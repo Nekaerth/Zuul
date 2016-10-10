@@ -26,7 +26,6 @@ public class Game {
 
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
 		cell.setExit("Hiddenroom", hiddenroom);
-		//cell.inv.putItem("stone", new Item(true, "stone", false));
 		cell.inv = setCellInventory();
 
 		hiddenroom.setExit("Bossroom", bossroom);
