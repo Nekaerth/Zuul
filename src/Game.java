@@ -223,5 +223,22 @@ public class Game {
 			System.out.println("You search the room, but find nothing.");
 		}
 	}
-
+        private void pickUp(Command command) {
+            if (command.hasSecondWord() == false) {
+                System.out.println("Pick up what?");
+            } else {
+                try {
+                Item item = currentRoom.inv.getItem(command.getSecondWord());
+                if (item.getPickUp() == true) {
+                player.inv.putItem(command.getSecondWord(), item);
+                currentRoom.inv.removeItem(command.getSecondWord());
+                }
+                }
+                catch(NullPointerException ex) {
+                    System.out.println("There is no such item.");
+                }
+                
+            }
+            
+        }
 }
