@@ -240,7 +240,7 @@ public class Game {
 					//player.inv.putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 				}
-			} catch (NullPointerException ex) {
+			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
 		}

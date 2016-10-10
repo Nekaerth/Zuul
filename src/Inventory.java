@@ -48,7 +48,11 @@ public class Inventory {
 	 * @return An Item object
 	 */
 	public Item getItem(String name) {
+		if(inventory.get(name) != null){
 		return inventory.get(name);
+		} else {
+			throw new IllegalArgumentException();
+		}
 
 	}
 
