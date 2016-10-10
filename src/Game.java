@@ -1,5 +1,4 @@
 
-
 public class Game {
 
 	private final Parser parser;

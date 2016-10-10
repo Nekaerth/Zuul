@@ -4,19 +4,18 @@
  * and open the template in the editor.
  */
 
-
 /**
  *
  * @author Danieln Johansen
  */
 public class Zuul {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        Game game = new Game();
-        game.play();
-    }
+	/**
+	 * @param args the command line arguments
+	 */
+	public static void main(String[] args) {
+		Game game = new Game();
+		game.play();
+	}
 
 }
