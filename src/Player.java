@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class Player extends Person {
 
 	private int time;
-	private Inventory inventory;
+	public Inventory inventory;
 	private ArrayList<PlayerAttack> attacks;
 
 	public Player(int hitpoint, int damage, int time) {

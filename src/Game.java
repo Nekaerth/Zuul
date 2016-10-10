@@ -160,7 +160,7 @@ public class Game {
 			switch (commandWord) {
 				case HELP:
 					// Hvis der er skrevet help
-					printHelp();
+					printHelp();					
 					break;
 				case GO:
 					// hvis der er skrevet go
@@ -259,7 +259,7 @@ public class Game {
 			try {
 				Item item = currentRoom.inv.getItem(command.getSecondWord());
 				if (item.getPickUp() == true) {
-					//player.inv.putItem(command.getSecondWord(), item);
+					player.inventory.putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 				}
 			} catch (IllegalArgumentException ex) {
