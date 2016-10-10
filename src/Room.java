@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class Room {
     
+		private boolean test;
     public  Inventory inv;
     private final String description;
     private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
