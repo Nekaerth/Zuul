@@ -151,6 +151,9 @@ public class Game {
 					// hvis der er skrevet search
 					searchRoom(command);
 					break;
+				case PICKUP:
+					pickUp(command);
+					break;
 				default:
 					break;
 			}
