@@ -4,7 +4,7 @@ public enum CommandWord {
 	/**
 	 *
 	 */
-	GO("go"), QUIT("quit"), HELP("help"), SEARCH("search"), UNKNOWN("?");
+	GO("go"), QUIT("quit"), HELP("help"), SEARCH("search"), UNKNOWN("?"), PICKUP("pickup");
 
 	private String commandString;
 
@@ -12,6 +12,7 @@ public enum CommandWord {
 		this.commandString = commandString;
 	}
 
+	@Override
 	public String toString() {
 		return commandString;
 	}

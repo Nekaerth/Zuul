@@ -43,30 +43,37 @@ public class Game {
 
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
 		cell.setExit("Hiddenroom", hiddenroom);
-		//cell.inv.putItem("stone", new Item(true, "stone", false));
 		cell.inv = setCellInventory();
 
 		hiddenroom.setExit("Bossroom", bossroom);
 		hiddenroom.setExit("Cell", cell);
-		hiddenroom.inv.putItem("flashlight", new Item(true, "flashlight", true));
+		hiddenroom.inv = setHiddenroomInventory();
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
 
 		dininghall.setExit("Cellhall", cellhall);
+		dininghall.inv = setDininghallInventory();
 
 		cellhall.setExit("Dininghall", dininghall);
 		cellhall.setExit("Yard", yard);
 		cellhall.setExit("Office", office);
+		cellhall.setExit("Cell", cell);
 
 		office.setExit("Storage", storage);
 		office.setExit("Cellhall", cellhall);
+		office.inv = setOfficeInventory();
 
 		yard.setExit("Parkinglot", parkinglot);
 		yard.setExit("Cellhall", cellhall);
+		yard.inv = setYardInventory();
 
 		storage.setExit("Office", office);
+		storage.inv = setStorageInventory();
 
 		parkinglot.setEscapeRoom();
+
+		bossroom.setExit("Hiddenroom", hiddenroom);
+		bossroom.inv = setBossroomInventory();
 
 		currentRoom = cell; //currentRoom er den variabel der holder styr på hvilket rum man er i.
 	}
@@ -74,6 +81,43 @@ public class Game {
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Item(true, "Stone", true));
+		return inv;
+	}
+
+	private Inventory setStorageInventory() {
+		Inventory inv = new Inventory();
+		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false));
+		inv.putItem("Pistol", new Item(false, "Pistol", false));
+		return inv;
+	}
+
+	private Inventory setDininghallInventory() {
+		Inventory inv = new Inventory();
+		inv.putItem("Key", new Item(true, "Key", true));
+		return inv;
+	}
+
+	private Inventory setYardInventory() {
+		Inventory inv = new Inventory();
+		inv.putItem("Knife", new Item(false, "Knife", false));
+		return inv;
+	}
+
+	private Inventory setOfficeInventory() {
+		Inventory inv = new Inventory();
+		inv.putItem("Blueprints", new Item(true, "Blueprints", true));
+		return inv;
+	}
+
+	private Inventory setHiddenroomInventory() {
+		Inventory inv = new Inventory();
+		inv.putItem("Flashlight", new Item(true, "Flashlight", true));
+		return inv;
+	}
+
+	private Inventory setBossroomInventory() {
+		Inventory inv = new Inventory();
+		inv.putItem("Key", new Item(false, "Key", false));
 		return inv;
 	}
 
@@ -125,6 +169,9 @@ public class Game {
 					// hvis der er skrevet search
 					searchRoom(command);
 					break;
+				case PICKUP:
+					pickUp(command);
+					break;
 				default:
 					break;
 			}
@@ -133,8 +180,8 @@ public class Game {
 	}
 
 	private void printHelp() {
-		System.out.println("You are lost. You are alone. You wander");
-		System.out.println("around at the university.");
+		System.out.println("You're a prisoner inside a prison, and there have just been a riot.");
+		System.out.println("Your goal is to break out.");
 		System.out.println();
 		System.out.println("Your command words are:");
 		parser.showCommands();
@@ -167,6 +214,7 @@ public class Game {
 
 				} else if (inputCode != -1 && inputCode != 111) {
 					System.out.println("Wrong code!");
+					System.out.println(currentRoom.getLongDescription());
 					return;
 				}
 			}
@@ -195,6 +243,23 @@ public class Game {
 			System.out.println(items);
 		} else {
 			System.out.println("You search the room, but find nothing.");
+		}
+
+	}
+
+	private void pickUp(Command command) {
+		if (command.hasSecondWord() == false) {
+			System.out.println("Pick up what?");
+		} else {
+			try {
+				Item item = currentRoom.inv.getItem(command.getSecondWord());
+				if (item.getPickUp() == true) {
+					//player.inv.putItem(command.getSecondWord(), item);
+					currentRoom.inv.removeItem(command.getSecondWord());
+				}
+			} catch (NullPointerException ex) {
+				System.out.println("There is no such item.");
+			}
 		}
 	}
 

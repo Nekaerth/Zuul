@@ -43,7 +43,8 @@ public class Inventory {
 	/**
 	 * This method returns the name of an item
 	 *
-	 * @param name The parameter name is the reference name to the item requested.
+	 * @param name The parameter name is the reference name to the item
+	 * requested.
 	 * @return An Item object
 	 */
 	public Item getItem(String name) {
@@ -76,5 +77,9 @@ public class Inventory {
 
 		inventory.put(name, item);
 
+	}
+
+	public void removeItem(String name) {
+		inventory.remove(name);
 	}
 }
