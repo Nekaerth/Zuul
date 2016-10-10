@@ -31,25 +31,32 @@ public class Game {
 
 		hiddenroom.setExit("Bossroom", bossroom);
 		hiddenroom.setExit("Cell", cell);
-		hiddenroom.inv.putItem("flashlight", new Item(true, "flashlight", true));
+		hiddenroom.inv = setHiddenroomInventory();
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
 
 		dininghall.setExit("Cellhall", cellhall);
+                dininghall.inv = setDininghallInventory();
 
 		cellhall.setExit("Dininghall", dininghall);
 		cellhall.setExit("Yard", yard);
 		cellhall.setExit("Office", office);
-
+                
 		office.setExit("Storage", storage);
 		office.setExit("Cellhall", cellhall);
+                office.inv = setOfficeInventory();
 
 		yard.setExit("Parkinglot", parkinglot);
 		yard.setExit("Cellhall", cellhall);
+                yard.inv = setYardInventory();
 
 		storage.setExit("Office", office);
-
+                storage.inv = setStorageInventory();
+                
 		parkinglot.setEscapeRoom();
+                
+                bossroom.setExit("Hiddenroom", hiddenroom);
+                bossroom.inv = setBossroomInventory();
 
 		currentRoom = cell; //currentRoom er den variabel der holder styr på hvilket rum man er i.
 	}
@@ -58,7 +65,43 @@ public class Game {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Item(true, "Stone", true));
 		return inv;
-	}
+        }
+        private Inventory setStorageInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Boltcutter", new Item(false, "Boltcutter", false));
+            inv.putItem("Pistol", new Item(false, "Pistol", false));
+            return inv;
+        }
+        
+        private Inventory setDininghallInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Key", new Item(true, "Key", true));
+            return inv;
+        }
+        
+        private Inventory setYardInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Knife", new Item(false, "Knife", false));
+            return inv;
+        }
+	
+        private Inventory setOfficeInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Blueprints", new Item(true, "Blueprints", true));
+            return inv;
+        }
+        
+        private Inventory setHiddenroomInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Flashlight", new Item(true, "Flashlight", true));
+            return inv;
+        }
+        
+        private Inventory setBossroomInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Key", new Item(false, "Key", false));
+            return inv;
+        }
 
 	public void play() {
 		printWelcome(); //Kalder metoden
@@ -116,8 +159,8 @@ public class Game {
 	}
 
 	private void printHelp() {
-		System.out.println("You are lost. You are alone. You wander");
-		System.out.println("around at the university.");
+		System.out.println("You're a prisoner inside a prison, and there have just been a riot.");
+		System.out.println("Your goal is to break out.");
 		System.out.println();
 		System.out.println("Your command words are:");
 		parser.showCommands();
