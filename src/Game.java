@@ -40,6 +40,8 @@ public class Game {
 		cellhall.setExit("Dininghall", dininghall);
 		cellhall.setExit("Yard", yard);
 		cellhall.setExit("Office", office);
+		cellhall.setExit("Cell", cell);
+                
 
 		office.setExit("Storage", storage);
 		office.setExit("Cellhall", cellhall);
@@ -196,6 +198,7 @@ public class Game {
 
 				} else if (inputCode != -1 && inputCode != 111) {
 					System.out.println("Wrong code!");
+                                        System.out.println(currentRoom.getLongDescription());
 					return;
 				}
 			}
@@ -228,6 +231,7 @@ public class Game {
 
 	}
 
+
 	private void pickUp(Command command) {
 		if (command.hasSecondWord() == false) {
 			System.out.println("Pick up what?");
@@ -243,5 +247,6 @@ public class Game {
 			}
 		}
 	}
-
 }
+
+     
