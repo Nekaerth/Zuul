@@ -77,4 +77,7 @@ public class Inventory {
 		inventory.put(name, item);
 
 	}
+	public void removeItem(String name){
+		inventory.remove(name);
+	}
 }
