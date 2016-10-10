@@ -41,6 +41,7 @@ public class Game {
 		cellhall.setExit("Dininghall", dininghall);
 		cellhall.setExit("Yard", yard);
 		cellhall.setExit("Office", office);
+                cellhall.setExit("Cell", cell);
                 
 		office.setExit("Storage", storage);
 		office.setExit("Cellhall", cellhall);
@@ -196,6 +197,7 @@ public class Game {
 
 				} else if (inputCode != -1 && inputCode != 111) {
 					System.out.println("Wrong code!");
+                                        System.out.println(currentRoom.getLongDescription());
 					return;
 				}
 			}
@@ -234,7 +236,7 @@ public class Game {
                 try {
                 Item item = currentRoom.inv.getItem(command.getSecondWord());
                 if (item.getPickUp() == true) {
-                player.inv.putItem(command.getSecondWord(), item);
+                //player.inv.putItem(command.getSecondWord(), item);
                 currentRoom.inv.removeItem(command.getSecondWord());
                 }
                 }
