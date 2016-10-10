@@ -35,29 +35,28 @@ public class Game {
 		bossroom.setExit("Hiddenroom", hiddenroom);
 
 		dininghall.setExit("Cellhall", cellhall);
-		dininghall.inv = setDininghallInventory();
+                dininghall.inv = setDininghallInventory();
 
 		cellhall.setExit("Dininghall", dininghall);
 		cellhall.setExit("Yard", yard);
 		cellhall.setExit("Office", office);
-		cellhall.setExit("Cell", cell);
+                cellhall.setExit("Cell", cell);
                 
-
 		office.setExit("Storage", storage);
 		office.setExit("Cellhall", cellhall);
-		office.inv = setOfficeInventory();
+                office.inv = setOfficeInventory();
 
 		yard.setExit("Parkinglot", parkinglot);
 		yard.setExit("Cellhall", cellhall);
-		yard.inv = setYardInventory();
+                yard.inv = setYardInventory();
 
 		storage.setExit("Office", office);
-		storage.inv = setStorageInventory();
-
+                storage.inv = setStorageInventory();
+                
 		parkinglot.setEscapeRoom();
-
-		bossroom.setExit("Hiddenroom", hiddenroom);
-		bossroom.inv = setBossroomInventory();
+                
+                bossroom.setExit("Hiddenroom", hiddenroom);
+                bossroom.inv = setBossroomInventory();
 
 		currentRoom = cell; //currentRoom er den variabel der holder styr på hvilket rum man er i.
 	}
@@ -66,44 +65,43 @@ public class Game {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Item(true, "Stone", true));
 		return inv;
-	}
-
-	private Inventory setStorageInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false));
-		inv.putItem("Pistol", new Item(false, "Pistol", false));
-		return inv;
-	}
-
-	private Inventory setDininghallInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", true));
-		return inv;
-	}
-
-	private Inventory setYardInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(false, "Knife", false));
-		return inv;
-	}
-
-	private Inventory setOfficeInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Blueprints", new Item(true, "Blueprints", true));
-		return inv;
-	}
-
-	private Inventory setHiddenroomInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Flashlight", new Item(true, "Flashlight", true));
-		return inv;
-	}
-
-	private Inventory setBossroomInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(false, "Key", false));
-		return inv;
-	}
+        }
+        private Inventory setStorageInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Boltcutter", new Item(false, "Boltcutter", false));
+            inv.putItem("Pistol", new Item(false, "Pistol", false));
+            return inv;
+        }
+        
+        private Inventory setDininghallInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Key", new Item(true, "Key", true));
+            return inv;
+        }
+        
+        private Inventory setYardInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Knife", new Item(false, "Knife", false));
+            return inv;
+        }
+	
+        private Inventory setOfficeInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Blueprints", new Item(true, "Blueprints", true));
+            return inv;
+        }
+        
+        private Inventory setHiddenroomInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Flashlight", new Item(true, "Flashlight", true));
+            return inv;
+        }
+        
+        private Inventory setBossroomInventory() {
+            Inventory inv = new Inventory();
+            inv.putItem("Key", new Item(false, "Key", false));
+            return inv;
+        }
 
 	public void play() {
 		printWelcome(); //Kalder metoden
@@ -228,25 +226,23 @@ public class Game {
 		} else {
 			System.out.println("You search the room, but find nothing.");
 		}
-
+                
 	}
+        private void pickUp(Command command) {
+            if (command.hasSecondWord() == false) {
+                System.out.println("Pick up what?");
+            } else {
+                try {
+                Item item = currentRoom.inv.getItem(command.getSecondWord());
+                if (item.getPickUp() == true) {
+                //player.inv.putItem(command.getSecondWord(), item);
+                currentRoom.inv.removeItem(command.getSecondWord());
+                }
+                }
+                catch(NullPointerException ex) {
+                    System.out.println("There is no such item.");
+                }
+            }
+        }
 
-
-	private void pickUp(Command command) {
-		if (command.hasSecondWord() == false) {
-			System.out.println("Pick up what?");
-		} else {
-			try {
-				Item item = currentRoom.inv.getItem(command.getSecondWord());
-				if (item.getPickUp() == true) {
-					player.inv.putItem(command.getSecondWord(), item);
-					currentRoom.inv.removeItem(command.getSecondWord());
-				}
-			} catch (NullPointerException ex) {
-				System.out.println("There is no such item.");
-			}
-		}
-	}
 }
-
-     
