@@ -6,23 +6,26 @@ import java.util.ArrayList;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Lasse
  */
 public class Player extends Person {
 
-	private int damage;
 	private int time;
 	private Inventory inventory;
+	private ArrayList<PlayerAttack> attacks;
 
 	public Player(int hitpoint, int damage, int time) {
 		this.hitpoint = hitpoint;
 		this.damage = damage;
 		this.time = time;
 		this.inventory = new Inventory();
-		this.attacks = new ArrayList<Attack>();
+		this.attacks = new ArrayList<PlayerAttack>();
+	}
+
+	public void putAttacks(PlayerAttack attack) {
+		this.attacks.add(attack);
 	}
 
 	public int getDamage() {

@@ -14,23 +14,28 @@ public class Game {
 	private void createRooms() //Kaldes fra constructor
 	{
 		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; //Fem rum oprettes
-		
-		//creates player and names all boss and players attacks
+
+		//creates player and names all boss attacks and players attacks
 		player = new Player(100, 10, 1200);
-		Attack stap, duck, jump, sideStep, boss1, boss2;
-		
-		//initiazes boss attacks
-		boss1 = new Attack("boss1", 20);
-		boss2 = new Attack("boss2", 15);
-		
+		PlayerAttack stap, duck, jump, sideStep, boss1, boss2;
+		BossAttack exampleAtk, exampleAtk2;
+
 		//initiazes player attacks
-		stap = new Attack("Stap", boss1);
-		duck = new Attack("Duck", boss2);
-		
+		stap = new PlayerAttack("Stap");
+		duck = new PlayerAttack("Duck");
+		jump = new PlayerAttack("Jump");
+		sideStep = new PlayerAttack("Side Step");
+
 		//adds attacks to the players attacklist
-		player.attacks.add(stap);
-		player.attacks.add(duck);
-		
+		player.putAttacks(stap);
+		player.putAttacks(duck);
+		player.putAttacks(jump);
+		player.putAttacks(sideStep);
+
+		//initiazes boss attacks (kan først laves når playerattacks er lavet, fordi de skal pege på dem
+		exampleAtk = new BossAttack("boss1", stap);
+		exampleAtk2 = new BossAttack("boss2", jump);
+
 		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
 		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true);
