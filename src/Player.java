@@ -40,7 +40,11 @@ public class Player extends Person {
 		return this.time;
 	}
 
-	public void setTime(int time) {
-		this.time = time;
+	public void addTime(int time) {
+		this.time += time;
+	}
+
+	public void subtractTime(int time) {
+		this.time -= time;
 	}
 }
