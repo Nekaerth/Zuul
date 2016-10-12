@@ -160,7 +160,7 @@ public class Game {
 			switch (commandWord) {
 				case HELP:
 					// Hvis der er skrevet help
-					printHelp();					
+					printHelp();
 					break;
 				case GO:
 					// hvis der er skrevet go
@@ -177,6 +177,11 @@ public class Game {
 				case PICKUP:
 					pickUp(command);
 					break;
+				case DROP:
+					drop(command);
+					break;
+				case USE:
+					use(command);
 				default:
 					break;
 			}
@@ -268,4 +273,53 @@ public class Game {
 		}
 	}
 
+	private void drop(Command command) {
+		if (command.hasSecondWord() == false) {
+			System.out.println("Drop what?");
+		} else {
+			try {
+				Item item = player.inventory.getItem(command.getSecondWord());
+				currentRoom.inv.putItem(command.getSecondWord(), item);
+				player.inventory.removeItem(command.getSecondWord());
+			} catch (IllegalArgumentException ex) {
+				System.out.println("There is no such item.");
+			}
+		}
+	}
+
+	private void use(Command command) {
+		if (command.hasSecondWord() == false) {
+			System.out.println("Use what?");
+		} else {
+			Item item = player.inventory.getItem(command.getSecondWord());
+			if (item.getUseable() == true) {
+				if (item.getName().equalsIgnoreCase("key")) {
+					useKey(command);
+				} else if (item.getName().equalsIgnoreCase("flashlight")) {
+					useFlashlight(command);
+
+				}
+			} else {
+				System.out.println("You can't use that item for anything");
+			}
+		}
+
+	}
+
+	private void useKey(Command command) {
+		if (command.hasThirdWord == false) {
+			System.out.println("Use " + command.getSecondWord() + " where?");
+		} else {
+			if(currentRoom.getExit(command.getThirdWord) != null){
+				nextRoom = currentRoom.getExit(command.getThirdWord);
+				nextRoom.unlock();
+				System.out.println("You successfully unlock the door");
+			}
+		}
+	}
+	
+
+	private void useFlashlight(Command command) {
+
+	}
 }
