@@ -1,6 +1,6 @@
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Scanner;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -15,8 +15,9 @@ public class Boss extends Person {
 
 	private final String name;
 	private HashMap<String, String> attacks = new HashMap<>();
+	private int damage;
 
-	public Boss(String name, int hitpoint, int damage, HashMap<String, String> attacks) {
+	public Boss(String name, int hitpoint, int damage) {
 		this.name = name;
 		this.hitpoint = hitpoint;
 		this.damage = damage;
@@ -27,7 +28,16 @@ public class Boss extends Person {
 		return this.name;
 	}
 
-	public void getRandomAttack() {
-		//Skal returnere et tilfældigt angreb
+	public void setPrisonGuard1Attacks() {
+		attacks.put("Lash", "Jump");
+		attacks.put("Charge", "Side Step");
+		attacks.put("Punch", "Stab");
+	}
+
+	public void setPrisonGuard2Attacks() {
+		attacks.put("Lash", "Jump");
+		attacks.put("Charge", "Side Step");
+		attacks.put("Punch", "Stab");
+		attacks.put("Shoot", "duck");
 	}
 }

@@ -14,6 +14,4 @@ import java.util.ArrayList;
 public class Person {
 	
 	public int hitpoint;
-	public int damage;
-	
 }

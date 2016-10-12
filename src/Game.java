@@ -17,13 +17,7 @@ public class Game {
 	{
 		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; //Fem rum oprettes
 
-		//creates player attacks and then creates a player
-		ArrayList<String> playerAttacks = new ArrayList<>();
-		playerAttacks.add("Stap");
-		playerAttacks.add("Duck");
-		playerAttacks.add("Jump");
-		playerAttacks.add("Side Step");
-		player = new Player(100, 10, 1200, playerAttacks);
+		player = new Player(100, 1200);
 
 		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
