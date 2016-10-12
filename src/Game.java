@@ -174,6 +174,10 @@ public class Game {
 					break;
 				case USE:
 					use(command);
+					break;
+				case INVENTORY:
+					showInventory();
+					break;
 				default:
 					break;
 			}
@@ -278,6 +282,7 @@ public class Game {
 				Item item = player.inventory.getItem(command.getSecondWord());
 				currentRoom.inv.putItem(command.getSecondWord(), item);
 				player.inventory.removeItem(command.getSecondWord());
+				System.out.println("You drop "+ item.getName());
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
@@ -324,5 +329,10 @@ public class Game {
 
 	private void useFlashlight(Command command) {
 
+	}
+
+	private void showInventory() {
+		System.out.println("Your inventory contains the following:");
+		System.out.println(player.inventory.getAllItems());
 	}
 }

@@ -4,7 +4,7 @@ public enum CommandWord {
 	/**
 	 *
 	 */
-	GO("go"), QUIT("quit"), HELP("help"), SEARCH("search"), UNKNOWN("?"), PICKUP("pickup"), DROP("drop"), USE("use");
+	GO("go"), QUIT("quit"), HELP("help"), SEARCH("search"), UNKNOWN("?"), PICKUP("pickup"), DROP("drop"), USE("use"), INVENTORY("inventory");
 
 	private String commandString;
 
