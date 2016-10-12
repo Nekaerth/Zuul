@@ -74,4 +74,8 @@ public class Room {
 		lock = false;
 	}
 
+	boolean isNumberRoom() {
+		return numberRoom;
+	}
+
 }

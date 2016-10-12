@@ -107,7 +107,7 @@ public class Game {
 
 	private Inventory setHiddenroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Flashlight", new Item(true, "Flashlight", true));
+		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5));
 		return inv;
 	}
 
@@ -181,7 +181,7 @@ public class Game {
 				default:
 					break;
 			}
-			
+
 		}
 		System.out.println(currentRoom.getExitString());
 		return wantToQuit; //return boolean, som under go og help commanden ikke ændres fra false
@@ -266,7 +266,7 @@ public class Game {
 				if (item.getPickUp() == true) {
 					player.inventory.putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
-					System.out.println("You pick up "+ item.getName());
+					System.out.println("You pick up " + item.getName());
 				}
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
@@ -282,7 +282,7 @@ public class Game {
 				Item item = player.inventory.getItem(command.getSecondWord());
 				currentRoom.inv.putItem(command.getSecondWord(), item);
 				player.inventory.removeItem(command.getSecondWord());
-				System.out.println("You drop "+ item.getName());
+				System.out.println("You drop " + item.getName());
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
@@ -290,46 +290,61 @@ public class Game {
 	}
 
 	private void use(Command command) {
-		try{
-		if (command.hasSecondWord() == false) {
-			System.out.println("Use what?");
-		} else {
-			Item item = player.inventory.getItem(command.getSecondWord());
+		try {
+			if (command.hasSecondWord() == false) {
+				System.out.println("Use what?");
+			} else {
+				Item item = player.inventory.getItem(command.getSecondWord());
 
-			if (item.getUseable() == true) {
-				if (item.getName().equalsIgnoreCase("key")) {
-					useKey(command);
-				} else if (item.getName().equalsIgnoreCase("flashlight")) {
-					useFlashlight(command);
+				if (item.getUseable() == true) {
+					if (item.getName().equalsIgnoreCase("key")) {
+						useKey(command, item);
+					} else if (item.getName().equalsIgnoreCase("flashlight")) {
+						useFlashlight(command, item);
+
+					} else {
+						System.out.println("There's a bug in the items useable boolean " + item.getName());
+					}
 
 				} else {
-					System.out.println("There's a bug in the items useable boolean " + item.getName());
+					System.out.println("You can't use that item for anything");
 				}
-
-			} else {
-				System.out.println("You can't use that item for anything");
 			}
-		}
-		} catch (IllegalArgumentException ex){
+		} catch (IllegalArgumentException ex) {
 			System.out.println("You don't have that item in your inventory");
-		} 
+		}
 
 	}
 
-	private void useKey(Command command) {
+	private void useKey(Command command, Item key) {
 		if (command.hasThirdWord() == false) {
 			System.out.println("Use " + command.getSecondWord() + " where?");
 		} else if (currentRoom.getExit(command.getThirdWord()) != null) {
 			Room nextRoom = currentRoom.getExit(command.getThirdWord());
 			nextRoom.unlock();
 			System.out.println("You successfully unlock the door");
-			player.inventory.removeItem(command.getSecondWord());
+			key.subtractCharge(1);
+			if (key.getCharges() <= 0) {
+				player.inventory.removeItem(command.getSecondWord());
+			}
 		}
 	}
 
-	private void useFlashlight(Command command) {
-		
-
+	private void useFlashlight(Command command, Item flashlight) {
+		if(flashlight.getCharges() > 0){
+			flashlight.subtractCharge(1);
+			System.out.println("You used the flashlight and the battery drained, you think you will have " + flashlight.getCharges() + " use(s) left");
+			if(currentRoom.isNumberRoom()){
+				System.out.println("You search the room and find a mysterious number that was hidden");
+				System.out.println("The number is "+currentRoom.getNumber());
+			} else {
+				System.out.println("To your disappointment you find nothing new");
+			}
+			
+		} else if(flashlight.getCharges() <= 0){
+			System.out.println("You don't have anymore charges in your flashlight");
+			System.out.println("if you haven't found anything with it, you will be in trouble");
+		}
 	}
 
 	private void showInventory() {
