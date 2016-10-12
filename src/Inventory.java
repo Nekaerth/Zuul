@@ -24,22 +24,9 @@ public class Inventory {
 
 	}
 
-	/*
-     
-     
-     
-    public int showAllItems () {
-        for(String inv : inventory.keySet()) {
-            System.out.print(inv + "  ");
-        }
-       System.out.println(" ");
-       return -1;
-   }
-	 */
 	public boolean isEmpty() {
 		return inventory.isEmpty();
 	}
-
 	/**
 	 * This method returns the name of an item
 	 *
