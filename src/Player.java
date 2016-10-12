@@ -14,22 +14,20 @@ public class Player extends Person {
 
 	private int time;
 	public Inventory inventory;
-	private ArrayList<String> attacks;
+	private ArrayList<Attack> attacks = new ArrayList<>();
 
-	public Player(int hitpoint, int damage, int time, ArrayList<String> attacks) {
+	public Player(int hitpoint, int time) {
 		this.hitpoint = hitpoint;
-		this.damage = damage;
 		this.time = time;
 		this.inventory = new Inventory();
-		this.attacks = attacks;
+		attacks.add(new Attack("Stab", 10));
+		attacks.add(new Attack("Duck", 0));
+		attacks.add(new Attack("Jump", 0));
+		attacks.add(new Attack("Side step", 0));
 	}
 
-	public int getDamage() {
-		return this.damage;
-	}
-
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setStabDamage(int damage) {
+		attacks.get(0).setDamage(damage);
 	}
 
 	public int getTime() {
