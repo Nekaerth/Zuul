@@ -17,23 +17,23 @@ public class Game {
 
 		//creates player and names all boss attacks and players attacks
 		player = new Player(100, 10, 1200);
-		PlayerAttack stap, duck, jump, sideStep, boss1, boss2;
+		PlayerAttack stab, duck, jump, sideStep, boss1, boss2;
 		BossAttack exampleAtk, exampleAtk2;
 
 		//initiazes player attacks
-		stap = new PlayerAttack("Stap");
+		stab = new PlayerAttack("Stap");
 		duck = new PlayerAttack("Duck");
 		jump = new PlayerAttack("Jump");
 		sideStep = new PlayerAttack("Side Step");
 
 		//adds attacks to the players attacklist
-		player.putAttacks(stap);
+		player.putAttacks(stab);
 		player.putAttacks(duck);
 		player.putAttacks(jump);
 		player.putAttacks(sideStep);
 
 		//initiazes boss attacks (kan først laves når playerattacks er lavet, fordi de skal pege på dem
-		exampleAtk = new BossAttack("boss1", stap);
+		exampleAtk = new BossAttack("boss1", stab);
 		exampleAtk2 = new BossAttack("boss2", jump);
 
 		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
@@ -249,7 +249,6 @@ public class Game {
 		} else {
 			System.out.println("You search the room, but find nothing.");
 		}
-
 	}
 
 	private void pickUp(Command command) {
@@ -267,5 +266,4 @@ public class Game {
 			}
 		}
 	}
-
 }
