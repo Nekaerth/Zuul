@@ -67,6 +67,7 @@ public class Game {
 		office.setExit("Storage", storage);
 		office.setExit("Cellhall", cellhall);
 		office.inv = setOfficeInventory();
+		office.LockRoom();
 
 		yard.setExit("Parkinglot", parkinglot);
 		yard.setExit("Cellhall", cellhall);
@@ -74,6 +75,7 @@ public class Game {
 
 		storage.setExit("Office", office);
 		storage.inv = setStorageInventory();
+		storage.LockRoom();
 
 		parkinglot.setEscapeRoom();
 
@@ -153,6 +155,7 @@ public class Game {
 
 		if (commandWord == CommandWord.UNKNOWN) { //Hvis det er unknown
 			System.out.println("I don't know what you mean...");
+			System.out.println(currentRoom.getExitString());
 			return false; //Vil ikke quitte programmet
 		}
 
@@ -185,7 +188,9 @@ public class Game {
 				default:
 					break;
 			}
+			
 		}
+		System.out.println(currentRoom.getExitString());
 		return wantToQuit; //return boolean, som under go og help commanden ikke ændres fra false
 	}
 
@@ -209,7 +214,7 @@ public class Game {
 
 		if (nextRoom == null) { //Hvis der ikke er noget room den vej / Hashmappen ikke indeholder nogen value for keyen
 			System.out.println("There is no door!");
-		} else {
+		} else if (nextRoom.isLocked() == false) {
 			if (nextRoom.getEscapeRoom()) {
 				//Koden der køres når man er i parkinglot
 				System.out.println("There is a codelock locking the door, to get to the parkinglot you need to enter a 3 digit code: ");
@@ -220,18 +225,21 @@ public class Game {
 					System.out.println("Congratulations, you have escaped!");
 					System.out.println("Type \"quit\" to quit the game");
 					currentRoom = nextRoom;
-					return;
 
 				} else if (inputCode != -1 && inputCode != 111) {
 					System.out.println("Wrong code!");
 					System.out.println(currentRoom.getLongDescription());
-					return;
-				}
-			}
 
-			currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
-			System.out.println(currentRoom.getLongDescription()); //Udskriv beskrivelse og exits af det nye rum
+				}
+			} else if (nextRoom.getEscapeRoom() == false) {
+				currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
+				System.out.println(currentRoom.getShortDescription()); //Udskriv beskrivelse og exits af det nye rum
+			}
+		} else if (nextRoom.isLocked() == true) {
+			System.out.println("The door is locked, you can't go in there without a key");
+
 		}
+
 	}
 
 	private boolean quit(Command command) {
@@ -265,6 +273,7 @@ public class Game {
 				if (item.getPickUp() == true) {
 					player.inventory.putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
+					System.out.println("You pick up "+ item.getName());
 				}
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
@@ -287,10 +296,12 @@ public class Game {
 	}
 
 	private void use(Command command) {
+		try{
 		if (command.hasSecondWord() == false) {
 			System.out.println("Use what?");
 		} else {
 			Item item = player.inventory.getItem(command.getSecondWord());
+
 			if (item.getUseable() == true) {
 				if (item.getName().equalsIgnoreCase("key")) {
 					useKey(command);
@@ -300,25 +311,27 @@ public class Game {
 				} else {
 					System.out.println("There's a bug in the items useable boolean " + item.getName());
 				}
+
 			} else {
 				System.out.println("You can't use that item for anything");
 			}
 		}
+		} catch (IllegalArgumentException ex){
+			System.out.println("You don't have that item in your inventory");
+		} 
 
 	}
 
 	private void useKey(Command command) {
 		if (command.hasThirdWord() == false) {
 			System.out.println("Use " + command.getSecondWord() + " where?");
-		} else {
-			if(currentRoom.getExit(command.getThirdWord()) != null){
-				Room nextRoom = currentRoom.getExit(command.getThirdWord());
-				nextRoom.unlock();
-				System.out.println("You successfully unlock the door");
-			}
+		} else if (currentRoom.getExit(command.getThirdWord()) != null) {
+			Room nextRoom = currentRoom.getExit(command.getThirdWord());
+			nextRoom.unlock();
+			System.out.println("You successfully unlock the door");
+			player.inventory.removeItem(command.getSecondWord());
 		}
 	}
-	
 
 	private void useFlashlight(Command command) {
 

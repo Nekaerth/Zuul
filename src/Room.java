@@ -7,9 +7,8 @@ public class Room {
 	public Inventory inv;
 	private final String description;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
-	boolean numberRoom;
+	boolean numberRoom, escapeRoom, lock = false;
 	int number;
-	boolean escapeRoom;
 
 	public Room(String description, boolean numberRoom) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
@@ -27,14 +26,14 @@ public class Room {
 	}
 
 	public String getShortDescription() {
-		return description;
+		return "You are " +description;
 	}
-
+//Bør fjernes
 	public String getLongDescription() {
 		return "You are " + description + "\n" + getExitString(); //Giver en længere beskrivelse af rummet og giver hvilke exits der findes
 	}
 
-	private String getExitString() {
+	public String getExitString() {
 		String returnString = "Exits:";
 		Set<String> keys = exits.keySet();
 		for (String exit : keys) {
@@ -63,6 +62,16 @@ public class Room {
 	public boolean getEscapeRoom() {
 		return this.escapeRoom;
 
+	}
+	public void LockRoom(){
+		lock = true;
+	}
+	public boolean isLocked(){
+		
+		return lock;
+	}
+	public void unlock(){
+		lock = false;
 	}
 
 }

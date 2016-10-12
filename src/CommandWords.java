@@ -6,7 +6,7 @@ public class CommandWords {
 	private HashMap<String, CommandWord> validCommands;
 
 	public CommandWords() {
-		validCommands = new HashMap<String, CommandWord>(); //Ny HashMap oprettes der indeholder string som key og commandword som value
+		validCommands = new HashMap<>(); //Ny HashMap oprettes der indeholder string som key og commandword som value
 		for (CommandWord command : CommandWord.values()) { // Alle variable i enum commandword gennemløbes
 			if (command != CommandWord.UNKNOWN) { // Hvis det ikke er variablen unknown
 				validCommands.put(command.toString(), command); //Læg commanden i hashmappen validcommands

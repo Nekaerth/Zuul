@@ -31,6 +31,7 @@ public class Parser {
                                 }
 			}
 		}
+		
 
 		return new Command(commands.getCommandWord(word1), word2, word3); //giver commandword ud fra word 1 og opretter en ny command ud fra commandWord objektet og stringen
 	}
