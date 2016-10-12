@@ -1,4 +1,7 @@
 
+import java.util.ArrayList;
+
+
 public class Game {
 
 	private final Parser parser;
@@ -15,26 +18,13 @@ public class Game {
 	{
 		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; //Fem rum oprettes
 
-		//creates player and names all boss attacks and players attacks
-		player = new Player(100, 10, 1200);
-		PlayerAttack stap, duck, jump, sideStep, boss1, boss2;
-		BossAttack exampleAtk, exampleAtk2;
-
-		//initiazes player attacks
-		stap = new PlayerAttack("Stap");
-		duck = new PlayerAttack("Duck");
-		jump = new PlayerAttack("Jump");
-		sideStep = new PlayerAttack("Side Step");
-
-		//adds attacks to the players attacklist
-		player.putAttacks(stap);
-		player.putAttacks(duck);
-		player.putAttacks(jump);
-		player.putAttacks(sideStep);
-
-		//initiazes boss attacks (kan først laves når playerattacks er lavet, fordi de skal pege på dem
-		exampleAtk = new BossAttack("boss1", stap);
-		exampleAtk2 = new BossAttack("boss2", jump);
+		//creates player attacks and then creates a player
+		ArrayList<String> playerAttacks = new ArrayList<>();
+		playerAttacks.add("Stap");
+		playerAttacks.add("Duck");
+		playerAttacks.add("Jump");
+		playerAttacks.add("Side Step");
+		player = new Player(100, 10, 1200, playerAttacks);
 
 		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
