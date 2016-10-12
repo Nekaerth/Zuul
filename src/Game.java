@@ -328,6 +328,7 @@ public class Game {
 	}
 
 	private void useFlashlight(Command command) {
+		
 
 	}
 
