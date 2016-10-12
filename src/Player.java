@@ -14,18 +14,14 @@ public class Player extends Person {
 
 	private int time;
 	public Inventory inventory;
-	private ArrayList<PlayerAttack> attacks;
+	private ArrayList<String> attacks;
 
-	public Player(int hitpoint, int damage, int time) {
+	public Player(int hitpoint, int damage, int time, ArrayList<String> attacks) {
 		this.hitpoint = hitpoint;
 		this.damage = damage;
 		this.time = time;
 		this.inventory = new Inventory();
-		this.attacks = new ArrayList<PlayerAttack>();
-	}
-
-	public void putAttacks(PlayerAttack attack) {
-		this.attacks.add(attack);
+		this.attacks = attacks;
 	}
 
 	public int getDamage() {
