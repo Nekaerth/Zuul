@@ -136,7 +136,7 @@ public class Game {
 		System.out.println();
 		System.out.println(currentRoom.getLongDescription()); // Giver beskrivelse af rummet + exit muligheder
 	}
-
+//Følgende kode har kun med udførelsen af commands at gøre
 	private boolean processCommand(Command command) {
 		boolean wantToQuit = false;
 
