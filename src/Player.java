@@ -13,21 +13,10 @@ import java.util.ArrayList;
 public class Player extends Person {
 
 	private int time;
-	public Inventory inventory;
-	private ArrayList<Attack> attacks = new ArrayList<>();
 
-	public Player(int hitpoint, int time) {
-		this.hitpoint = hitpoint;
+	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time) {
+		super(hitpoint, attacks, inventory);
 		this.time = time;
-		this.inventory = new Inventory();
-		attacks.add(new Attack("Stab", 10));
-		attacks.add(new Attack("Duck", 0));
-		attacks.add(new Attack("Jump", 0));
-		attacks.add(new Attack("Side step", 0));
-	}
-
-	public void setStabDamage(int damage) {
-		attacks.get(0).setDamage(damage);
 	}
 
 	public int getTime() {
@@ -40,5 +29,13 @@ public class Player extends Person {
 
 	public void subtractTime(int time) {
 		this.time -= time;
+	}
+	
+	public void setPlayerAttacks() {
+		ArrayList<Attack> attacks = getAttacks();
+		attacks.add(new Attack(Moves.STAB, 10));
+		attacks.add(new Attack(Moves.DUCK, 0));
+		attacks.add(new Attack(Moves.JUMP, 0));
+		attacks.add(new Attack(Moves.SIDESTEP, 0));
 	}
 }

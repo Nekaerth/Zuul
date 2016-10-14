@@ -1,6 +1,5 @@
 
-import java.util.HashMap;
-import java.util.Scanner;
+import java.util.ArrayList;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,14 +13,10 @@ import java.util.Scanner;
 public class Boss extends Person {
 
 	private final String name;
-	private HashMap<String, String> attacks = new HashMap<>();
-	private int damage;
 
-	public Boss(String name, int hitpoint, int damage) {
+	public Boss(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, String name) {
+		super(hitpoint, attacks, inventory);
 		this.name = name;
-		this.hitpoint = hitpoint;
-		this.damage = damage;
-		this.attacks = attacks;
 	}
 
 	public String getName() {
@@ -29,15 +24,17 @@ public class Boss extends Person {
 	}
 
 	public void setPrisonGuard1Attacks() {
-		attacks.put("Lash", "Jump");
-		attacks.put("Charge", "Side Step");
-		attacks.put("Punch", "Stab");
+		ArrayList<Attack> attacks = getAttacks();
+		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 10));
+		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 10));
+		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
 	}
 
 	public void setPrisonGuard2Attacks() {
-		attacks.put("Lash", "Jump");
-		attacks.put("Charge", "Side Step");
-		attacks.put("Punch", "Stab");
-		attacks.put("Shoot", "duck");
+		ArrayList<Attack> attacks = getAttacks();
+		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 10));
+		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 10));
+		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
+		attacks.add(new Attack(Moves.SHOOT, Moves.DUCK, 10));
 	}
 }

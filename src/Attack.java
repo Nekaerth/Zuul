@@ -10,20 +10,23 @@
  */
 public class Attack {
 
-	private String name;
+	private Moves move = null;
+	private Moves counterMove = null;
 	private int damage;
 
-	public Attack(String name, int damage) {
-		this.name = name;
+	public Attack(Moves move, int damage) {
+		this.move = move;
+		this.damage = damage;
+	}
+
+	public Attack(Moves move, Moves counterMove, int damage) {
+		this.move = move;
+		this.counterMove = counterMove;
 		this.damage = damage;
 	}
 
 	public String getName() {
-		return this.name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		return this.move.toString();
 	}
 
 	public int getDamage() {

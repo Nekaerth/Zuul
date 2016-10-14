@@ -17,7 +17,7 @@ public class Game {
 	{
 		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; //Fem rum oprettes
 
-		player = new Player(100, 1200);
+		player = new Player(100, new ArrayList<>(), new Inventory(), 1200);
 
 		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -131,6 +131,7 @@ public class Game {
 		System.out.println(currentRoom.getLongDescription()); // Giver beskrivelse af rummet + exit muligheder
 	}
 //Følgende kode har kun med udførelsen af commands at gøre
+
 	private boolean processCommand(Command command) {
 		boolean wantToQuit = false;
 
@@ -325,17 +326,17 @@ public class Game {
 	}
 
 	private void useFlashlight(Command command, Item flashlight) {
-		if(flashlight.getCharges() > 0){
+		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
 			System.out.println("You used the flashlight and the battery drained, you think you will have " + flashlight.getCharges() + " use(s) left");
-			if(currentRoom.isNumberRoom()){
+			if (currentRoom.isNumberRoom()) {
 				System.out.println("You search the room and find a mysterious number that was hidden");
-				System.out.println("The number is "+currentRoom.getNumber());
+				System.out.println("The number is " + currentRoom.getNumber());
 			} else {
 				System.out.println("To your disappointment you find nothing new");
 			}
-			
-		} else if(flashlight.getCharges() <= 0){
+
+		} else if (flashlight.getCharges() <= 0) {
 			System.out.println("You don't have anymore charges in your flashlight");
 			System.out.println("if you haven't found anything with it, you will be in trouble");
 		}
