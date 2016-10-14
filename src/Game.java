@@ -1,24 +1,25 @@
 
-
+import java.util.ArrayList;
 
 public class Game {
 
 	private final Parser parser;
 	private Room currentRoom;
 	private Player player;
-	
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	public Game() //Constructor
 	{
 		createRooms();
 		parser = new Parser();
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void createRooms() //Kaldes fra constructor
 	{
@@ -138,9 +139,10 @@ public class Game {
 		System.out.println(currentRoom.getLongDescription()); // Giver beskrivelse af rummet + exit muligheder
 	}
 //Følgende kode har kun med udførelsen af commands at gøre
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 
 	private boolean processCommand(Command command) {
@@ -192,9 +194,10 @@ public class Game {
 		System.out.println(currentRoom.getExitString());
 		return wantToQuit; //return boolean, som under go og help commanden ikke ændres fra false
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void printHelp() {
 		System.out.println("You're a prisoner inside a prison, and there have just been a riot.");
@@ -203,9 +206,10 @@ public class Game {
 		System.out.println("Your command words are:");
 		parser.showCommands();
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void goRoom(Command command) {
 		if (!command.hasSecondWord()) { //Tjekker om der er en retning
@@ -246,9 +250,10 @@ public class Game {
 		}
 
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private boolean quit(Command command) {
 		if (command.hasSecondWord()) { //hvis der er skrevet mere end quit
@@ -258,9 +263,10 @@ public class Game {
 			return true; //hvis der bare er skrevet quit, så quit spillet fuldstændigt.
 		}
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void searchRoom(Command command) {
 		if (command.hasSecondWord()) {
@@ -274,9 +280,10 @@ public class Game {
 			System.out.println("You search the room, but find nothing.");
 		}
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void pickUp(Command command) {
 		if (command.hasSecondWord() == false) {
@@ -285,7 +292,7 @@ public class Game {
 			try {
 				Item item = currentRoom.inv.getItem(command.getSecondWord());
 				if (item.getPickUp() == true) {
-					player.inventory.putItem(command.getSecondWord(), item);
+					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 					System.out.println("You pick up " + item.getName());
 				}
@@ -294,34 +301,36 @@ public class Game {
 			}
 		}
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void drop(Command command) {
 		if (command.hasSecondWord() == false) {
 			System.out.println("Drop what?");
 		} else {
 			try {
-				Item item = player.inventory.getItem(command.getSecondWord());
+				Item item = player.getInventory().getItem(command.getSecondWord());
 				currentRoom.inv.putItem(command.getSecondWord(), item);
-				player.inventory.removeItem(command.getSecondWord());
+				player.getInventory().removeItem(command.getSecondWord());
 				System.out.println("You drop " + item.getName());
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
 		}
 	}
+
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void use(Command command) {
 		try {
 			if (command.hasSecondWord() == false) {
 				System.out.println("Use what?");
 			} else {
-				Item item = player.inventory.getItem(command.getSecondWord());
+				Item item = player.getInventory().getItem(command.getSecondWord());
 
 				if (item.getUseable() == true) {
 					if (item.getName().equalsIgnoreCase("key")) {
@@ -352,7 +361,7 @@ public class Game {
 			System.out.println("You successfully unlock the door");
 			key.subtractCharge(1);
 			if (key.getCharges() <= 0) {
-				player.inventory.removeItem(command.getSecondWord());
+				player.getInventory().removeItem(command.getSecondWord());
 			}
 		}
 	}
@@ -375,11 +384,11 @@ public class Game {
 	}
 
 	/**
-	 * 
-	 * 
+	 *
+	 *
 	 */
 	private void showInventory() {
 		System.out.println("Your inventory contains the following:");
-		System.out.println(player.inventory.getAllItems());
+		System.out.println(player.getInventory().getAllItems());
 	}
 }
