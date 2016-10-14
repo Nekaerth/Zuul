@@ -1,18 +1,25 @@
 
-import java.util.ArrayList;
+
 
 public class Game {
 
 	private final Parser parser;
 	private Room currentRoom;
 	private Player player;
-
+	
+	/**
+	 * 
+	 * 
+	 */
 	public Game() //Constructor
 	{
 		createRooms();
 		parser = new Parser();
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private void createRooms() //Kaldes fra constructor
 	{
 		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; //Fem rum oprettes
@@ -131,6 +138,10 @@ public class Game {
 		System.out.println(currentRoom.getLongDescription()); // Giver beskrivelse af rummet + exit muligheder
 	}
 //Følgende kode har kun med udførelsen af commands at gøre
+	/**
+	 * 
+	 * 
+	 */
 	private boolean processCommand(Command command) {
 		boolean wantToQuit = false;
 
@@ -180,7 +191,10 @@ public class Game {
 		System.out.println(currentRoom.getExitString());
 		return wantToQuit; //return boolean, som under go og help commanden ikke ændres fra false
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private void printHelp() {
 		System.out.println("You're a prisoner inside a prison, and there have just been a riot.");
 		System.out.println("Your goal is to break out.");
@@ -188,7 +202,10 @@ public class Game {
 		System.out.println("Your command words are:");
 		parser.showCommands();
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private void goRoom(Command command) {
 		if (!command.hasSecondWord()) { //Tjekker om der er en retning
 			System.out.println("Go where?");
@@ -228,7 +245,10 @@ public class Game {
 		}
 
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private boolean quit(Command command) {
 		if (command.hasSecondWord()) { //hvis der er skrevet mere end quit
 			System.out.println("Quit what?");
@@ -237,7 +257,10 @@ public class Game {
 			return true; //hvis der bare er skrevet quit, så quit spillet fuldstændigt.
 		}
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private void searchRoom(Command command) {
 		if (command.hasSecondWord()) {
 			System.out.println("Search what?");
@@ -250,7 +273,10 @@ public class Game {
 			System.out.println("You search the room, but find nothing.");
 		}
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private void pickUp(Command command) {
 		if (command.hasSecondWord() == false) {
 			System.out.println("Pick up what?");
@@ -267,7 +293,10 @@ public class Game {
 			}
 		}
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private void drop(Command command) {
 		if (command.hasSecondWord() == false) {
 			System.out.println("Drop what?");
@@ -282,7 +311,10 @@ public class Game {
 			}
 		}
 	}
-
+	/**
+	 * 
+	 * 
+	 */
 	private void use(Command command) {
 		try {
 			if (command.hasSecondWord() == false) {
@@ -341,6 +373,10 @@ public class Game {
 		}
 	}
 
+	/**
+	 * 
+	 * 
+	 */
 	private void showInventory() {
 		System.out.println("Your inventory contains the following:");
 		System.out.println(player.inventory.getAllItems());
