@@ -1,4 +1,7 @@
-
+/**
+ * The game class cosists off X instance variable and X instance methods
+ * The arraylsit is import from the java utility library
+ */
 import java.util.ArrayList;
 
 public class Game {
@@ -8,24 +11,25 @@ public class Game {
 	private Player player;
 
 	/**
-	 *
-	 *
+	 *The construter for the game class consists off calling a method
+         *The createRooms() method and creating a new object of the parser class.
 	 */
 	public Game() //Constructor
 	{
-		createRooms();
-		parser = new Parser();
+		createRooms(); // calls the createRooms() method
+		parser = new Parser(); // creates a new object of the parser class
 	}
 
 	/**
-	 *
-	 *
+	 * This method creates all the rooms which are available 
+         * and an object of the player class
 	 */
 	private void createRooms() //Kaldes fra constructor
 	{
-		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; //Fem rum oprettes
+		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; 
+                // initializes the rooms available
 
-		player = new Player(100, new ArrayList<>(), new Inventory(), 1200);
+		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
 
 		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -39,7 +43,8 @@ public class Game {
 
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
 		cell.setExit("Hiddenroom", hiddenroom);
-		cell.inv = setCellInventory();
+		cell.inv = setCellInventory(); // calls the method setCellInventory()
+                //to declare what items that are in the cell when the game begins
 
 		hiddenroom.setExit("Bossroom", bossroom);
 		hiddenroom.setExit("Cell", cell);
@@ -73,63 +78,94 @@ public class Game {
 		bossroom.setExit("Hiddenroom", hiddenroom);
 		bossroom.inv = setBossroomInventory();
 
-		currentRoom = cell; //currentRoom er den variabel der holder styr på hvilket rum man er i.
+		currentRoom = cell; // currentRoom is the variable that keeps track of what room you are in
+                // the variable is set to cell to declare the room you begin the game in
 	}
 
+        /**
+         * This method will set the cell inventory when the game starts
+         * @return will return the cell inventory
+         */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Item(true, "Stone", true));
 		return inv;
 	}
-
+         /**
+         * This method will set the storage inventory when the game starts
+         * @return will return the storage inventory
+         */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false));
 		inv.putItem("Pistol", new Item(false, "Pistol", false));
 		return inv;
 	}
-
+         /**
+         * This method will set the dining hall inventory when the game starts
+         * @return will return the dining hall inventory
+         */
 	private Inventory setDininghallInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Key", new Item(true, "Key", true));
 		return inv;
 	}
-
+         /**
+         * This method will set the yard inventory when the game starts
+         * @return will return the yard inventory
+         */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Knife", new Item(false, "Knife", false));
 		return inv;
 	}
-
+         /**
+         * This method will set the office inventory when the game starts
+         * @return will return the office inventory
+         */
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Blueprints", new Item(true, "Blueprints", true));
 		return inv;
 	}
-
+        /**
+         * This method will set the hidden rooms inventory when the game starts
+         * @return will return the hidden rooms inventory
+         */
 	private Inventory setHiddenroomInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5));
 		return inv;
 	}
-
+        /**
+         * This method will set the boss rooms inventory when the game starts
+         * @return will return the boss rooms inventory
+         */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Key", new Item(false, "Key", false));
 		return inv;
 	}
-
+        /**
+         * The play method is used to run the game it starts by calling the 
+         * printWelcome() method, then a boolean is initialized and as long as
+         * the boolean is false a loop will run where inputs from the user is processed
+         */
 	public void play() {
-		printWelcome(); //Kalder metoden
+		printWelcome(); //calls the method printWelcome()
 
-		boolean finished = false;
-		while (!finished) { //Et loop der kører så længe spillet ikke er færdigt
-			Command command = parser.getCommand(); //Får command baseret på brugerens input, og modtager det som et objekt command
+		boolean finished = false; // initializes boolean finished as false
+		while (!finished) { // a loop that run as long as the boolean finished stay false
+			Command command = parser.getCommand(); //Får command baseret på brugerens input,
+                        //og modtager det som et objekt command
 			finished = processCommand(command); //processer commanden
 		}
 		System.out.println("Thank you for playing.  Good bye."); //Hvis der quittes
 	}
-
+         /**
+          * The method printWelcome will print the text, 
+          * and what to type if you need help, in the console
+          */
 	private void printWelcome() {
 		System.out.println();
 		System.out.println("You wake up and realize there's a prisonriot going on. Now's your chance to escape!");
@@ -138,13 +174,12 @@ public class Game {
 		System.out.println();
 		System.out.println(currentRoom.getLongDescription()); // Giver beskrivelse af rummet + exit muligheder
 	}
-//Følgende kode har kun med udførelsen af commands at gøre
-
+        
 	/**
-	 *
-	 *
+	 * The method processCommand will process the user input 
+         * and reactes to the specific input
+         * @param command is a parameter that needs a command object as an input 
 	 */
-
 	private boolean processCommand(Command command) {
 		boolean wantToQuit = false;
 
@@ -196,8 +231,9 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The method printHelp is a case of the user input
+         * and will print what the objective of the game is 
+         * and what commands that are available if the user types "help"
 	 */
 	private void printHelp() {
 		System.out.println("You're a prisoner inside a prison, and there have just been a riot.");
@@ -208,8 +244,9 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The method goRoom is a case of the user input
+         * and are used when the user types "go" as a command
+         * @param command is a parameter that needs a command object as an input 
 	 */
 	private void goRoom(Command command) {
 		if (!command.hasSecondWord()) { //Tjekker om der er en retning
@@ -252,8 +289,9 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The quit method is a case of the user input
+         * and is used when the user types "quit" as a command
+         * @param command is a parameter that needs a command object as an input 
 	 */
 	private boolean quit(Command command) {
 		if (command.hasSecondWord()) { //hvis der er skrevet mere end quit
@@ -265,8 +303,9 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The searchRoom method is a case of the user input
+         * and is used when the user types "search" as a command
+         * @param command is a parameter that needs a command object as an input 
 	 */
 	private void searchRoom(Command command) {
 		if (command.hasSecondWord()) {
@@ -282,8 +321,9 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The pickUp method is a case of the user input
+         * and is used when the user types "pickup" as a command
+         * @param command is a parameter that needs a command object as an input 
 	 */
 	private void pickUp(Command command) {
 		if (command.hasSecondWord() == false) {
@@ -303,8 +343,9 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The drop method is a case of the user input
+         * and is used when the user types "drop" as a command
+         * @param command is a parameter that needs a command object as an input 
 	 */
 	private void drop(Command command) {
 		if (command.hasSecondWord() == false) {
@@ -322,8 +363,9 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The use method is a case of the user input
+         * and is used when the user types "use" as a command
+         * @param command is a parameter that needs a command object as an input 
 	 */
 	private void use(Command command) {
 		try {
@@ -351,7 +393,13 @@ public class Game {
 		}
 
 	}
-
+        /**
+         * The useKey method is a case when the user types "use" 
+         * and is used when the user types "use key" as a command
+         * @param command is a parameter that needs a command object as an input 
+         * @param key the key is a item you must have in yor inventory
+         * to use the command "use key" the key is used as an input to this method
+         */
 	private void useKey(Command command, Item key) {
 		if (command.hasThirdWord() == false) {
 			System.out.println("Use " + command.getSecondWord() + " where?");
@@ -365,7 +413,12 @@ public class Game {
 			}
 		}
 	}
-
+        /**
+         * The useFlashlight method is a case when the user types "use"
+         * and is used when the user types "use flashlight"
+         * @param command is a parameter that needs a command object as an input 
+         * @param flashlight is a item you must have in your inventory to use the command "use flashlight"
+         */
 	private void useFlashlight(Command command, Item flashlight) {
 		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
@@ -384,8 +437,7 @@ public class Game {
 	}
 
 	/**
-	 *
-	 *
+	 * The showInventory method will print the items that are currently in the players inventory
 	 */
 	private void showInventory() {
 		System.out.println("Your inventory contains the following:");
