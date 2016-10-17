@@ -30,6 +30,10 @@ public class Person {
 		this.hitpoint = hitpoint;
 	}
 	
+	public void subtractHitpoint(int damage) {
+		this.hitpoint -= damage;
+	}
+
 	public ArrayList<Attack> getAttacks() {
 		return attacks;
 	}
@@ -40,5 +44,22 @@ public class Person {
 
 	public void setInventory(int Inventory) {
 		this.inventory = inventory;
+	}
+
+	public String getAttackString() {
+		String list = "";
+		for (Attack attack : attacks) {
+			list += attack.getName() + ", ";
+		}
+		return list.substring(0, list.length() - 2);
+	}
+
+	public Attack getAttack(String attackString) {
+		for (Attack attack : attacks) {
+			if (attackString.equals(attack.getName())) {
+				return attack;
+			}
+		}
+		return null;
 	}
 }

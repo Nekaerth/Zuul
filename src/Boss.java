@@ -37,4 +37,16 @@ public class Boss extends Person {
 		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
 		attacks.add(new Attack(Moves.SHOOT, Moves.DUCK, 10));
 	}
+
+	public Attack getRandomAttack() {
+		int randomNumber = (int) (getAttacks().size() * Math.random());
+		int count = 0;
+		for (Attack attack : getAttacks()) {
+			if (randomNumber == count) {
+				return attack;
+			}
+			count++;
+		}
+		return null;
+	}
 }
