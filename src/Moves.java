@@ -10,7 +10,7 @@
  */
 public enum Moves {
 
-	PUNCH("Punch"), STAB("Stab"), DUCK("Duck"), JUMP("Jump"), SIDESTEP("Side step"), LASH("Lash"), CHARGE("Charge"), SHOOT("Shoot");
+	PUNCH("Punch"), STAB("Stab"), DUCK("Duck"), JUMP("Jump"), SIDESTEP("Side step"), LASH("Lash"), CHARGE("Charge"), SHOOT("Shoot"), DANCE("Dance");
 
 	private String moveString;
 
