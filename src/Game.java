@@ -37,6 +37,7 @@ public class Game {
 
 		// initializes the rooms available
 		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
+		player.setPlayerAttacks();
 
 		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -48,12 +49,7 @@ public class Game {
 		hiddenroom = new Room("in a secret room", true);
 		bossroom = new Room("in the bossroom", false);
 
-		cell.setExit("Cellhall", cellhall); // metode i room der hedder setExit kaldes, der tager en string og et room objekt som argument
-		//cell.setExit("Hiddenroom", hiddenroom);
-		cell.inv = setCellInventory();
-
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
-		cell.setExit("Hiddenroom", hiddenroom);
 		cell.inv = setCellInventory(); // calls the method setCellInventory()
 		//to declare what items that are in the cell when the game begins
 
@@ -104,8 +100,8 @@ public class Game {
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Item(true, "Stone", false,1));
-                inv.putItem("Key", new Item(true, "Key", false,1));
-                inv.putItem("Blueprints", new Item(true, "Blueprints", false,1));
+        inv.putItem("Key", new Item(true, "Key", true,1));
+        inv.putItem("Blueprints", new Item(true, "Blueprints", true,1));
 		return inv;
 	}
          /**
@@ -308,7 +304,7 @@ public class Game {
 
 				if (currentRoom.boss != null) {
 
-					finish = currentRoom.bossFight();
+					finish = currentRoom.bossFight(player);
 
 				} else {
 					System.out.println(currentRoom.getShortDescription()); //Udskriv beskrivelse og exits af det nye rum
@@ -388,7 +384,12 @@ public class Game {
 					currentRoom.inv.removeItem(command.getSecondWord());
 
 					System.out.println("You picked up " + item.getName());
-
+					if(item.getName().equalsIgnoreCase("knife")){
+						player.changePlayerAttack(item.getName());
+						
+					} else if(item.getName().equalsIgnoreCase("pistol")){
+						player.changePlayerAttack(item.getName());
+					}
 			}
 
 				
@@ -514,6 +515,7 @@ public class Game {
 		if (command.hasSecondWord() == false) {
 			System.out.println("Use what?");
 		} else {
+			
 			cell.setExit("Hiddenroom", hiddenroom);
 			System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
 			player.getInventory().removeItem("blueprints");
