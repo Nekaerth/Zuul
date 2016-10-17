@@ -68,6 +68,7 @@ public class Inventory {
 	public void putItem(String name, Item item) {
 
 		inventory.put(name, item);
+		
 
 	}
 

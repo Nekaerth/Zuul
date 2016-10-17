@@ -1,13 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author niklasbruun
- */
 public class Item {
 
 	boolean pickUp;
@@ -41,7 +31,7 @@ public class Item {
 	public boolean getUseable() {
 		return useable;
 	}
-		public int getCharges() {
+	public int getCharges() {
 		return this.charges;
 	}
 	

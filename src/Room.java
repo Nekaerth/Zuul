@@ -13,18 +13,18 @@ public class Room {
 	public Inventory inv;
 	private final String description;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
-	boolean numberRoom, escapeRoom, lock, hideRoom = false;
+	private boolean numberRoom, escapeRoom, lock, hideRoom = false;
 	public Boss boss = null;
 	int number;
-
+        
 	public Room(String description, boolean numberRoom) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
 		inv = new Inventory(); // Creates a new inventory for each room
 		this.escapeRoom = false;
-		this.numberRoom = numberRoom;
+		this.numberRoom = numberRoom;                
 		if (numberRoom == true) {
-			number = 1;
+			number = (int)(Math.random()*9);
 		}
 	}
 
@@ -42,8 +42,6 @@ public class Room {
 	public String getShortDescription() {
 		return "You are " + description;
 	}
-//Bør fjernes
-
 	public String getLongDescription() {
 		return "You are " + description + "\n" + getExitString(); //Giver en længere beskrivelse af rummet og giver hvilke exits der findes
 	}
@@ -51,8 +49,8 @@ public class Room {
 	public String getExitString() {
 		String returnString = "Exits:";
 		Set<String> keys = exits.keySet();
-		for (String exit : keys) {
-			returnString += " " + exit;
+		for (String exit : keys) {     
+                        returnString = returnString + " " + exit;                       
 		}
 		return returnString;
 	}
@@ -121,78 +119,5 @@ public class Room {
 	 */
 	public boolean isNumberRoom() {
 		return numberRoom;
-	}
-
-	/**
-	 * The hideRoom method is a setter method that will set the boolean value
-	 * hideRoom to true
-	 */
-	public void hideRoom() {
-		hideRoom = true;
-	}
-
-	/**
-	 * The showRoom method is a setter method that will set the boolean value of
-	 * hideRoom to false
-	 */
-	public void showRoom() {
-		hideRoom = false;
-	}
-
-	/**
-	 * The isHidden method will return the current value of hideRoom
-	 *
-	 * @return will return the current value of the boolean hideRoom
-	 */
-	public boolean isHidden() {
-		return hideRoom;
-	}
-
-	/**
-	 *
-	 * @param player
-	 * @return
-	 */
-	public boolean bossFight(Player player) {
-		//This loop runs until the player or the boss has no hipoints left. In each iteration the boss attacks once and the player defence once.
-		while (player.getHitpoint() > 0 && boss.getHitpoint() > 0) {
-			Attack currentBossAttack = boss.getRandomAttack(); //This chooses what attack the boss uses at random.
-			Attack currentPlayerAttack = null; //Creates variable for containing what attack the player uses.
-			System.out.println("The prison guard uses " + currentBossAttack.getName() + "!");
-
-			//Within this loop the player chooses a counter attack. This loop makes sure that the input is valid.
-			while (true) {
-				System.out.println("Choose a move: " + player.getAttackString()); //Prints all the available attacks the player can do.
-				System.out.print(">");
-				Scanner scanner = new Scanner(System.in); //Creates new Scanner object.
-				String input = scanner.nextLine(); //Takes user input.
-				currentPlayerAttack = player.getAttack(input); //Checks if the user input is a valid attack and saves the corresponding attack in currentPlayerAttack.
-
-				//Breaks out of the loop if was a valid attack.
-				if (currentPlayerAttack != null) {
-					break;
-				}
-				System.out.println("Move does not exits. Make sure to write a correct move.");
-			}
-
-			//If the chosen attack was a counter attack to the boss attack, the boss loses hitpoint equal to the player attack damage. Else the player loses hitpoints equal to the boss attack damage.
-			if (currentBossAttack.getCounterMove() == currentPlayerAttack.getMove()) { //Checks if the player attack is a counter attack to the boss attack.
-				boss.subtractHitpoint(currentPlayerAttack.getDamage()); //Subtracts hitpoints from the boss.
-				System.out.println("The prison guard loses " + currentPlayerAttack.getDamage() + " hitpoints. He has " + boss.getHitpoint() + " hitpoints left."); //Prints out how much damage dealt and how much hitpoints the boss have left
-			} else {
-				player.subtractHitpoint(currentBossAttack.getDamage()); //Subtracts hitpoints from the player.
-				System.out.println("You lose " + currentBossAttack.getDamage() + " hitpoints. You have " + player.getHitpoint() + " hitpoints left."); //Prints out how much damage dealt and how much hitpoints the player has left.
-			}
-		}
-
-		if (player.getHitpoint() <= 0) {
-			System.out.println("You've been defeated by the prison guard!");
-			return true;
-		} else {
-			System.out.println("You defeated the prison guard!");
-			boss = null;
-			return false;
-		}
-	}
-
+	}              
 }

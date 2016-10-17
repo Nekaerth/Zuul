@@ -48,18 +48,18 @@ public class Parser {
         commands.showAll();
     }
 
-    public int getCode() {
+    public String getCode() {
 
-        int inputCode;
+        String inputCode;
         while (reader.hasNext()) {
             if (reader.hasNextInt()) {
-                inputCode = reader.nextInt();
+                inputCode = reader.nextLine();
                 return inputCode;
             } else {
                 System.out.println("" + reader.next() + " is not a number");
             }
         }
-        return -1;
+        return null;
     }
     
     //Denne metode vil tjekke vores ord (word1, word2 og word3) igennem, og sætte dem som uppercase/lowercase
