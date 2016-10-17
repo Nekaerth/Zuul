@@ -103,9 +103,9 @@ public class Game {
 	 */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Item(true, "Stone", false));
-                inv.putItem("Key", new Item(true, "Key", false));
-                inv.putItem("Blueprints", new Item(true, "Blueprints", false));
+		inv.putItem("Stone", new Item(true, "Stone", false,1));
+                inv.putItem("Key", new Item(true, "Key", false,1));
+                inv.putItem("Blueprints", new Item(true, "Blueprints", false,1));
 		return inv;
 	}
          /**
@@ -114,8 +114,8 @@ public class Game {
          */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true));
-		inv.putItem("Pistol", new Item(true, "Pistol", false));
+		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true,1));
+		inv.putItem("Pistol", new Item(true, "Pistol", false,1));
 		return inv;
 	}
          /**
@@ -124,7 +124,7 @@ public class Game {
          */
 	private Inventory setDininghallInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", true));
+		inv.putItem("Key", new Item(true, "Key", true,1));
 		return inv;
 	}
          /**
@@ -133,7 +133,7 @@ public class Game {
          */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(true, "Knife", false));
+		inv.putItem("Knife", new Item(true, "Knife", false,1));
 		return inv;
 	}
          /**
@@ -142,7 +142,7 @@ public class Game {
          */
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Blueprints", new Item(true, "Blueprints", true));
+		inv.putItem("Blueprints", new Item(true, "Blueprints", true,1));
 		return inv;
 	}
         /**
@@ -151,7 +151,7 @@ public class Game {
          */
 	private Inventory setHiddenroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5));
+		inv.putItem("Flashlight", new Item(true, "Flashlight", true,1, 5));
 		return inv;                
 	}
         /**
@@ -160,7 +160,7 @@ public class Game {
          */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", true));
+		inv.putItem("Key", new Item(true, "Key", true,1));
 		return inv;
 	}
         /**
