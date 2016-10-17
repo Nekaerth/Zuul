@@ -304,7 +304,6 @@ public class Game {
 
 				} else if (inputCode != null && inputCode.equalsIgnoreCase(correctCode) == false) {
 					System.out.println("Wrong code!");
-					System.out.println(currentRoom.getLongDescription());
 				}
 
 			} else if (nextRoom.getEscapeRoom() == false) {
