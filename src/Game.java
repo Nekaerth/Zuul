@@ -104,6 +104,8 @@ public class Game {
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Item(true, "Stone", false));
+                inv.putItem("Key", new Item(true, "Key", false));
+                inv.putItem("Blueprints", new Item(true, "Blueprints", false));
 		return inv;
 	}
          /**
