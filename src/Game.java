@@ -416,9 +416,6 @@ public class Game {
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void pickUp(Command command) {
-            Room cell, hiddenroom;
-            hiddenroom = new Room("in a secret room", true);
-            cell = new Room("in your own cell.", false);
             
 		if (command.hasSecondWord() == false) {
 			System.out.println("Pick up what?");
@@ -434,9 +431,7 @@ public class Game {
 					System.out.println("You pick up " + item.getName());
 
 				}
-                                /*if ("blueprints".equals(item.getName())) {
-                                    cell.setExit("Hiddenroom", hiddenroom);
-                                }*/
+                            
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
