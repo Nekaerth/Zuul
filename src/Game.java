@@ -286,9 +286,15 @@ public class Game {
 
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
+				String correctCode;
 				System.out.println("There is a codelock locking the door, to get to the parkinglot you need to enter a 3 digit code: ");
 				String inputCode = parser.getCode();
-				String correctCode = getCorrectCode();
+				if(roomNumber.size() == 3){
+				correctCode = getCorrectCode();
+				} else {
+					System.out.println("You haven't found all the hidden numbers, you wont know the code!");
+					correctCode = "debugDevBugtool";
+				}
 
 				if (inputCode != null && inputCode.equalsIgnoreCase(correctCode) == true) {
 
