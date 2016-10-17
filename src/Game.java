@@ -1,6 +1,6 @@
 /**
  * The game class cosists off X instance variable and X instance methods
- * The arraylsit is import from the java utility library
+ * The arraylist is import from the java utility library
  */
 import java.util.ArrayList;
 
@@ -9,6 +9,7 @@ public class Game {
 	private final Parser parser;
 	private Room currentRoom;
 	private Player player;
+	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 
 	/**
 	 *The construter for the game class consists off calling a method
@@ -26,8 +27,7 @@ public class Game {
 	 */
 	private void createRooms() //Kaldes fra constructor
 	{
-		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; 
-                // initializes the rooms available
+		
 
 		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
 
