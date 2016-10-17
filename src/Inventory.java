@@ -16,10 +16,10 @@ public class Inventory {
 	 */
 	private HashMap<String, Item> inventory;
 
+	/**
+	 * New hashmap with the name "inventory" is create in the contructor
+	 */
 	public Inventory() {
-		/**
-		 * New hashmap with the name "inventory" is create in the contructor
-		 */
 		inventory = new HashMap<>();
 
 	}
@@ -27,6 +27,7 @@ public class Inventory {
 	public boolean isEmpty() {
 		return inventory.isEmpty();
 	}
+
 	/**
 	 * This method returns the name of an item
 	 *
@@ -35,8 +36,8 @@ public class Inventory {
 	 * @return An Item object
 	 */
 	public Item getItem(String name) {
-		if(inventory.get(name) != null){
-		return inventory.get(name);
+		if (inventory.get(name) != null) {
+			return inventory.get(name);
 		} else {
 			throw new IllegalArgumentException();
 		}
@@ -67,6 +68,7 @@ public class Inventory {
 	public void putItem(String name, Item item) {
 
 		inventory.put(name, item);
+		
 
 	}
 
