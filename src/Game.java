@@ -9,7 +9,9 @@ public class Game {
 	private final Parser parser;
 	private Room currentRoom;
 	private Player player;
-
+        private boolean blueprintUsed;
+    
+        private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; 
 	/**
 	 *The construter for the game class consists off calling a method
          *The createRooms() method and creating a new object of the parser class.
@@ -26,7 +28,7 @@ public class Game {
 	 */
 	private void createRooms() //Kaldes fra constructor
 	{
-		Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; 
+		
                 // initializes the rooms available
 
 		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
@@ -41,9 +43,10 @@ public class Game {
 		hiddenroom = new Room("in a secret room", true);
 		bossroom = new Room("in the bossroom", false);
 
-		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
-		cell.setExit("Hiddenroom", hiddenroom);		
-
+		cell.setExit("Cellhall", cellhall); // metode i room der hedder setExit kaldes, der tager en string og et room objekt som argument
+		//cell.setExit("Hiddenroom", hiddenroom);
+                cell.inv = setCellInventory();                
+                
 		hiddenroom.setExit("Bossroom", bossroom);
 		hiddenroom.setExit("Cell", cell);
 		hiddenroom.inv = setHiddenroomInventory();             
@@ -78,8 +81,14 @@ public class Game {
 
 		currentRoom = cell; // currentRoom is the variable that keeps track of what room you are in
                 // the variable is set to cell to declare the room you begin the game in
+                
 	}
-	
+        
+	private Inventory setCellInventory() {
+		Inventory inv = new Inventory();
+		inv.putItem("Stone", new Item(true, "Stone", false));
+		return inv;
+	}
          /**
          * This method will set the storage inventory when the game starts
          * @return will return the storage inventory
@@ -87,7 +96,7 @@ public class Game {
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true));
-		inv.putItem("Pistol", new Item(true, "Pistol", true));
+		inv.putItem("Pistol", new Item(true, "Pistol", false));
 		return inv;
 	}
          /**
@@ -105,7 +114,7 @@ public class Game {
          */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(true, "Knife", true));
+		inv.putItem("Knife", new Item(true, "Knife", false));
 		return inv;
 	}
          /**
@@ -166,7 +175,7 @@ public class Game {
         
 	/**
 	 * The method processCommand will process the user input 
-         * and reactes to the specific input
+         * and reactes to the specific user input
          * @param command is a parameter that needs a command object as an input 
 	 */
 	private boolean processCommand(Command command) {
@@ -209,7 +218,7 @@ public class Game {
 					break;
 				case INVENTORY:
 					showInventory();
-					break;
+					break;                                
 				default:
 					break;
 			}
@@ -259,7 +268,7 @@ public class Game {
 
 					System.out.println("Congratulations, you have escaped!");
 					System.out.println("Type \"quit\" to quit the game");
-					currentRoom = nextRoom;
+					currentRoom = nextRoom;                                        
 
 				} else if (inputCode != -1 && inputCode != 111) {
 					System.out.println("Wrong code!");
@@ -272,9 +281,7 @@ public class Game {
 			}
 		} else if (nextRoom.isLocked() == true) {
 			System.out.println("The door is locked, you can't go in there without a key");
-
 		}
-
 	}
 
 	/**
@@ -315,6 +322,10 @@ public class Game {
          * @param command is a parameter that needs a command object as an input 
 	 */
 	private void pickUp(Command command) {
+            Room cell, hiddenroom;
+            hiddenroom = new Room("in a secret room", true);
+            cell = new Room("in your own cell.", false);
+            
 		if (command.hasSecondWord() == false) {
 			System.out.println("Pick up what?");
 		} else {
@@ -325,6 +336,9 @@ public class Game {
 					currentRoom.inv.removeItem(command.getSecondWord());
 					System.out.println("You picked up " + item.getName());
 				}
+                                /*if ("blueprints".equals(item.getName())) {
+                                    cell.setExit("Hiddenroom", hiddenroom);
+                                }*/
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
@@ -368,7 +382,9 @@ public class Game {
 						useKey(command, item);
 					} else if (item.getName().equalsIgnoreCase("flashlight")) {
 						useFlashlight(command, item);
-
+                                        }     else if (item.getName().equalsIgnoreCase("blueprints")) {
+                                                    blueprintIsUsed();
+                                                    useBlueprints(command, item);
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
@@ -424,6 +440,17 @@ public class Game {
 			System.out.println("if you haven't found anything with it, you will be in trouble");
 		}
 	}
+        
+        private void useBlueprints (Command command, Item blueprints) {                         
+                      
+            if (command.hasSecondWord() == false) {
+                System.out.println("Use what?");
+            }
+            else if (getBlueprintUsed() == true) {                
+                cell.setExit("Hiddenroom", hiddenroom);
+                    System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
+                }
+        }
 
 	/**
 	 * The showInventory method will print the items that are currently in the players inventory
@@ -432,4 +459,12 @@ public class Game {
 		System.out.println("Your inventory contains the following:");
 		System.out.println(player.getInventory().getAllItems());
 	}
+        
+        public boolean getBlueprintUsed () {
+            return blueprintUsed;
+        }
+        
+        public void blueprintIsUsed () {
+            this.blueprintUsed = true;
+        }
 }

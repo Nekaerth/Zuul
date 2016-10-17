@@ -11,7 +11,7 @@ public class Room {
 	public Inventory inv;
 	private final String description;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
-	boolean numberRoom, escapeRoom, lock, hideRoom = false;
+	boolean numberRoom, escapeRoom, lock = false;
 	int number;
         
 	public Room(String description, boolean numberRoom) { //Constructor der tager en string der beskriver rummet
@@ -44,8 +44,8 @@ public class Room {
 	public String getExitString() {
 		String returnString = "Exits:";
 		Set<String> keys = exits.keySet();
-		for (String exit : keys) {                    
-			returnString = returnString + " " + exit;                    
+		for (String exit : keys) {     
+                        returnString = returnString + " " + exit;                       
 		}
 		return returnString;
 	}
@@ -109,31 +109,5 @@ public class Room {
          */
 	public boolean isNumberRoom() {
 		return numberRoom;
-	}
-        
-        /**
-         * The hideRoom method is a setter method
-         * that will set the boolean value hideRoom to true
-         */
-        public void hideRoom() {
-            hideRoom = true;
-        }
-        
-        /**
-         * The showRoom method is a setter method
-         * that will set the boolean value of hideRoom to false
-         */
-        public void showRoom() {
-            hideRoom = false;
-        }           
-        
-        /**
-         * The isHidden method will return the current value of hideRoom
-         * @return will return the current value of the boolean hideRoom
-         */
-        public boolean isHidden() {
-            return hideRoom;
-        }
-        
-
+	}              
 }

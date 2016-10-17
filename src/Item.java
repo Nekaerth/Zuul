@@ -1,8 +1,7 @@
 public class Item {
 
-	boolean pickUp;
-	String name;
-	boolean useable;
+	boolean pickUp, useable, blueprintsUsed;
+	String name;	
 	int charges = 1;
 
 	public Item(boolean pickUp, String name, boolean useable) {
@@ -29,11 +28,14 @@ public class Item {
 	public boolean getUseable() {
 		return useable;
 	}
-		public int getCharges() {
+	public int getCharges() {
 		return this.charges;
 	}
 	
 	public void subtractCharge(int subCharge){
 		this.charges -= subCharge;
-	}
+	}      
+        
+        
+        
 }
