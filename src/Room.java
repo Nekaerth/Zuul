@@ -12,6 +12,7 @@ public class Room {
 	private final String description;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	boolean numberRoom, escapeRoom, lock, hideRoom = false;
+	public Boss boss = null;
 	int number;
               
 	public Room(String description, boolean numberRoom) { //Constructor der tager en string der beskriver rummet
