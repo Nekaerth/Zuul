@@ -1,11 +1,6 @@
 
 import java.util.ArrayList;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
  * @author Lasse
@@ -37,26 +32,41 @@ public class Player extends Person {
 		this.weightCapacity = weightCapacity;
 	}
 
+	/**
+	 *
+	 * @return the time the player has left.
+	 */
 	public int getTime() {
 		return this.time;
 	}
 
-	public void addTime(int time) {
-		this.time += time;
-	}
-
+	/**
+	 *
+	 * @param time subtracts time from the time the player has left.
+	 */
 	public void subtractTime(int time) {
 		this.time -= time;
 	}
 
+	/**
+	 *
+	 * @return the maximum amount item the player can hold.
+	 */
 	public int getCapacity() {
 		return this.capacity;
 	}
 
+	/**
+	 *
+	 * @return the maximum weight that the players items must weight in total.
+	 */
 	public int getWeightCapacity() {
 		return this.weightCapacity;
 	}
 
+	/**
+	 * Adds four attack to player attack list.
+	 */
 	public void setPlayerAttacks() {
 		ArrayList<Attack> attacks = getAttacks();
 		attacks.add(new Attack(Moves.STAB, 10));
