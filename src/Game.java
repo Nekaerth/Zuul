@@ -11,7 +11,7 @@ public class Game {
 	private Room currentRoom;
 	private Player player;
 
-	private boolean blueprintUsed;
+
 
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
@@ -436,8 +436,8 @@ public class Game {
 					} else if (item.getName().equalsIgnoreCase("flashlight")) {
 						useFlashlight(command, item);
                                         }     else if (item.getName().equalsIgnoreCase("blueprints")) {
-                                                    blueprintIsUsed();
-                                                    useBlueprints(command, item);
+                                                    
+                                                    useBlueprints(command);
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
@@ -507,11 +507,11 @@ public class Game {
 		}
 	}
 
-	private void useBlueprints(Command command, Item blueprints) {
+	private void useBlueprints(Command command) {
 
 		if (command.hasSecondWord() == false) {
 			System.out.println("Use what?");
-		} else if (getBlueprintUsed() == true) {
+		} else {
 			cell.setExit("Hiddenroom", hiddenroom);
 			System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
 			player.getInventory().removeItem("blueprints");
@@ -527,11 +527,5 @@ public class Game {
 		System.out.println(player.getInventory().getAllItems());
 	}
 
-	public boolean getBlueprintUsed() {
-		return blueprintUsed;
-	}
 
-	public void blueprintIsUsed() {
-		this.blueprintUsed = true;
-	}
 }
