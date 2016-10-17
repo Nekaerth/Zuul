@@ -13,10 +13,14 @@ import java.util.ArrayList;
 public class Player extends Person {
 
 	private int time;
+        private int capacity;
+        private int weightCapacity;
 
-	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time) {
+	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time, int capacity, int weightCapacity) {
 		super(hitpoint, attacks, inventory);
 		this.time = time;
+                this.capacity = capacity;
+                this.weightCapacity = weightCapacity;
 	}
 
 	public int getTime() {
@@ -30,6 +34,12 @@ public class Player extends Person {
 	public void subtractTime(int time) {
 		this.time -= time;
 	}
+        public int getCapacity() {
+                return this.capacity;
+        }
+        public int getWeightCapacity() {
+                return this.weightCapacity;
+        }
 	
 	public void setPlayerAttacks() {
 		ArrayList<Attack> attacks = getAttacks();

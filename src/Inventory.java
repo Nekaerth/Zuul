@@ -15,7 +15,8 @@ public class Inventory {
 	 * New hashmap is initialized
 	 */
 	private HashMap<String, Item> inventory;
-
+        
+        
 	/**
 	 * New hashmap with the name "inventory" is create in the contructor
 	 */
@@ -57,6 +58,19 @@ public class Inventory {
 		}
 		return returnString;
 	}
+        
+        public int itemWeight() {
+                int weight = 0;
+                for (Item item : inventory.values()) {
+                    weight += item.getWeight();
+            }
+                return weight;
+        }
+        public int size() {
+                int size = 0;
+                size = inventory.size();
+                return size;
+        }
 
 	/**
 	 * This method allow you to put an item that you are carrying into an
@@ -66,7 +80,6 @@ public class Inventory {
 	 * @param item The parameter item is the object of the class Item
 	 */
 	public void putItem(String name, Item item) {
-
 		inventory.put(name, item);
 
 	}

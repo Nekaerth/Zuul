@@ -15,19 +15,22 @@ public class Item {
 	boolean useable;
 	private final int weight;
 	int charges = 1;
+        private final int itemCapacity;  
 
-	public Item(boolean pickUp, String name, boolean useable, int weight) {
+	public Item(boolean pickUp, String name, boolean useable, int weight, int itemCapacity) {
 		this.name = name;
 		this.pickUp = pickUp;
 		this.useable = useable;
 		this.weight = weight;
+                this.itemCapacity = itemCapacity;
 	}
-	public Item(boolean pickUp, String name, boolean useable,int weight, int charges) {
+	public Item(boolean pickUp, String name, boolean useable,int weight, int itemCapacity, int charges) {
 		this.name = name;
 		this.pickUp = pickUp;
 		this.useable = useable;
 		this.weight = weight;
 		this.charges = charges;
+                this.itemCapacity = itemCapacity;
 	}
 
 	public boolean getPickUp() {
@@ -50,5 +53,8 @@ public class Item {
 	}
 	public int getWeight() {
 		return this.weight;
-	}
+        }
+        public int getItemCapacity() {
+                return this.itemCapacity;
+        }
 }

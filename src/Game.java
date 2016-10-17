@@ -29,7 +29,7 @@ public class Game {
 	{
 		
 
-		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
+		player = new Player(100, new ArrayList<>(), new Inventory(), 1200, 3, 20); // creates a new object of the player class
 
 		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -88,7 +88,7 @@ public class Game {
          */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Item(true, "Stone", true));
+		inv.putItem("Stone", new Item(true, "Stone", true, 11, 1));
 		return inv;
 	}
          /**
@@ -97,8 +97,8 @@ public class Game {
          */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false));
-		inv.putItem("Pistol", new Item(false, "Pistol", false));
+		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false, 5, 1));
+		inv.putItem("Pistol", new Item(false, "Pistol", false, 5, 1));
 		return inv;
 	}
          /**
@@ -107,7 +107,7 @@ public class Game {
          */
 	private Inventory setDininghallInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", true));
+		inv.putItem("Key", new Item(true, "Key", true, 5, 1));
 		return inv;
 	}
          /**
@@ -116,7 +116,7 @@ public class Game {
          */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(false, "Knife", false));
+		inv.putItem("Knife", new Item(false, "Knife", false, 5, 1));
 		return inv;
 	}
          /**
@@ -125,7 +125,7 @@ public class Game {
          */
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Blueprints", new Item(true, "Blueprints", true));
+		inv.putItem("Blueprints", new Item(true, "Blueprints", true, 5, 1));
 		return inv;
 	}
         /**
@@ -134,7 +134,7 @@ public class Game {
          */
 	private Inventory setHiddenroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5));
+		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5, 1, 5));
 		return inv;
 	}
         /**
@@ -143,7 +143,7 @@ public class Game {
          */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(false, "Key", false));
+		inv.putItem("Key", new Item(false, "Key", false, 5, 1));
 		return inv;
 	}
         /**
@@ -331,11 +331,21 @@ public class Game {
 		} else {
 			try {
 				Item item = currentRoom.inv.getItem(command.getSecondWord());
-				if (item.getPickUp() == true) {
+				if (item.getPickUp() == true 
+                                        && player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity() 
+                                        && player.getInventory().size() + 1 <= player.getCapacity()) {
 					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 					System.out.println("You pick up " + item.getName());
 				}
+                                else if(player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity() || player.getInventory().size() + 1 > player.getCapacity()) {
+                                    System.out.println("It's too heavy for you to pickup.");
+                                    System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
+                                    System.out.println("The item you want to pickup weighs: " + item.getWeight());
+                                    System.out.println("Your capacity is: " + + player.getInventory().size() + "/" + player.getCapacity());
+                                    System.out.println("The capacity of the item you want to pickup is: " + item.getItemCapacity());
+                                }
+                                
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
@@ -442,5 +452,8 @@ public class Game {
 	private void showInventory() {
 		System.out.println("Your inventory contains the following:");
 		System.out.println(player.getInventory().getAllItems());
-	}
+                System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
+                System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
+	}  
+        
 }
