@@ -17,14 +17,12 @@ public class Player extends Person {
         private int weightCapacity;
 
 	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time, int capacity, int weightCapacity) {
-	
-	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time) {
-		super(hitpoint, attacks, inventory);
+	super(hitpoint, attacks, inventory);
 		this.time = time;
                 this.capacity = capacity;
                 this.weightCapacity = weightCapacity;
-	}
-	
+        }
+		
 	public int getTime() {
 		return this.time;
 	}

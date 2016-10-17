@@ -32,7 +32,7 @@ public class Game {
                
 
 		// initializes the rooms available
-		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
+		player = new Player(100, new ArrayList<>(), new Inventory(), 1200, 3, 20); // creates a new object of the player class
 		player.setPlayerAttacks();
 
 		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
@@ -95,9 +95,9 @@ public class Game {
 	 */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Item(true, "Stone", false,1));
-        inv.putItem("Key", new Item(true, "Key", true,1));
-        inv.putItem("Blueprints", new Item(true, "Blueprints", true,1));
+		inv.putItem("Stone", new Item(true, "Stone", false, 1, 1));
+                inv.putItem("Key", new Item(true, "Key", true, 1, 1));
+                inv.putItem("Blueprints", new Item(true, "Blueprints", true, 1, 1));
 		return inv;
 	}
          /**
@@ -523,7 +523,7 @@ public class Game {
 			
 			cell.setExit("Hiddenroom", hiddenroom);
 			System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
-			player.getInventory().removeItem("blueprints");
+			player.getInventory().removeItem(command.getSecondWord());
 		}
 	}
 
