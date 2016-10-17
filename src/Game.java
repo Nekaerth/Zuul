@@ -514,6 +514,7 @@ public class Game {
 		} else if (getBlueprintUsed() == true) {
 			cell.setExit("Hiddenroom", hiddenroom);
 			System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
+			player.getInventory().removeItem("blueprints");
 		}
 	}
 
