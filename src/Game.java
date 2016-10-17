@@ -36,20 +36,18 @@ public class Game {
 		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true);
 		yard = new Room("in the yard. Fresh air, ahh.", false);
 		office = new Room("in the office. They have alot of paperwork going on here.", true);
-		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monetoring this room!", false);
+		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monitoring this room!", false);
 		parkinglot = new Room("outside at the parkinglot. There is a parked car, it could be your getaway.", false);
 		hiddenroom = new Room("in a secret room", true);
 		bossroom = new Room("in the bossroom", false);
 
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
-		cell.setExit("Hiddenroom", hiddenroom);
-		cell.inv = setCellInventory(); // calls the method setCellInventory()
-                //to declare what items that are in the cell when the game begins
+		cell.setExit("Hiddenroom", hiddenroom);		
 
 		hiddenroom.setExit("Bossroom", bossroom);
 		hiddenroom.setExit("Cell", cell);
-		hiddenroom.inv = setHiddenroomInventory();
-
+		hiddenroom.inv = setHiddenroomInventory();             
+              
 		bossroom.setExit("Hiddenroom", hiddenroom);
 
 		dininghall.setExit("Cellhall", cellhall);
@@ -81,24 +79,15 @@ public class Game {
 		currentRoom = cell; // currentRoom is the variable that keeps track of what room you are in
                 // the variable is set to cell to declare the room you begin the game in
 	}
-
-        /**
-         * This method will set the cell inventory when the game starts
-         * @return will return the cell inventory
-         */
-	private Inventory setCellInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Item(true, "Stone", true));
-		return inv;
-	}
+	
          /**
          * This method will set the storage inventory when the game starts
          * @return will return the storage inventory
          */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false));
-		inv.putItem("Pistol", new Item(false, "Pistol", false));
+		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true));
+		inv.putItem("Pistol", new Item(true, "Pistol", true));
 		return inv;
 	}
          /**
@@ -116,7 +105,7 @@ public class Game {
          */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(false, "Knife", false));
+		inv.putItem("Knife", new Item(true, "Knife", true));
 		return inv;
 	}
          /**
@@ -129,21 +118,21 @@ public class Game {
 		return inv;
 	}
         /**
-         * This method will set the hidden rooms inventory when the game starts
-         * @return will return the hidden rooms inventory
+         * This method will set the hiddenroom inventory when the game starts
+         * @return will return the hiddenroom inventory
          */
 	private Inventory setHiddenroomInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5));
-		return inv;
+		return inv;                
 	}
         /**
-         * This method will set the boss rooms inventory when the game starts
-         * @return will return the boss rooms inventory
+         * This method will set the bossroom inventory when the game starts
+         * @return will return the bossroom inventory
          */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(false, "Key", false));
+		inv.putItem("Key", new Item(true, "Key", true));
 		return inv;
 	}
         /**
@@ -334,7 +323,7 @@ public class Game {
 				if (item.getPickUp() == true) {
 					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
-					System.out.println("You pick up " + item.getName());
+					System.out.println("You picked up " + item.getName());
 				}
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");

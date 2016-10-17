@@ -13,13 +13,13 @@ public class Room {
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	boolean numberRoom, escapeRoom, lock, hideRoom = false;
 	int number;
-              
+        
 	public Room(String description, boolean numberRoom) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
 		inv = new Inventory(); // Creates a new inventory for each room
 		this.escapeRoom = false;
-		this.numberRoom = numberRoom;
+		this.numberRoom = numberRoom;                
 		if (numberRoom == true) {
 			number = 1;
 		}
@@ -44,8 +44,8 @@ public class Room {
 	public String getExitString() {
 		String returnString = "Exits:";
 		Set<String> keys = exits.keySet();
-		for (String exit : keys) {
-			returnString += " " + exit;
+		for (String exit : keys) {                    
+			returnString = returnString + " " + exit;                    
 		}
 		return returnString;
 	}
