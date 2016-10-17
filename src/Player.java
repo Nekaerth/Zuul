@@ -11,25 +11,37 @@ import java.util.ArrayList;
  * @author Lasse
  */
 public class Player extends Person {
-
+	
 	private int time;
+        private int capacity;
+        private int weightCapacity;
 
+	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time, int capacity, int weightCapacity) {
+	
 	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time) {
 		super(hitpoint, attacks, inventory);
 		this.time = time;
+                this.capacity = capacity;
+                this.weightCapacity = weightCapacity;
 	}
-
+	
 	public int getTime() {
 		return this.time;
 	}
-
+	
 	public void addTime(int time) {
 		this.time += time;
 	}
-
+	
 	public void subtractTime(int time) {
 		this.time -= time;
 	}
+        public int getCapacity() {
+                return this.capacity;
+        }
+        public int getWeightCapacity() {
+                return this.weightCapacity;
+        }
 	
 	public void setPlayerAttacks() {
 		ArrayList<Attack> attacks = getAttacks();
@@ -37,5 +49,17 @@ public class Player extends Person {
 		attacks.add(new Attack(Moves.DUCK, 0));
 		attacks.add(new Attack(Moves.JUMP, 0));
 		attacks.add(new Attack(Moves.SIDESTEP, 0));
+	}
+	
+	public void changePlayerAttack(String itemName) {
+		
+		if (itemName.equalsIgnoreCase("knife")) {
+			Attack attack = getAttack("Stab");
+			attack.setDamage(20);
+			
+		} else if (itemName.equalsIgnoreCase("pistol")) {
+			System.out.println("Not implemented");
+			
+		}		
 	}
 }

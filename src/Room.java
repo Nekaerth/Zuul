@@ -133,7 +133,7 @@ public class Room {
 			//Within this loop the player chooses a counter attack. This loop makes sure that the input is valid.
 			while (true) {
 				System.out.println("Choose a move: " + player.getAttackString()); //Prints all the available attacks the player can do.
-				System.out.print(">");
+				System.out.print("> ");
 				Scanner scanner = new Scanner(System.in); //Creates new Scanner object.
 				String input = scanner.nextLine(); //Takes user input.
 				currentPlayerAttack = player.getAttack(input); //Checks if the user input is a valid attack and saves the corresponding attack in currentPlayerAttack.
@@ -144,7 +144,7 @@ public class Room {
 				}
 				System.out.println("Move does not exits. Make sure to write a correct move.");
 			}
-
+			player.subtractTime(5); //Subtracts 5 seconds for each move.
 			//If the chosen attack was a counter attack to the boss attack, the boss loses hitpoint equal to the player attack damage. Else the player loses hitpoints equal to the boss attack damage.
 			if (currentBossAttack.getCounterMove() == currentPlayerAttack.getMove()) { //Checks if the player attack is a counter attack to the boss attack.
 				boss.subtractHitpoint(currentPlayerAttack.getDamage()); //Subtracts hitpoints from the boss.

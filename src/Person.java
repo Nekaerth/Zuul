@@ -56,7 +56,7 @@ public class Person {
 
 	public Attack getAttack(String attackString) {
 		for (Attack attack : attacks) {
-			if (attackString.equals(attack.getName())) {
+			if (attackString.equalsIgnoreCase(attack.getName())) {
 				return attack;
 			}
 		}

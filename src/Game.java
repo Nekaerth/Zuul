@@ -1,4 +1,3 @@
-
 /**
  * The game class cosists off X instance variable and X instance methods
  * The arraylist is import from the java utility library
@@ -10,15 +9,12 @@ public class Game {
 	private final Parser parser;
 	private Room currentRoom;
 	private Player player;
-
-
-
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
 
 	/**
-	 * The construter for the game class consists off calling a method The
-	 * createRooms() method and creating a new object of the parser class.
+	 *The construter for the game class consists off calling a method
+         *The createRooms() method and creating a new object of the parser class.
 	 */
 	public Game() //Constructor
 	{
@@ -27,8 +23,8 @@ public class Game {
 	}
 
 	/**
-	 * This method creates all the rooms which are available and an object of
-	 * the player class
+	 * This method creates all the rooms which are available 
+         * and an object of the player class
 	 */
 	private void createRooms() //Called from the constructor
 	{
@@ -37,6 +33,7 @@ public class Game {
 
 		// initializes the rooms available
 		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
+		player.setPlayerAttacks();
 
 		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -48,12 +45,7 @@ public class Game {
 		hiddenroom = new Room("in a secret room", true);
 		bossroom = new Room("in the bossroom", false);
 
-		cell.setExit("Cellhall", cellhall); // metode i room der hedder setExit kaldes, der tager en string og et room objekt som argument
-		//cell.setExit("Hiddenroom", hiddenroom);
-		cell.inv = setCellInventory();
-
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
-		cell.setExit("Hiddenroom", hiddenroom);
 		cell.inv = setCellInventory(); // calls the method setCellInventory()
 		//to declare what items that are in the cell when the game begins
 
@@ -104,8 +96,8 @@ public class Game {
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Item(true, "Stone", false,1));
-                inv.putItem("Key", new Item(true, "Key", false,1));
-                inv.putItem("Blueprints", new Item(true, "Blueprints", false,1));
+        inv.putItem("Key", new Item(true, "Key", true,1));
+        inv.putItem("Blueprints", new Item(true, "Blueprints", true,1));
 		return inv;
 	}
          /**
@@ -114,8 +106,8 @@ public class Game {
          */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true,1));
-		inv.putItem("Pistol", new Item(true, "Pistol", false,1));
+		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false, 5, 1));
+		inv.putItem("Pistol", new Item(false, "Pistol", false, 5, 1));
 		return inv;
 	}
          /**
@@ -124,7 +116,7 @@ public class Game {
          */
 	private Inventory setDininghallInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", true,1));
+		inv.putItem("Key", new Item(true, "Key", true, 5, 1));
 		return inv;
 	}
          /**
@@ -133,7 +125,7 @@ public class Game {
          */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(true, "Knife", false,1));
+		inv.putItem("Knife", new Item(false, "Knife", false, 5, 1));
 		return inv;
 	}
          /**
@@ -142,25 +134,25 @@ public class Game {
          */
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Blueprints", new Item(true, "Blueprints", true,1));
+		inv.putItem("Blueprints", new Item(true, "Blueprints", true, 5, 1));
 		return inv;
 	}
         /**
-         * This method will set the hiddenroom inventory when the game starts
-         * @return will return the hiddenroom inventory
+         * This method will set the hidden rooms inventory when the game starts
+         * @return will return the hidden rooms inventory
          */
 	private Inventory setHiddenroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Flashlight", new Item(true, "Flashlight", true,1, 5));
-		return inv;                
+		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5, 1, 5));
+		return inv;
 	}
         /**
-         * This method will set the bossroom inventory when the game starts
-         * @return will return the bossroom inventory
+         * This method will set the boss rooms inventory when the game starts
+         * @return will return the boss rooms inventory
          */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", true,1));
+		inv.putItem("Key", new Item(false, "Key", false, 5, 1));
 		return inv;
 	}
         /**
@@ -308,7 +300,7 @@ public class Game {
 
 				if (currentRoom.boss != null) {
 
-					finish = currentRoom.bossFight();
+					finish = currentRoom.bossFight(player);
 
 				} else {
 					System.out.println(currentRoom.getShortDescription()); //Udskriv beskrivelse og exits af det nye rum
@@ -383,13 +375,27 @@ public class Game {
 		} else {
 			try {
 				Item item = currentRoom.inv.getItem(command.getSecondWord());
-				if (item.getPickUp() == true) {
+				if (item.getPickUp() == true 
+                                        && player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity() 
+                                        && player.getInventory().size() + 1 <= player.getCapacity()) {
 					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 
 					System.out.println("You picked up " + item.getName());
-
+					if(item.getName().equalsIgnoreCase("knife")){
+						player.changePlayerAttack(item.getName());
+						
+					} else if(item.getName().equalsIgnoreCase("pistol")){
+						player.changePlayerAttack(item.getName());
+					}
 			}
+                                else if(player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity() || player.getInventory().size() + 1 > player.getCapacity()) {
+                                    System.out.println("It's too heavy for you to pickup.");
+                                    System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
+                                    System.out.println("The item you want to pickup weighs: " + item.getWeight());
+                                    System.out.println("Your capacity is: " + + player.getInventory().size() + "/" + player.getCapacity());
+                                    System.out.println("The capacity of the item you want to pickup is: " + item.getItemCapacity());
+                                }
 
 				
                               
@@ -514,6 +520,7 @@ public class Game {
 		if (command.hasSecondWord() == false) {
 			System.out.println("Use what?");
 		} else {
+			
 			cell.setExit("Hiddenroom", hiddenroom);
 			System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
 			player.getInventory().removeItem("blueprints");
@@ -527,7 +534,8 @@ public class Game {
 	private void showInventory() {
 		System.out.println("Your inventory contains the following:");
 		System.out.println(player.getInventory().getAllItems());
-	}
-
-
+                System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
+                System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
+	}  
+        
 }

@@ -54,6 +54,10 @@ public class Attack {
 	public int getDamage() {
 		return this.damage;
 	}
+	
+	public void setDamage(int damage){
+		this.damage = damage;
+	}
 
 	/**
 	 *
@@ -70,4 +74,5 @@ public class Attack {
 	public Moves getCounterMove() {
 		return this.counterMove;
 	}
+	
 }
