@@ -11,6 +11,7 @@ public class Game {
 	private Room currentRoom;
 	private Player player;
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
+	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
 
 	/**
 	 * The construter for the game class consists off calling a method The
@@ -26,12 +27,11 @@ public class Game {
 	 * This method creates all the rooms which are available and an object of
 	 * the player class
 	 */
-	private void createRooms() //Kaldes fra constructor
+	private void createRooms() //Called from the constructor
 	{
-
 		player = new Player(100, new ArrayList<>(), new Inventory(), 1200); // creates a new object of the player class
 
-		cell = new Room("in your own cell.", false); //constructor for room kaldes, med en string som argument
+		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
 		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true);
 		yard = new Room("in the yard. Fresh air, ahh.", false);
@@ -79,6 +79,8 @@ public class Game {
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
 		bossroom.inv = setBossroomInventory();
+
+		
 
 		currentRoom = cell; // currentRoom is the variable that keeps track of what room you are in
 		// the variable is set to cell to declare the room you begin the game in
@@ -186,7 +188,7 @@ public class Game {
 	private void printWelcome() {
 		System.out.println();
 		System.out.println("You wake up and realize there's a prisonriot going on. Now's your chance to escape!");
-		System.out.println("Hurry! you have limmited time to escape, before the warden gets everything under control again.");
+		System.out.println("Hurry! you have limited time to escape, before the warden gets everything under control again.");
 		System.out.println("Type '" + CommandWord.HELP + "' if you need help."); //commandWord.HELP er en variabel i commandword
 		System.out.println();
 		System.out.println(currentRoom.getLongDescription()); // Giver beskrivelse af rummet + exit muligheder
@@ -217,7 +219,7 @@ public class Game {
 					break;
 				case GO:
 					// hvis der er skrevet go
-					goRoom(command); //gå til et andet rum hvis commanden er gyldig
+					wantToQuit = goRoom(command); //gå til et andet rum hvis commanden er gyldig
 					break;
 				case QUIT:
 					// hvis der er skrevet quit
@@ -267,10 +269,11 @@ public class Game {
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
-	private void goRoom(Command command) {
+	private boolean goRoom(Command command) {
+		boolean finish = false;
 		if (!command.hasSecondWord()) { //Tjekker om der er en retning
 			System.out.println("Go where?");
-			return;
+			return finish;
 		}
 
 		String direction = command.getSecondWord(); //Gemmer det som en string
@@ -282,20 +285,20 @@ public class Game {
 		} else if (nextRoom.isLocked() == false) {
 
 			if (nextRoom.getEscapeRoom()) {
-				//Koden der køres når man er i parkinglot
+				//Following code is run if the next room is the parkinglot
 				System.out.println("There is a codelock locking the door, to get to the parkinglot you need to enter a 3 digit code: ");
-				int inputCode = parser.getCode();
+				String inputCode = parser.getCode();
+				String correctCode = getCorrectCode();
 
-				if (inputCode != -1 && inputCode == 111) {
+				if (inputCode != null && inputCode.equalsIgnoreCase(correctCode) == true) {
 
 					System.out.println("Congratulations, you have escaped!");
 					System.out.println("Type \"quit\" to quit the game");
 					currentRoom = nextRoom;
 
-				} else if (inputCode != -1 && inputCode != 111) {
+				} else if (inputCode != null && inputCode.equalsIgnoreCase(correctCode) == false) {
 					System.out.println("Wrong code!");
 					System.out.println(currentRoom.getLongDescription());
-
 				}
 
 			} else if (nextRoom.getEscapeRoom() == false) {
@@ -303,7 +306,7 @@ public class Game {
 
 				if (currentRoom.boss != null) {
 
-					currentRoom.bossFight();
+					finish = currentRoom.bossFight();
 
 				} else {
 					System.out.println(currentRoom.getShortDescription()); //Udskriv beskrivelse og exits af det nye rum
@@ -315,6 +318,23 @@ public class Game {
 
 		}
 
+		return finish;
+	}
+
+	/**
+	 * The getCorrectCode method returns the hidden code that is found in all
+	 * rooms, the order of the code is determined by the order of the arraylist
+	 *
+	 * @return returns a string with the correct key code
+	 */
+	public String getCorrectCode() {
+		StringBuilder correctCode = new StringBuilder();
+		for (Room r : roomNumber) {
+			if (r.isNumberRoom()) {
+				correctCode.append(r.getNumber());
+			}
+		}
+		return correctCode.toString();
 	}
 
 	/**
@@ -367,6 +387,7 @@ public class Game {
 					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 					System.out.println("You pick up " + item.getName());
+
 				}
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
@@ -406,14 +427,14 @@ public class Game {
 			if (command.hasSecondWord() == false) {
 				System.out.println("Use what?");
 			} else {
+
 				Item item = player.getInventory().getItem(command.getSecondWord());
 
-				if (item.getUseable() == true) {
+				if (item.getUseable() == true) { //There are only 2 items that are useable. Either key or flashlight
 					if (item.getName().equalsIgnoreCase("key")) {
 						useKey(command, item);
 					} else if (item.getName().equalsIgnoreCase("flashlight")) {
 						useFlashlight(command, item);
-
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
@@ -475,6 +496,9 @@ public class Game {
 			if (currentRoom.isNumberRoom()) {
 				System.out.println("You search the room and find a mysterious number that was hidden");
 				System.out.println("The number is " + currentRoom.getNumber());
+				if (roomNumber.contains(currentRoom) == false) { //add a room to the arraylist roomNumber, that tracks the rooms with numbers in them
+					roomNumber.add(currentRoom);
+				}
 			} else {
 				System.out.println("To your disappointment you find nothing new");
 			}

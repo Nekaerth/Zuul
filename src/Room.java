@@ -11,7 +11,7 @@ public class Room {
 	public Inventory inv;
 	private final String description;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
-	boolean numberRoom, escapeRoom, lock, hideRoom = false;
+	private boolean numberRoom, escapeRoom, lock, hideRoom = false;
 	public Boss boss = null;
 	int number;
               
@@ -22,7 +22,7 @@ public class Room {
 		this.escapeRoom = false;
 		this.numberRoom = numberRoom;
 		if (numberRoom == true) {
-			number = 1;
+			number = (int)(Math.random()*9);
 		}
 	}
         /**
@@ -37,7 +37,6 @@ public class Room {
 	public String getShortDescription() {
 		return "You are " +description;
 	}
-//Bør fjernes
 	public String getLongDescription() {
 		return "You are " + description + "\n" + getExitString(); //Giver en længere beskrivelse af rummet og giver hvilke exits der findes
 	}
