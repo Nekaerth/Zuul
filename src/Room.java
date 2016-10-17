@@ -32,8 +32,8 @@ public class Room {
 	 * The setExit method is used to declare which exits a room has
 	 *
 	 * @param direction is a string parameter used to declare where the exit is
-	 * @param neighbor is a room parameter used to declare what room the
-	 * direction refers to
+	 * @param neighbor is a room parameter used to declare what room the direction
+	 * refers to
 	 */
 	public void setExit(String direction, Room neighbor) {
 		exits.put(direction, neighbor);
@@ -78,8 +78,8 @@ public class Room {
 	}
 
 	/**
-	 * The getEscapeRomm is a getter method that returns the current value of
-	 * the boolean escapeRoom
+	 * The getEscapeRomm is a getter method that returns the current value of the
+	 * boolean escapeRoom
 	 *
 	 * @return will return the current boolean value of escapeRoom
 	 */
@@ -87,8 +87,8 @@ public class Room {
 		return this.escapeRoom;
 
 		/**
-		 * The lockRoom method is a setter method that will set the boolean
-		 * value lock to true
+		 * The lockRoom method is a setter method that will set the boolean value
+		 * lock to true
 		 */
 	}
 
@@ -114,8 +114,7 @@ public class Room {
 	}
 
 	/**
-	 * The isNumberRoom method will return the current boolean value of
-	 * numberRoom
+	 * The isNumberRoom method will return the current boolean value of numberRoom
 	 *
 	 * @return will return the current boolean value
 	 */
