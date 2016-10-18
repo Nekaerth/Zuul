@@ -273,6 +273,9 @@ public class Game {
 				case INVENTORY:
 					showInventory();
 					break;
+				case TIME:
+					System.out.println("You have " + displayTime() + " left.");
+					break;
 				default:
 					break;
 			}
