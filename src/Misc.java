@@ -1,21 +1,26 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
+ * @author Niklas
  */
-public class SpecialItem implements Item {
-	private boolean pickup, useable;
+public class Misc implements Item {
+    private boolean pickup, useable;
 	private int weight, capacity;
 	private String name;
-
-	public SpecialItem(boolean pickup, String name, boolean useable, int weight, int capacity) {
+	public Misc (boolean pickup, String name, boolean useable){
 		this.pickup = pickup;
 		this.name = name;
 		this.weight = weight;
 		this.capacity = capacity;
 		this.useable = useable;
 	}
-
+        
+	
 	@Override
 	public boolean isWeapon() {
 		return false;
@@ -28,12 +33,12 @@ public class SpecialItem implements Item {
 
 	@Override
 	public boolean isMisc() {
-		return false;
-	}
-
-	@Override
-	public boolean isSpecial() {
 		return true;
+	}
+	
+	@Override
+	public boolean isSpecial(){
+		return false;
 	}
 
 	@Override
@@ -45,25 +50,24 @@ public class SpecialItem implements Item {
 	public boolean isPickup() {
 		return this.pickup;
 	}
-
+	
 	@Override
-	public boolean isUseable() {
+	public boolean isUseable(){
 		return this.useable;
 	}
 
 	@Override
 	public int getWeight() {
-		return this.weight;
+		return 0;
 	}
 
 	@Override
 	public int getCapacity() {
-		return this.capacity;
+		return 0;
 	}
 
 	@Override
 	public boolean isFlashlight() {
 		return false;
 	}
-
 }

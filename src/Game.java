@@ -1,13 +1,10 @@
-
+/**
+ * *******************GAME CLASS*************************************
+ * The game class cosists off X instance variable and X instance methods
+ * The arraylist is import from the java utility library
+ */
 import java.util.ArrayList;
 
-/**
- * *****************************GAME CLASS*************************************
- * The game class cosists off X instance variable and X instance methods The
- * arraylist is import from the java utility library
- *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
- */
 public class Game {
 
 	private final Parser parser;
@@ -15,7 +12,7 @@ public class Game {
 	private Player player;
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
-	private int time; //How much time the user has left.
+	private int time;
 
 	/**
 	 * The construter for the game class consists off calling a method The
@@ -36,19 +33,19 @@ public class Game {
 
 		// initializes the rooms available
 		player = new Player(100, new ArrayList<>(), new Inventory(), 3, 20); // creates a new object of the player class
-		player.setUpPlayer(); //Sets up player by adding player attacks
+		player.setUpPlayer();
 
-		this.time = 1200; //Sets start time
+		this.time = 1200;
 
-		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
-		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
-		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true);
-		yard = new Room("in the yard. Fresh air, ahh.", false);
-		office = new Room("in the office. They have alot of paperwork going on here.", true);
-		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monitoring this room!", false);
-		parkinglot = new Room("outside at the parkinglot. There is a parked car, it could be your getaway.", false);
-		hiddenroom = new Room("in a secret room", true);
-		bossroom = new Room("in the bossroom", false);
+		cell = new Room("in your own cell.", false, false); //The constructor for room is called with parameters String, boolean
+		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false, true);
+		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true, false);
+		yard = new Room("in the yard. Fresh air, ahh.", false, false);
+		office = new Room("in the office. They have alot of paperwork going on here.", true, false);
+		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monitoring this room!", false, false);
+		parkinglot = new Room("outside at the parkinglot. There is a parked car, it could be your getaway.", false, false);
+		hiddenroom = new Room("in a secret room", true, false);
+		bossroom = new Room("in the bossroom", false, false);
 
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
 		cell.inv = setCellInventory(); // calls the method setCellInventory()
@@ -92,45 +89,30 @@ public class Game {
 
 	}
 
-	/**
-	 *
-	 * @return The player object
-	 */
 	public Player getPlayer() {
 		return this.player;
 	}
 
 	/**
 	 *
-	 * @return The Time that is left
+	 * @return
 	 */
 	public int getTime() {
 		return this.time;
 	}
 
-	/**
-	 * Subtracts time from time left, and in case the time passes the five minute
-	 * mark, then it displays current time left
-	 *
-	 * @param time Subtracts time from time left
-	 */
 	public void subtractTime(int time) {
-		int fiveMinuteMark = (this.time - 1) / 300; //How many whole five minutes the user has left
+		int fiveMinuteMark = (this.time - 1) / 300;
 		this.time -= time;
-		int newFiveMinuteMark = (this.time - 1) / 300; //How many whole five minutes the user has left after the time is subtracted
-		//If you passed a five minutes mark
+		int newFiveMinuteMark = (this.time - 1) / 300;
 		if (fiveMinuteMark > newFiveMinuteMark) {
 			System.out.println("You have " + displayTime() + " left.");
 		}
 	}
 
-	/**
-	 *
-	 * @return A String which tells how many minutes and seconds the user has left
-	 */
 	public String displayTime() {
-		int minutes = this.time / 60; //Calculates number of minutes
-		int seconds = this.time % 60; //Calculates number of seconds
+		int minutes = this.time / 60;
+		int seconds = this.time % 60;
 		return minutes + " min and " + seconds + " sec";
 	}
 
@@ -141,21 +123,20 @@ public class Game {
 	 */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, "melee"));
-		inv.putItem("Key", new Key(true, "Key", true, 1, 1));
-		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 1, 1));
+		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1,11 , "melee"));
+                inv.putItem("Stick", new Misc(false, "Stick", false));
 		return inv;
 	}
 
 	/**
 	 * This method will set the storage inventory when the game starts
-	 *
 	 * @return will return the storage inventory
 	 */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
-		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, "range"));
+		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1,25,"range"));
+                inv.putItem("Evidence box", new Misc(false, "Evidence box", false));
 		return inv;
 	}
 
@@ -167,6 +148,7 @@ public class Game {
 	private Inventory setDininghallInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Key", new Key(true, "Key", true, 5, 1));
+                inv.putItem("Plate", new Misc (false, "Plate", false));
 		return inv;
 	}
 
@@ -177,7 +159,7 @@ public class Game {
 	 */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, "melee"));
+		inv.putItem("Knife", new Weapon(true, "Knife", false, 5, 1,15,"melee"));
 		return inv;
 	}
 
@@ -189,6 +171,7 @@ public class Game {
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
+                inv.putItem("Stacks of paper", new Misc(false, "Stacks of paper", false));
 		return inv;
 	}
 
@@ -318,8 +301,7 @@ public class Game {
 
 	/**
 	 * The method goRoom is a case of the user input and are used when the user
-	 * types "go" as a command
-	 *
+	 * types "go" as a command	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean goRoom(Command command) {
@@ -363,13 +345,16 @@ public class Game {
 			} else if (nextRoom.getEscapeRoom() == false) {
 				currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
 				//Should be changed to more generic reuseable code
-				if (nextRoom == storage) {
+				if (nextRoom == storage && cellhall.needsBoss() == true) {
+                                        
 					cellhall.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 2");
 					cellhall.boss.setUpPrisonGuard2();
+                                        cellhall.setNeedsBoss(false);
 				}
 
-				if (currentRoom.boss != null) {
-
+				if (currentRoom.boss != null && currentRoom.needsBoss() == false) {
+                                        System.out.println("You encounter a prison guard");
+                                        System.out.println("Be prepared or you will die!");
 					finish = currentRoom.bossFight(this);
 
 				} else {
@@ -452,8 +437,8 @@ public class Game {
 			try {
 				Item item = currentRoom.inv.getItem(command.getSecondWord());
 				if (item.isPickup() == true
-								&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
-								&& player.getInventory().size() + 1 <= player.getCapacity()) {
+						&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
+						&& player.getInventory().size() + 1 <= player.getCapacity()) {
 					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 
@@ -461,7 +446,7 @@ public class Game {
 					if (item.isWeapon()) {
 						player.changePlayerAttack(item);
 
-					}
+					} 
 				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 					System.out.println("OOPS!! It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
@@ -470,7 +455,9 @@ public class Game {
 				} else if (player.getInventory().size() + 1 > player.getCapacity()) {
 					System.out.println("OOPS!! Your inventory is full: " + player.getInventory().size() + "/" + player.getCapacity() + " items");
 					System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
-				}
+				} else if (item.isPickup() == false) {
+                                    System.out.println("You can't pick up that item");
+                                }
 
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
@@ -481,7 +468,6 @@ public class Game {
 	/**
 	 * The drop method is a case of the user input and is used when the user types
 	 * "drop" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void drop(Command command) {
@@ -490,6 +476,9 @@ public class Game {
 		} else {
 			try {
 				Item item = player.getInventory().getItem(command.getSecondWord());
+				if(item.isWeapon() == true){
+					player.droppedWeapon(item);
+				}
 				currentRoom.inv.putItem(command.getSecondWord(), item);
 				player.getInventory().removeItem(command.getSecondWord());
 				System.out.println("You drop " + item.getName());
@@ -517,7 +506,7 @@ public class Game {
 					if (item.isKey() == true) {
 						useKey(command, item);
 					} else if (item.isFlashlight() == true) {
-						useFlashlight(command, item);
+						useFlashlight(item);
 					} else if (item.isSpecial() == true && item.getName().equalsIgnoreCase("blueprints")) {
 						useBlueprints(command);
 					} else if (item.isSpecial() == true && item.getName().equalsIgnoreCase("boltcutter")) {
@@ -525,6 +514,7 @@ public class Game {
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
+
 
 				} else {
 					System.out.println("You can't use that item for anything");
@@ -539,7 +529,6 @@ public class Game {
 	/**
 	 * The useKey method is a case when the user types "use" and is used when the
 	 * user types "use key" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param key the key is a item you must have in yor inventory to use the
 	 * command "use key" the key is used as an input to this method
@@ -557,22 +546,19 @@ public class Game {
 			nextRoom.unlock();
 
 			System.out.println("You successfully unlock the door");
-
-			player.getInventory().removeItem(command.getSecondWord());
-
-		}
-
+	
+				player.getInventory().removeItem(command.getSecondWord());		
+                }
 	}
 
 	/**
 	 * The useFlashlight method is a case when the user types "use" and is used
 	 * when the user types "use flashlight"
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param flashlight is a item you must have in your inventory to use the
 	 * command "use flashlight"
 	 */
-	private void useFlashlight(Command command, Item item) {
+	private void useFlashlight(Item item) {
 		Flashlight flashlight = (Flashlight) item;
 		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
@@ -616,9 +602,7 @@ public class Game {
 		} else {
 			System.out.println("You got no use for the boltcutter here");
 		}
-
 	}
-
 	/**
 	 * The showInventory method will print the items that are currently in the
 	 * players inventory
@@ -629,5 +613,4 @@ public class Game {
 		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 		System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
 	}
-
 }

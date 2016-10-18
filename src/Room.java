@@ -14,16 +14,17 @@ public class Room {
 	public Inventory inv;
 	private final String description;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
-	private boolean numberRoom, escapeRoom, lock, hideRoom = false;
+	private boolean numberRoom, escapeRoom, lock, needsBoss = false;
 	public Boss boss = null;
 	int number;
 
-	public Room(String description, boolean numberRoom) { //Constructor der tager en string der beskriver rummet
+	public Room(String description, boolean numberRoom, boolean needsBoss) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
 		inv = new Inventory(); // Creates a new inventory for each room
 		this.escapeRoom = false;
 		this.numberRoom = numberRoom;
+                this.needsBoss = needsBoss;
 		if (numberRoom == true) {
 			number = (int) (Math.random() * 9);
 		}
@@ -172,4 +173,11 @@ public class Room {
 			return false; //Returns false because you didn't die.
 		}
 	}
+        public boolean needsBoss() {
+            return needsBoss;
+        }
+        
+        public void setNeedsBoss(boolean needsBoss) {
+            this.needsBoss = needsBoss;
+        }
 }
