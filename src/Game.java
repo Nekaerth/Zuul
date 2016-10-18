@@ -26,8 +26,8 @@ public class Game {
 	}
 
 	/**
-	 * This method creates all the rooms which are available and an object of
-	 * the player class
+	 * This method creates all the rooms which are available and an object of the
+	 * player class
 	 */
 	private void createRooms() //Called from the constructor
 	{
@@ -102,12 +102,19 @@ public class Game {
 		return this.time;
 	}
 
-	/**
-	 *
-	 * @param time
-	 */
 	public void subtractTime(int time) {
+		int fiveMinuteMark = (this.time - 1) / 300;
 		this.time -= time;
+		int newFiveMinuteMark = (this.time - 1) / 300;
+		if (fiveMinuteMark > newFiveMinuteMark) {
+			System.out.println("You have " + displayTime() + " left.");
+		}
+	}
+
+	public String displayTime() {
+		int minutes = this.time / 60;
+		int seconds = this.time % 60;
+		return minutes + " min and " + seconds + " sec";
 	}
 
 	/**
@@ -117,7 +124,7 @@ public class Game {
 	 */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11,"melee"));
+		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1,11 , "melee"));
 		inv.putItem("Key", new Key(true, "Key", true, 1, 1));
 		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 1, 1));
 		return inv;
@@ -131,7 +138,7 @@ public class Game {
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
-		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, "range"));
+		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1,25,"range"));
 		return inv;
 	}
 
@@ -164,7 +171,7 @@ public class Game {
 	 */
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Blueprints", new Key(true, "Blueprints", true, 5, 1));
+		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
 		return inv;
 	}
 
@@ -267,6 +274,9 @@ public class Game {
 				case INVENTORY:
 					showInventory();
 					break;
+				case TIME:
+					System.out.println("You have " + displayTime() + " left.");
+					break;
 				default:
 					break;
 			}
@@ -309,9 +319,8 @@ public class Game {
 		if (nextRoom == null) { //Hvis der ikke er noget room den vej / Hashmappen ikke indeholder nogen value for keyen
 			System.out.println("There is no door!");
 		} else if (!nextRoom.isLocked()) {
-			subtractTime(10);
-			System.out.println("Time: " + this.time);
 
+			subtractTime(10);
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
 				String correctCode;
@@ -375,8 +384,8 @@ public class Game {
 	}
 
 	/**
-	 * The quit method is a case of the user input and is used when the user
-	 * types "quit" as a command
+	 * The quit method is a case of the user input and is used when the user types
+	 * "quit" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -390,8 +399,8 @@ public class Game {
 	}
 
 	/**
-	 * The searchRoom method is a case of the user input and is used when the
-	 * user types "search" as a command
+	 * The searchRoom method is a case of the user input and is used when the user
+	 * types "search" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -403,8 +412,12 @@ public class Game {
 			String items = currentRoom.inv.getAllItems();
 			System.out.println("You find the following items.");
 			System.out.println(items);
+
+			subtractTime(5);
 		} else {
 			System.out.println("You search the room, but find nothing.");
+
+			subtractTime(5);
 		}
 	}
 
@@ -432,13 +445,13 @@ public class Game {
 						player.changePlayerAttack(item);
 
 					} 
-				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()
-						|| player.getInventory().size() + 1 > player.getCapacity()) {
-
-					System.out.println("It's too heavy for you to pickup.");
+				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
+					System.out.println("OOPS!! It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 					System.out.println("The item you want to pickup weighs: " + item.getWeight());
-					System.out.println("Your capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
+
+				} else if (player.getInventory().size() + 1 > player.getCapacity()) {
+					System.out.println("OOPS!! Your inventory is full: " + player.getInventory().size() + "/" + player.getCapacity() + " items");
 					System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
 				}
 
@@ -449,8 +462,8 @@ public class Game {
 	}
 
 	/**
-	 * The drop method is a case of the user input and is used when the user
-	 * types "drop" as a command
+	 * The drop method is a case of the user input and is used when the user types
+	 * "drop" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -470,8 +483,8 @@ public class Game {
 	}
 
 	/**
-	 * The use method is a case of the user input and is used when the user
-	 * types "use" as a command
+	 * The use method is a case of the user input and is used when the user types
+	 * "use" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -496,6 +509,7 @@ public class Game {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
 
+
 				} else {
 					System.out.println("You can't use that item for anything");
 				}
@@ -507,26 +521,29 @@ public class Game {
 	}
 
 	/**
-	 * The useKey method is a case when the user types "use" and is used when
-	 * the user types "use key" as a command
+	 * The useKey method is a case when the user types "use" and is used when the
+	 * user types "use key" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param key the key is a item you must have in yor inventory to use the
 	 * command "use key" the key is used as an input to this method
 	 */
-	private void useKey(Command command, Item item) {
-		Key key = (Key) item;
+	private void useKey(Command command, Item key) {
+
 		if (command.hasThirdWord() == false) {
+
 			System.out.println("Use " + command.getSecondWord() + " where?");
 
 		} else if (currentRoom.getExit(command.getThirdWord()) != null) {
 
 			Room nextRoom = currentRoom.getExit(command.getThirdWord());
-			
+
 			nextRoom.unlock();
-			
+
 			System.out.println("You successfully unlock the door");
-			player.getInventory().removeItem(command.getSecondWord());
+
+	
+				player.getInventory().removeItem(command.getSecondWord());
 			
 
 		}
@@ -563,7 +580,6 @@ public class Game {
 	}
 
 	private void useBlueprints(Command command) {
-
 		if (command.hasSecondWord() == false) {
 			System.out.println("Use what?");
 		} else {

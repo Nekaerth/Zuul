@@ -71,6 +71,10 @@ public class Inventory {
 		return size;
 	}
 
+	public boolean containItem(String name) {
+		return this.inventory.containsKey(name);
+	}
+
 	/**
 	 * This method allow you to put an item that you are carrying into an
 	 * inventory

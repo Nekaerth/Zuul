@@ -160,8 +160,10 @@ public class Room {
 		} else {
 			System.out.println("You defeated the prison guard!");
 
-			Item item = boss.getInventory().getItem("Key"); //gets Key from boss inventory.
-			this.inv.putItem("Key", item); //Drops the key in the room.
+			if (boss.getInventory().containItem("Key")) {
+				Item item = boss.getInventory().getItem("Key"); //gets Key from boss inventory.
+				this.inv.putItem("Key", item); //Drops the key in the room.
+			}
 
 			boss = null;
 			return false;
