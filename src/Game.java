@@ -38,15 +38,15 @@ public class Game {
 
 		this.time = 1200;
 
-		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
-		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
-		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true);
-		yard = new Room("in the yard. Fresh air, ahh.", false);
-		office = new Room("in the office. They have alot of paperwork going on here.", true);
-		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monitoring this room!", false);
-		parkinglot = new Room("outside at the parkinglot. There is a parked car, it could be your getaway.", false);
-		hiddenroom = new Room("in a secret room", true);
-		bossroom = new Room("in the bossroom", false);
+		cell = new Room("in your own cell.", false, false); //The constructor for room is called with parameters String, boolean
+		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false, true);
+		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true, false);
+		yard = new Room("in the yard. Fresh air, ahh.", false, false);
+		office = new Room("in the office. They have alot of paperwork going on here.", true, false);
+		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monitoring this room!", false, false);
+		parkinglot = new Room("outside at the parkinglot. There is a parked car, it could be your getaway.", false, false);
+		hiddenroom = new Room("in a secret room", true, false);
+		bossroom = new Room("in the bossroom", false, false);
 
 		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
 		cell.inv = setCellInventory(); // calls the method setCellInventory()
@@ -346,13 +346,16 @@ public class Game {
 			} else if (nextRoom.getEscapeRoom() == false) {
 				currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
 				//Should be changed to more generic reuseable code
-				if (nextRoom == storage) {
+				if (nextRoom == storage && cellhall.needsBoss() == true) {
+                                        
 					cellhall.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 2");
 					cellhall.boss.setUpPrisonGuard2();
+                                        cellhall.setNeedsBoss(false);
 				}
 
-				if (currentRoom.boss != null) {
-
+				if (currentRoom.boss != null && currentRoom.needsBoss() == false) {
+                                        System.out.println("You encounter a prison guard");
+                                        System.out.println("Be prepared or you will die!");
 					finish = currentRoom.bossFight(this);
 
 				} else {
@@ -500,7 +503,7 @@ public class Game {
 					if (item.isKey() == true) {
 						useKey(command, item);
 					} else if (item.isFlashlight() == true) {
-						useFlashlight(command, item);
+						useFlashlight(item);
 					} else if (item.isSpecial() == true && item.getName().equalsIgnoreCase("blueprints")) {
 						useBlueprints(command);
 					} else if (item.isSpecial() == true && item.getName().equalsIgnoreCase("boltcutter")) {
@@ -523,7 +526,6 @@ public class Game {
 	/**
 	 * The useKey method is a case when the user types "use" and is used when the
 	 * user types "use key" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param key the key is a item you must have in yor inventory to use the
 	 * command "use key" the key is used as an input to this method
@@ -541,24 +543,19 @@ public class Game {
 			nextRoom.unlock();
 
 			System.out.println("You successfully unlock the door");
-
 	
-				player.getInventory().removeItem(command.getSecondWord());
-			
-
-		}
-
+				player.getInventory().removeItem(command.getSecondWord());		
+                }
 	}
 
 	/**
 	 * The useFlashlight method is a case when the user types "use" and is used
 	 * when the user types "use flashlight"
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param flashlight is a item you must have in your inventory to use the
 	 * command "use flashlight"
 	 */
-	private void useFlashlight(Command command, Item item) {
+	private void useFlashlight(Item item) {
 		Flashlight flashlight = (Flashlight) item;
 		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
@@ -602,7 +599,6 @@ public class Game {
 		} else {
 			System.out.println("You got no use for the boltcutter here");
 		}
-
 	}
 
 	/**

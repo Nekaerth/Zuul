@@ -30,47 +30,49 @@ public class Weapon implements Item {
 
 	@Override
 	public boolean isKey() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return false;
 	}
 
 	@Override
 	public boolean isMisc() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return false;
 	}
 
 	@Override
 	public boolean isFlashlight() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return false;
+		
 	}
 	@Override
 	public boolean isSpecial(){
-		return true;
+		return false;
 	}
 
 	@Override
 	public String getName() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return this.name;
 	}
 
 	@Override
 	public boolean isPickup() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return this.pickup;
 	}
-
+	
 	@Override
-	public boolean isUseable() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public boolean isUseable(){
+		return this.useable;
 	}
 
 	@Override
 	public int getWeight() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return this.weight;
 	}
 
 	@Override
 	public int getCapacity() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return this.capacity;
 	}
+	
 	public String weaponType(){
 		return weaponType;
 	}
