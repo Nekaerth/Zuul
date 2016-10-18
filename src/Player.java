@@ -8,12 +8,12 @@ import java.util.ArrayList;
  * maximum item weight capacity. It has a method for changing and adding
  * attacks, when picking up weapon items.
  *
- * @author Lasse
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Player extends Person {
 
-	private int capacity;
-	private int weightCapacity;
+	private int capacity; //Is the maximum amount of items the player must hold.
+	private int weightCapacity; //Is the maximum weight that the players items must
 
 	/**
 	 * This contructor creates a Player-object. It represent the player, which
@@ -61,16 +61,23 @@ public class Player extends Person {
 		attacks.add(new Attack(Moves.SIDESTEP, 0));
 	}
 
+	/**
+	 * Takes an item name as argument. If the item is a melee weapon, the damage
+	 * of the Stab attack is changed. If the item is a range weapon, then a Shoot
+	 * attack is added to player attacks
+	 *
+	 * @param item Takes an weapon item to update attacks
+	 */
 	public void changePlayerAttack(Item item) {
 		Weapon weapon = (Weapon) item;
+		//If the item is a melee weapon
 		if (weapon.weaponType().equalsIgnoreCase("melee")) {
 			Attack attack = getAttack("Stab");
-			attack.setDamage(weapon.getDamage());
-
-		} else if (weapon.weaponType().equalsIgnoreCase("range")) {
+			attack.setDamage(weapon.getDamage()); //Changes damage of the Stab attack
+		} //If the item is a range weapon
+		else if (weapon.weaponType().equalsIgnoreCase("range")) {
 			ArrayList<Attack> attacks = getAttacks();
-			attacks.add(new Attack(Moves.SHOOT, weapon.getDamage()));
-
+			attacks.add(new Attack(Moves.SHOOT, weapon.getDamage())); //Adds a Shoot attack
 		}
 	}
 

@@ -1,7 +1,7 @@
 
 /**
  *
- * @author Danieln Johansen
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Zuul {
 
