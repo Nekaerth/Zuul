@@ -48,38 +48,38 @@ public class Parser {
 		commands.showAll();
 	}
 
-	public String getCode() {
-
-		String inputCode;
-		while (reader.hasNext()) {
-			if (reader.hasNextInt()) {
-				inputCode = reader.nextLine();
-				return inputCode;
-			} else {
-				System.out.println("" + reader.next() + " is not a number");
-			}
-		}
-		return null;
-	}
-
-	//Denne metode vil tjekke vores ord (word1, word2 og word3) igennem, og sætte dem som uppercase/lowercase
-	//hvis karakteren man har fat i er et bogstav, og hvis den forrige karakter ikke er et bogstav,
-	//skal den sætte det til stortbogstav, eller et lille bogstav.
-	private String capitalized(String str) {
-		char ch;       // En af karakterne i strengen (str)
-		char prevCh;   // Karakteren der befinder sig før ch i strengen
-		int i;         // Positionen i str, from 0 til str.length ()-1
-		prevCh = '.';  // Prime the loop with any non-letter character. 
-		String returnString = ""; // Vi sætter strengen til andet end null
-		for (i = 0; i < str.length(); i++) { // Laver et for-loop der tjekker alle karaktererne igennem i ordene
-			ch = str.charAt(i);
-			if (Character.isLetter(ch) && !Character.isLetter(prevCh)) { // Hvis karakteren man har fat i nu er et bogstav, og hvis den forrige karakter ikke er et bogstav:
-				returnString += Character.toUpperCase(ch); // Så skal den sætte det til et stortbogstav
-			} else {
-				returnString += Character.toLowerCase(ch); // Eller så skal den sætte det til et lille bogstav
-			}
-			prevCh = ch;  // prevCh for next iteration is ch.
-		}
-		return returnString;
-	}
+    public String getCode() {
+        System.out.println("> ");
+        String inputCode;
+        while (reader.hasNext()) {
+            if (reader.hasNextInt()) {
+                inputCode = reader.nextLine();
+                return inputCode;
+            } else {
+                System.out.println("" + reader.next() + " is not a number");
+            }
+        }
+        return null;
+    }
+    
+    //Denne metode vil tjekke vores ord (word1, word2 og word3) igennem, og sætte dem som uppercase/lowercase
+    //hvis karakteren man har fat i er et bogstav, og hvis den forrige karakter ikke er et bogstav,
+    //skal den sætte det til stortbogstav, eller et lille bogstav.
+    private String capitalized(String str) { 
+        char ch;       // En af karakterne i strengen (str)
+        char prevCh;   // Karakteren der befinder sig før ch i strengen
+        int i;         // Positionen i str, from 0 til str.length ()-1
+        prevCh = '.';  // Prime the loop with any non-letter character. 
+        String returnString = ""; // Vi sætter strengen til andet end null
+        for (i = 0; i < str.length(); i++) { // Laver et for-loop der tjekker alle karaktererne igennem i ordene
+            ch = str.charAt(i);
+            if (Character.isLetter(ch) && !Character.isLetter(prevCh)) { // Hvis karakteren man har fat i nu er et bogstav, og hvis den forrige karakter ikke er et bogstav:
+                returnString += Character.toUpperCase(ch); // Så skal den sætte det til et stortbogstav
+            } else {
+                returnString += Character.toLowerCase(ch); // Eller så skal den sætte det til et lille bogstav
+            }
+            prevCh = ch;  // prevCh for next iteration is ch.
+        }
+        return returnString;
+    }
 }

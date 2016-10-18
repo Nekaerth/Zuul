@@ -1,5 +1,5 @@
 
-/**
+/*********************GAME CLASS*************************************
  * The game class cosists off X instance variable and X instance methods
  * The arraylist is import from the java utility library
  */
@@ -12,6 +12,7 @@ public class Game {
 	private Player player;
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
+	private int time;
 
 	/**
 	 * The construter for the game class consists off calling a method The
@@ -23,16 +24,20 @@ public class Game {
 		parser = new Parser(); // creates a new object of the parser class
 	}
 
-	/**
-	 * This method creates all the rooms which are available and an object of the
-	 * player class
+	/**                 
+	 * This method creates all the rooms which are available 
+         * and an object of the player class
 	 */
 	private void createRooms() //Called from the constructor
 	{
 
+               
+
 		// initializes the rooms available
-		player = new Player(100, new ArrayList<>(), new Inventory(), 1200, 3, 20); // creates a new object of the player class
+		player = new Player(100, new ArrayList<>(), new Inventory(), 3, 20); // creates a new object of the player class
 		player.setPlayerAttacks();
+
+		this.time = 1200;
 
 		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -54,7 +59,7 @@ public class Game {
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
 		bossroom.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 1");
-		bossroom.boss.setPrisonGuard1Attacks();
+		bossroom.boss.setUpPrisonGuard();
 
 		dininghall.setExit("Cellhall", cellhall);
 		dininghall.inv = setDininghallInventory();
@@ -68,8 +73,7 @@ public class Game {
 		office.setExit("Cellhall", cellhall);
 		office.inv = setOfficeInventory();
 		office.LockRoom();
-
-		yard.setExit("Parkinglot", parkinglot);
+		
 		yard.setExit("Cellhall", cellhall);
 		yard.inv = setYardInventory();
 
@@ -85,6 +89,26 @@ public class Game {
 		currentRoom = cell; // currentRoom is the variable that keeps track of what room you are in
 		// the variable is set to cell to declare the room you begin the game in
 
+	}
+
+	public Player getPlayer() {
+		return this.player;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public int getTime() {
+		return this.time;
+	}
+
+	/**
+	 *
+	 * @param time
+	 */
+	public void subtractTime(int time) {
+		this.time -= time;
 	}
 
 	/**
@@ -107,8 +131,8 @@ public class Game {
 	 */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false, 5, 1));
-		inv.putItem("Pistol", new Item(false, "Pistol", false, 5, 1));
+		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true, 5, 1));
+		inv.putItem("Pistol", new Item(true, "Pistol", false, 5, 1));
 		return inv;
 	}
 
@@ -130,7 +154,7 @@ public class Game {
 	 */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(false, "Knife", false, 5, 1));
+		inv.putItem("Knife", new Item(true, "Knife", false, 5, 1));
 		return inv;
 	}
 
@@ -163,7 +187,7 @@ public class Game {
 	 */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(false, "Key", false, 5, 1));
+		inv.putItem("Key", new Item(true, "Key", false, 5, 1));
 		return inv;
 	}
 
@@ -285,7 +309,9 @@ public class Game {
 
 		if (nextRoom == null) { //Hvis der ikke er noget room den vej / Hashmappen ikke indeholder nogen value for keyen
 			System.out.println("There is no door!");
-		} else if (nextRoom.isLocked() == false) {
+		} else if (!nextRoom.isLocked()) {
+			subtractTime(10);
+			System.out.println("Time: " + this.time);
 
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
@@ -311,10 +337,15 @@ public class Game {
 
 			} else if (nextRoom.getEscapeRoom() == false) {
 				currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
+				//Should be changed to more generic reuseable code
+				if (nextRoom == storage) {
+					cellhall.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 2");
+					cellhall.boss.setUpPrisonGuard2();
+				}
 
 				if (currentRoom.boss != null) {
 
-					finish = currentRoom.bossFight(player);
+					finish = currentRoom.bossFight(this);
 
 				} else {
 					System.out.println(currentRoom.getShortDescription()); //Udskriv beskrivelse og exits af det nye rum
@@ -401,14 +432,15 @@ public class Game {
 					if (item.getName().equalsIgnoreCase("knife")) {
 						player.changePlayerAttack(item.getName());
 
-					} else if (item.getName().equalsIgnoreCase("pistol")) {
+					} else if(item.getName().equalsIgnoreCase("pistol")){
 						player.changePlayerAttack(item.getName());
 					}
-				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity() || player.getInventory().size() + 1 > player.getCapacity()) {
+			}
+                                else if(player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity() || player.getInventory().size() + 1 > player.getCapacity()) {
 					System.out.println("It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 					System.out.println("The item you want to pickup weighs: " + item.getWeight());
-					System.out.println("Your capacity is: " + +player.getInventory().size() + "/" + player.getCapacity());
+					System.out.println("Your capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
 					System.out.println("The capacity of the item you want to pickup is: " + item.getItemCapacity());
 				}
 
@@ -453,14 +485,17 @@ public class Game {
 
 				Item item = player.getInventory().getItem(command.getSecondWord());
 
-				if (item.getUseable() == true) { //There are only 2 items that are useable. Either key or flashlight
+				if (item.getUseable() == true) { //There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
 					if (item.getName().equalsIgnoreCase("key")) {
 						useKey(command, item);
 					} else if (item.getName().equalsIgnoreCase("flashlight")) {
 						useFlashlight(command, item);
-					} else if (item.getName().equalsIgnoreCase("blueprints")) {
-
-						useBlueprints(command);
+                                        }     else if (item.getName().equalsIgnoreCase("blueprints")) {                                                    
+                                                    useBlueprints(command);
+                                        }           else if (item.getName().equalsIgnoreCase("boltcutter")) {                                                            
+                                                            useBoltcutter(command);
+                                        }       	 else if (item.getName().equalsIgnoreCase("blueprints")) {
+                						useBlueprints(command);
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
@@ -546,6 +581,22 @@ public class Game {
 			player.getInventory().removeItem(command.getSecondWord());
 		}
 	}
+        
+        private void useBoltcutter (Command command) {            
+      
+            if (command.hasSecondWord() == false) {
+                System.out.println("Use What?");
+            } else if (currentRoom == yard){
+                System.out.println("You use the boltcutter to cut open the net and escape to the parkinglot,");
+                System.out.println("find a car and get out of here");
+                yard.setExit("Parkinglot", parkinglot);
+                player.getInventory().removeItem(command.getSecondWord());
+            }
+            else {
+                System.out.println("You got no use for the boltcutter here");
+            }
+                
+        }
 
 	/**
 	 * The showInventory method will print the items that are currently in the

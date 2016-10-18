@@ -23,19 +23,21 @@ public class Boss extends Person {
 		return this.name;
 	}
 
-	public void setPrisonGuard1Attacks() {
+	public void setUpPrisonGuard() {
 		ArrayList<Attack> attacks = getAttacks();
 		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 10));
 		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 10));
 		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
+		getInventory().putItem("Key", new Item(true, "Key", true, 1, 1));
 	}
 
-	public void setPrisonGuard2Attacks() {
+	public void setUpPrisonGuard2() {
 		ArrayList<Attack> attacks = getAttacks();
-		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 10));
-		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 10));
-		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
-		attacks.add(new Attack(Moves.SHOOT, Moves.DUCK, 10));
+		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 15));
+		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 15));
+		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 15));
+		attacks.add(new Attack(Moves.SHOOT, Moves.DUCK, 15));
+                attacks.add(new Attack(Moves.LAUGH, Moves.SHOOT, 5));
 	}
 
 	public Attack getRandomAttack() {
