@@ -57,15 +57,15 @@ public class Player extends Person {
 		attacks.add(new Attack(Moves.SIDESTEP, 0));
 	}
 
-	public void changePlayerAttack(String itemName) {
-
-		if (itemName.equalsIgnoreCase("knife")) {
+	public void changePlayerAttack(Item item) {
+		Weapon weapon = (Weapon) item;
+		if (weapon.weaponType().equalsIgnoreCase("melee")) {
 			Attack attack = getAttack("Stab");
-			attack.setDamage(15);
+			attack.setDamage(weapon.getDamage());
 
-		} else if (itemName.equalsIgnoreCase("pistol")) {
+		} else if (weapon.weaponType().equalsIgnoreCase("range")) {
 			ArrayList<Attack> attacks = getAttacks();
-			attacks.add(new Attack(Moves.SHOOT, 25));
+			attacks.add(new Attack(Moves.SHOOT, weapon.getDamage()));
 
 		}
 	}
