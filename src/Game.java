@@ -1,5 +1,6 @@
 
-/*********************GAME CLASS*************************************
+/**
+ * *******************GAME CLASS*************************************
  * The game class cosists off X instance variable and X instance methods
  * The arraylist is import from the java utility library
  */
@@ -24,14 +25,12 @@ public class Game {
 		parser = new Parser(); // creates a new object of the parser class
 	}
 
-	/**                 
-	 * This method creates all the rooms which are available 
-         * and an object of the player class
+	/**
+	 * This method creates all the rooms which are available and an object of the
+	 * player class
 	 */
 	private void createRooms() //Called from the constructor
 	{
-
-               
 
 		// initializes the rooms available
 		player = new Player(100, new ArrayList<>(), new Inventory(), 3, 20); // creates a new object of the player class
@@ -73,7 +72,7 @@ public class Game {
 		office.setExit("Cellhall", cellhall);
 		office.inv = setOfficeInventory();
 		office.LockRoom();
-		
+
 		yard.setExit("Cellhall", cellhall);
 		yard.inv = setYardInventory();
 
@@ -109,6 +108,12 @@ public class Game {
 	 */
 	public void subtractTime(int time) {
 		this.time -= time;
+	}
+
+	public String displayTime() {
+		int minutes = this.time / 60;
+		int seconds = this.time % 60;
+		return minutes + " min and " + seconds + " sec";
 	}
 
 	/**
@@ -310,9 +315,8 @@ public class Game {
 		if (nextRoom == null) { //Hvis der ikke er noget room den vej / Hashmappen ikke indeholder nogen value for keyen
 			System.out.println("There is no door!");
 		} else if (!nextRoom.isLocked()) {
-			subtractTime(10);
-			System.out.println("Time: " + this.time);
 
+			subtractTime(10);
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
 				String correctCode;
@@ -404,8 +408,12 @@ public class Game {
 			String items = currentRoom.inv.getAllItems();
 			System.out.println("You find the following items.");
 			System.out.println(items);
+
+			subtractTime(5);
 		} else {
 			System.out.println("You search the room, but find nothing.");
+
+			subtractTime(5);
 		}
 	}
 
@@ -432,11 +440,10 @@ public class Game {
 					if (item.getName().equalsIgnoreCase("knife")) {
 						player.changePlayerAttack(item.getName());
 
-					} else if(item.getName().equalsIgnoreCase("pistol")){
+					} else if (item.getName().equalsIgnoreCase("pistol")) {
 						player.changePlayerAttack(item.getName());
 					}
-			}
-                                else if(player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity() || player.getInventory().size() + 1 > player.getCapacity()) {
+				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity() || player.getInventory().size() + 1 > player.getCapacity()) {
 					System.out.println("It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 					System.out.println("The item you want to pickup weighs: " + item.getWeight());
@@ -490,12 +497,12 @@ public class Game {
 						useKey(command, item);
 					} else if (item.getName().equalsIgnoreCase("flashlight")) {
 						useFlashlight(command, item);
-                                        }     else if (item.getName().equalsIgnoreCase("blueprints")) {                                                    
-                                                    useBlueprints(command);
-                                        }           else if (item.getName().equalsIgnoreCase("boltcutter")) {                                                            
-                                                            useBoltcutter(command);
-                                        }       	 else if (item.getName().equalsIgnoreCase("blueprints")) {
-                						useBlueprints(command);
+					} else if (item.getName().equalsIgnoreCase("blueprints")) {
+						useBlueprints(command);
+					} else if (item.getName().equalsIgnoreCase("boltcutter")) {
+						useBoltcutter(command);
+					} else if (item.getName().equalsIgnoreCase("blueprints")) {
+						useBlueprints(command);
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
@@ -581,22 +588,21 @@ public class Game {
 			player.getInventory().removeItem(command.getSecondWord());
 		}
 	}
-        
-        private void useBoltcutter (Command command) {            
-      
-            if (command.hasSecondWord() == false) {
-                System.out.println("Use What?");
-            } else if (currentRoom == yard){
-                System.out.println("You use the boltcutter to cut open the net and escape to the parkinglot,");
-                System.out.println("find a car and get out of here");
-                yard.setExit("Parkinglot", parkinglot);
-                player.getInventory().removeItem(command.getSecondWord());
-            }
-            else {
-                System.out.println("You got no use for the boltcutter here");
-            }
-                
-        }
+
+	private void useBoltcutter(Command command) {
+
+		if (command.hasSecondWord() == false) {
+			System.out.println("Use What?");
+		} else if (currentRoom == yard) {
+			System.out.println("You use the boltcutter to cut open the net and escape to the parkinglot,");
+			System.out.println("find a car and get out of here");
+			yard.setExit("Parkinglot", parkinglot);
+			player.getInventory().removeItem(command.getSecondWord());
+		} else {
+			System.out.println("You got no use for the boltcutter here");
+		}
+
+	}
 
 	/**
 	 * The showInventory method will print the items that are currently in the
