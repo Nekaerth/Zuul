@@ -18,7 +18,7 @@ public enum Moves {
 		this.moveString = moveString;
 	}
 
-        @Override
+	@Override
 	public String toString() {
 		return moveString;
 	}
