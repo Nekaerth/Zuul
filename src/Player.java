@@ -7,45 +7,26 @@ import java.util.ArrayList;
  */
 public class Player extends Person {
 
-	private int time;
 	private int capacity;
 	private int weightCapacity;
 
 	/**
 	 * This contructor creates a Player-object. It represent the player, which
-	 * includes hitpoints, available attacks, available items, time left, maximum
-	 * number of items and maximum weight capacity. Notice it does not include the
-	 * position of the player.
+	 * includes hitpoints, available attacks, available items, maximum number of
+	 * items and maximum weight capacity. Notice it does not include the position
+	 * of the player.
 	 *
 	 * @param hitpoint is how much hitpoints the player has.
 	 * @param attacks is a list of all attacks, that are available to the player.
 	 * @param inventory is where the player holds his picked up items.
-	 * @param time is how much time the player has left before losing.
 	 * @param capacity is the maximum amount of items the player must hold.
 	 * @param weightCapacity is the maximum weight that the players items must
 	 * weight in total.
 	 */
-	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int time, int capacity, int weightCapacity) {
+	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int capacity, int weightCapacity) {
 		super(hitpoint, attacks, inventory);
-		this.time = time;
 		this.capacity = capacity;
 		this.weightCapacity = weightCapacity;
-	}
-
-	/**
-	 *
-	 * @return the time the player has left.
-	 */
-	public int getTime() {
-		return this.time;
-	}
-
-	/**
-	 *
-	 * @param time subtracts time from the time the player has left.
-	 */
-	public void subtractTime(int time) {
-		this.time -= time;
 	}
 
 	/**

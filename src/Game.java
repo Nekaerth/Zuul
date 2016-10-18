@@ -12,6 +12,7 @@ public class Game {
 	private Player player;
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
+	private int time;
 
 	/**
 	 * The construter for the game class consists off calling a method The
@@ -31,8 +32,10 @@ public class Game {
 	{
 
 		// initializes the rooms available
-		player = new Player(100, new ArrayList<>(), new Inventory(), 1200, 3, 20); // creates a new object of the player class
+		player = new Player(100, new ArrayList<>(), new Inventory(), 3, 20); // creates a new object of the player class
 		player.setPlayerAttacks();
+
+		this.time = 1200;
 
 		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -85,6 +88,26 @@ public class Game {
 		currentRoom = cell; // currentRoom is the variable that keeps track of what room you are in
 		// the variable is set to cell to declare the room you begin the game in
 
+	}
+	
+	public Player getPlayer() {
+		return this.player;
+	}
+
+	/**
+	 *
+	 * @return
+	 */
+	public int getTime() {
+		return this.time;
+	}
+
+	/**
+	 *
+	 * @param time
+	 */
+	public void subtractTime(int time) {
+		this.time -= time;
 	}
 
 	/**
@@ -312,14 +335,14 @@ public class Game {
 			} else if (nextRoom.getEscapeRoom() == false) {
 				currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
 				//Should be changed to more generic reuseable code
-				if(nextRoom == storage){
+				if (nextRoom == storage) {
 					cellhall.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 2");
 					cellhall.boss.setPrisonGuard2Attacks();
 				}
 
 				if (currentRoom.boss != null) {
-					
-					finish = currentRoom.bossFight(player);
+
+					finish = currentRoom.bossFight(this);
 
 				} else {
 					System.out.println(currentRoom.getShortDescription()); //Udskriv beskrivelse og exits af det nye rum
