@@ -79,10 +79,11 @@ public class Player extends Person {
 
 		if (itemName.equalsIgnoreCase("knife")) {
 			Attack attack = getAttack("Stab");
-			attack.setDamage(20);
+			attack.setDamage(15);
 
 		} else if (itemName.equalsIgnoreCase("pistol")) {
-			System.out.println("Not implemented");
+                        ArrayList<Attack> attacks = getAttacks();
+                        attacks.add(new Attack(Moves.SHOOT, 25));        
 
 		}
 	}

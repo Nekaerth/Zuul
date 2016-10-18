@@ -108,7 +108,7 @@ public class Game {
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false, 5, 1));
-		inv.putItem("Pistol", new Item(false, "Pistol", false, 5, 1));
+		inv.putItem("Pistol", new Item(true, "Pistol", false, 5, 1));
 		return inv;
 	}
 
@@ -130,7 +130,7 @@ public class Game {
 	 */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(false, "Knife", false, 5, 1));
+		inv.putItem("Knife", new Item(true, "Knife", false, 5, 1));
 		return inv;
 	}
 
