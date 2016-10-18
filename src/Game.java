@@ -124,7 +124,7 @@ public class Game {
 	 */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1,11 , "melee"));
+		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11 , "melee"));
 		inv.putItem("Key", new Key(true, "Key", true, 1, 1));
 		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 1, 1));
 		return inv;
@@ -476,6 +476,9 @@ public class Game {
 		} else {
 			try {
 				Item item = player.getInventory().getItem(command.getSecondWord());
+				if(item.isWeapon() == true){
+					player.droppedWeapon(item);
+				}
 				currentRoom.inv.putItem(command.getSecondWord(), item);
 				player.getInventory().removeItem(command.getSecondWord());
 				System.out.println("You drop " + item.getName());
