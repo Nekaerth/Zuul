@@ -13,7 +13,7 @@ public class Game {
 	private Player player;
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
-	private int time;
+	private int time; //How much time the user has left.
 
 	/**
 	 * The construter for the game class consists off calling a method The
@@ -34,9 +34,9 @@ public class Game {
 
 		// initializes the rooms available
 		player = new Player(100, new ArrayList<>(), new Inventory(), 3, 20); // creates a new object of the player class
-		player.setPlayerAttacks();
+		player.setUpPlayer(); //Sets up player by adding player attacks
 
-		this.time = 1200;
+		this.time = 1200; //Sets start time
 
 		cell = new Room("in your own cell.", false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false);
@@ -90,30 +90,45 @@ public class Game {
 
 	}
 
+	/**
+	 *
+	 * @return The player object
+	 */
 	public Player getPlayer() {
 		return this.player;
 	}
 
 	/**
 	 *
-	 * @return
+	 * @return The Time that is left
 	 */
 	public int getTime() {
 		return this.time;
 	}
 
+	/**
+	 * Subtracts time from time left, and in case the time passes the five minute
+	 * mark, then it displays current time left
+	 *
+	 * @param time Subtracts time from time left
+	 */
 	public void subtractTime(int time) {
-		int fiveMinuteMark = (this.time - 1) / 300;
+		int fiveMinuteMark = (this.time - 1) / 300; //How many whole five minutes the user has left
 		this.time -= time;
-		int newFiveMinuteMark = (this.time - 1) / 300;
+		int newFiveMinuteMark = (this.time - 1) / 300; //How many whole five minutes the user has left after the time is subtracted
+		//If you passed a five minutes mark
 		if (fiveMinuteMark > newFiveMinuteMark) {
 			System.out.println("You have " + displayTime() + " left.");
 		}
 	}
 
+	/**
+	 *
+	 * @return A String which tells how many minutes and seconds the user has left
+	 */
 	public String displayTime() {
-		int minutes = this.time / 60;
-		int seconds = this.time % 60;
+		int minutes = this.time / 60; //Calculates number of minutes
+		int seconds = this.time % 60; //Calculates number of seconds
 		return minutes + " min and " + seconds + " sec";
 	}
 
