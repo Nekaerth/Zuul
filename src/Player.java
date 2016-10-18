@@ -60,23 +60,16 @@ public class Player extends Person {
 		attacks.add(new Attack(Moves.SIDESTEP, 0));
 	}
 
-	/**
-	 * Takes an item name as argument. If the item is a knife, the damage of the
-	 * Stab attack is changed. If the item is a pistol, then a Shoot attack is
-	 * added to player attacks
-	 *
-	 * @param itemName Takes an weapon item name to update attacks
-	 */
-	public void changePlayerAttack(String itemName) {
-
-		//If the item is a knife
-		if (itemName.equalsIgnoreCase("knife")) {
+	public void changePlayerAttack(Item item) {
+		Weapon weapon = (Weapon) item;
+		if (weapon.weaponType().equalsIgnoreCase("melee")) {
 			Attack attack = getAttack("Stab");
-			attack.setDamage(15); //Changes current Stab damage
-		} //If the item is a pistol
-		else if (itemName.equalsIgnoreCase("pistol")) {
+			attack.setDamage(weapon.getDamage());
+
+		} else if (weapon.weaponType().equalsIgnoreCase("range")) {
 			ArrayList<Attack> attacks = getAttacks();
-			attacks.add(new Attack(Moves.SHOOT, 25)); //Adds new Shoot attack to player attack
+			attacks.add(new Attack(Moves.SHOOT, weapon.getDamage()));
+
 		}
 	}
 }

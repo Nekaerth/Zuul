@@ -139,9 +139,9 @@ public class Game {
 	 */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Item(true, "Stone", false, 1, 1));
-		inv.putItem("Key", new Item(true, "Key", true, 1, 1));
-		inv.putItem("Blueprints", new Item(true, "Blueprints", true, 1, 1));
+		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1,11 , "melee"));
+		inv.putItem("Key", new Key(true, "Key", true, 1, 1));
+		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 1, 1));
 		return inv;
 	}
 
@@ -152,8 +152,8 @@ public class Game {
 	 */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true, 5, 1));
-		inv.putItem("Pistol", new Item(true, "Pistol", false, 5, 1));
+		inv.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
+		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1,25,"range"));
 		return inv;
 	}
 
@@ -164,7 +164,7 @@ public class Game {
 	 */
 	private Inventory setDininghallInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", true, 5, 1));
+		inv.putItem("Key", new Key(true, "Key", true, 5, 1));
 		return inv;
 	}
 
@@ -175,7 +175,7 @@ public class Game {
 	 */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(true, "Knife", false, 5, 1));
+		inv.putItem("Knife", new Weapon(true, "Knife", false, 5, 1,15,"melee"));
 		return inv;
 	}
 
@@ -186,7 +186,7 @@ public class Game {
 	 */
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Blueprints", new Item(true, "Blueprints", true, 5, 1));
+		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
 		return inv;
 	}
 
@@ -197,7 +197,7 @@ public class Game {
 	 */
 	private Inventory setHiddenroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5, 1, 5));
+		inv.putItem("Flashlight", new Flashlight(true, "Flashlight", true, 5, 1, 5));
 		return inv;
 	}
 
@@ -208,7 +208,7 @@ public class Game {
 	 */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(true, "Key", false, 5, 1));
+		inv.putItem("Key", new Key(true, "Key", false, 5, 1));
 		return inv;
 	}
 
@@ -449,19 +449,17 @@ public class Game {
 		} else {
 			try {
 				Item item = currentRoom.inv.getItem(command.getSecondWord());
-				if (item.getPickUp() == true
-								&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
-								&& player.getInventory().size() + 1 <= player.getCapacity()) {
+				if (item.isPickup() == true
+						&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
+						&& player.getInventory().size() + 1 <= player.getCapacity()) {
 					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 
 					System.out.println("You picked up " + item.getName());
-					if (item.getName().equalsIgnoreCase("knife")) {
-						player.changePlayerAttack(item.getName());
+					if (item.isWeapon()) {
+						player.changePlayerAttack(item);
 
-					} else if (item.getName().equalsIgnoreCase("pistol")) {
-						player.changePlayerAttack(item.getName());
-					}
+					} 
 				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 					System.out.println("OOPS!! It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
@@ -469,7 +467,7 @@ public class Game {
 
 				} else if (player.getInventory().size() + 1 > player.getCapacity()) {
 					System.out.println("OOPS!! Your inventory is full: " + player.getInventory().size() + "/" + player.getCapacity() + " items");
-					System.out.println("The capacity of the item you want to pickup is: " + item.getItemCapacity());
+					System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
 				}
 
 			} catch (IllegalArgumentException ex) {
@@ -513,20 +511,19 @@ public class Game {
 
 				Item item = player.getInventory().getItem(command.getSecondWord());
 
-				if (item.getUseable() == true) { //There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
-					if (item.getName().equalsIgnoreCase("key")) {
+				if (item.isUseable() == true) { //There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
+					if (item.isKey() == true) {
 						useKey(command, item);
-					} else if (item.getName().equalsIgnoreCase("flashlight")) {
+					} else if (item.isFlashlight() == true) {
 						useFlashlight(command, item);
-					} else if (item.getName().equalsIgnoreCase("blueprints")) {
+					} else if (item.isSpecial() == true && item.getName().equalsIgnoreCase("blueprints")) {
 						useBlueprints(command);
-					} else if (item.getName().equalsIgnoreCase("boltcutter")) {
+					} else if (item.isSpecial() == true && item.getName().equalsIgnoreCase("boltcutter")) {
 						useBoltcutter(command);
-					} else if (item.getName().equalsIgnoreCase("blueprints")) {
-						useBlueprints(command);
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
+
 
 				} else {
 					System.out.println("You can't use that item for anything");
@@ -560,11 +557,9 @@ public class Game {
 
 			System.out.println("You successfully unlock the door");
 
-			key.subtractCharge(1);
-
-			if (key.getCharges() <= 0) {
+	
 				player.getInventory().removeItem(command.getSecondWord());
-			}
+			
 
 		}
 
@@ -578,7 +573,8 @@ public class Game {
 	 * @param flashlight is a item you must have in your inventory to use the
 	 * command "use flashlight"
 	 */
-	private void useFlashlight(Command command, Item flashlight) {
+	private void useFlashlight(Command command, Item item) {
+		Flashlight flashlight = (Flashlight) item;
 		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
 			System.out.println("You used the flashlight and the battery drained, you think you will have " + flashlight.getCharges() + " use(s) left");
@@ -599,7 +595,6 @@ public class Game {
 	}
 
 	private void useBlueprints(Command command) {
-
 		if (command.hasSecondWord() == false) {
 			System.out.println("Use what?");
 		} else {
