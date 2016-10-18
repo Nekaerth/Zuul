@@ -21,12 +21,10 @@ public class Player extends Person {
 	 * items and maximum weight capacity.
 	 *
 	 * @param hitpoint is how much hitpoints the player has.
-	 * @param attacks is a list of all attacks, that are available to the
-	 * player.
+	 * @param attacks is a list of all attacks, that are available to the player.
 	 * @param inventory is where the player holds his picked up items.
 	 * @param capacity is the maximum amount of items the player must hold.
-	 * @param weightCapacity is the maximum weight that the players items must
-	 * weight in total.
+	 * @param weightCapacity is the maximum weight that the players items must weight in total.
 	 */
 	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int capacity, int weightCapacity) {
 		super(hitpoint, attacks, inventory);
@@ -35,7 +33,7 @@ public class Player extends Person {
 	}
 
 	/**
-	 *
+	 * 
 	 * @return the maximum amount item the player can hold.
 	 */
 	public int getCapacity() {

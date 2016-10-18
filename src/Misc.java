@@ -5,8 +5,9 @@
  */
 
 /**
- *
- * @author Niklas
+ * This method is for all the misc items that cant be picked up.
+ * 
+ * @return false so the item cant be picked up.
  */
 public class Misc implements Item {
     private boolean pickup, useable;
