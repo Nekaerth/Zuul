@@ -4,23 +4,23 @@ import java.util.ArrayList;
 /**
  * This class represent a boss. It extends the Person class to adobt the
  * hitpoints, available attacks and an inventory. Notice it does not include the
- * position of the boss. The boss class has a name variable. It also has method 
+ * position of the boss. The boss class has a name variable. It also has method
  * for returning a random attack.
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016) 
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Boss extends Person {
 
-	private final String name;
+	private final String name; //The name of the boss
 
 	/**
 	 * This contructor creates a Boss-object. It represent the boss, which
 	 * includes hitpoints, available attacks, available items and a name.
 	 *
-	 * @param hitpoint is how much hitpoints the boss has
-	 * @param attacks is a list of all attacks, that are available to the boss
-	 * @param inventory is where the boss holds his items
-	 * @param name is the name of the boss
+	 * @param hitpoint Sets the boss's hitpoint.
+	 * @param attacks Sets the boss's attacks.
+	 * @param inventory Sets the boss's Inventory.
+	 * @param name Sets the name of the boss.
 	 */
 	public Boss(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, String name) {
 		super(hitpoint, attacks, inventory);
@@ -29,7 +29,7 @@ public class Boss extends Person {
 
 	/**
 	 *
-	 * @return The name of the boss
+	 * @return The name of the boss.
 	 */
 	public String getName() {
 		return this.name;
@@ -37,7 +37,7 @@ public class Boss extends Person {
 
 	/**
 	 * Sets up the first boss, by adding all attacks and adding all items to his
-	 * inventory
+	 * inventory.
 	 */
 	public void setUpPrisonGuard() {
 		ArrayList<Attack> attacks = getAttacks();
@@ -48,7 +48,7 @@ public class Boss extends Person {
 	}
 
 	/**
-	 * Sets up the second boss, by adding all attacks
+	 * Sets up the second boss, by adding all attacks.
 	 */
 	public void setUpPrisonGuard2() {
 		ArrayList<Attack> attacks = getAttacks();
@@ -60,9 +60,9 @@ public class Boss extends Person {
 	}
 
 	/**
-	 * Returns an attack at random. It is be used at boss fight
+	 * Returns an attack at random. It is be used at boss fight.
 	 *
-	 * @return An attack at random
+	 * @return An attack at random.
 	 */
 	public Attack getRandomAttack() {
 		int randomNumber = (int) (getAttacks().size() * Math.random()); //Creates a random number between 0 and x, where x is the number of available attacks
