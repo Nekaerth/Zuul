@@ -59,7 +59,7 @@ public class Game {
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
 		bossroom.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 1");
-		bossroom.boss.setPrisonGuard1Attacks();
+		bossroom.boss.setUpPrisonGuard();
 
 		dininghall.setExit("Cellhall", cellhall);
 		dininghall.inv = setDininghallInventory();
@@ -90,7 +90,7 @@ public class Game {
 		// the variable is set to cell to declare the room you begin the game in
 
 	}
-	
+
 	public Player getPlayer() {
 		return this.player;
 	}
@@ -309,7 +309,9 @@ public class Game {
 
 		if (nextRoom == null) { //Hvis der ikke er noget room den vej / Hashmappen ikke indeholder nogen value for keyen
 			System.out.println("There is no door!");
-		} else if (nextRoom.isLocked() == false) {
+		} else if (!nextRoom.isLocked()) {
+			subtractTime(10);
+			System.out.println("Time: " + this.time);
 
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
@@ -338,7 +340,7 @@ public class Game {
 				//Should be changed to more generic reuseable code
 				if (nextRoom == storage) {
 					cellhall.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 2");
-					cellhall.boss.setPrisonGuard2Attacks();
+					cellhall.boss.setUpPrisonGuard2();
 				}
 
 				if (currentRoom.boss != null) {

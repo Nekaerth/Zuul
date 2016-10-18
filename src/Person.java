@@ -29,9 +29,12 @@ public class Person {
 	public void setHitpoint(int hitpoint) {
 		this.hitpoint = hitpoint;
 	}
-	
+
 	public void subtractHitpoint(int damage) {
 		this.hitpoint -= damage;
+		if (this.hitpoint < 0) {
+			this.hitpoint = 0;
+		}
 	}
 
 	public ArrayList<Attack> getAttacks() {
