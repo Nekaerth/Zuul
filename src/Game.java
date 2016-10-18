@@ -311,9 +311,14 @@ public class Game {
 
 			} else if (nextRoom.getEscapeRoom() == false) {
 				currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
+				//Should be changed to more generic reuseable code
+				if(nextRoom == storage){
+					cellhall.boss = new Boss(100, new ArrayList<>(), new Inventory(), "boss 2");
+					cellhall.boss.setPrisonGuard2Attacks();
+				}
 
 				if (currentRoom.boss != null) {
-
+					
 					finish = currentRoom.bossFight(player);
 
 				} else {
