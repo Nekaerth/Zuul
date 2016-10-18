@@ -69,8 +69,7 @@ public class Game {
 		office.setExit("Cellhall", cellhall);
 		office.inv = setOfficeInventory();
 		office.LockRoom();
-
-		yard.setExit("Parkinglot", parkinglot);
+		
 		yard.setExit("Cellhall", cellhall);
 		yard.inv = setYardInventory();
 
@@ -106,8 +105,8 @@ public class Game {
          */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new Item(false, "Boltcutter", false, 5, 1));
-		inv.putItem("Pistol", new Item(false, "Pistol", false, 5, 1));
+		inv.putItem("Boltcutter", new Item(true, "Boltcutter", true, 5, 1));
+		inv.putItem("Pistol", new Item(true, "Pistol", false, 5, 1));
 		return inv;
 	}
          /**
@@ -125,7 +124,7 @@ public class Game {
          */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Item(false, "Knife", false, 5, 1));
+		inv.putItem("Knife", new Item(true, "Knife", false, 5, 1));
 		return inv;
 	}
          /**
@@ -152,7 +151,7 @@ public class Game {
          */
 	private Inventory setBossroomInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Key", new Item(false, "Key", false, 5, 1));
+		inv.putItem("Key", new Item(true, "Key", false, 5, 1));
 		return inv;
 	}
         /**
@@ -438,15 +437,17 @@ public class Game {
 
 				Item item = player.getInventory().getItem(command.getSecondWord());
 
-				if (item.getUseable() == true) { //There are only 2 items that are useable. Either key or flashlight
+				if (item.getUseable() == true) { //There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
 					if (item.getName().equalsIgnoreCase("key")) {
 						useKey(command, item);
 					} else if (item.getName().equalsIgnoreCase("flashlight")) {
 						useFlashlight(command, item);
-                                        }     else if (item.getName().equalsIgnoreCase("blueprints")) {
-                                                    
+                                        }     else if (item.getName().equalsIgnoreCase("blueprints")) {                                                    
                                                     useBlueprints(command);
-					} else {
+                                        }           else if (item.getName().equalsIgnoreCase("boltcutter")) {                                                            
+                                                            useBoltcutter(command);
+                                        } else 
+                                        {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
 
@@ -526,6 +527,22 @@ public class Game {
 			player.getInventory().removeItem(command.getSecondWord());
 		}
 	}
+        
+        private void useBoltcutter (Command command) {            
+      
+            if (command.hasSecondWord() == false) {
+                System.out.println("Use What?");
+            } else if (currentRoom == yard){
+                System.out.println("You use the boltcutter to cut open the net and escape to the parkinglot,");
+                System.out.println("find a car and get out of here");
+                yard.setExit("Parkinglot", parkinglot);
+                player.getInventory().removeItem(command.getSecondWord());
+            }
+            else {
+                System.out.println("You got no use for the boltcutter here");
+            }
+                
+        }
 
 	/**
 	 * The showInventory method will print the items that are currently in the

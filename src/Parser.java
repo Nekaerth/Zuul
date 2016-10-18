@@ -49,7 +49,7 @@ public class Parser {
     }
 
     public String getCode() {
-
+        System.out.println("> ");
         String inputCode;
         while (reader.hasNext()) {
             if (reader.hasNextInt()) {
