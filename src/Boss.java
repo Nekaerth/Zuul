@@ -28,7 +28,7 @@ public class Boss extends Person {
 		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 10));
 		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 10));
 		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
-		getInventory().putItem("Key", new Item(true, "Key", true, 1, 1));
+		getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
 	}
 
 	public void setUpPrisonGuard2() {
