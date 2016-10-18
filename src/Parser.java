@@ -2,7 +2,7 @@
 import java.util.Scanner;
 
 /**
- *
+ * The Parser class is used to get input from the user, and turning these inputs into objects of Command or String's.
  * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Parser {
@@ -10,11 +10,18 @@ public class Parser {
 	private CommandWords commands;
 	private Scanner reader;
 
+	/**
+	 * The constructor of the parser
+	 */
 	public Parser() {
 		commands = new CommandWords(); //Opretter de commands der findes i spillet, commandsene findes fra enum'en commandWord
 		reader = new Scanner(System.in); // en scanner oprettes, der læser i consollen
 	}
 
+	/**
+	 * This method asks the user for input, and returns an object of Command
+	 * @return an object of Command
+	 */
 	public Command getCommand() {
 		String inputLine;
 		String word1 = null;
@@ -51,7 +58,11 @@ public class Parser {
 	public void showCommands() {
 		commands.showAll();
 	}
-
+/**
+ * This method will ask for an input through a scanner object and
+ * the input is required to be a set of numbers that will be saved to a string
+ * @return a string of numbers
+ */
 	public String getCode() {
 		System.out.println("> ");
 		String inputCode;
@@ -66,9 +77,11 @@ public class Parser {
 		return null;
 	}
 
-	//Denne metode vil tjekke vores ord (word1, word2 og word3) igennem, og sætte dem som uppercase/lowercase
-	//hvis karakteren man har fat i er et bogstav, og hvis den forrige karakter ikke er et bogstav,
-	//skal den sætte det til stortbogstav, eller et lille bogstav.
+	/**
+	 * This method capitalizes the first letter in every word in the string that is sent as a parameter
+	 * @param a string to be capitalized
+	 * @return a string that has been capitalized
+	 */
 	private String capitalized(String str) {
 		char ch;       // En af karakterne i strengen (str)
 		char prevCh;   // Karakteren der befinder sig før ch i strengen
