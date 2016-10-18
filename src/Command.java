@@ -1,4 +1,8 @@
 
+/**
+ *
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
+ */
 public class Command {
 
 	private CommandWord commandWord;

@@ -1,11 +1,13 @@
 
-/**
- * *******************GAME CLASS*************************************
- * The game class cosists off X instance variable and X instance methods
- * The arraylist is import from the java utility library
- */
 import java.util.ArrayList;
 
+/**
+ * *****************************GAME CLASS*************************************
+ * The game class cosists off X instance variable and X instance methods The
+ * arraylist is import from the java utility library
+ *
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
+ */
 public class Game {
 
 	private final Parser parser;
@@ -139,7 +141,7 @@ public class Game {
 	 */
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1,11 , "melee"));
+		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, "melee"));
 		inv.putItem("Key", new Key(true, "Key", true, 1, 1));
 		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 1, 1));
 		return inv;
@@ -153,7 +155,7 @@ public class Game {
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
-		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1,25,"range"));
+		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, "range"));
 		return inv;
 	}
 
@@ -175,7 +177,7 @@ public class Game {
 	 */
 	private Inventory setYardInventory() {
 		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Weapon(true, "Knife", false, 5, 1,15,"melee"));
+		inv.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, "melee"));
 		return inv;
 	}
 
@@ -450,8 +452,8 @@ public class Game {
 			try {
 				Item item = currentRoom.inv.getItem(command.getSecondWord());
 				if (item.isPickup() == true
-						&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
-						&& player.getInventory().size() + 1 <= player.getCapacity()) {
+								&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
+								&& player.getInventory().size() + 1 <= player.getCapacity()) {
 					player.getInventory().putItem(command.getSecondWord(), item);
 					currentRoom.inv.removeItem(command.getSecondWord());
 
@@ -459,7 +461,7 @@ public class Game {
 					if (item.isWeapon()) {
 						player.changePlayerAttack(item);
 
-					} 
+					}
 				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 					System.out.println("OOPS!! It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
@@ -524,7 +526,6 @@ public class Game {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
 
-
 				} else {
 					System.out.println("You can't use that item for anything");
 				}
@@ -557,9 +558,7 @@ public class Game {
 
 			System.out.println("You successfully unlock the door");
 
-	
-				player.getInventory().removeItem(command.getSecondWord());
-			
+			player.getInventory().removeItem(command.getSecondWord());
 
 		}
 

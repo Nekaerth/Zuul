@@ -1,6 +1,10 @@
 
 import java.util.HashMap;
 
+/**
+ * 
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
+ */
 public class CommandWords {
 
 	private HashMap<String, CommandWord> validCommands;

@@ -1,18 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author Danieln Johansen
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Weapon implements Item {
+
 	private boolean key, weapon, misc, pickup, useable;
 	private int weight, capacity, damage;
 	private String name, weaponType;
-	
+
 	public Weapon(boolean pickup, String name, boolean useable, int weight, int capacity, int damage, String weaponType) {
 		this.pickup = pickup;
 		this.name = name;
@@ -22,7 +18,7 @@ public class Weapon implements Item {
 		this.damage = damage;
 		this.weaponType = weaponType;
 	}
-	
+
 	@Override
 	public boolean isWeapon() {
 		return true;
@@ -42,8 +38,9 @@ public class Weapon implements Item {
 	public boolean isFlashlight() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
+
 	@Override
-	public boolean isSpecial(){
+	public boolean isSpecial() {
 		return true;
 	}
 
@@ -71,12 +68,13 @@ public class Weapon implements Item {
 	public int getCapacity() {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-	public String weaponType(){
+
+	public String weaponType() {
 		return weaponType;
 	}
-	public int getDamage(){
+
+	public int getDamage() {
 		return damage;
 	}
-	
-	
+
 }

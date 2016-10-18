@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *
- * @author Danieln Johansen
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Flashlight implements Item {
 
@@ -32,8 +27,9 @@ public class Flashlight implements Item {
 	public boolean isKey() {
 		return false;
 	}
+
 	@Override
-	public boolean isFlashlight(){
+	public boolean isFlashlight() {
 		return true;
 	}
 
@@ -41,8 +37,9 @@ public class Flashlight implements Item {
 	public boolean isMisc() {
 		return false;
 	}
+
 	@Override
-	public boolean isSpecial(){
+	public boolean isSpecial() {
 		return false;
 	}
 
@@ -70,16 +67,15 @@ public class Flashlight implements Item {
 	public int getCapacity() {
 		return this.capacity;
 	}
-	
-	public int getCharges(){
+
+	public int getCharges() {
 		return this.charges;
-		
+
 	}
+
 	public void subtractCharge(int subCharge) {
 
 		this.charges -= subCharge;
 	}
-
-	
 
 }

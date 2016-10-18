@@ -1,14 +1,14 @@
 
 /**
- *
- * @author Niklas
- */
-/**
  * This statement import the Hashmap class from the util library.
  */
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ *
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
+ */
 public class Inventory {
 
 	/**
