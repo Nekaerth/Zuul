@@ -154,20 +154,22 @@ public class Room {
 				System.out.println("You lose " + currentBossAttack.getDamage() + " hitpoints. You have " + game.getPlayer().getHitpoint() + " hitpoints left."); //Prints out how much damage dealt and how much hitpoints the player has left.
 			}
 		}
-
+		//If the player loses all hitpoints.
 		if (game.getPlayer().getHitpoint() <= 0) {
 			System.out.println("You've been defeated by the prison guard!");
-			return true;
-		} else {
+			return true; // returns true because you died.
+		} //If the boss loses all hitpoints.
+		else {
 			System.out.println("You defeated the prison guard!");
 
+			//If the boss contains a key.
 			if (boss.getInventory().containItem("Key")) {
-				Item item = boss.getInventory().getItem("Key"); //gets Key from boss inventory.
+				Item item = boss.getInventory().getItem("Key"); //Gets Key from boss inventory.
 				this.inv.putItem("Key", item); //Drops the key in the room.
 			}
 
-			boss = null;
-			return false;
+			boss = null; //Removes the boss.
+			return false; //Returns false because you didn't die.
 		}
 	}
         public boolean needsBoss() {

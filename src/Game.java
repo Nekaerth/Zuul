@@ -34,7 +34,7 @@ public class Game {
 
 		// initializes the rooms available
 		player = new Player(100, new ArrayList<>(), new Inventory(), 3, 20); // creates a new object of the player class
-		player.setPlayerAttacks();
+		player.setUpPlayer();
 
 		this.time = 1200;
 
