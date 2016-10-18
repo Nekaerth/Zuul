@@ -6,19 +6,20 @@
 
 /**
  *
- * @author Danieln Johansen
+ * @author Niklas
  */
-public class SpecialItem implements Item {
-	private boolean pickup, useable;
+public class Misc implements Item {
+    private boolean pickup, useable;
 	private int weight, capacity;
 	private String name;
-	public SpecialItem(boolean pickup, String name, boolean useable, int weight, int capacity){
+	public Misc (boolean pickup, String name, boolean useable){
 		this.pickup = pickup;
 		this.name = name;
 		this.weight = weight;
 		this.capacity = capacity;
 		this.useable = useable;
 	}
+        
 	
 	@Override
 	public boolean isWeapon() {
@@ -32,12 +33,12 @@ public class SpecialItem implements Item {
 
 	@Override
 	public boolean isMisc() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	public boolean isSpecial(){
-		return true;
+		return false;
 	}
 
 	@Override
@@ -57,17 +58,16 @@ public class SpecialItem implements Item {
 
 	@Override
 	public int getWeight() {
-		return this.weight;
+		return 0;
 	}
 
 	@Override
 	public int getCapacity() {
-		return this.capacity;
+		return 0;
 	}
 
 	@Override
 	public boolean isFlashlight() {
 		return false;
 	}
-	
 }

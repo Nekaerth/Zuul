@@ -125,20 +125,19 @@ public class Game {
 	private Inventory setCellInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1,11 , "melee"));
-		inv.putItem("Key", new Key(true, "Key", true, 1, 1));
-		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 1, 1));
+                inv.putItem("Stick", new Misc(false, "Stick", false));
 		return inv;
 	}
 
 	/**
 	 * This method will set the storage inventory when the game starts
-	 *
 	 * @return will return the storage inventory
 	 */
 	private Inventory setStorageInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
 		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1,25,"range"));
+                inv.putItem("Evidence box", new Misc(false, "Evidence box", false));
 		return inv;
 	}
 
@@ -150,6 +149,7 @@ public class Game {
 	private Inventory setDininghallInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Key", new Key(true, "Key", true, 5, 1));
+                inv.putItem("Plate", new Misc (false, "Plate", false));
 		return inv;
 	}
 
@@ -172,6 +172,7 @@ public class Game {
 	private Inventory setOfficeInventory() {
 		Inventory inv = new Inventory();
 		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
+                inv.putItem("Stacks of paper", new Misc(false, "Stacks of paper", false));
 		return inv;
 	}
 
@@ -301,8 +302,7 @@ public class Game {
 
 	/**
 	 * The method goRoom is a case of the user input and are used when the user
-	 * types "go" as a command
-	 *
+	 * types "go" as a command	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean goRoom(Command command) {
@@ -456,7 +456,9 @@ public class Game {
 				} else if (player.getInventory().size() + 1 > player.getCapacity()) {
 					System.out.println("OOPS!! Your inventory is full: " + player.getInventory().size() + "/" + player.getCapacity() + " items");
 					System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
-				}
+				} else if (item.isPickup() == false) {
+                                    System.out.println("You can't pick up that item");
+                                }
 
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
@@ -467,7 +469,6 @@ public class Game {
 	/**
 	 * The drop method is a case of the user input and is used when the user types
 	 * "drop" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void drop(Command command) {

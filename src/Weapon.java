@@ -9,7 +9,7 @@
  * @author Danieln Johansen
  */
 public class Weapon implements Item {
-	private boolean key, weapon, misc, pickup, useable;
+	private boolean pickup, useable;
 	private int weight, capacity, damage;
 	private String name, weaponType;
 	
