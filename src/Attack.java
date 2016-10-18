@@ -5,20 +5,20 @@
  * it is and one to tell what move can counter the attack. Lastly it contains an
  * int attribute that tells how much damage the attack does.
  *
- * @author Lasse
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Attack {
 
-	private Moves move = null;
-	private Moves counterMove = null;
-	private int damage;
+	private Moves move = null; //An enum which represent what kind of attack it is
+	private Moves counterMove = null; //An enum which tells what move can counter this attack
+	private int damage; //How much damage the attack deals
 
 	/**
 	 * This constructor returns an Attack-object which is meant for the player,
 	 * because it does not contain a counterMove.
 	 *
-	 * @param move is a enum which represent what kind of attack it is.
-	 * @param damage is how much this attack deals in damage.
+	 * @param move Sets the type of move.
+	 * @param damage Sets the attack damage.
 	 */
 	public Attack(Moves move, int damage) {
 		this.move = move;
@@ -29,9 +29,9 @@ public class Attack {
 	 * This constructor returns an Attack-object which is meant for the boss,
 	 * because it does contain a counterMove.
 	 *
-	 * @param move is a enum which represent what kind of attack it is.
-	 * @param counterMove is a enum which tells what move can counter this attack.
-	 * @param damage is how much this attack deals in damage.
+	 * @param move Sets the type of move.
+	 * @param counterMove Sets the type of counter move.
+	 * @param damage Sets the attack damage.
 	 */
 	public Attack(Moves move, Moves counterMove, int damage) {
 		this.move = move;

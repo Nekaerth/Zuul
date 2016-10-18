@@ -1,14 +1,16 @@
 
+/**
+ *
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
+ */
 public class Command {
 
 	private CommandWord commandWord;
-	//private CommandWord commandWord2;
 	private String secondWord;
 	private String thirdWord;
 
 	public Command(CommandWord commandWord, String secondWord, String thirdWord) {
 		this.commandWord = commandWord;
-		//this.commandWord2 = commandWord2;
 		this.secondWord = secondWord;
 		this.thirdWord = thirdWord;
 
@@ -16,7 +18,6 @@ public class Command {
 
 	public CommandWord getCommandWord() {
 		return commandWord;
-		//return commandWord2;
 	}
 
 	public String getSecondWord() {

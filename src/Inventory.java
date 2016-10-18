@@ -1,14 +1,14 @@
 
 /**
- *
- * @author Niklas
- */
-/**
  * This statement import the Hashmap class from the util library.
  */
 import java.util.HashMap;
 import java.util.Set;
 
+/**
+ *
+ * @author Semesterprojektgruppe 13 (Efterår 2016)
+ */
 public class Inventory {
 
 	/**
@@ -17,13 +17,17 @@ public class Inventory {
 	private HashMap<String, Item> inventory;
 
 	/**
-	 * New hashmap with the name "inventory" is create in the contructor
+	 * New hashmap with the name "inventory" is created in the contructor
 	 */
 	public Inventory() {
 		inventory = new HashMap<>();
 
 	}
 
+	/**
+	 * This method returns whether or not the inventory is empty
+	 * @return A boolean, true if empty and false
+	 */
 	public boolean isEmpty() {
 		return inventory.isEmpty();
 	}
@@ -57,6 +61,10 @@ public class Inventory {
 		return returnString;
 	}
 
+	/**
+	 * This method will calculate the total weight of items in a inventory
+	 * @return an integer that is the total weight
+	 */
 	public int itemWeight() {
 		int weight = 0;
 		for (Item item : inventory.values()) {
@@ -65,12 +73,22 @@ public class Inventory {
 		return weight;
 	}
 
+	/**
+	 * This method returns the amount of items in the inventory
+	 * @return an integer
+	 */
 	public int size() {
 		int size = 0;
 		size = inventory.size();
 		return size;
 	}
 
+	/**
+	 * This method checks if the inventory contains
+	 * an item with the name of the parameter
+	 * @param name which is a String
+	 * @return a boolean that is true if it contains the item
+	 */
 	public boolean containItem(String name) {
 		return this.inventory.containsKey(name);
 	}
@@ -87,6 +105,10 @@ public class Inventory {
 
 	}
 
+	/**
+	 * This method removes an item from an inventory
+	 * @param name string, the name of the item to be removed
+	 */
 	public void removeItem(String name) {
 		inventory.remove(name);
 	}
