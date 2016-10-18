@@ -1,4 +1,3 @@
-
 /**
  * *******************GAME CLASS*************************************
  * The game class cosists off X instance variable and X instance methods
@@ -477,6 +476,9 @@ public class Game {
 		} else {
 			try {
 				Item item = player.getInventory().getItem(command.getSecondWord());
+				if(item.isWeapon() == true){
+					player.droppedWeapon(item);
+				}
 				currentRoom.inv.putItem(command.getSecondWord(), item);
 				player.getInventory().removeItem(command.getSecondWord());
 				System.out.println("You drop " + item.getName());
@@ -601,7 +603,6 @@ public class Game {
 			System.out.println("You got no use for the boltcutter here");
 		}
 	}
-
 	/**
 	 * The showInventory method will print the items that are currently in the
 	 * players inventory
@@ -612,5 +613,4 @@ public class Game {
 		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 		System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
 	}
-
 }
