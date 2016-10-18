@@ -20,13 +20,11 @@ public class Player extends Person {
 	 * includes hitpoints, available attacks, available items, maximum number of
 	 * items and maximum weight capacity.
 	 *
-	 * @param hitpoint is how much hitpoints the player has.
-	 * @param attacks is a list of all attacks, that are available to the
-	 * player.
-	 * @param inventory is where the player holds his picked up items.
-	 * @param capacity is the maximum amount of items the player must hold.
-	 * @param weightCapacity is the maximum weight that the players items must
-	 * weight in total.
+	 * @param hitpoint Sets the players hitpoint.
+	 * @param attacks Sets the players attacks.
+	 * @param inventory Sets the players inventory.
+	 * @param capacity Sets the players maximum item capacity.
+	 * @param weightCapacity Sets the players maximum item weight capacity.
 	 */
 	public Player(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, int capacity, int weightCapacity) {
 		super(hitpoint, attacks, inventory);
@@ -64,9 +62,9 @@ public class Player extends Person {
 	/**
 	 * Takes an item name as argument. If the item is a melee weapon, the damage
 	 * of the Stab attack is changed. If the item is a range weapon, then a Shoot
-	 * attack is added to player attacks
+	 * attack is added to player attacks.
 	 *
-	 * @param item Takes an weapon item to update attacks
+	 * @param item Takes a weapon item to update attacks.
 	 */
 	public void changePlayerAttack(Item item) {
 		Weapon weapon = (Weapon) item;
@@ -81,18 +79,21 @@ public class Player extends Person {
 		}
 	}
 
+	/**
+	 *
+	 * @param item Takes a weapon item which effect on attacks should be reversed
+	 */
 	public void droppedWeapon(Item item) {
 		Weapon weapon = (Weapon) item;
+		//If the item is a range weapon
 		if (weapon.weaponType().equalsIgnoreCase("range")) {
 			ArrayList<Attack> attacks = getAttacks();
-			Attack attack = getAttack("Shoot");
+			Attack attack = getAttack("Shoot"); //Removes the Shoot attack
 			attacks.remove(attack);
-
-		} else if (weapon.weaponType().equalsIgnoreCase("melee")) {
+		} //If the item is a melee weapon
+		else if (weapon.weaponType().equalsIgnoreCase("melee")) {
 			Attack attack = getAttack("Stab");
-			attack.setDamage(10);
-
+			attack.setDamage(10); //Sets Stab damage back to 10
 		}
-
 	}
 }

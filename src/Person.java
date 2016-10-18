@@ -10,17 +10,17 @@ import java.util.ArrayList;
  */
 public class Person {
 
-	private int hitpoint;
-	private ArrayList<Attack> attacks;
-	private Inventory inventory;
+	private int hitpoint; //How much hitpoints the person has.
+	private ArrayList<Attack> attacks; //ArrayList of all attacks, that are available to the person.
+	private Inventory inventory; //An Inventory that holds the persons items
 
 	/**
 	 * This contructor can creates a Person-object.It represent a person, which
 	 * includes hitpoints, available attacks and available items.
 	 *
-	 * @param hitpoint is how much hitpoints the person has.
-	 * @param attacks is a list of all attacks, that are available to the person.
-	 * @param inventory is where the person holds his items.
+	 * @param hitpoint Sets the persons hitpoint.
+	 * @param attacks Sets the persons attacks.
+	 * @param inventory Sets the persons inventory.
 	 */
 	public Person(int hitpoint, ArrayList<Attack> attacks, Inventory inventory) {
 		this.hitpoint = hitpoint;
@@ -30,7 +30,7 @@ public class Person {
 
 	/**
 	 *
-	 * @return the hitpoint for a person
+	 * @return the hitpoint for a person.
 	 */
 	public int getHitpoint() {
 		return hitpoint;
@@ -38,7 +38,7 @@ public class Person {
 
 	/**
 	 *
-	 * @param damage how much to subtract from the persons hitpoits
+	 * @param damage how much to subtract from the persons hitpoits.
 	 */
 	public void subtractHitpoint(int damage) {
 		this.hitpoint -= damage;
@@ -50,7 +50,7 @@ public class Person {
 
 	/**
 	 *
-	 * @return a ArrayList of all avialble attacks
+	 * @return a ArrayList of all avialble attacks.
 	 */
 	public ArrayList<Attack> getAttacks() {
 		return attacks;
@@ -58,7 +58,7 @@ public class Person {
 
 	/**
 	 *
-	 * @return the inventory of the person
+	 * @return the inventory of the person.
 	 */
 	public Inventory getInventory() {
 		return inventory;
@@ -66,7 +66,7 @@ public class Person {
 
 	/**
 	 *
-	 * @return a String which contains a list with all available attacks
+	 * @return a String which contains a list with all available attacks.
 	 */
 	public String getAttackString() {
 		String list = "";
@@ -79,8 +79,8 @@ public class Person {
 
 	/**
 	 *
-	 * @param attackName name of the requested attack
-	 * @return the requested attack
+	 * @param attackName name of the requested attack.
+	 * @return the requested attack.
 	 */
 	public Attack getAttack(String attackName) {
 		//Goes through all attacks and returns the requested attack
