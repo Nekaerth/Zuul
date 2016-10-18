@@ -15,8 +15,8 @@ public class Game {
 	private int time;
 
 	/**
-	 *The construter for the game class consists off calling a method
-         *The createRooms() method and creating a new object of the parser class.
+	 * The construter for the game class consists off calling a method The
+	 * createRooms() method and creating a new object of the parser class.
 	 */
 	public Game() //Constructor
 	{
@@ -157,8 +157,10 @@ public class Game {
 		inv.putItem("Knife", new Item(true, "Knife", false, 5, 1));
 		return inv;
 	}
+
 	/**
 	 * This method will set the office inventory when the game starts
+	 *
 	 * @return will return the office inventory
 	 */
 	private Inventory setOfficeInventory() {
@@ -166,8 +168,10 @@ public class Game {
 		inv.putItem("Blueprints", new Item(true, "Blueprints", true, 5, 1));
 		return inv;
 	}
+
 	/**
 	 * This method will set the hidden rooms inventory when the game starts
+	 *
 	 * @return will return the hidden rooms inventory
 	 */
 	private Inventory setHiddenroomInventory() {
@@ -175,8 +179,10 @@ public class Game {
 		inv.putItem("Flashlight", new Item(true, "Flashlight", true, 5, 1, 5));
 		return inv;
 	}
+
 	/**
 	 * This method will set the boss rooms inventory when the game starts
+	 *
 	 * @return will return the boss rooms inventory
 	 */
 	private Inventory setBossroomInventory() {
@@ -184,10 +190,11 @@ public class Game {
 		inv.putItem("Key", new Item(true, "Key", false, 5, 1));
 		return inv;
 	}
+
 	/**
 	 * The play method is used to run the game it starts by calling the
-         * printWelcome() method, then a boolean is initialized and as long as
-         * the boolean is false a loop will run where inputs from the user is processed
+	 * printWelcome() method, then a boolean is initialized and as long as the
+	 * boolean is false a loop will run where inputs from the user is processed
 	 */
 	public void play() {
 		printWelcome(); //calls the method printWelcome()
@@ -200,9 +207,10 @@ public class Game {
 		}
 		System.out.println("Thank you for playing.  Good bye."); //Hvis der quittes
 	}
+
 	/**
-          * The method printWelcome will print the text, 
-          * and what to type if you need help, in the console
+	 * The method printWelcome will print the text, and what to type if you need
+	 * help, in the console
 	 */
 	private void printWelcome() {
 		System.out.println();
@@ -214,8 +222,9 @@ public class Game {
 	}
 
 	/**
-	 * The method processCommand will process the user input 
-         * and reactes to the specific user input
+	 * The method processCommand will process the user input and reactes to the
+	 * specific user input
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean processCommand(Command command) {
@@ -365,8 +374,8 @@ public class Game {
 	}
 
 	/**
-	 * The quit method is a case of the user input and is used when the user
-	 * types "quit" as a command
+	 * The quit method is a case of the user input and is used when the user types
+	 * "quit" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -380,8 +389,9 @@ public class Game {
 	}
 
 	/**
-	 * The searchRoom method is a case of the user input
-         * and is used when the user types "search" as a command
+	 * The searchRoom method is a case of the user input and is used when the user
+	 * types "search" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void searchRoom(Command command) {
@@ -398,8 +408,9 @@ public class Game {
 	}
 
 	/**
-	 * The pickUp method is a case of the user input
-         * and is used when the user types "pickup" as a command
+	 * The pickUp method is a case of the user input and is used when the user
+	 * types "pickup" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void pickUp(Command command) {
@@ -416,7 +427,7 @@ public class Game {
 					currentRoom.inv.removeItem(command.getSecondWord());
 
 					System.out.println("You picked up " + item.getName());
-					if(item.getName().equalsIgnoreCase("knife")){
+					if (item.getName().equalsIgnoreCase("knife")) {
 						player.changePlayerAttack(item.getName());
 
 					} else if(item.getName().equalsIgnoreCase("pistol")){
@@ -431,8 +442,6 @@ public class Game {
 					System.out.println("The capacity of the item you want to pickup is: " + item.getItemCapacity());
 				}
 
-				
-                              
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
 			}
@@ -440,8 +449,9 @@ public class Game {
 	}
 
 	/**
-	 * The drop method is a case of the user input
-         * and is used when the user types "drop" as a command
+	 * The drop method is a case of the user input and is used when the user types
+	 * "drop" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void drop(Command command) {
@@ -460,8 +470,9 @@ public class Game {
 	}
 
 	/**
-	 * The use method is a case of the user input
-         * and is used when the user types "use" as a command
+	 * The use method is a case of the user input and is used when the user types
+	 * "use" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void use(Command command) {
@@ -496,12 +507,14 @@ public class Game {
 		}
 
 	}
+
 	/**
-         * The useKey method is a case when the user types "use" 
-         * and is used when the user types "use key" as a command
+	 * The useKey method is a case when the user types "use" and is used when the
+	 * user types "use key" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
-         * @param key the key is a item you must have in yor inventory
-         * to use the command "use key" the key is used as an input to this method
+	 * @param key the key is a item you must have in yor inventory to use the
+	 * command "use key" the key is used as an input to this method
 	 */
 	private void useKey(Command command, Item key) {
 
@@ -526,11 +539,14 @@ public class Game {
 		}
 
 	}
+
 	/**
-         * The useFlashlight method is a case when the user types "use"
-         * and is used when the user types "use flashlight"
+	 * The useFlashlight method is a case when the user types "use" and is used
+	 * when the user types "use flashlight"
+	 *
 	 * @param command is a parameter that needs a command object as an input
-         * @param flashlight is a item you must have in your inventory to use the command "use flashlight"
+	 * @param flashlight is a item you must have in your inventory to use the
+	 * command "use flashlight"
 	 */
 	private void useFlashlight(Command command, Item flashlight) {
 		if (flashlight.getCharges() > 0) {

@@ -32,10 +32,11 @@ public class Boss extends Person {
 
 	public void setPrisonGuard2Attacks() {
 		ArrayList<Attack> attacks = getAttacks();
-		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 10));
-		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 10));
-		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
-		attacks.add(new Attack(Moves.SHOOT, Moves.DUCK, 10));
+		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 15));
+		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 15));
+		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 15));
+		attacks.add(new Attack(Moves.SHOOT, Moves.DUCK, 15));
+                attacks.add(new Attack(Moves.LAUGH, Moves.SHOOT, 5));
 	}
 
 	public Attack getRandomAttack() {
