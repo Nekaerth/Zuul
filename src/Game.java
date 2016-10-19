@@ -281,7 +281,7 @@ public class Game {
 					break;
 				case TIME:
 					System.out.println("You have " + displayTime() + " left.");
-					break;
+					break;                                
 				default:
 					break;
 			}
@@ -445,9 +445,11 @@ public class Game {
 
 					System.out.println("You picked up " + item.getName());
 					if (item.isWeapon()) {
-						player.changePlayerAttack(item);
-
-					} 
+						player.changePlayerAttack(item);                                     
+					}
+                                        else if (item.isFlashlight()) {
+                                            System.out.println("Use it wisely, it won't last forever!");
+                                }
 				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 					System.out.println("OOPS!! It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
@@ -458,7 +460,7 @@ public class Game {
 					System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
 				} else if (item.isPickup() == false) {
                                     System.out.println("You can't pick up that item");
-                                }
+                                } 
 
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
