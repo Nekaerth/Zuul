@@ -47,7 +47,7 @@ public class Game {
 		hiddenroom = new Room("in a secret room", true, false);
 		bossroom = new Room("in the bossroom", false, false);
 
-		cell.setExit("Cellhall", cellhall); // metode i room der hedder set exit kaldes, der tager en string og et room objekt som argument
+		cell.setExit("Cellhall", cellhall); // Calls the method in room called set exit, taking a string and room object as an argument.
 		cell.inv = setCellInventory(); // calls the method setCellInventory()
 		//to declare what items that are in the cell when the game begins
 
@@ -217,7 +217,7 @@ public class Game {
 			//og modtager det som et objekt command
 			finished = processCommand(command); //processer commanden
 		}
-		System.out.println("Thank you for playing.  Good bye."); //Hvis der quittes
+		System.out.println("Thank you for playing.  Good bye."); //prints this if you quit the game
 	}
 
 	/**
@@ -228,9 +228,9 @@ public class Game {
 		System.out.println();
 		System.out.println("You wake up and realize there's a prisonriot going on. Now's your chance to escape!");
 		System.out.println("Hurry! you have limited time to escape, before the warden gets everything under control again.");
-		System.out.println("Type '" + CommandWord.HELP + "' if you need help."); //commandWord.HELP er en variabel i commandword
+		System.out.println("Type '" + CommandWord.HELP + "' if you need help."); //commandWord.HELP is a variable in commandWord
 		System.out.println();
-		System.out.println(currentRoom.getLongDescription()); // Giver beskrivelse af rummet + exit muligheder
+		System.out.println(currentRoom.getLongDescription()); //Gives a description of the room you're in + exit options
 	}
 
 	/**
@@ -243,45 +243,50 @@ public class Game {
 
 		CommandWord commandWord = command.getCommandWord(); //Får command ordet og gemmer det i objektet commandword ud fra objektet command
 
-		if (commandWord == CommandWord.UNKNOWN) { //Hvis det er unknown
+		if (commandWord == CommandWord.UNKNOWN) { //Prints this if commandWord isn't known
 			System.out.println("I don't know what you mean...");
 			System.out.println(currentRoom.getExitString());
-			return false; //Vil ikke quitte programmet
+			return false; //Does so it won't quit program
 		}
 
 		if (null != commandWord) {
 			switch (commandWord) {
 				case HELP:
-					// Hvis der er skrevet help
-					printHelp();
+					//If help is typed
+					printHelp(); //Prints all command words
 					break;
 				case GO:
-					// hvis der er skrevet go
-					wantToQuit = goRoom(command); //gå til et andet rum hvis commanden er gyldig
+					//If go + exitRoom is typed
+					wantToQuit = goRoom(command); //Goes to typed room if the command is valid
 					break;
 				case QUIT:
-					// hvis der er skrevet quit
-					wantToQuit = quit(command); //returner true hvis der bare er skrevet quit, hvis der er skrevet mere returner det flase    
+					//If quit is typed
+					wantToQuit = quit(command); //Returns true if only 'quit' is typed, and returns false if anything else is typed    
 					break;
 				case SEARCH:
-					// hvis der er skrevet search
-					searchRoom(command);
+					//If search is typed
+					searchRoom(command); //Searches the room for items
 					break;
 				case PICKUP:
-					pickUp(command);
+                                        //If pickup + secondWord is typed
+					pickUp(command); //Picks up item to players inventory if secondWord is valid
 					break;
 				case DROP:
-					drop(command);
+                                        //If drop + secondWord is typed
+					drop(command); //Drops item in players inventory to currentRoom if secondWord is valid
 					break;
 				case USE:
-					use(command);
+                                        //If use + secondWord is typed
+					use(command); //Uses an items functionality if the item have any
 					break;
 				case INVENTORY:
-					showInventory();
+                                        //If inventory is typed
+					showInventory(); //Shows what items the player currently have in the inventory
 					break;
 				case TIME:
-					System.out.println("You have " + displayTime() + " left.");
-					break;                                
+                                        //If time is typed
+					System.out.println("You have " + displayTime() + " left."); //Displays amount of time left, before you lose the game
+					break; 
 				default:
 					break;
 			}
