@@ -26,6 +26,7 @@ public class Inventory {
 
 	/**
 	 * This method returns whether or not the inventory is empty
+	 *
 	 * @return A boolean, true if empty and false
 	 */
 	public boolean isEmpty() {
@@ -63,6 +64,7 @@ public class Inventory {
 
 	/**
 	 * This method will calculate the total weight of items in a inventory
+	 *
 	 * @return an integer that is the total weight
 	 */
 	public int itemWeight() {
@@ -75,6 +77,7 @@ public class Inventory {
 
 	/**
 	 * This method returns the amount of items in the inventory
+	 *
 	 * @return an integer
 	 */
 	public int size() {
@@ -84,8 +87,9 @@ public class Inventory {
 	}
 
 	/**
-	 * This method checks if the inventory contains
-	 * an item with the name of the parameter
+	 * This method checks if the inventory contains an item with the name of the
+	 * parameter
+	 *
 	 * @param name which is a String
 	 * @return a boolean that is true if it contains the item
 	 */
@@ -107,6 +111,7 @@ public class Inventory {
 
 	/**
 	 * This method removes an item from an inventory
+	 *
 	 * @param name string, the name of the item to be removed
 	 */
 	public void removeItem(String name) {

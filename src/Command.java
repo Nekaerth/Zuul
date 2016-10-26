@@ -13,7 +13,6 @@ public class Command {
 		this.commandWord = commandWord;
 		this.secondWord = secondWord;
 		this.thirdWord = thirdWord;
-
 	}
 
 	public CommandWord getCommandWord() {

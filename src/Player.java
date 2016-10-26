@@ -33,7 +33,7 @@ public class Player extends Person {
 	}
 
 	/**
-	 * 
+	 *
 	 * @return the maximum amount item the player can hold.
 	 */
 	public int getCapacity() {

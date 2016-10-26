@@ -2,15 +2,17 @@
 import java.util.HashMap;
 
 /**
- * 
+ *
  * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class CommandWords {
 
 	private HashMap<String, CommandWord> validCommands;
-/**
- * The constructor for commandwords that sorts the different commands into valid commands and unknown commands
- */
+
+	/**
+	 * The constructor for commandwords that sorts the different commands into
+	 * valid commands and unknown commands
+	 */
 	public CommandWords() {
 		validCommands = new HashMap<>(); //Ny HashMap oprettes der indeholder string som key og commandword som value
 		for (CommandWord command : CommandWord.values()) { // Alle variable i enum commandword gennemløbes
@@ -19,11 +21,14 @@ public class CommandWords {
 			}
 		}
 	}
+
 	/**
-	 * Based on the user input, the method will return a CommandWord object
-	 * if the input is recognized as a valid command.
+	 * Based on the user input, the method will return a CommandWord object if the
+	 * input is recognized as a valid command.
+	 *
 	 * @param commandWord which is a string
-	 * @return Returns a CommandWord object, which is UNKNOWN if the input is not recognized as a known command.
+	 * @return Returns a CommandWord object, which is UNKNOWN if the input is not
+	 * recognized as a known command.
 	 */
 	public CommandWord getCommandWord(String commandWord) {
 		CommandWord command = validCommands.get(commandWord); //får value i hashmappen baseret på den string metoden kaldes med
@@ -36,6 +41,7 @@ public class CommandWords {
 
 	/**
 	 * checks if the input is a known command or not
+	 *
 	 * @param aString
 	 * @return returns true if it is known and false if it isn't
 	 */

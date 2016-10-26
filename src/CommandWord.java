@@ -13,15 +13,18 @@ public enum CommandWord {
 	private String commandString;
 
 	/**
-	 * Constructor for enums. The constructor is automatically run the first time you encounter an enum
-	 * @param a string commandString 
+	 * Constructor for enums. The constructor is automatically run the first time
+	 * you encounter an enum
+	 *
+	 * @param a string commandString
 	 */
 	CommandWord(String commandString) {
 		this.commandString = commandString;
 	}
-	
+
 	/**
 	 * toString returns the enum value as a string
+	 *
 	 * @return a string, that is the enum value.
 	 */
 	@Override
