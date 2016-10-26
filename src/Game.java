@@ -237,7 +237,7 @@ public class Game {
 	}
 
 	/**
-	 * The method processCommand will process the user input and reactes to the
+	 * The method processCommand will process the user input and reacts to the
 	 * specific user input
 	 * @param command is a parameter that needs a command object as an input
 	 */
