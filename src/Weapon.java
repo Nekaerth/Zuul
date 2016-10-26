@@ -130,7 +130,6 @@ public class Weapon implements Item {
 	}
         
 	/**
-         * We override the instance method which is declare in the interface
          * The weaponType method returns the String declared when creating the weapon object
          * @return will return a String equal to what is declared when creating the object
          */
@@ -139,7 +138,6 @@ public class Weapon implements Item {
 	}
         
         /**
-         * We override the instance method which is declare in the interface
          * The getDamage method returns the int value declared when creating the weapon object
          * @return will return an int equal to what is declared when creating the object
          */
