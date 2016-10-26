@@ -73,7 +73,7 @@ public class Player extends Person {
 			Attack attack = getAttack("Stab");
 			attack.setDamage(weapon.getDamage()); //Changes damage of the Stab attack
 		} //If the item is a range weapon
-		else if (weapon.weaponType().equalsIgnoreCase("range")) {
+		else if (weapon.weaponType().equalsIgnoreCase("ranged")) {
 			ArrayList<Attack> attacks = getAttacks();
 			attacks.add(new Attack(Moves.SHOOT, weapon.getDamage())); //Adds a Shoot attack
 		}

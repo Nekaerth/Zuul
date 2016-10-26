@@ -1,6 +1,6 @@
 
 /**
- * This statement import the Hashmap class from the util library.
+ * These statements import the Hashmap and set class from the util library.
  */
 import java.util.HashMap;
 import java.util.Set;
@@ -34,7 +34,6 @@ public class Inventory {
 
 	/**
 	 * This method returns the name of an item
-	 *
 	 * @param name The parameter name is the reference name to the item requested.
 	 * @return An Item object
 	 */
@@ -44,7 +43,6 @@ public class Inventory {
 		} else {
 			throw new IllegalArgumentException();
 		}
-
 	}
 
 	/**
@@ -96,7 +94,6 @@ public class Inventory {
 	/**
 	 * This method allow you to put an item that you are carrying into an
 	 * inventory
-	 *
 	 * @param name The parameter name is the reference name to the object
 	 * @param item The parameter item is the object of the class Item
 	 */

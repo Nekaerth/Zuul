@@ -1,7 +1,7 @@
 /**
  * *******************GAME CLASS*************************************
  * The game class cosists off X instance variable and X instance methods
- * The arraylist is import from the java utility library
+ * The arraylist is imported from the java utility library
  */
 import java.util.ArrayList;
 
@@ -11,7 +11,7 @@ public class Game {
 	private Room currentRoom;
 	private Player player;
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
-	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contain a hidden number
+	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 	private int time;
 
 	/**
@@ -467,6 +467,17 @@ public class Game {
 					} else if (item.isFlashlight()) {
                                             System.out.println("Use it wisely, it won't last very long!");
                                         } 
+                                        else if (item.isSpecial()) {
+                                            if (item.getName().equalsIgnoreCase("boltcutter")) {
+                                                System.out.println("This might be usefull for escaping");
+                                            } else if (item.getName().equalsIgnoreCase("blueprints")) {
+                                                System.out.println("The blueprints could be useful for finding new places to go,");
+                                                System.out.println("just don't wander around for too long");
+                                            }
+                                        }
+                                        else if (item.isKey()) {
+                                            System.out.println("Look for a locked door");
+                                        }
 				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 					System.out.println("OOPS!! It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
