@@ -62,7 +62,7 @@ public class Attack {
 	public void setDamage(int damage) {
 		this.damage = damage;
 	}
-	
+
 	/**
 	 *
 	 * @return the move, which is an enum.

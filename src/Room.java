@@ -19,9 +19,11 @@ public class Room {
 	int number;
 
 	/**
-	 * The constructor of the class Room. The constructor takes 3 parameters:
-	 * A description of the room, a boolean that says whether or not the room contains a number
-	 * and a boolean that says whether or not the room need to create a boss
+	 * The constructor of the class Room. The constructor takes 3 parameters: A
+	 * description of the room, a boolean that says whether or not the room
+	 * contains a number and a boolean that says whether or not the room need to
+	 * create a boss
+	 *
 	 * @param description string
 	 * @param numberRoom boolean
 	 * @param needsBoss boolean
@@ -32,7 +34,7 @@ public class Room {
 		inv = new Inventory(); // Creates a new inventory for each room
 		this.escapeRoom = false;
 		this.numberRoom = numberRoom;
-                this.needsBoss = needsBoss;
+		this.needsBoss = needsBoss;
 		if (numberRoom == true) {
 			number = (int) (Math.random() * 9);
 		}
@@ -50,23 +52,28 @@ public class Room {
 	}
 
 	/**
-	 * This method returns a string of the description of the room and the pre fix "you are"
+	 * This method returns a string of the description of the room and the pre fix
+	 * "you are"
+	 *
 	 * @return a string with the description
 	 */
 	public String getShortDescription() {
 		return "You are " + description;
 	}
+
 	/**
-	* This method returns a string of the description of the room and the pre fix "you are"
-	* the string also contains all the exits out of the room
-	* @return a string with a description and exits
-	*/
+	 * This method returns a string of the description of the room and the pre fix
+	 * "you are" the string also contains all the exits out of the room
+	 *
+	 * @return a string with a description and exits
+	 */
 	public String getLongDescription() {
 		return "You are " + description + "\n" + getExitString(); //Giver en længere beskrivelse af rummet og giver hvilke exits der findes
 	}
 
 	/**
 	 * This method returns a string of all the exits out of the room
+	 *
 	 * @return a string of exits
 	 */
 	public String getExitString() {
@@ -77,18 +84,23 @@ public class Room {
 		}
 		return returnString;
 	}
+
 	/**
 	 * This method returns the room in a given direction that is the parameter
+	 *
 	 * @param direction, a string
 	 * @return a Room in the given direction
 	 */
 	public Room getExit(String direction) {
 		return exits.get(direction);
 	}
+
 	/**
 	 * This method returns the number that is in the room if it is a numberroom,
 	 * else it returns -1.
-	 * @return an int. If the room is not a number room it returns -1. if it is, a random number
+	 *
+	 * @return an int. If the room is not a number room it returns -1. if it is, a
+	 * random number
 	 */
 
 	public int getNumber() {
@@ -122,10 +134,11 @@ public class Room {
 		 * lock to true
 		 */
 	}
+
 	/**
-	* This method locks a room
-	*
-	*/
+	 * This method locks a room
+	 *
+	 */
 	public void LockRoom() {
 		lock = true;
 	}
@@ -157,7 +170,9 @@ public class Room {
 	}
 
 	/**
-	 * This method iniates a bossfight, and is only done if the boss or the player is defeated
+	 * This method iniates a bossfight, and is only done if the boss or the player
+	 * is defeated
+	 *
 	 * @param game. An object of the Game class
 	 * @return returns a boolean of whether or not the player has won.
 	 */
@@ -210,11 +225,12 @@ public class Room {
 			return false; //Returns false because you didn't die.
 		}
 	}
-        public boolean needsBoss() {
-            return needsBoss;
-        }
-        
-        public void setNeedsBoss(boolean needsBoss) {
-            this.needsBoss = needsBoss;
-        }
+
+	public boolean needsBoss() {
+		return needsBoss;
+	}
+
+	public void setNeedsBoss(boolean needsBoss) {
+		this.needsBoss = needsBoss;
+	}
 }
