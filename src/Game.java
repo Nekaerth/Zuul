@@ -590,7 +590,6 @@ public class Game {
 		} catch (IllegalArgumentException ex) {
 			System.out.println("You don't have that item in your inventory");
 		}
-
 	}
 
 	/**
