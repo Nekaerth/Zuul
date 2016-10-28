@@ -94,7 +94,6 @@ public class Game {
 
 	/**
 	 * The getPlayer() is a getter method that will return a player object
-	 *
 	 * @return will return the object player
 	 */
 	public Player getPlayer() {
@@ -103,7 +102,6 @@ public class Game {
 
 	/**
 	 * The getTime() is a getter method to get the integer "time"
-	 *
 	 * @return will return the integer "time"
 	 */
 	public int getTime() {
@@ -114,7 +112,6 @@ public class Game {
 	 * The subtractTime() method is used as a count down timer to keep track of
 	 * how much time the player has left Time is used as a ressource that you
 	 * spend while moving through rooms and looking for items.
-	 *
 	 * @param time is an integer that we subtract from to reduce the time the
 	 * player has left to win the game.
 	 */
@@ -130,7 +127,6 @@ public class Game {
 	/**
 	 * The displayTime() method is a case of the user input and occours when the
 	 * user types "time"
-	 *
 	 * @return will return the time that is left in minutes and seconds
 	 */
 	public String displayTime() {
@@ -142,7 +138,6 @@ public class Game {
 	/**
 	 * The setCellInventory() method will set the cell inventory when the game
 	 * starts
-	 *
 	 * @return will return the cell inventory
 	 */
 	private Inventory setCellInventory() {
@@ -154,7 +149,6 @@ public class Game {
 
 	/**
 	 * This method will set the storage inventory when the game starts
-	 *
 	 * @return will return the storage inventory
 	 */
 	private Inventory setStorageInventory() {
@@ -167,7 +161,6 @@ public class Game {
 
 	/**
 	 * This method will set the dining hall inventory when the game starts
-	 *
 	 * @return will return the dining hall inventory
 	 */
 	private Inventory setDininghallInventory() {
@@ -180,7 +173,6 @@ public class Game {
 
 	/**
 	 * This method will set the yard inventory when the game starts
-	 *
 	 * @return will return the yard inventory
 	 */
 	private Inventory setYardInventory() {
@@ -191,7 +183,6 @@ public class Game {
 
 	/**
 	 * This method will set the office inventory when the game starts
-	 *
 	 * @return will return the office inventory
 	 */
 	private Inventory setOfficeInventory() {
@@ -203,7 +194,6 @@ public class Game {
 
 	/**
 	 * This method will set the hidden rooms inventory when the game starts
-	 *
 	 * @return will return the hidden rooms inventory
 	 */
 	private Inventory setHiddenroomInventory() {
@@ -214,7 +204,6 @@ public class Game {
 
 	/**
 	 * This method will set the boss rooms inventory when the game starts
-	 *
 	 * @return will return the boss rooms inventory
 	 */
 	private Inventory setBossroomInventory() {
@@ -257,7 +246,6 @@ public class Game {
 	/**
 	 * The method processCommand will process the user input and reacts to the
 	 * specific user input
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean processCommand(Command command) {
@@ -334,8 +322,6 @@ public class Game {
 	/**
 	 * The method goRoom is a case of the user input and are used when the user
 	 * types "go" as a command
-	 *
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean goRoom(Command command) {
@@ -406,7 +392,6 @@ public class Game {
 	/**
 	 * The getCorrectCode method returns the hidden code that is found in all
 	 * rooms, the order of the code is determined by the order of the arraylist
-	 *
 	 * @return returns a string with the correct key code
 	 */
 	public String getCorrectCode() {
@@ -422,7 +407,6 @@ public class Game {
 	/**
 	 * The quit method is a case of the user input and is used when the user types
 	 * "quit" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean quit(Command command) {
@@ -437,7 +421,6 @@ public class Game {
 	/**
 	 * The searchRoom method is a case of the user input and is used when the user
 	 * types "search" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void searchRoom(Command command) {
@@ -460,7 +443,6 @@ public class Game {
 	/**
 	 * The pickUp method is a case of the user input and is used when the user
 	 * types "pickup" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void pickUp(Command command) {
@@ -535,7 +517,6 @@ public class Game {
 	/**
 	 * The drop method is a case of the user input and is used when the user types
 	 * "drop" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void drop(Command command) {
@@ -559,7 +540,6 @@ public class Game {
 	/**
 	 * The use method is a case of the user input and is used when the user types
 	 * "use" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void use(Command command) {
@@ -595,7 +575,6 @@ public class Game {
 	/**
 	 * The useKey method is a case when the user types "use" and is used when the
 	 * user types "use key" as a command
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param key the key is a item you must have in yor inventory to use the
 	 * command "use key" the key is used as an input to this method
@@ -621,7 +600,6 @@ public class Game {
 	/**
 	 * The useFlashlight method is a case when the user types "use" and is used
 	 * when the user types "use flashlight"
-	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param flashlight is a item you must have in your inventory to use the
 	 * command "use flashlight"
@@ -650,7 +628,6 @@ public class Game {
 	/**
 	 * The useBlueprints method is a case when the user types "use". This method
 	 * is a case of the "use" input from the user
-	 *
 	 * @param command the parameter command is what the method requires when it is
 	 * called
 	 */
@@ -668,7 +645,6 @@ public class Game {
 	/**
 	 * The useBoltcutter method is a case when the user types "use". This method
 	 * is a case of the "use" input from the user
-	 *
 	 * @param command the parameter command is what the method requires when it is
 	 * called
 	 */
