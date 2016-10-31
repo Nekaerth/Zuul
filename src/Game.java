@@ -30,14 +30,7 @@ public class Game {
 	 */
 	private void createRooms() //Called from the constructor
 	{
-
 		// initializes the rooms available
-		player = new Player(cell, 100, 1200, 3, 20); // creates a new object of the player class
-		setUpPlayer();
-
-		bosses[0] = new Boss(bossroom, 100, "boss 1");
-		setUpBoss1();
-
 		cell = new Room("in your own cell.", false, false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false, true);
 		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true, false);
@@ -80,6 +73,12 @@ public class Game {
 		storage.LockRoom();
 
 		parkinglot.setEscapeRoom();
+
+		player = new Player(cell, 100, 1200, 3, 20); // creates a new object of the player class
+		setUpPlayer();
+
+		bosses[0] = new Boss(bossroom, 100, "boss 1");
+		setUpBoss1();
 	}
 
 	/**
