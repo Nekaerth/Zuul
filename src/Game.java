@@ -35,6 +35,9 @@ public class Game {
 		player = new Player(cell, 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 
+		boss1 = new Boss(bossroom, 100, "boss 1");
+		setUpBoss1();
+
 		cell = new Room("in your own cell.", false, false); //The constructor for room is called with parameters String, boolean
 		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false, true);
 		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true, false);
@@ -46,19 +49,18 @@ public class Game {
 		bossroom = new Room("in the bossroom", false, false);
 
 		cell.setExit("Cellhall", cellhall); // Calls the method in room called set exit, taking a string and room object as an argument.
-		cell.inv = setCellInventory(); // calls the method setCellInventory()
+		setCellInventory(); // calls the method setCellInventory()
 		//to declare what items that are in the cell when the game begins
 
 		hiddenroom.setExit("Bossroom", bossroom);
 		hiddenroom.setExit("Cell", cell);
-		hiddenroom.inv = setHiddenroomInventory();
+		setHiddenroomInventory();
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
-		boss1 = new Boss(bossroom, 100, "boss 1");
-		setUpBoss1();
+		setBossroomInventory();
 
 		dininghall.setExit("Cellhall", cellhall);
-		dininghall.inv = setDininghallInventory();
+		setDininghallInventory();
 
 		cellhall.setExit("Dininghall", dininghall);
 		cellhall.setExit("Yard", yard);
@@ -67,20 +69,17 @@ public class Game {
 
 		office.setExit("Storage", storage);
 		office.setExit("Cellhall", cellhall);
-		office.inv = setOfficeInventory();
+		setOfficeInventory();
 		office.LockRoom();
 
 		yard.setExit("Cellhall", cellhall);
-		yard.inv = setYardInventory();
+		setYardInventory();
 
 		storage.setExit("Office", office);
-		storage.inv = setStorageInventory();
+		setStorageInventory();
 		storage.LockRoom();
 
 		parkinglot.setEscapeRoom();
-
-		bossroom.setExit("Hiddenroom", hiddenroom);
-		bossroom.inv = setBossroomInventory();
 	}
 
 	/**
@@ -128,87 +127,66 @@ public class Game {
 	}
 
 	/**
-	 * The setCellInventory() method will set the cell inventory when the game
+	 * The setCellInventory() method will set the cell inventory when the game.
 	 * starts
-	 *
-	 * @return will return the cell inventory
 	 */
-	private Inventory setCellInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, "melee"));
-		inv.putItem("Stick", new Misc(false, "Stick", false));
-		return inv;
+	private void setCellInventory() {
+		Inventory inventory = cell.getInventory();
+		inventory.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, "melee"));
+		inventory.putItem("Stick", new Misc(false, "Stick", false));
 	}
 
 	/**
-	 * This method will set the storage inventory when the game starts
-	 *
-	 * @return will return the storage inventory
+	 * This method will set the hidden rooms inventory when the game starts.
 	 */
-	private Inventory setStorageInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
-		inv.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, "ranged"));
-		inv.putItem("Boxes", new Misc(false, "Box", false));
-		return inv;
-	}
-
-	/**
-	 * This method will set the dining hall inventory when the game starts
-	 *
-	 * @return will return the dining hall inventory
-	 */
-	private Inventory setDininghallInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Key", new Key(true, "Key", true, 5, 1));
-		inv.putItem("Plate", new Misc(false, "Plate", false));
-		inv.putItem("Fork", new Weapon(true, "Fork", true, 1, 1, 12, "melee"));
-		return inv;
-	}
-
-	/**
-	 * This method will set the yard inventory when the game starts
-	 *
-	 * @return will return the yard inventory
-	 */
-	private Inventory setYardInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, "melee"));
-		return inv;
-	}
-
-	/**
-	 * This method will set the office inventory when the game starts
-	 *
-	 * @return will return the office inventory
-	 */
-	private Inventory setOfficeInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
-		inv.putItem("Papers", new Misc(false, "Papers", false));
-		return inv;
-	}
-
-	/**
-	 * This method will set the hidden rooms inventory when the game starts
-	 *
-	 * @return will return the hidden rooms inventory
-	 */
-	private Inventory setHiddenroomInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Flashlight", new Flashlight(true, "Flashlight", true, 5, 1, 5));
-		return inv;
+	private void setHiddenroomInventory() {
+		Inventory inventory = hiddenroom.getInventory();
+		inventory.putItem("Flashlight", new Flashlight(true, "Flashlight", true, 5, 1, 5));
 	}
 
 	/**
 	 * This method will set the boss rooms inventory when the game starts
-	 *
-	 * @return will return the boss rooms inventory
 	 */
-	private Inventory setBossroomInventory() {
-		Inventory inv = new Inventory();
-		inv.putItem("Key", new Key(true, "Key", false, 5, 1));
-		return inv;
+	private void setBossroomInventory() {
+		Inventory inventory = bossroom.getInventory();
+		inventory.putItem("Key", new Key(true, "Key", false, 5, 1));
+	}
+
+	/**
+	 * This method will set the dining hall inventory when the game starts.
+	 */
+	private void setDininghallInventory() {
+		Inventory inventory = dininghall.getInventory();
+		inventory.putItem("Key", new Key(true, "Key", true, 5, 1));
+		inventory.putItem("Plate", new Misc(false, "Plate", false));
+		inventory.putItem("Fork", new Weapon(true, "Fork", true, 1, 1, 12, "melee"));
+	}
+
+	/**
+	 * This method will set the office inventory when the game starts.
+	 */
+	private void setOfficeInventory() {
+		Inventory inventory = office.getInventory();
+		inventory.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
+		inventory.putItem("Papers", new Misc(false, "Papers", false));
+	}
+
+	/**
+	 * This method will set the yard inventory when the game starts.
+	 */
+	private void setYardInventory() {
+		Inventory inventory = yard.getInventory();
+		inventory.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, "melee"));
+	}
+
+	/**
+	 * This method will set the storage inventory when the game starts.
+	 */
+	private void setStorageInventory() {
+		Inventory inventory = storage.getInventory();
+		inventory.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
+		inventory.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, "ranged"));
+		inventory.putItem("Boxes", new Misc(false, "Box", false));
 	}
 
 	/**
@@ -398,9 +376,9 @@ public class Game {
 	 */
 	public String getCorrectCode() {
 		StringBuilder correctCode = new StringBuilder();
-		for (Room r : roomNumber) {
-			if (r.isNumberRoom()) {
-				correctCode.append(r.getNumber());
+		for (Room room : roomNumber) {
+			if (room.isNumberRoom()) {
+				correctCode.append(room.getNumber());
 			}
 		}
 		return correctCode.toString();
@@ -430,9 +408,9 @@ public class Game {
 	private void searchRoom(Command command) {
 		if (command.hasSecondWord()) {
 			System.out.println("Search what?");
-		} else if (!player.getRoom().inv.isEmpty()) {  //If there exist any items in inv for currentRoom, prints this.       
+		} else if (!player.getRoom().getInventory().isEmpty()) {  //If there exist any items in inv for currentRoom, prints this.       
 			System.out.println("You search the room and find something interesting.");
-			String items = player.getRoom().inv.getAllItems();
+			String items = player.getRoom().getInventory().getAllItems();
 			System.out.println("You find the following items.");
 			System.out.println(items);
 
@@ -456,12 +434,12 @@ public class Game {
 			System.out.println("Pick up what?");
 		} else {
 			try {
-				Item item = player.getRoom().inv.getItem(command.getSecondWord());
+				Item item = player.getRoom().getInventory().getItem(command.getSecondWord());
 				if (item.isPickup() == true
 								&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
 								&& player.getInventory().size() + 1 <= player.getCapacity()) {
 					player.getInventory().putItem(command.getSecondWord(), item);
-					player.getRoom().inv.removeItem(command.getSecondWord());
+					player.getRoom().getInventory().removeItem(command.getSecondWord());
 
 					System.out.println("You picked up " + item.getName());
 					if (null != item.getType()) {
@@ -540,7 +518,7 @@ public class Game {
 				if (item.getType() == ItemType.WEAPON) {
 					player.droppedWeapon(item);
 				}
-				player.getRoom().inv.putItem(command.getSecondWord(), item);
+				player.getRoom().getInventory().putItem(command.getSecondWord(), item);
 				player.getInventory().removeItem(command.getSecondWord());
 				System.out.println("You drop " + item.getName());
 			} catch (IllegalArgumentException ex) {

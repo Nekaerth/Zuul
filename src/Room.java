@@ -11,9 +11,9 @@ import java.util.Scanner;
  */
 public class Room {
 
-	public Inventory inv;
 	private final String description;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
+	private final Inventory inventory = new Inventory();
 	private boolean numberRoom, escapeRoom, lock, needsBoss = false;
 	public Boss boss = null;
 	int number;
@@ -31,13 +31,20 @@ public class Room {
 	public Room(String description, boolean numberRoom, boolean needsBoss) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
-		inv = new Inventory(); // Creates a new inventory for each room
 		this.escapeRoom = false;
 		this.numberRoom = numberRoom;
 		this.needsBoss = needsBoss;
 		if (numberRoom == true) {
 			number = (int) (Math.random() * 9);
 		}
+	}
+
+	/**
+	 *
+	 * @return the rooms inventory.
+	 */
+	public Inventory getInventory() {
+		return this.inventory;
 	}
 
 	/**
@@ -217,7 +224,7 @@ public class Room {
 			//If the boss contains a key.
 			if (boss.getInventory().containItem("Key")) {
 				Item item = boss.getInventory().getItem("Key"); //Gets Key from boss inventory.
-				this.inv.putItem("Key", item); //Drops the key in the room.
+				this.inventory.putItem("Key", item); //Drops the key in the room.
 			}
 
 			boss = null; //Removes the boss.
