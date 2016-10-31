@@ -10,7 +10,7 @@ public class Game {
 
 	private final Parser parser;
 	private Player player;
-	private Boss boss1, boss2;
+	private final Boss[] bosses = new Boss[2];
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
@@ -35,7 +35,7 @@ public class Game {
 		player = new Player(cell, 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 
-		boss1 = new Boss(bossroom, 100, "boss 1");
+		bosses[0] = new Boss(bossroom, 100, "boss 1");
 		setUpBoss1();
 
 		cell = new Room("in your own cell.", false, false); //The constructor for room is called with parameters String, boolean
@@ -107,18 +107,18 @@ public class Game {
 	 * inventory.
 	 */
 	private void setUpBoss1() {
-		ArrayList<Move> moves = this.boss1.getMoves();
+		ArrayList<Move> moves = this.bosses[0].getMoves();
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-		this.boss1.getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
+		this.bosses[0].getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
 	}
 
 	/**
 	 * Sets up the second boss, by adding all moves.
 	 */
 	private void setUpBoss2() {
-		ArrayList<Move> moves = this.boss2.getMoves();
+		ArrayList<Move> moves = this.bosses[1].getMoves();
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
@@ -346,19 +346,19 @@ public class Game {
 				//Should be changed to more generic reuseable code
 				if (nextRoom == storage && cellhall.needsBoss() == true) {
 
-					boss2 = new Boss(cellhall, 100, "boss 2");
+					bosses[1] = new Boss(cellhall, 100, "boss 2");
 					setUpBoss2();
 					cellhall.setNeedsBoss(false);
 				}
 
-				if (player.getRoom() == boss2.getRoom() && player.getRoom().needsBoss() == false) {
-					System.out.println("You encounter a prison guard");
-					System.out.println("Be prepared or you will die!");
-					finish = player.getRoom().bossFight(this);
-
-				} else {
-					System.out.println(player.getRoom().getShortDescription()); //Prints descriptions and exits of the new room
+				for (Boss boss : bosses) {
+					if (player.getRoom() == boss.getRoom() && player.getRoom().needsBoss() == false) {
+						System.out.println("You encounter a prison guard");
+						System.out.println("Be prepared or you will die!");
+						finish = boss.bossFight(player);
+					}
 				}
+				System.out.println(player.getRoom().getShortDescription()); //Prints descriptions and exits of the new room
 			}
 
 		} else if (nextRoom.isLocked() == true) {
@@ -410,7 +410,7 @@ public class Game {
 			System.out.println("Search what?");
 		} else if (!player.getRoom().getInventory().isEmpty()) {  //If there exist any items in inv for currentRoom, prints this.       
 			System.out.println("You search the room and find something interesting.");
-			String items = player.getRoom().getInventory().getAllItems();
+			String items = player.getRoom().getInventory().getStringOfAllItems();
 			System.out.println("You find the following items.");
 			System.out.println(items);
 
@@ -692,7 +692,7 @@ public class Game {
 	 */
 	private void showInventory() { //Shows players current inventory containing; items, weight and capacity.
 		System.out.println("Your inventory contains the following:");
-		System.out.println(player.getInventory().getAllItems());
+		System.out.println(player.getInventory().getStringOfAllItems());
 		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 		System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
 	}
