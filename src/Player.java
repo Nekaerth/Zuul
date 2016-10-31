@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class Player extends Person {
 
 	private int time;
-	private int capacity; //Is the maximum amount of items the player must hold.
-	private int weightCapacity; //Is the maximum weight that the players items must
+	private final int capacity; //Is the maximum amount of items the player must hold.
+	private final int weightCapacity; //Is the maximum weight that the players items must
 
 	/**
 	 * This contructor creates a Player-object. It represent the player, which
@@ -22,13 +22,12 @@ public class Player extends Person {
 	 * items and maximum weight capacity.
 	 *
 	 * @param hitpoint Sets the players hitpoint.
-	 * @param moves Sets the players moves.
-	 * @param inventory Sets the players inventory.
+	 * @param time
 	 * @param capacity Sets the players maximum item capacity.
 	 * @param weightCapacity Sets the players maximum item weight capacity.
 	 */
-	public Player(int hitpoint, ArrayList<Move> moves, Inventory inventory, int time, int capacity, int weightCapacity) {
-		super(hitpoint, moves, inventory);
+	public Player(int hitpoint, int time, int capacity, int weightCapacity) {
+		super(hitpoint);
 		this.time = time;
 		this.capacity = capacity;
 		this.weightCapacity = weightCapacity;
@@ -88,17 +87,6 @@ public class Player extends Person {
 	}
 
 	/**
-	 * Adds four moves to player move list.
-	 */
-	public void setUpPlayer() {
-		ArrayList<Move> moves = getMoves();
-		moves.add(new Move(Attack.STAB, 10));
-		moves.add(new Move(Attack.DUCK, 0));
-		moves.add(new Move(Attack.JUMP, 0));
-		moves.add(new Move(Attack.SIDESTEP, 0));
-	}
-
-	/**
 	 * Takes an item name as argument. If the item is a melee weapon, the damage
 	 * of the Stab move is changed. If the item is a range weapon, then a Shoot
 	 * move is added to player moves.
@@ -113,8 +101,7 @@ public class Player extends Person {
 			move.setDamage(weapon.getDamage()); //Changes damage of the Stab move
 		} //If the item is a range weapon
 		else if (weapon.weaponType().equalsIgnoreCase("ranged")) {
-			ArrayList<Move> moves = getMoves();
-			moves.add(new Move(Attack.SHOOT, weapon.getDamage())); //Adds a Shoot move
+			addMove(new Move(Attack.SHOOT, weapon.getDamage())); //Adds a Shoot move
 		}
 	}
 
@@ -126,9 +113,8 @@ public class Player extends Person {
 		Weapon weapon = (Weapon) item;
 		//If the item is a range weapon
 		if (weapon.weaponType().equalsIgnoreCase("range")) {
-			ArrayList<Move> attacks = getMoves();
 			Move move = getMove("Shoot"); //Removes the Shoot move
-			attacks.remove(move);
+			removeMove(move);
 		} //If the item is a melee weapon
 		else if (weapon.weaponType().equalsIgnoreCase("melee")) {
 			Move move = getMove("Stab");

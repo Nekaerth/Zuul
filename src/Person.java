@@ -11,21 +11,17 @@ import java.util.ArrayList;
 public class Person {
 
 	private int hitpoint; //How much hitpoints the person has.
-	private ArrayList<Move> moves; //ArrayList of all moves, that are available to the person.
-	private Inventory inventory; //An Inventory that holds the persons items
+	private final ArrayList<Move> moves = new ArrayList<>(); //ArrayList of all moves, that are available to the person.
+	private final Inventory inventory = new Inventory(); //An Inventory that holds the persons items
 
 	/**
 	 * This contructor can creates a Person-object.It represent a person, which
 	 * includes hitpoints, available attacks and available items.
 	 *
 	 * @param hitpoint Sets the persons hitpoint.
-	 * @param moves Sets the persons moves.
-	 * @param inventory Sets the persons inventory.
 	 */
-	public Person(int hitpoint, ArrayList<Move> moves, Inventory inventory) {
+	public Person(int hitpoint) {
 		this.hitpoint = hitpoint;
-		this.moves = moves;
-		this.inventory = inventory;
 	}
 
 	/**
@@ -58,10 +54,18 @@ public class Person {
 
 	/**
 	 *
-	 * @return the inventory of the person.
+	 * @param move adds a move to moves.
 	 */
-	public Inventory getInventory() {
-		return inventory;
+	public void addMove(Move move) {
+		moves.add(move);
+	}
+
+	/**
+	 *
+	 * @param move removes the given move from moves.
+	 */
+	public void removeMove(Move move) {
+		moves.remove(move);
 	}
 
 	/**
@@ -90,5 +94,17 @@ public class Person {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 *
+	 * @return the inventory of the person.
+	 */
+	public Inventory getInventory() {
+		return inventory;
+	}
+	
+	public void addItem(String itemName, Item item) {
+		inventory.putItem(itemName, item);
 	}
 }
