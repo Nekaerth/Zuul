@@ -27,8 +27,20 @@ public class Person {
 		this.hitpoint = hitpoint;
 	}
 
+	/**
+	 *
+	 * @return the room which the person currently is in.
+	 */
 	public Room getRoom() {
 		return this.room;
+	}
+
+	/**
+	 *
+	 * @param room which room to change current room to.
+	 */
+	public void setRoom(Room room) {
+		this.room = room;
 	}
 
 	/**
