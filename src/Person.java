@@ -3,15 +3,15 @@ import java.util.ArrayList;
 
 /**
  * This class represent a person. It is used as an abstract class. The person
- * class attributes includes hitpoint, attacks and inventory. Among its methods
- * are getAttackString() and getAttack().
+ * class attributes includes hitpoint, moves and inventory. Among its methods
+ * are getMoveString() and getMove().
  *
  * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Person {
 
 	private int hitpoint; //How much hitpoints the person has.
-	private ArrayList<Attack> attacks; //ArrayList of all attacks, that are available to the person.
+	private ArrayList<Move> moves; //ArrayList of all moves, that are available to the person.
 	private Inventory inventory; //An Inventory that holds the persons items
 
 	/**
@@ -19,12 +19,12 @@ public class Person {
 	 * includes hitpoints, available attacks and available items.
 	 *
 	 * @param hitpoint Sets the persons hitpoint.
-	 * @param attacks Sets the persons attacks.
+	 * @param moves Sets the persons moves.
 	 * @param inventory Sets the persons inventory.
 	 */
-	public Person(int hitpoint, ArrayList<Attack> attacks, Inventory inventory) {
+	public Person(int hitpoint, ArrayList<Move> moves, Inventory inventory) {
 		this.hitpoint = hitpoint;
-		this.attacks = attacks;
+		this.moves = moves;
 		this.inventory = inventory;
 	}
 
@@ -50,10 +50,10 @@ public class Person {
 
 	/**
 	 *
-	 * @return a ArrayList of all avialble attacks.
+	 * @return a ArrayList of all avialble moves.
 	 */
-	public ArrayList<Attack> getAttacks() {
-		return attacks;
+	public ArrayList<Move> getMoves() {
+		return moves;
 	}
 
 	/**
@@ -66,27 +66,27 @@ public class Person {
 
 	/**
 	 *
-	 * @return a String which contains a list with all available attacks.
+	 * @return a String which contains a list with all available moves.
 	 */
-	public String getAttackString() {
+	public String getMoveString() {
 		String list = "";
 		//Goes through all attacks and adds their name to the String
-		for (Attack attack : attacks) {
-			list += attack.getName() + ", ";
+		for (Move move : moves) {
+			list += move.getName() + ", ";
 		}
 		return list.substring(0, list.length() - 2);
 	}
 
 	/**
 	 *
-	 * @param attackName name of the requested attack.
+	 * @param moveName name of the requested move.
 	 * @return the requested attack.
 	 */
-	public Attack getAttack(String attackName) {
-		//Goes through all attacks and returns the requested attack
-		for (Attack attack : attacks) {
-			if (attackName.equalsIgnoreCase(attack.getName())) {
-				return attack;
+	public Move getMove(String moveName) {
+		//Goes through all moves and returns the requested move
+		for (Move move : moves) {
+			if (moveName.equalsIgnoreCase(move.getName())) {
+				return move;
 			}
 		}
 		return null;

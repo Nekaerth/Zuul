@@ -102,7 +102,6 @@ public class Room {
 	 * @return an int. If the room is not a number room it returns -1. if it is, a
 	 * random number
 	 */
-
 	public int getNumber() {
 		if (numberRoom == true) {
 			return number;
@@ -179,32 +178,32 @@ public class Room {
 	public boolean bossFight(Game game) {
 		//This loop runs until the player or the boss has no hipoints left. In each iteration the boss attacks once and the player defence once.
 		while (game.getPlayer().getHitpoint() > 0 && boss.getHitpoint() > 0) {
-			Attack currentBossAttack = boss.getRandomAttack(); //This chooses what attack the boss uses at random.
-			Attack currentPlayerAttack = null; //Creates variable for containing what attack the player uses.
-			System.out.println("The prison guard uses " + currentBossAttack.getName() + "!");
+			Move currentBossMove = boss.getRandomMove(); //This chooses what move the boss uses at random.
+			Move currentPlayerMove = null; //Creates variable for containing what move the player uses.
+			System.out.println("The prison guard uses " + currentBossMove.getName() + "!");
 
-			//Within this loop the player chooses a counter attack. This loop makes sure that the input is valid.
+			//Within this loop the player chooses a counter move. This loop makes sure that the input is valid.
 			while (true) {
-				System.out.println("Choose a move: " + game.getPlayer().getAttackString()); //Prints all the available attacks the player can do.
+				System.out.println("Choose a move: " + game.getPlayer().getMoveString()); //Prints all the available moves the player can do.
 				System.out.print("> ");
 				Scanner scanner = new Scanner(System.in); //Creates new Scanner object.
 				String input = scanner.nextLine(); //Takes user input.
-				currentPlayerAttack = game.getPlayer().getAttack(input); //Checks if the user input is a valid attack and saves the corresponding attack in currentPlayerAttack.
+				currentPlayerMove = game.getPlayer().getMove(input); //Checks if the user input is a valid move and saves the corresponding move in currentPlayerMove.
 
-				//Breaks out of the loop if was a valid attack.
-				if (currentPlayerAttack != null) {
+				//Breaks out of the loop if was a valid move.
+				if (currentPlayerMove != null) {
 					break;
 				}
 				System.out.println("Move does not exits. Make sure to write a correct move.");
 			}
 			game.subtractTime(5); //Subtracts 5 seconds for each move.
-			//If the chosen attack was a counter attack to the boss attack, the boss loses hitpoint equal to the player attack damage. Else the player loses hitpoints equal to the boss attack damage.
-			if (currentBossAttack.getCounterMove() == currentPlayerAttack.getMove()) { //Checks if the player attack is a counter attack to the boss attack.
-				boss.subtractHitpoint(currentPlayerAttack.getDamage()); //Subtracts hitpoints from the boss.
-				System.out.println("The prison guard loses " + currentPlayerAttack.getDamage() + " hitpoints. He has " + boss.getHitpoint() + " hitpoints left."); //Prints out how much damage dealt and how much hitpoints the boss have left
+			//If the chosen move was a counter move to the boss move, the boss loses hitpoint equal to the player move damage. Else the player loses hitpoints equal to the boss move damage.
+			if (currentBossMove.getCounterAttack() == currentPlayerMove.getAttack()) { //Checks if the player attack is a counter attack to the boss attack.
+				boss.subtractHitpoint(currentPlayerMove.getDamage()); //Subtracts hitpoints from the boss.
+				System.out.println("The prison guard loses " + currentPlayerMove.getDamage() + " hitpoints. He has " + boss.getHitpoint() + " hitpoints left."); //Prints out how much damage dealt and how much hitpoints the boss have left
 			} else {
-				game.getPlayer().subtractHitpoint(currentBossAttack.getDamage()); //Subtracts hitpoints from the player.
-				System.out.println("You lose " + currentBossAttack.getDamage() + " hitpoints. You have " + game.getPlayer().getHitpoint() + " hitpoints left."); //Prints out how much damage dealt and how much hitpoints the player has left.
+				game.getPlayer().subtractHitpoint(currentBossMove.getDamage()); //Subtracts hitpoints from the player.
+				System.out.println("You lose " + currentBossMove.getDamage() + " hitpoints. You have " + game.getPlayer().getHitpoint() + " hitpoints left."); //Prints out how much damage dealt and how much hitpoints the player has left.
 			}
 		}
 		//If the player loses all hitpoints.

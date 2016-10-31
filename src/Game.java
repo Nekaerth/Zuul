@@ -462,7 +462,7 @@ public class Game {
 					if (null != item.getType())
 						switch (item.getType()) {
 						case WEAPON:
-							player.changePlayerAttack(item);
+							player.changePlayerMove(item);
 							if (item.getName().equalsIgnoreCase("stone")) {
 								System.out.println("Your melee attack increases by 1");
 							} else if (item.getName().equalsIgnoreCase("fork")) {

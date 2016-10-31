@@ -3,7 +3,7 @@
  *
  * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
-public class Zuul {
+public class Start {
 
 	/**
 	 * @param args the command line arguments

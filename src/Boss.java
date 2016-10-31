@@ -5,7 +5,7 @@ import java.util.ArrayList;
  * This class represent a boss. It extends the Person class to adobt the
  * hitpoints, available attacks and an inventory. Notice it does not include the
  * position of the boss. The boss class has a name variable. It also has method
- * for returning a random attack.
+ * for returning a random move.
  *
  * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
@@ -18,12 +18,12 @@ public class Boss extends Person {
 	 * includes hitpoints, available attacks, available items and a name.
 	 *
 	 * @param hitpoint Sets the boss's hitpoint.
-	 * @param attacks Sets the boss's attacks.
+	 * @param moves Sets the boss's moves.
 	 * @param inventory Sets the boss's Inventory.
 	 * @param name Sets the name of the boss.
 	 */
-	public Boss(int hitpoint, ArrayList<Attack> attacks, Inventory inventory, String name) {
-		super(hitpoint, attacks, inventory);
+	public Boss(int hitpoint, ArrayList<Move> moves, Inventory inventory, String name) {
+		super(hitpoint, moves, inventory);
 		this.name = name;
 	}
 
@@ -36,42 +36,42 @@ public class Boss extends Person {
 	}
 
 	/**
-	 * Sets up the first boss, by adding all attacks and adding all items to his
+	 * Sets up the first boss, by adding all moves and adding all items to his
 	 * inventory.
 	 */
 	public void setUpPrisonGuard() {
-		ArrayList<Attack> attacks = getAttacks();
-		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 10));
-		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 10));
-		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 10));
+		ArrayList<Move> moves = getMoves();
+		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
+		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
+		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
 		getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
 	}
 
 	/**
-	 * Sets up the second boss, by adding all attacks.
+	 * Sets up the second boss, by adding all moves.
 	 */
 	public void setUpPrisonGuard2() {
-		ArrayList<Attack> attacks = getAttacks();
-		attacks.add(new Attack(Moves.LASH, Moves.JUMP, 15));
-		attacks.add(new Attack(Moves.CHARGE, Moves.SIDESTEP, 15));
-		attacks.add(new Attack(Moves.PUNCH, Moves.STAB, 15));
-		attacks.add(new Attack(Moves.SHOOT, Moves.DUCK, 15));
-		attacks.add(new Attack(Moves.LAUGH, Moves.SHOOT, 5));
+		ArrayList<Move> moves = getMoves();
+		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
+		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
+		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
+		moves.add(new Move(Attack.SHOOT, Attack.DUCK, 15));
+		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
 	}
 
 	/**
-	 * Returns an attack at random. It is be used at boss fight.
+	 * Returns an move at random. It is be used at boss fight.
 	 *
-	 * @return An attack at random.
+	 * @return An move at random.
 	 */
-	public Attack getRandomAttack() {
-		int randomNumber = (int) (getAttacks().size() * Math.random()); //Creates a random number between 0 and x, where x is the number of available attacks
+	public Move getRandomMove() {
+		int randomNumber = (int) (getMoves().size() * Math.random()); //Creates a random number between 0 and x, where x is the number of available moves
 		int count = 0;
-		//Goes through all attacks
-		for (Attack attack : getAttacks()) {
-			//If randomNumber is equal to the current attack index
+		//Goes through all moves
+		for (Move move : getMoves()) {
+			//If randomNumber is equal to the current move index
 			if (randomNumber == count) {
-				return attack; //Return current attack
+				return move; //Return current move
 			}
 			count++;
 		}
