@@ -196,7 +196,7 @@ public class Room {
 				}
 				System.out.println("Move does not exits. Make sure to write a correct move.");
 			}
-			game.subtractTime(5); //Subtracts 5 seconds for each move.
+			game.getPlayer().subtractTime(5); //Subtracts 5 seconds for each move.
 			//If the chosen move was a counter move to the boss move, the boss loses hitpoint equal to the player move damage. Else the player loses hitpoints equal to the boss move damage.
 			if (currentBossMove.getCounterAttack() == currentPlayerMove.getAttack()) { //Checks if the player attack is a counter attack to the boss attack.
 				boss.subtractHitpoint(currentPlayerMove.getDamage()); //Subtracts hitpoints from the boss.

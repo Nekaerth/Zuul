@@ -18,12 +18,10 @@ public class Boss extends Person {
 	 * includes hitpoints, available attacks, available items and a name.
 	 *
 	 * @param hitpoint Sets the boss's hitpoint.
-	 * @param moves Sets the boss's moves.
-	 * @param inventory Sets the boss's Inventory.
 	 * @param name Sets the name of the boss.
 	 */
-	public Boss(int hitpoint, ArrayList<Move> moves, Inventory inventory, String name) {
-		super(hitpoint, moves, inventory);
+	public Boss(int hitpoint, String name) {
+		super(hitpoint);
 		this.name = name;
 	}
 
@@ -33,30 +31,6 @@ public class Boss extends Person {
 	 */
 	public String getName() {
 		return this.name;
-	}
-
-	/**
-	 * Sets up the first boss, by adding all moves and adding all items to his
-	 * inventory.
-	 */
-	public void setUpPrisonGuard() {
-		ArrayList<Move> moves = getMoves();
-		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
-		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
-		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-		getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
-	}
-
-	/**
-	 * Sets up the second boss, by adding all moves.
-	 */
-	public void setUpPrisonGuard2() {
-		ArrayList<Move> moves = getMoves();
-		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
-		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
-		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
-		moves.add(new Move(Attack.SHOOT, Attack.DUCK, 15));
-		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
 	}
 
 	/**
