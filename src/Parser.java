@@ -4,7 +4,7 @@ import java.util.Scanner;
  * The Parser class is used to get input from the user, and turning these inputs
  * into objects of Command or String's.
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
+ * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Parser {
 

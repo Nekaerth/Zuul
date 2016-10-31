@@ -5,7 +5,7 @@
  * it is and one to tell what attack can counter the move. Lastly it contains an
  * int attribute that tells how much damage the attack does.
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
+ * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Move {
 

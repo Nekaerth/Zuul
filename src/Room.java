@@ -7,7 +7,7 @@ import java.util.Scanner;
  * The Room class is used to create rooms and methods that can describe the
  * rooms. The class consists of X instance variable and X instance methods
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
+ * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Room {
 

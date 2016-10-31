@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * position of the boss. The boss class has a name variable. It also has method
  * for returning a random move.
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
+ * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Boss extends Person {
 

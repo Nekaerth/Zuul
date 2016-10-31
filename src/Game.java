@@ -251,7 +251,7 @@ public class Game {
 	private boolean processCommand(Command command) {
 		boolean wantToQuit = false;
 
-		CommandWord commandWord = command.getCommandWord(); //Får command ordet og gemmer det i objektet commandword ud fra objektet command
+		CommandWord commandWord = command.getCommandWord(); //Gets the command word and saves as in the object commandWord
 
 		if (commandWord == CommandWord.UNKNOWN) { //Prints this if commandWord isn't known
 			System.out.println("I don't know what you mean...");
@@ -303,7 +303,7 @@ public class Game {
 
 		}
 		System.out.println(currentRoom.getExitString());
-		return wantToQuit; //return boolean, som under go og help commanden ikke ændres fra false
+		return wantToQuit; //returns boolean for 'go' and 'help' commands that doesnt change from false
 	}
 
 	/**
@@ -326,16 +326,16 @@ public class Game {
 	 */
 	private boolean goRoom(Command command) {
 		boolean finish = false;
-		if (!command.hasSecondWord()) { //Tjekker om der er en retning
+		if (!command.hasSecondWord()) { //Checks if there is a direction
 			System.out.println("Go where?");
 			return finish;
 		}
 
-		String direction = command.getSecondWord(); //Gemmer det som en string
+		String direction = command.getSecondWord(); //Saves it as a string
 
-		Room nextRoom = currentRoom.getExit(direction); //Finder det næste room i hashmappen i Room og angiver denne som nextRoom
+		Room nextRoom = currentRoom.getExit(direction); //Finds the next room in the hashmap room and sets this as NextRoom
 
-		if (nextRoom == null) { //Hvis der ikke er noget room den vej / Hashmappen ikke indeholder nogen value for keyen
+		if (nextRoom == null) { //Prints this if there is no room that direction / the hashmap doesnt contain the value of the key
 			System.out.println("There is no door!");
 		} else if (!nextRoom.isLocked()) {
 
@@ -363,7 +363,7 @@ public class Game {
 				}
 
 			} else if (nextRoom.getEscapeRoom() == false) {
-				currentRoom = nextRoom; //Skifter rum hvis der er et andet rum ud fra den command brugeren gav
+				currentRoom = nextRoom; //Changes nextRoom you go to, to currentRoom.
 				//Should be changed to more generic reuseable code
 				if (nextRoom == storage && cellhall.needsBoss() == true) {
 
@@ -378,7 +378,7 @@ public class Game {
 					finish = currentRoom.bossFight(this);
 
 				} else {
-					System.out.println(currentRoom.getShortDescription()); //Udskriv beskrivelse og exits af det nye rum
+					System.out.println(currentRoom.getShortDescription()); //Prints descriptions and exits of the new room
 				}
 			}
 
@@ -410,11 +410,11 @@ public class Game {
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean quit(Command command) {
-		if (command.hasSecondWord()) { //hvis der er skrevet mere end quit
+		if (command.hasSecondWord()) { //If anymore than quit is typed
 			System.out.println("Quit what?");
 			return false;
 		} else {
-			return true; //hvis der bare er skrevet quit, så quit spillet fuldstændigt.
+			return true; //If only 'quit' is typed; quits the game
 		}
 	}
 
@@ -426,7 +426,7 @@ public class Game {
 	private void searchRoom(Command command) {
 		if (command.hasSecondWord()) {
 			System.out.println("Search what?");
-		} else if (!currentRoom.inv.isEmpty()) {  //Hvis der findes items i inv for currentRoom, så printes følgende.        
+		} else if (!currentRoom.inv.isEmpty()) {  //If there exist any items in inv for currentRoom, prints this.       
 			System.out.println("You search the room and find something interesting.");
 			String items = currentRoom.inv.getAllItems();
 			System.out.println("You find the following items.");
@@ -434,7 +434,7 @@ public class Game {
 
 			subtractTime(5);
 		} else {
-			System.out.println("You search the room, but find nothing.");
+			System.out.println("You search the room, but find nothing."); //If there isnt any items in inv for currentRoom, prints this.
 
 			subtractTime(5);
 		}
@@ -447,7 +447,7 @@ public class Game {
 	 */
 	private void pickUp(Command command) {
 
-		if (command.hasSecondWord() == false) {
+		if (command.hasSecondWord() == false) { //If 'pickup' and something that doesnt exist in game is typed, prints this.
 			System.out.println("Pick up what?");
 		} else {
 			try {
@@ -616,7 +616,7 @@ public class Game {
 
 		if (command.hasThirdWord() == false) {
 
-			System.out.println("Use " + command.getSecondWord() + " where?");
+			System.out.println("Use " + command.getSecondWord() + " where?"); //Prints this if 'use key' isn't used at a setExit.
 
 		} else if (currentRoom.getExit(command.getThirdWord()) != null) {
 
@@ -625,11 +625,11 @@ public class Game {
 			if(nextRoom.isLocked()){
 			nextRoom.unlock();
 
-			System.out.println("You successfully unlock the door");
+			System.out.println("You successfully unlock the door"); //Prints this if key is used correct.
 
 			player.getInventory().removeItem(command.getSecondWord());
 			} else {
-				System.out.println("The door is already unlocked");
+				System.out.println("The door is already unlocked"); //Prints this if you try to 'use key' any other place than a locked door.
 			}
 		}
 	}
@@ -642,7 +642,7 @@ public class Game {
 	 * command "use flashlight"
 	 */
 	private void useFlashlight(Item item) {
-		Flashlight flashlight = (Flashlight) item;
+		Flashlight flashlight = (Flashlight) item; //Uses up charges on players flashlight, and prints line below telling you how many charges you have left.
 		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
 			System.out.println("You used the flashlight and the battery drained, you think you will have " + flashlight.getCharges() + " use(s) left");
@@ -673,7 +673,7 @@ public class Game {
 			System.out.println("Use what?");
 		} else {
 
-			cell.setExit("Hiddenroom", hiddenroom);
+			cell.setExit("Hiddenroom", hiddenroom); //Prints this when you 'use blueprints'
 			System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
 			player.getInventory().removeItem(command.getSecondWord());
 		}
@@ -689,7 +689,7 @@ public class Game {
 
 		if (command.hasSecondWord() == false) {
 			System.out.println("Use What?");
-		} else if (currentRoom == yard) {
+		} else if (currentRoom == yard) { //Prints this if you 'use boltcutter' at correct place.
 			System.out.println("You use the boltcutter to cut open the net and escape to the parkinglot,");
 			System.out.println("find a car and get out of here");
 			yard.setExit("Parkinglot", parkinglot);
@@ -703,7 +703,7 @@ public class Game {
 	 * The showInventory method will print the items that are currently in the
 	 * players inventory
 	 */
-	private void showInventory() {
+	private void showInventory() { //Shows players current inventory containing; items, weight and capacity.
 		System.out.println("Your inventory contains the following:");
 		System.out.println(player.getInventory().getAllItems());
 		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());

@@ -3,7 +3,7 @@
  * The enum is a special type of class.
  * It contains variables that can't be changed
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
+ * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public enum CommandWord {
 
