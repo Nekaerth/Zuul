@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Game {
 
 	private final Parser parser;
-	private Room currentRoom;
 	private Player player;
+	private Boss boss1, boss2;
 	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
@@ -32,7 +32,7 @@ public class Game {
 	{
 
 		// initializes the rooms available
-		player = new Player(100, 1200, 3, 20); // creates a new object of the player class
+		player = new Player(cell, 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 
 		cell = new Room("in your own cell.", false, false); //The constructor for room is called with parameters String, boolean
@@ -54,8 +54,8 @@ public class Game {
 		hiddenroom.inv = setHiddenroomInventory();
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
-		bossroom.boss = new Boss(100, "boss 1");
-		setUpPrisonGuard(bossroom.boss);
+		boss1 = new Boss(bossroom, 100, "boss 1");
+		setUpBoss1();
 
 		dininghall.setExit("Cellhall", cellhall);
 		dininghall.inv = setDininghallInventory();
@@ -81,12 +81,6 @@ public class Game {
 
 		bossroom.setExit("Hiddenroom", hiddenroom);
 		bossroom.inv = setBossroomInventory();
-
-		currentRoom = cell;
-		/* currentRoom is the variable that keeps track of what room you are in
-		the variable is set to cell to declare the room you begin the game in
-		 */
-
 	}
 
 	/**
@@ -102,32 +96,35 @@ public class Game {
 	 * Adds four moves to player move list.
 	 */
 	private void setUpPlayer() {
-		this.player.addMove(new Move(Attack.STAB, 10));
-		this.player.addMove(new Move(Attack.DUCK, 0));
-		this.player.addMove(new Move(Attack.JUMP, 0));
-		this.player.addMove(new Move(Attack.SIDESTEP, 0));
+		ArrayList<Move> moves = this.player.getMoves();
+		moves.add(new Move(Attack.STAB, 10));
+		moves.add(new Move(Attack.DUCK, 0));
+		moves.add(new Move(Attack.JUMP, 0));
+		moves.add(new Move(Attack.SIDESTEP, 0));
 	}
 
 	/**
 	 * Sets up the first boss, by adding all moves and adding all items to his
 	 * inventory.
 	 */
-	private void setUpPrisonGuard(Boss boss) {
-		boss.addMove(new Move(Attack.LASH, Attack.JUMP, 10));
-		boss.addMove(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
-		boss.addMove(new Move(Attack.PUNCH, Attack.STAB, 10));
-		boss.addItem("Key", new Key(true, "Key", true, 1, 1));
+	private void setUpBoss1() {
+		ArrayList<Move> moves = this.boss1.getMoves();
+		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
+		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
+		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
+		this.boss1.getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
 	}
 
 	/**
 	 * Sets up the second boss, by adding all moves.
 	 */
-	private void setUpPrisonGuard2(Boss boss) {
-		boss.addMove(new Move(Attack.LASH, Attack.JUMP, 15));
-		boss.addMove(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
-		boss.addMove(new Move(Attack.PUNCH, Attack.STAB, 15));
-		boss.addMove(new Move(Attack.SHOOT, Attack.DUCK, 15));
-		boss.addMove(new Move(Attack.LAUGH, Attack.SHOOT, 5));
+	private void setUpBoss2() {
+		ArrayList<Move> moves = this.boss2.getMoves();
+		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
+		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
+		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
+		moves.add(new Move(Attack.SHOOT, Attack.DUCK, 15));
+		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
 	}
 
 	/**

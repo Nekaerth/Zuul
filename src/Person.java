@@ -3,13 +3,14 @@ import java.util.ArrayList;
 
 /**
  * This class represent a person. It is used as an abstract class. The person
- * class attributes includes hitpoint, moves and inventory. Among its methods
- * are getMoveString() and getMove().
+ * class attributes includes room, hitpoint, moves and inventory. Among its
+ * methods are getMoveString() and getMove().
  *
  * @author Semesterprojektgruppe 13 (Efterår 2016)
  */
 public class Person {
 
+	private Room room; //Where the person currently is.
 	private int hitpoint; //How much hitpoints the person has.
 	private final ArrayList<Move> moves = new ArrayList<>(); //ArrayList of all moves, that are available to the person.
 	private final Inventory inventory = new Inventory(); //An Inventory that holds the persons items
@@ -18,10 +19,16 @@ public class Person {
 	 * This contructor can creates a Person-object.It represent a person, which
 	 * includes hitpoints, available attacks and available items.
 	 *
+	 * @param room Sets which room the person currently is in.
 	 * @param hitpoint Sets the persons hitpoint.
 	 */
-	public Person(int hitpoint) {
+	public Person(Room room, int hitpoint) {
+		this.room = room;
 		this.hitpoint = hitpoint;
+	}
+
+	public Room getRoom() {
+		return this.room;
 	}
 
 	/**
@@ -50,22 +57,6 @@ public class Person {
 	 */
 	public ArrayList<Move> getMoves() {
 		return moves;
-	}
-
-	/**
-	 *
-	 * @param move adds a move to moves.
-	 */
-	public void addMove(Move move) {
-		moves.add(move);
-	}
-
-	/**
-	 *
-	 * @param move removes the given move from moves.
-	 */
-	public void removeMove(Move move) {
-		moves.remove(move);
 	}
 
 	/**
@@ -102,9 +93,5 @@ public class Person {
 	 */
 	public Inventory getInventory() {
 		return inventory;
-	}
-	
-	public void addItem(String itemName, Item item) {
-		inventory.putItem(itemName, item);
 	}
 }

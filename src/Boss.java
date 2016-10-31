@@ -1,6 +1,4 @@
 
-import java.util.ArrayList;
-
 /**
  * This class represent a boss. It extends the Person class to adobt the
  * hitpoints, available attacks and an inventory. Notice it does not include the
@@ -17,11 +15,12 @@ public class Boss extends Person {
 	 * This contructor creates a Boss-object. It represent the boss, which
 	 * includes hitpoints, available attacks, available items and a name.
 	 *
+	 * @param room Sets which room the boss currently is in.
 	 * @param hitpoint Sets the boss's hitpoint.
 	 * @param name Sets the name of the boss.
 	 */
-	public Boss(int hitpoint, String name) {
-		super(hitpoint);
+	public Boss(Room room, int hitpoint, String name) {
+		super(room, hitpoint);
 		this.name = name;
 	}
 

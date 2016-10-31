@@ -21,13 +21,14 @@ public class Player extends Person {
 	 * includes hitpoints, available attacks, available items, maximum number of
 	 * items and maximum weight capacity.
 	 *
+	 * @param room Sets which room the player currently is in.
 	 * @param hitpoint Sets the players hitpoint.
-	 * @param time
+	 * @param time Sets how much time the player has.
 	 * @param capacity Sets the players maximum item capacity.
 	 * @param weightCapacity Sets the players maximum item weight capacity.
 	 */
-	public Player(int hitpoint, int time, int capacity, int weightCapacity) {
-		super(hitpoint);
+	public Player(Room room, int hitpoint, int time, int capacity, int weightCapacity) {
+		super(room, hitpoint);
 		this.time = time;
 		this.capacity = capacity;
 		this.weightCapacity = weightCapacity;
@@ -101,7 +102,8 @@ public class Player extends Person {
 			move.setDamage(weapon.getDamage()); //Changes damage of the Stab move
 		} //If the item is a range weapon
 		else if (weapon.weaponType().equalsIgnoreCase("ranged")) {
-			addMove(new Move(Attack.SHOOT, weapon.getDamage())); //Adds a Shoot move
+			ArrayList<Move> moves = getMoves();
+			moves.add(new Move(Attack.SHOOT, weapon.getDamage())); //Adds a Shoot move
 		}
 	}
 
@@ -113,8 +115,9 @@ public class Player extends Person {
 		Weapon weapon = (Weapon) item;
 		//If the item is a range weapon
 		if (weapon.weaponType().equalsIgnoreCase("range")) {
+			ArrayList<Move> moves = getMoves();
 			Move move = getMove("Shoot"); //Removes the Shoot move
-			removeMove(move);
+			moves.remove(move);
 		} //If the item is a melee weapon
 		else if (weapon.weaponType().equalsIgnoreCase("melee")) {
 			Move move = getMove("Stab");
