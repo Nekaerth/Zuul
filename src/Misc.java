@@ -4,15 +4,10 @@
  * and open the template in the editor.
  */
 
-/**
- * This method is for all the misc items that cant be picked up.
- *
- * @return false so the item cant be picked up.
- */
+
 public class Misc implements Item {
 
 	private boolean pickup, useable;
-	private int weight, capacity;
 	private String name;
 
 	/**
@@ -27,54 +22,20 @@ public class Misc implements Item {
 	public Misc(boolean pickup, String name, boolean useable) {
 		this.pickup = pickup;
 		this.name = name;
-		this.weight = weight;
-		this.capacity = capacity;
 		this.useable = useable;
 	}
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * isWeapon method returns false if called to an object of the misc class
+	 * getType method returns the enum value corresponding to this item type
 	 *
-	 * @return will return a boolean as false
+	 * @return will return a value of the type ItemType enum 
 	 */
 	@Override
-	public boolean isWeapon() {
-		return false;
+	public ItemType getType(){
+		return ItemType.MISC;
 	}
 
-	/**
-	 * We override the instance method which is declare in the interface The isKey
-	 * method returns false if called to an object of the misc class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isKey() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isMisc method returns true if called to an object of the misc class
-	 *
-	 * @return will return a boolean as true
-	 */
-	@Override
-	public boolean isMisc() {
-		return true;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isSpecial method returns false if called to an object of the misc class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isSpecial() {
-		return false;
-	}
 
 	/**
 	 * We override the instance method which is declare in the interface The
@@ -137,14 +98,4 @@ public class Misc implements Item {
 		return 0;
 	}
 
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isFlashlight method returns false if called to an object of the misc class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isFlashlight() {
-		return false;
-	}
 }

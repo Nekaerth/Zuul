@@ -28,49 +28,10 @@ public class Key implements Item {
 		this.capacity = capacity;
 		this.useable = useable;
 	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isWeapon method returns false if called to an object of the key class
-	 *
-	 * @return will return a boolean as false
-	 */
+	
 	@Override
-	public boolean isWeapon() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The isKey
-	 * method returns true if called to an object of the key class
-	 *
-	 * @return will return a boolean as true
-	 */
-	@Override
-	public boolean isKey() {
-		return true;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isMisc method returns false if called to an object of the key class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isMisc() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isSpecial method returns false if called to an object of the key class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isSpecial() {
-		return false;
+	public ItemType getType(){
+		return ItemType.KEY;
 	}
 
 	/**
@@ -134,17 +95,6 @@ public class Key implements Item {
 	@Override
 	public int getCapacity() {
 		return this.capacity;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isFlashlight method returns false if called to an object of the key class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isFlashlight() {
-		return false;
 	}
 
 }

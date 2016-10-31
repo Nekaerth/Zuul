@@ -28,65 +28,18 @@ public class Flashlight implements Item {
 		this.useable = useable;
 		this.charges = charges;
 	}
-
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * isWeapon method returns false if called to an object of the Flashlight
-	 * class
+	 * isPickup method returns the boolean value declared when creating the
+	 * flashlight object
 	 *
-	 * @return will return a boolean as false
+	 * @return will return a value of the type ItemType enum 
 	 */
 	@Override
-	public boolean isWeapon() {
-		return false;
+	public ItemType getType(){
+		return ItemType.FLASHLIGHT;
 	}
-
-	/**
-	 * We override the instance method which is declare in the interface The isKey
-	 * method returns false if called to an object of the Flashlight class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isKey() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isFlashlight method returns true if called to an object of the Flashlight
-	 * class
-	 *
-	 * @return will return a boolean as true
-	 */
-	@Override
-	public boolean isFlashlight() {
-		return true;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isMisc method returns false if called to an object of the Flashlight class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isMisc() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isSpecial method returns false if called to an object of the flashlight
-	 * class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isSpecial() {
-		return false;
-	}
-
+	
 	/**
 	 * We override the instance method which is declare in the interface The
 	 * getName method returns the name of the flashlight object
@@ -97,6 +50,7 @@ public class Flashlight implements Item {
 	public String getName() {
 		return this.name;
 	}
+
 
 	/**
 	 * We override the instance method which is declare in the interface The

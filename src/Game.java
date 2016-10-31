@@ -459,32 +459,37 @@ public class Game {
 					currentRoom.inv.removeItem(command.getSecondWord());
 
 					System.out.println("You picked up " + item.getName());
-					if (item.isWeapon()) {
-						player.changePlayerAttack(item);
-						if (item.getName().equalsIgnoreCase("stone")) {
-							System.out.println("Your melee attack increases by 1");
-						} else if (item.getName().equalsIgnoreCase("fork")) {
-							System.out.println("Your melee attack increases by 2");
-						} else if (item.getName().equalsIgnoreCase("knife")) {
-							System.out.println("Your melee attack increases by 5");
-						} else if (item.getName().equalsIgnoreCase("Pistol")) {
-							System.out.println("You gain the ability to use shoot against prison guards");
-							System.out.println("Your ranged attack damage is 25");
-						}
-					} else if (item.isFlashlight()) {
-                                            System.out.println("Use it wisely, it won't last very long!");
-                                        } 
-                                        else if (item.isSpecial()) {
-                                            if (item.getName().equalsIgnoreCase("boltcutter")) {
-                                                System.out.println("This might be usefull for escaping");
-                                            } else if (item.getName().equalsIgnoreCase("blueprints")) {
-                                                System.out.println("The blueprints could be useful for finding new places to go,");
-                                                System.out.println("just don't wander around for too long");
-                                            }
-                                        }
-                                        else if (item.isKey()) {
-                                            System.out.println("Look for a locked door");
-                                        }
+					if (null != item.getType())
+						switch (item.getType()) {
+						case WEAPON:
+							player.changePlayerAttack(item);
+							if (item.getName().equalsIgnoreCase("stone")) {
+								System.out.println("Your melee attack increases by 1");
+							} else if (item.getName().equalsIgnoreCase("fork")) {
+								System.out.println("Your melee attack increases by 2");
+							} else if (item.getName().equalsIgnoreCase("knife")) {
+								System.out.println("Your melee attack increases by 5");
+							} else if (item.getName().equalsIgnoreCase("Pistol")) {
+								System.out.println("You gain the ability to use shoot against prison guards");
+								System.out.println("Your ranged attack damage is 25");
+							}	break;
+						case FLASHLIGHT:
+							System.out.println("Use it wisely, it won't last very long!");
+							break;
+						case SPECIALITEM:
+							if (item.getName().equalsIgnoreCase("boltcutter")) {
+								System.out.println("This might be usefull for escaping");
+							} else if (item.getName().equalsIgnoreCase("blueprints")) {
+								System.out.println("The blueprints could be useful for finding new places to go,");
+								System.out.println("just don't wander around for too long");
+							}
+							break;
+						case KEY:
+							System.out.println("Look for a locked door");
+							break;
+						default:
+							break;
+					}
 				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 					System.out.println("OOPS!! It's too heavy for you to pickup.");
 					System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
@@ -493,16 +498,16 @@ public class Game {
 				} else if (player.getInventory().size() + 1 > player.getCapacity()) {
 					System.out.println("OOPS!! Your inventory is full: " + player.getInventory().size() + "/" + player.getCapacity() + " items");
 					System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
-				} else if (item.isMisc() == true && item.getName().equalsIgnoreCase("stick")) {
+				} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("stick")) {
 						System.out.println("The stick is stuck in the wall");
 						System.out.println("go find something more usefull instead");
-					} else if (item.isMisc() == true && item.getName().equalsIgnoreCase("papers")) {
+					} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("papers")) {
 						System.out.println("You don't have time to go through that stack of papers");
 						System.out.println("Move ON!");
-					} else if (item.isMisc() == true && item.getName().equalsIgnoreCase("boxes")) {
+					} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("boxes")) {
 						System.out.println("You don't have time to find the box of evidence related to your case");
 						System.out.println("Move ON!");
-					} else if (item.isMisc() == true && item.getName().equalsIgnoreCase("plate")) {
+					} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("plate")) {
 						System.out.println("Seriously! you want to eat now?");
 						System.out.println("Hurry up instead and escape while you still got a chance to");
 					}
@@ -525,7 +530,7 @@ public class Game {
 		} else {
 			try {
 				Item item = player.getInventory().getItem(command.getSecondWord());
-				if (item.isWeapon() == true) {
+				if (item.getType() == ItemType.WEAPON) {
 					player.droppedWeapon(item);
 				}
 				currentRoom.inv.putItem(command.getSecondWord(), item);
@@ -551,7 +556,35 @@ public class Game {
 				Item item = player.getInventory().getItem(command.getSecondWord());
 
 				if (item.isUseable() == true) { //There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
-					if (item.isKey() == true) {
+					switch(item.getType()){
+						case KEY:
+							useKey(command);
+							break;
+						case FLASHLIGHT:
+							useFlashlight(item);
+							break;
+						case SPECIALITEM:
+							if(item.getName().equalsIgnoreCase("blueprints")){
+								useBlueprints(command);
+							} else if(item.getName().equalsIgnoreCase("boltcutter")){
+								useBoltcutter(command);
+							}
+							break;
+						case MISC:
+							System.out.println("Shouldn't be useable");
+							break;
+						case WEAPON:
+							System.out.println("Don't need to use your weapon");
+							break;
+						default:
+							break;
+								
+					}
+						
+					
+					
+					
+					/*if (item.isKey() == true) {
 						useKey(command, item);
 					} else if (item.isFlashlight() == true) {
 						useFlashlight(item);
@@ -562,7 +595,7 @@ public class Game {
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
-
+					*/
 				} else {
 					System.out.println("You can't use that item for anything");
 				}
@@ -579,7 +612,7 @@ public class Game {
 	 * @param key the key is a item you must have in yor inventory to use the
 	 * command "use key" the key is used as an input to this method
 	 */
-	private void useKey(Command command, Item key) {
+	private void useKey(Command command) {
 
 		if (command.hasThirdWord() == false) {
 
@@ -588,12 +621,16 @@ public class Game {
 		} else if (currentRoom.getExit(command.getThirdWord()) != null) {
 
 			Room nextRoom = currentRoom.getExit(command.getThirdWord());
-
+			
+			if(nextRoom.isLocked()){
 			nextRoom.unlock();
 
 			System.out.println("You successfully unlock the door");
 
 			player.getInventory().removeItem(command.getSecondWord());
+			} else {
+				System.out.println("The door is already unlocked");
+			}
 		}
 	}
 

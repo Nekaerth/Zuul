@@ -38,58 +38,13 @@ public class Weapon implements Item {
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * isWeapon method returns true if called to an object of the weapon class
+	 * getType method returns the enum value corresponding to this item type
 	 *
-	 * @return will return a boolean as true
+	 * @return will return a value of the type ItemType enum 
 	 */
 	@Override
-	public boolean isWeapon() {
-		return true;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The isKey
-	 * method returns false if called to an object of the weapon class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isKey() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isMisc method returns false if called to an object of the weapon class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isMisc() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isFlashlight method returns false if called to an object of the weapon
-	 * class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isFlashlight() {
-		return false;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isSpecial method returns false if called to an object of the weapon class
-	 *
-	 * @return will return a boolean as false
-	 */
-	@Override
-	public boolean isSpecial() {
-		return false;
+	public ItemType getType(){
+		return ItemType.WEAPON;
 	}
 
 	/**
