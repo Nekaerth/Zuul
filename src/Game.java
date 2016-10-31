@@ -33,7 +33,7 @@ public class Game {
 	{
 
 		// initializes the rooms available
-		player = new Player(100, new ArrayList<>(), new Inventory(), 3, 20); // creates a new object of the player class
+		player = new Player(100, new ArrayList<>(), new Inventory(), 1200, 3, 20); // creates a new object of the player class
 		player.setUpPlayer();
 
 		this.time = 1200;
@@ -94,6 +94,7 @@ public class Game {
 
 	/**
 	 * The getPlayer() is a getter method that will return a player object
+	 *
 	 * @return will return the object player
 	 */
 	public Player getPlayer() {
@@ -101,43 +102,9 @@ public class Game {
 	}
 
 	/**
-	 * The getTime() is a getter method to get the integer "time"
-	 * @return will return the integer "time"
-	 */
-	public int getTime() {
-		return this.time;
-	}
-
-	/**
-	 * The subtractTime() method is used as a count down timer to keep track of
-	 * how much time the player has left Time is used as a ressource that you
-	 * spend while moving through rooms and looking for items.
-	 * @param time is an integer that we subtract from to reduce the time the
-	 * player has left to win the game.
-	 */
-	public void subtractTime(int time) {
-		int fiveMinuteMark = (this.time - 1) / 300;
-		this.time -= time;
-		int newFiveMinuteMark = (this.time - 1) / 300;
-		if (fiveMinuteMark > newFiveMinuteMark) {
-			System.out.println("You have " + displayTime() + " left.");
-		}
-	}
-
-	/**
-	 * The displayTime() method is a case of the user input and occours when the
-	 * user types "time"
-	 * @return will return the time that is left in minutes and seconds
-	 */
-	public String displayTime() {
-		int minutes = this.time / 60;
-		int seconds = this.time % 60;
-		return minutes + " min and " + seconds + " sec";
-	}
-
-	/**
 	 * The setCellInventory() method will set the cell inventory when the game
 	 * starts
+	 *
 	 * @return will return the cell inventory
 	 */
 	private Inventory setCellInventory() {
@@ -149,6 +116,7 @@ public class Game {
 
 	/**
 	 * This method will set the storage inventory when the game starts
+	 *
 	 * @return will return the storage inventory
 	 */
 	private Inventory setStorageInventory() {
@@ -161,6 +129,7 @@ public class Game {
 
 	/**
 	 * This method will set the dining hall inventory when the game starts
+	 *
 	 * @return will return the dining hall inventory
 	 */
 	private Inventory setDininghallInventory() {
@@ -173,6 +142,7 @@ public class Game {
 
 	/**
 	 * This method will set the yard inventory when the game starts
+	 *
 	 * @return will return the yard inventory
 	 */
 	private Inventory setYardInventory() {
@@ -183,6 +153,7 @@ public class Game {
 
 	/**
 	 * This method will set the office inventory when the game starts
+	 *
 	 * @return will return the office inventory
 	 */
 	private Inventory setOfficeInventory() {
@@ -194,6 +165,7 @@ public class Game {
 
 	/**
 	 * This method will set the hidden rooms inventory when the game starts
+	 *
 	 * @return will return the hidden rooms inventory
 	 */
 	private Inventory setHiddenroomInventory() {
@@ -204,6 +176,7 @@ public class Game {
 
 	/**
 	 * This method will set the boss rooms inventory when the game starts
+	 *
 	 * @return will return the boss rooms inventory
 	 */
 	private Inventory setBossroomInventory() {
@@ -246,6 +219,7 @@ public class Game {
 	/**
 	 * The method processCommand will process the user input and reacts to the
 	 * specific user input
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean processCommand(Command command) {
@@ -295,7 +269,7 @@ public class Game {
 					break;
 				case TIME:
 					//If time is typed
-					System.out.println("You have " + displayTime() + " left."); //Displays amount of time left, before you lose the game
+					System.out.println("You have " + player.displayTime() + " left."); //Displays amount of time left, before you lose the game
 					break;
 				default:
 					break;
@@ -322,6 +296,7 @@ public class Game {
 	/**
 	 * The method goRoom is a case of the user input and are used when the user
 	 * types "go" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean goRoom(Command command) {
@@ -339,7 +314,7 @@ public class Game {
 			System.out.println("There is no door!");
 		} else if (!nextRoom.isLocked()) {
 
-			subtractTime(10);
+			player.subtractTime(10);
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
 				String correctCode;
@@ -392,6 +367,7 @@ public class Game {
 	/**
 	 * The getCorrectCode method returns the hidden code that is found in all
 	 * rooms, the order of the code is determined by the order of the arraylist
+	 *
 	 * @return returns a string with the correct key code
 	 */
 	public String getCorrectCode() {
@@ -407,6 +383,7 @@ public class Game {
 	/**
 	 * The quit method is a case of the user input and is used when the user types
 	 * "quit" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private boolean quit(Command command) {
@@ -421,6 +398,7 @@ public class Game {
 	/**
 	 * The searchRoom method is a case of the user input and is used when the user
 	 * types "search" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void searchRoom(Command command) {
@@ -432,17 +410,18 @@ public class Game {
 			System.out.println("You find the following items.");
 			System.out.println(items);
 
-			subtractTime(5);
+			player.subtractTime(5);
 		} else {
 			System.out.println("You search the room, but find nothing.");
 
-			subtractTime(5);
+			player.subtractTime(5);
 		}
 	}
 
 	/**
 	 * The pickUp method is a case of the user input and is used when the user
 	 * types "pickup" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void pickUp(Command command) {
@@ -459,36 +438,38 @@ public class Game {
 					currentRoom.inv.removeItem(command.getSecondWord());
 
 					System.out.println("You picked up " + item.getName());
-					if (null != item.getType())
+					if (null != item.getType()) {
 						switch (item.getType()) {
-						case WEAPON:
-							player.changePlayerMove(item);
-							if (item.getName().equalsIgnoreCase("stone")) {
-								System.out.println("Your melee attack increases by 1");
-							} else if (item.getName().equalsIgnoreCase("fork")) {
-								System.out.println("Your melee attack increases by 2");
-							} else if (item.getName().equalsIgnoreCase("knife")) {
-								System.out.println("Your melee attack increases by 5");
-							} else if (item.getName().equalsIgnoreCase("Pistol")) {
-								System.out.println("You gain the ability to use shoot against prison guards");
-								System.out.println("Your ranged attack damage is 25");
-							}	break;
-						case FLASHLIGHT:
-							System.out.println("Use it wisely, it won't last very long!");
-							break;
-						case SPECIALITEM:
-							if (item.getName().equalsIgnoreCase("boltcutter")) {
-								System.out.println("This might be usefull for escaping");
-							} else if (item.getName().equalsIgnoreCase("blueprints")) {
-								System.out.println("The blueprints could be useful for finding new places to go,");
-								System.out.println("just don't wander around for too long");
-							}
-							break;
-						case KEY:
-							System.out.println("Look for a locked door");
-							break;
-						default:
-							break;
+							case WEAPON:
+								player.changePlayerMove(item);
+								if (item.getName().equalsIgnoreCase("stone")) {
+									System.out.println("Your melee attack increases by 1");
+								} else if (item.getName().equalsIgnoreCase("fork")) {
+									System.out.println("Your melee attack increases by 2");
+								} else if (item.getName().equalsIgnoreCase("knife")) {
+									System.out.println("Your melee attack increases by 5");
+								} else if (item.getName().equalsIgnoreCase("Pistol")) {
+									System.out.println("You gain the ability to use shoot against prison guards");
+									System.out.println("Your ranged attack damage is 25");
+								}
+								break;
+							case FLASHLIGHT:
+								System.out.println("Use it wisely, it won't last very long!");
+								break;
+							case SPECIALITEM:
+								if (item.getName().equalsIgnoreCase("boltcutter")) {
+									System.out.println("This might be usefull for escaping");
+								} else if (item.getName().equalsIgnoreCase("blueprints")) {
+									System.out.println("The blueprints could be useful for finding new places to go,");
+									System.out.println("just don't wander around for too long");
+								}
+								break;
+							case KEY:
+								System.out.println("Look for a locked door");
+								break;
+							default:
+								break;
+						}
 					}
 				} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 					System.out.println("OOPS!! It's too heavy for you to pickup.");
@@ -499,19 +480,18 @@ public class Game {
 					System.out.println("OOPS!! Your inventory is full: " + player.getInventory().size() + "/" + player.getCapacity() + " items");
 					System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
 				} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("stick")) {
-						System.out.println("The stick is stuck in the wall");
-						System.out.println("go find something more usefull instead");
-					} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("papers")) {
-						System.out.println("You don't have time to go through that stack of papers");
-						System.out.println("Move ON!");
-					} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("boxes")) {
-						System.out.println("You don't have time to find the box of evidence related to your case");
-						System.out.println("Move ON!");
-					} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("plate")) {
-						System.out.println("Seriously! you want to eat now?");
-						System.out.println("Hurry up instead and escape while you still got a chance to");
-					}
-				
+					System.out.println("The stick is stuck in the wall");
+					System.out.println("go find something more usefull instead");
+				} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("papers")) {
+					System.out.println("You don't have time to go through that stack of papers");
+					System.out.println("Move ON!");
+				} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("boxes")) {
+					System.out.println("You don't have time to find the box of evidence related to your case");
+					System.out.println("Move ON!");
+				} else if (item.getType() == ItemType.MISC && item.getName().equalsIgnoreCase("plate")) {
+					System.out.println("Seriously! you want to eat now?");
+					System.out.println("Hurry up instead and escape while you still got a chance to");
+				}
 
 			} catch (IllegalArgumentException ex) {
 				System.out.println("There is no such item.");
@@ -522,6 +502,7 @@ public class Game {
 	/**
 	 * The drop method is a case of the user input and is used when the user types
 	 * "drop" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void drop(Command command) {
@@ -545,6 +526,7 @@ public class Game {
 	/**
 	 * The use method is a case of the user input and is used when the user types
 	 * "use" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
 	private void use(Command command) {
@@ -556,7 +538,7 @@ public class Game {
 				Item item = player.getInventory().getItem(command.getSecondWord());
 
 				if (item.isUseable() == true) { //There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
-					switch(item.getType()){
+					switch (item.getType()) {
 						case KEY:
 							useKey(command);
 							break;
@@ -564,9 +546,9 @@ public class Game {
 							useFlashlight(item);
 							break;
 						case SPECIALITEM:
-							if(item.getName().equalsIgnoreCase("blueprints")){
+							if (item.getName().equalsIgnoreCase("blueprints")) {
 								useBlueprints(command);
-							} else if(item.getName().equalsIgnoreCase("boltcutter")){
+							} else if (item.getName().equalsIgnoreCase("boltcutter")) {
 								useBoltcutter(command);
 							}
 							break;
@@ -578,12 +560,9 @@ public class Game {
 							break;
 						default:
 							break;
-								
+
 					}
-						
-					
-					
-					
+
 					/*if (item.isKey() == true) {
 						useKey(command, item);
 					} else if (item.isFlashlight() == true) {
@@ -595,7 +574,7 @@ public class Game {
 					} else {
 						System.out.println("There's a bug in the items useable boolean " + item.getName());
 					}
-					*/
+					 */
 				} else {
 					System.out.println("You can't use that item for anything");
 				}
@@ -608,6 +587,7 @@ public class Game {
 	/**
 	 * The useKey method is a case when the user types "use" and is used when the
 	 * user types "use key" as a command
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param key the key is a item you must have in yor inventory to use the
 	 * command "use key" the key is used as an input to this method
@@ -621,13 +601,13 @@ public class Game {
 		} else if (currentRoom.getExit(command.getThirdWord()) != null) {
 
 			Room nextRoom = currentRoom.getExit(command.getThirdWord());
-			
-			if(nextRoom.isLocked()){
-			nextRoom.unlock();
 
-			System.out.println("You successfully unlock the door");
+			if (nextRoom.isLocked()) {
+				nextRoom.unlock();
 
-			player.getInventory().removeItem(command.getSecondWord());
+				System.out.println("You successfully unlock the door");
+
+				player.getInventory().removeItem(command.getSecondWord());
 			} else {
 				System.out.println("The door is already unlocked");
 			}
@@ -637,6 +617,7 @@ public class Game {
 	/**
 	 * The useFlashlight method is a case when the user types "use" and is used
 	 * when the user types "use flashlight"
+	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param flashlight is a item you must have in your inventory to use the
 	 * command "use flashlight"
@@ -665,6 +646,7 @@ public class Game {
 	/**
 	 * The useBlueprints method is a case when the user types "use". This method
 	 * is a case of the "use" input from the user
+	 *
 	 * @param command the parameter command is what the method requires when it is
 	 * called
 	 */
@@ -682,6 +664,7 @@ public class Game {
 	/**
 	 * The useBoltcutter method is a case when the user types "use". This method
 	 * is a case of the "use" input from the user
+	 *
 	 * @param command the parameter command is what the method requires when it is
 	 * called
 	 */

@@ -12,6 +12,7 @@ import java.util.ArrayList;
  */
 public class Player extends Person {
 
+	private int time;
 	private int capacity; //Is the maximum amount of items the player must hold.
 	private int weightCapacity; //Is the maximum weight that the players items must
 
@@ -26,10 +27,48 @@ public class Player extends Person {
 	 * @param capacity Sets the players maximum item capacity.
 	 * @param weightCapacity Sets the players maximum item weight capacity.
 	 */
-	public Player(int hitpoint, ArrayList<Move> moves, Inventory inventory, int capacity, int weightCapacity) {
+	public Player(int hitpoint, ArrayList<Move> moves, Inventory inventory, int time, int capacity, int weightCapacity) {
 		super(hitpoint, moves, inventory);
+		this.time = time;
 		this.capacity = capacity;
 		this.weightCapacity = weightCapacity;
+	}
+
+	/**
+	 * The getTime() is a getter method to get the integer "time"
+	 *
+	 * @return will return the integer "time"
+	 */
+	public int getTime() {
+		return this.time;
+	}
+
+	/**
+	 * The subtractTime() method is used as a count down timer to keep track of
+	 * how much time the player has left. Time is used as a ressource that you
+	 * spend while moving through rooms and looking for items.
+	 *
+	 * @param time is an integer that we subtract from to reduce the time the
+	 * player has left to win the game.
+	 */
+	public void subtractTime(int time) {
+		int fiveMinuteMark = (this.time - 1) / 300;
+		this.time -= time;
+		int newFiveMinuteMark = (this.time - 1) / 300;
+		if (fiveMinuteMark > newFiveMinuteMark) {
+			System.out.println("You have " + displayTime() + " left.");
+		}
+	}
+
+	/**
+	 *
+	 * @return will return the time that the player has left in minutes and
+	 * seconds as a String
+	 */
+	public String displayTime() {
+		int minutes = this.time / 60;
+		int seconds = this.time % 60;
+		return minutes + " min and " + seconds + " sec";
 	}
 
 	/**
