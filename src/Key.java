@@ -1,7 +1,7 @@
 
 /**
  *
- * @author Semesterprojektgruppe 13 (Efterår 2016)
+ * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Key implements Item {
 
