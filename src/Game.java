@@ -10,8 +10,8 @@ public class Game {
 
 	private final Parser parser;
 	private Player player;
-	private final Boss[] bosses = new Boss[2];
-	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, hiddenroom, bossroom; // initializes the rooms available
+	private final ArrayList<Boss> bosses = new ArrayList<>();
+	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, tunnel, employeeCanteen; // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
 	/**
@@ -38,18 +38,18 @@ public class Game {
 		office = new Room("in the office. They have alot of paperwork going on here.", true, false);
 		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monitoring this room!", false, false);
 		parkinglot = new Room("outside at the parkinglot. There is a parked car, it could be your getaway.", false, false);
-		hiddenroom = new Room("in a secret room", true, false);
-		bossroom = new Room("in the bossroom", false, false);
+		tunnel = new Room("in a secret tunnel", true, false);
+		employeeCanteen = new Room("in the employees canteen", false, false);
 
 		cell.setExit("Cellhall", cellhall); // Calls the method in room called set exit, taking a string and room object as an argument.
 		setCellInventory(); // calls the method setCellInventory()
 		//to declare what items that are in the cell when the game begins
 
-		hiddenroom.setExit("Bossroom", bossroom);
-		hiddenroom.setExit("Cell", cell);
+		tunnel.setExit("Canteen", employeeCanteen);
+		tunnel.setExit("Cell", cell);
 		setHiddenroomInventory();
 
-		bossroom.setExit("Hiddenroom", hiddenroom);
+		employeeCanteen.setExit("Tunnel", tunnel);
 		setBossroomInventory();
 
 		dininghall.setExit("Cellhall", cellhall);
@@ -77,7 +77,7 @@ public class Game {
 		player = new Player(cell, 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 
-		bosses[0] = new Boss(bossroom, 100, "boss 1");
+		bosses.add(0, new Boss(employeeCanteen, 100, "boss 1"));
 		setUpBoss1();
 	}
 
@@ -106,18 +106,18 @@ public class Game {
 	 * inventory.
 	 */
 	private void setUpBoss1() {
-		ArrayList<Move> moves = this.bosses[0].getMoves();
+		ArrayList<Move> moves = this.bosses.get(0).getMoves();
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-		this.bosses[0].getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
+		this.bosses.get(0).getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
 	}
 
 	/**
 	 * Sets up the second boss, by adding all moves.
 	 */
 	private void setUpBoss2() {
-		ArrayList<Move> moves = this.bosses[1].getMoves();
+		ArrayList<Move> moves = this.bosses.get(1).getMoves();
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
@@ -139,7 +139,7 @@ public class Game {
 	 * This method will set the hidden rooms inventory when the game starts.
 	 */
 	private void setHiddenroomInventory() {
-		Inventory inventory = hiddenroom.getInventory();
+		Inventory inventory = tunnel.getInventory();
 		inventory.putItem("Flashlight", new Flashlight(true, "Flashlight", true, 5, 1, 5));
 	}
 
@@ -147,7 +147,7 @@ public class Game {
 	 * This method will set the boss rooms inventory when the game starts
 	 */
 	private void setBossroomInventory() {
-		Inventory inventory = bossroom.getInventory();
+		Inventory inventory = employeeCanteen.getInventory();
 		inventory.putItem("Key", new Key(true, "Key", false, 5, 1));
 	}
 
@@ -345,13 +345,14 @@ public class Game {
 				//Should be changed to more generic reuseable code
 				if (nextRoom == storage && cellhall.needsBoss() == true) {
 
-					bosses[1] = new Boss(cellhall, 100, "boss 2");
+					bosses.add(1,new Boss(cellhall, 100, "boss 2"));
 					setUpBoss2();
 					cellhall.setNeedsBoss(false);
 				}
 
 				for (Boss boss : bosses) {
-					if (player.getRoom() == boss.getRoom() && player.getRoom().needsBoss() == false) {
+					if (player.getRoom() == boss.getRoom()
+							&& player.getRoom().needsBoss() == false) {
 						System.out.println("You encounter a prison guard");
 						System.out.println("Be prepared or you will die!");
 						finish = boss.bossFight(player);
@@ -658,7 +659,7 @@ public class Game {
 			System.out.println("Use what?");
 		} else {
 
-			cell.setExit("Hiddenroom", hiddenroom); //Prints this when you 'use blueprints'
+			cell.setExit("Tunnel", tunnel); //Prints this when you 'use blueprints'
 			System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
 			player.getInventory().removeItem(command.getSecondWord());
 		}
