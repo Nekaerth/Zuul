@@ -345,14 +345,13 @@ public class Game {
 				//Should be changed to more generic reuseable code
 				if (nextRoom == storage && cellhall.needsBoss() == true) {
 
-					bosses.add(1,new Boss(cellhall, 100, "boss 2"));
+					bosses.add(1, new Boss(cellhall, 100, "boss 2"));
 					setUpBoss2();
 					cellhall.setNeedsBoss(false);
 				}
 
 				for (Boss boss : bosses) {
-					if (player.getRoom() == boss.getRoom()
-							&& player.getRoom().needsBoss() == false) {
+					if (player.getRoom() == boss.getRoom() && player.getRoom().needsBoss() == false) {
 						System.out.println("You encounter a prison guard");
 						System.out.println("Be prepared or you will die!");
 						finish = boss.bossFight(player);

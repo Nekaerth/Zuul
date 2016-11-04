@@ -15,7 +15,6 @@ public class Room {
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	private final Inventory inventory = new Inventory();
 	private boolean numberRoom, escapeRoom, lock, needsBoss = false;
-	public Boss boss = null;
 	int number;
 
 	/**

@@ -28,18 +28,19 @@ public class Flashlight implements Item {
 		this.useable = useable;
 		this.charges = charges;
 	}
+
 	/**
 	 * We override the instance method which is declare in the interface The
 	 * isPickup method returns the boolean value declared when creating the
 	 * flashlight object
 	 *
-	 * @return will return a value of the type ItemType enum 
+	 * @return will return a value of the type ItemType enum
 	 */
 	@Override
-	public ItemType getType(){
+	public ItemType getType() {
 		return ItemType.FLASHLIGHT;
 	}
-	
+
 	/**
 	 * We override the instance method which is declare in the interface The
 	 * getName method returns the name of the flashlight object
@@ -50,7 +51,6 @@ public class Flashlight implements Item {
 	public String getName() {
 		return this.name;
 	}
-
 
 	/**
 	 * We override the instance method which is declare in the interface The

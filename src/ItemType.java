@@ -9,7 +9,7 @@
  * @author Danieln Johansen
  */
 public enum ItemType {
-	
+
 	KEY, WEAPON, FLASHLIGHT, SPECIALITEM, MISC;
-	
+
 }

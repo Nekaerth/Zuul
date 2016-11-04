@@ -33,10 +33,10 @@ public class SpecialItem implements Item {
 	 * We override the instance method which is declare in the interface The
 	 * getType method returns the enum value corresponding to this item type
 	 *
-	 * @return will return a value of the type ItemType enum 
+	 * @return will return a value of the type ItemType enum
 	 */
 	@Override
-	public ItemType getType(){
+	public ItemType getType() {
 		return ItemType.SPECIALITEM;
 	}
 
@@ -102,7 +102,4 @@ public class SpecialItem implements Item {
 	public int getCapacity() {
 		return this.capacity;
 	}
-
-
-
 }

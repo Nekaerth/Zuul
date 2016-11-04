@@ -28,9 +28,9 @@ public class Key implements Item {
 		this.capacity = capacity;
 		this.useable = useable;
 	}
-	
+
 	@Override
-	public ItemType getType(){
+	public ItemType getType() {
 		return ItemType.KEY;
 	}
 
