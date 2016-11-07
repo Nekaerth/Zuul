@@ -9,7 +9,8 @@ public class Weapon implements Item {
 
 	private boolean pickup, useable;
 	private int weight, capacity, damage;
-	private String name, weaponType;
+	private String name;
+	private WeaponType weaponType;
 
 	/**
 	 * The constructor for the Weapon class is called when we want to create
@@ -26,7 +27,7 @@ public class Weapon implements Item {
 	 * while wielding this weapon
 	 * @param weaponType is a String that refers to the type e.g. ranged or melee
 	 */
-	public Weapon(boolean pickup, String name, boolean useable, int weight, int capacity, int damage, String weaponType) {
+	public Weapon(boolean pickup, String name, boolean useable, int weight, int capacity, int damage, WeaponType weaponType) {
 		this.pickup = pickup;
 		this.name = name;
 		this.weight = weight;
@@ -111,13 +112,13 @@ public class Weapon implements Item {
 	}
 
 	/**
-	 * The weaponType method returns the String declared when creating the weapon
+	 * The weaponType method returns the WeaponType declared when creating the weapon
 	 * object
 	 *
-	 * @return will return a String equal to what is declared when creating the
+	 * @return will return a WeaponType enum equal to what is declared when creating the
 	 * object
 	 */
-	public String weaponType() {
+	public WeaponType weaponType() {
 		return weaponType;
 	}
 

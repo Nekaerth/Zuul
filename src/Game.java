@@ -131,7 +131,7 @@ public class Game {
 	 */
 	private void setCellInventory() {
 		Inventory inventory = cell.getInventory();
-		inventory.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, "melee"));
+		inventory.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, WeaponType.MELEE));
 		inventory.putItem("Stick", new Misc(false, "Stick", false));
 	}
 
@@ -158,7 +158,7 @@ public class Game {
 		Inventory inventory = dininghall.getInventory();
 		inventory.putItem("Key", new Key(true, "Key", true, 5, 1));
 		inventory.putItem("Plate", new Misc(false, "Plate", false));
-		inventory.putItem("Fork", new Weapon(true, "Fork", true, 1, 1, 12, "melee"));
+		inventory.putItem("Fork", new Weapon(true, "Fork", true, 1, 1, 12, WeaponType.MELEE));
 	}
 
 	/**
@@ -175,7 +175,7 @@ public class Game {
 	 */
 	private void setYardInventory() {
 		Inventory inventory = yard.getInventory();
-		inventory.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, "melee"));
+		inventory.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, WeaponType.MELEE));
 	}
 
 	/**
@@ -184,7 +184,7 @@ public class Game {
 	private void setStorageInventory() {
 		Inventory inventory = storage.getInventory();
 		inventory.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
-		inventory.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, "ranged"));
+		inventory.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, WeaponType.RANGED));
 		inventory.putItem("Boxes", new Misc(false, "Box", false));
 	}
 
