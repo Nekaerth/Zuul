@@ -1,5 +1,6 @@
 
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  *
@@ -20,6 +21,10 @@ public class CommandWords {
 				validCommands.put(command.toString(), command); //Læg commanden i hashmappen validcommands
 			}
 		}
+	}
+
+	public Set<String> getValidCommands() {
+		return validCommands.keySet();
 	}
 
 	/**

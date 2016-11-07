@@ -35,14 +35,22 @@ public class Parser {
 
 		inputLine = reader.nextLine(); //Scanner læser input fra consollen
 
-		Scanner tokenizer = new Scanner(inputLine); //Laver ny scanner for at opdele i to strings 
-		if (tokenizer.hasNext()) {
-			word1 = tokenizer.next();
-			if (tokenizer.hasNext()) {
-				word2 = tokenizer.next();
-				if (tokenizer.hasNext()) {
-					word3 = tokenizer.next();
+		for (String command : commands.getValidCommands()) {
+			int commandLength = command.length();
+			int inputLength = inputLine.length();
+			if (inputLength >= commandLength && command.equalsIgnoreCase(inputLine.substring(0, commandLength))) {
+				word1 = command;
+				String[] inputRest;
+				if (inputLength > commandLength && inputLine.substring(commandLength, commandLength + 1).equals(" ")) {
+					inputRest = inputLine.substring(commandLength + 1).split(" ");
+					if (inputRest.length >= 1) {
+						word2 = inputRest[0];
+					}
+					if (inputRest.length >= 2) {
+						word3 = inputRest[1];
+					}
 				}
+				break;
 			}
 		}
 
@@ -89,20 +97,19 @@ public class Parser {
 	 * @param a string to be capitalized
 	 * @return a string that has been capitalized
 	 */
-	private String capitalized(String str) {
+	private String capitalized(String inputString) {
 		char ch;       // En af karakterne i strengen (str)
 		char prevCh;   // Karakteren der befinder sig før ch i strengen
-		int i;         // Positionen i str, from 0 til str.length ()-1
 		prevCh = '.';  // Prime the loop with any non-letter character. 
 		String returnString = ""; // Vi sætter strengen til andet end null
-		for (i = 0; i < str.length(); i++) { // Laver et for-loop der tjekker alle karaktererne igennem i ordene
-			ch = str.charAt(i);
+		for (int i = 0; i < inputString.length(); i++) { // Laver et for-loop der tjekker alle karaktererne igennem i ordene
+			ch = inputString.charAt(i);
 			if (Character.isLetter(ch) && !Character.isLetter(prevCh)) { // Hvis karakteren man har fat i nu er et bogstav, og hvis den forrige karakter ikke er et bogstav:
 				returnString += Character.toUpperCase(ch); // Så skal den sætte det til et stortbogstav
 			} else {
 				returnString += Character.toLowerCase(ch); // Eller så skal den sætte det til et lille bogstav
 			}
-			prevCh = ch;  // prevCh for next iteration is ch.
+			prevCh = ch;	// prevCh for next iteration is ch.
 		}
 		return returnString;
 	}

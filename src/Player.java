@@ -92,10 +92,9 @@ public class Player extends Person {
 	 * of the Stab move is changed. If the item is a range weapon, then a Shoot
 	 * move is added to player moves.
 	 *
-	 * @param item Takes a weapon item to update attacks.
+	 * @param weapon Takes a weapon item to update attacks.
 	 */
-	public void changePlayerMove(Item item) {
-		Weapon weapon = (Weapon) item;
+	public void changePlayerMove(Weapon weapon) {
 		//If the item is a melee weapon
 		if (weapon.weaponType().equalsIgnoreCase("melee")) {
 			Move move = getMove("Stab");
@@ -109,10 +108,9 @@ public class Player extends Person {
 
 	/**
 	 *
-	 * @param item Takes a weapon item which effect on moves should be reversed
+	 * @param weapon Takes a weapon item which effect on moves should be reversed
 	 */
-	public void droppedWeapon(Item item) {
-		Weapon weapon = (Weapon) item;
+	public void droppedWeapon(Weapon weapon) {
 		//If the item is a range weapon
 		if (weapon.weaponType().equalsIgnoreCase("range")) {
 			ArrayList<Move> moves = getMoves();
