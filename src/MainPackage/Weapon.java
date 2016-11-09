@@ -1,49 +1,58 @@
+package MainPackage;
+
 
 /**
+ * The Weapon class implements the interface Item
+ * It is used to create weapons which is a specific type of items
  *
  * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
-public class Flashlight implements Item {
+public class Weapon implements Item {
 
 	private boolean pickup, useable;
-	private int weight, capacity, charges;
+	private int weight, capacity, damage;
 	private String name;
+	private WeaponType weaponType;
 
 	/**
-	 * The constructor for the Flashlight class is called when we want to create
-	 * objects of the Flashlight class with a specific set of instace variables.
+	 * The constructor for the Weapon class is called when we want to create
+	 * objects of the weapon class with a specific set of instace variables.
 	 *
 	 * @param pickup is a boolean used to check if the item can be picked up
-	 * @param name is a String that refers to the name of the item
-	 * @param useable is a boolean used to check if the item can be used
+	 * @param name is a String that refers to the name of the weapon
+	 * @param useable is a boolean used to check if the item can be used once you
+	 * have picked it up
 	 * @param weight is an int that refers to the weight of the item
-	 * @param capacity is an int that refers to the capacity of the item
-	 * @param charges is an int that refers to how many charges the item has
+	 * @param capacity is an int that refers to how much space it requires in the
+	 * inventory
+	 * @param damage is an int that refers to how much damage you deal to bosses
+	 * while wielding this weapon
+	 * @param weaponType is a String that refers to the type e.g. ranged or melee
 	 */
-	public Flashlight(boolean pickup, String name, boolean useable, int weight, int capacity, int charges) {
+	public Weapon(boolean pickup, String name, boolean useable, int weight, int capacity, int damage, WeaponType weaponType) {
 		this.pickup = pickup;
 		this.name = name;
 		this.weight = weight;
 		this.capacity = capacity;
 		this.useable = useable;
-		this.charges = charges;
+		this.damage = damage;
+		this.weaponType = weaponType;
 	}
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * isPickup method returns the boolean value declared when creating the
-	 * flashlight object
+	 * getType method returns the enum value corresponding to this item type
 	 *
 	 * @return will return a value of the type ItemType enum
 	 */
 	@Override
 	public ItemType getType() {
-		return ItemType.FLASHLIGHT;
+		return ItemType.WEAPON;
 	}
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * getName method returns the name of the flashlight object
+	 * getName method returns the name of the weapon object
 	 *
 	 * @return will return the name of the item in a String
 	 */
@@ -54,8 +63,8 @@ public class Flashlight implements Item {
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * isPickup method returns the boolean value declared when creating the
-	 * flashlight object
+	 * isPickup method returns the boolean value declared when creating the weapon
+	 * object
 	 *
 	 * @return will return a boolean equal to what is declared when creating the
 	 * object
@@ -68,7 +77,7 @@ public class Flashlight implements Item {
 	/**
 	 * We override the instance method which is declare in the interface The
 	 * isUseable method returns the boolean value declared when creating the
-	 * flashlight object
+	 * weapon object
 	 *
 	 * @return will return a boolean equal to what is declared when creating the
 	 * object
@@ -80,8 +89,8 @@ public class Flashlight implements Item {
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * getWeight method returns the int value declared when creating the
-	 * flashlight object
+	 * getWeight method returns the int value declared when creating the weapon
+	 * object
 	 *
 	 * @return will return an int equal to what is declared when creating the
 	 * object
@@ -93,8 +102,8 @@ public class Flashlight implements Item {
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * getCapacity method returns the int value declared when creating the
-	 * flashlight object
+	 * getCapacity method returns the int value declared when creating the weapon
+	 * object
 	 *
 	 * @return will return a int equal to what is declared when creating the
 	 * object
@@ -105,26 +114,25 @@ public class Flashlight implements Item {
 	}
 
 	/**
-	 * The getCharges method returns the int value declared when creating the
-	 * flashlight object
+	 * The weaponType method returns the WeaponType declared when creating the weapon
+	 * object
+	 *
+	 * @return will return a WeaponType enum equal to what is declared when creating the
+	 * object
+	 */
+	public WeaponType weaponType() {
+		return weaponType;
+	}
+
+	/**
+	 * The getDamage method returns the int value declared when creating the
+	 * weapon object
 	 *
 	 * @return will return an int equal to what is declared when creating the
 	 * object
 	 */
-	public int getCharges() {
-		return this.charges;
-
-	}
-
-	/**
-	 * The subtractCharge method will subtract the int value of subCharge from
-	 * charges
-	 *
-	 * @param subCharge is an int used to determine how many charges we subract
-	 */
-	public void subtractCharge(int subCharge) {
-
-		this.charges -= subCharge;
+	public int getDamage() {
+		return damage;
 	}
 
 }

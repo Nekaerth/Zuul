@@ -1,3 +1,6 @@
+package MainPackage;
+
+
 
 import java.util.Set;
 import java.util.HashMap;
@@ -12,10 +15,12 @@ import java.util.Scanner;
 public class Room {
 
 	private final String description;
+	private String name;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	private final Inventory inventory = new Inventory();
 	private boolean numberRoom, escapeRoom, lock, needsBoss = false;
-	int number;
+	private int number;
+	private String id;
 
 	/**
 	 * The constructor of the class Room. The constructor takes 3 parameters: A
@@ -23,16 +28,22 @@ public class Room {
 	 * contains a number and a boolean that says whether or not the room need to
 	 * create a boss
 	 *
+	 * @param id
 	 * @param description string
 	 * @param numberRoom boolean
-	 * @param needsBoss boolean
+	 * @param lock
+	 * @param escapeRoom
+	 * @param name
 	 */
-	public Room(String description, boolean numberRoom, boolean needsBoss) { //Constructor der tager en string der beskriver rummet
+	public Room(String id, String description, boolean numberRoom, boolean lock, boolean escapeRoom, String name) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
-		this.escapeRoom = false;
+		this.escapeRoom = escapeRoom;
+		this.id = id;
+		this.name = name;
 		this.numberRoom = numberRoom;
-		this.needsBoss = needsBoss;
+		this.needsBoss = false;
+		this.lock = lock;
 		if (numberRoom == true) {
 			number = (int) (Math.random() * 9);
 		}
@@ -180,5 +191,26 @@ public class Room {
 
 	public void setNeedsBoss(boolean needsBoss) {
 		this.needsBoss = needsBoss;
+	}
+
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 }

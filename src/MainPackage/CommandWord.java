@@ -1,3 +1,5 @@
+package MainPackage;
+
 
 /**
  * The enum is a special type of class.

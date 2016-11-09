@@ -1,3 +1,5 @@
+package MainPackage;
+
 
 /**
  * This class represent an Move, which can be used both for the player and the

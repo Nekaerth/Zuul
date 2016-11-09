@@ -1,3 +1,5 @@
+package MainPackage;
+
 
 /**
  * An interface that can be used for items in the game. It contains methods that are required for the game to run.

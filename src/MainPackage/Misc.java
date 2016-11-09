@@ -1,31 +1,28 @@
+package MainPackage;
 
-/**
- *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-public class SpecialItem implements Item {
+
+public class Misc implements Item {
 
 	private boolean pickup, useable;
-	private int weight, capacity;
 	private String name;
 
 	/**
-	 * The constructor for the specialItem class is called when we want to create
-	 * objects of the specialItem class with a specific set of instace variables.
+	 * The constructor for the Weapon class is called when we want to create
+	 * objects of the misc class with a specific set of instace variables.
 	 *
 	 * @param pickup is a boolean used to check if the item can be picked up
-	 * @param name is a String that refers to the name of the specialItem
+	 * @param name is a String that refers to the name of the misc
 	 * @param useable is a boolean used to check if the item can be used once you
 	 * have picked it up
-	 * @param weight is an int that refers to the weight of the item
-	 * @param capacity is an int that refers to how much space it requires in the
-	 * inventory
 	 */
-	public SpecialItem(boolean pickup, String name, boolean useable, int weight, int capacity) {
+	public Misc(boolean pickup, String name, boolean useable) {
 		this.pickup = pickup;
 		this.name = name;
-		this.weight = weight;
-		this.capacity = capacity;
 		this.useable = useable;
 	}
 
@@ -37,12 +34,12 @@ public class SpecialItem implements Item {
 	 */
 	@Override
 	public ItemType getType() {
-		return ItemType.SPECIALITEM;
+		return ItemType.MISC;
 	}
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * getName method returns the name of the specialItem object
+	 * getName method returns the name of the misc object
 	 *
 	 * @return will return the name of the item in a String
 	 */
@@ -53,8 +50,8 @@ public class SpecialItem implements Item {
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * isPickup method returns the boolean value declared when creating the
-	 * specialItem object
+	 * isPickup method returns the boolean value declared when creating the misc
+	 * object
 	 *
 	 * @return will return a boolean equal to what is declared when creating the
 	 * object
@@ -66,8 +63,8 @@ public class SpecialItem implements Item {
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * isUseable method returns the boolean value declared when creating the
-	 * specialItem object
+	 * isUseable method returns the boolean value declared when creating the misc
+	 * object
 	 *
 	 * @return will return a boolean equal to what is declared when creating the
 	 * object
@@ -79,27 +76,26 @@ public class SpecialItem implements Item {
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * getWeight method returns the int value declared when creating the
-	 * specialItem object
+	 * getWeight method returns 0 as an int when called on an object of the misc
+	 * class
 	 *
-	 * @return will return an int equal to what is declared when creating the
-	 * object
+	 * @return will return 0 as an int
 	 */
 	@Override
 	public int getWeight() {
-		return this.weight;
+		return 0;
 	}
 
 	/**
 	 * We override the instance method which is declare in the interface The
-	 * getCapacity method returns the int value declared when creating the
-	 * specialItem object
+	 * getCapacity method returns 0 as an int when called on an object of the misc
+	 * class
 	 *
-	 * @return will return a int equal to what is declared when creating the
-	 * object
+	 * @return will return 0 as an int
 	 */
 	@Override
 	public int getCapacity() {
-		return this.capacity;
+		return 0;
 	}
+
 }

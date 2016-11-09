@@ -1,3 +1,5 @@
+package MainPackage;
+
 
 /**
  * *******************GAME CLASS*************************************
@@ -11,16 +13,17 @@ public class Game {
 	private final Parser parser;
 	private Player player;
 	private final ArrayList<Boss> bosses = new ArrayList<>();
-	private Room cell, cellhall, dininghall, yard, office, storage, parkinglot, tunnel, employeeCanteen; // initializes the rooms available
+	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
 	/**
 	 * The construter for the game class consists off calling a method The
 	 * createRooms() method and creating a new object of the parser class.
+	 * @param rooms
 	 */
-	public Game() //Constructor
+	public Game(ArrayList<Room> rooms) //Constructor
 	{
-		createRooms(); // calls the createRooms() method
+		createRooms(rooms); // calls the createRooms() method
 		parser = new Parser(); // creates a new object of the parser class
 	}
 
@@ -28,57 +31,15 @@ public class Game {
 	 * This method creates all the rooms which are available and an object of the
 	 * player class
 	 */
-	private void createRooms() //Called from the constructor
+	private void createRooms(ArrayList<Room> rooms) //Called from the constructor
 	{
-		// initializes the rooms available
-		cell = new Room("in your own cell.", false, false); //The constructor for room is called with parameters String, boolean
-		cellhall = new Room("in the cellhall. Be carefull, the guards are on the lookout.", false, true);
-		dininghall = new Room("in the dininghall. You find yourself stepping on a piece of ham. Yuck!", true, false);
-		yard = new Room("in the yard. Fresh air, ahh.", false, false);
-		office = new Room("in the office. They have alot of paperwork going on here.", true, false);
-		storage = new Room("in the storage. Grab what you can and get on the run fast. They are monitoring this room!", false, false);
-		parkinglot = new Room("outside at the parkinglot. There is a parked car, it could be your getaway.", false, false);
-		tunnel = new Room("in a secret tunnel", true, false);
-		employeeCanteen = new Room("in the employees canteen", false, false);
+		this.rooms = rooms;
 
-		cell.setExit("Cellhall", cellhall); // Calls the method in room called set exit, taking a string and room object as an argument.
-		setCellInventory(); // calls the method setCellInventory()
-		//to declare what items that are in the cell when the game begins
-
-		tunnel.setExit("Canteen", employeeCanteen);
-		tunnel.setExit("Cell", cell);
-		setHiddenroomInventory();
-
-		employeeCanteen.setExit("Tunnel", tunnel);
-		setBossroomInventory();
-
-		dininghall.setExit("Cellhall", cellhall);
-		setDininghallInventory();
-
-		cellhall.setExit("Dininghall", dininghall);
-		cellhall.setExit("Yard", yard);
-		cellhall.setExit("Office", office);
-		cellhall.setExit("Cell", cell);
-
-		office.setExit("Storage", storage);
-		office.setExit("Cellhall", cellhall);
-		setOfficeInventory();
-		office.LockRoom();
-
-		yard.setExit("Cellhall", cellhall);
-		setYardInventory();
-
-		storage.setExit("Office", office);
-		setStorageInventory();
-		storage.LockRoom();
-
-		parkinglot.setEscapeRoom();
-
-		player = new Player(cell, 100, 1200, 3, 20); // creates a new object of the player class
+		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 
-		bosses.add(0, new Boss(employeeCanteen, 100, "boss 1"));
-		setUpBoss1();
+		//bosses.add(0, new Boss(employeeCanteen, 100, "boss 1"));
+		//setUpBoss1();
 	}
 
 	/**
@@ -125,68 +86,68 @@ public class Game {
 		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
 	}
 
-	/**
-	 * The setCellInventory() method will set the cell inventory when the game.
-	 * starts
-	 */
-	private void setCellInventory() {
-		Inventory inventory = cell.getInventory();
-		inventory.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, WeaponType.MELEE));
-		inventory.putItem("Stick", new Misc(false, "Stick", false));
-	}
-
-	/**
-	 * This method will set the hidden rooms inventory when the game starts.
-	 */
-	private void setHiddenroomInventory() {
-		Inventory inventory = tunnel.getInventory();
-		inventory.putItem("Flashlight", new Flashlight(true, "Flashlight", true, 5, 1, 5));
-	}
-
-	/**
-	 * This method will set the boss rooms inventory when the game starts
-	 */
-	private void setBossroomInventory() {
-		Inventory inventory = employeeCanteen.getInventory();
-		inventory.putItem("Key", new Key(true, "Key", false, 5, 1));
-	}
-
-	/**
-	 * This method will set the dining hall inventory when the game starts.
-	 */
-	private void setDininghallInventory() {
-		Inventory inventory = dininghall.getInventory();
-		inventory.putItem("Key", new Key(true, "Key", true, 5, 1));
-		inventory.putItem("Plate", new Misc(false, "Plate", false));
-		inventory.putItem("Fork", new Weapon(true, "Fork", true, 1, 1, 12, WeaponType.MELEE));
-	}
-
-	/**
-	 * This method will set the office inventory when the game starts.
-	 */
-	private void setOfficeInventory() {
-		Inventory inventory = office.getInventory();
-		inventory.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
-		inventory.putItem("Papers", new Misc(false, "Papers", false));
-	}
-
-	/**
-	 * This method will set the yard inventory when the game starts.
-	 */
-	private void setYardInventory() {
-		Inventory inventory = yard.getInventory();
-		inventory.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, WeaponType.MELEE));
-	}
-
-	/**
-	 * This method will set the storage inventory when the game starts.
-	 */
-	private void setStorageInventory() {
-		Inventory inventory = storage.getInventory();
-		inventory.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
-		inventory.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, WeaponType.RANGED));
-		inventory.putItem("Boxes", new Misc(false, "Box", false));
-	}
+//	/**
+//	 * The setCellInventory() method will set the cell inventory when the game.
+//	 * starts
+//	 */
+//	private void setCellInventory() {
+//		Inventory inventory = cell.getInventory();
+//		inventory.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, WeaponType.MELEE));
+//		inventory.putItem("Stick", new Misc(false, "Stick", false));
+//	}
+//
+//	/**
+//	 * This method will set the hidden rooms inventory when the game starts.
+//	 */
+//	private void setHiddenroomInventory() {
+//		Inventory inventory = tunnel.getInventory();
+//		inventory.putItem("Flashlight", new Flashlight(true, "Flashlight", true, 5, 1, 5));
+//	}
+//
+//	/**
+//	 * This method will set the boss rooms inventory when the game starts
+//	 */
+//	private void setBossroomInventory() {
+//		Inventory inventory = employeeCanteen.getInventory();
+//		inventory.putItem("Key", new Key(true, "Key", false, 5, 1));
+//	}
+//
+//	/**
+//	 * This method will set the dining hall inventory when the game starts.
+//	 */
+//	private void setDininghallInventory() {
+//		Inventory inventory = dininghall.getInventory();
+//		inventory.putItem("Key", new Key(true, "Key", true, 5, 1));
+//		inventory.putItem("Plate", new Misc(false, "Plate", false));
+//		inventory.putItem("Fork", new Weapon(true, "Fork", true, 1, 1, 12, WeaponType.MELEE));
+//	}
+//
+//	/**
+//	 * This method will set the office inventory when the game starts.
+//	 */
+//	private void setOfficeInventory() {
+//		Inventory inventory = office.getInventory();
+//		inventory.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
+//		inventory.putItem("Papers", new Misc(false, "Papers", false));
+//	}
+//
+//	/**
+//	 * This method will set the yard inventory when the game starts.
+//	 */
+//	private void setYardInventory() {
+//		Inventory inventory = yard.getInventory();
+//		inventory.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, WeaponType.MELEE));
+//	}
+//
+//	/**
+//	 * This method will set the storage inventory when the game starts.
+//	 */
+//	private void setStorageInventory() {
+//		Inventory inventory = storage.getInventory();
+//		inventory.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
+//		inventory.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, WeaponType.RANGED));
+//		inventory.putItem("Boxes", new Misc(false, "Box", false));
+//	}
 
 	/**
 	 * The play method is used to run the game it starts by calling the
@@ -342,13 +303,13 @@ public class Game {
 
 			} else if (nextRoom.getEscapeRoom() == false) {
 				player.setRoom(nextRoom); //Changes players current room to nextRoom.
-				//Should be changed to more generic reuseable code
-				if (nextRoom == storage && cellhall.needsBoss() == true) {
-
-					bosses.add(1, new Boss(cellhall, 100, "boss 2"));
-					setUpBoss2();
-					cellhall.setNeedsBoss(false);
-				}
+//				//Should be changed to more generic reuseable code
+//				if (nextRoom == storage && cellhall.needsBoss() == true) {
+//
+//					bosses.add(1, new Boss(cellhall, 100, "boss 2"));
+//					setUpBoss2();
+//					cellhall.setNeedsBoss(false);
+//				}
 
 				for (Boss boss : bosses) {
 					if (player.getRoom() == boss.getRoom() && player.getRoom().needsBoss() == false) {
@@ -631,7 +592,7 @@ public class Game {
 	 * called
 	 */
 	private void useBlueprints(Command command) {
-		cell.setExit("Tunnel", tunnel);
+//		cell.setExit("Tunnel", tunnel);
 		System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
 		player.getInventory().removeItem(command.getSecondWord());
 	}
@@ -644,15 +605,15 @@ public class Game {
 	 * called
 	 */
 	private void useBoltcutter(Command command) {
-		if (player.getRoom() != yard) {//You can only use boltcutter at the yard
-			System.out.println("You got no use for the boltcutter here");
-		} else if (player.getRoom().getExit("Parkinglot") == null) {
-			System.out.println("You use the boltcutter to cut open the net. You can now escape to the parkinglot.");
-			System.out.println("Find a car and get out of here.");
-			yard.setExit("Parkinglot", parkinglot);
-		} else {
-			System.out.println("You already have opened up to the parkinglot.");
-		}
+////		if (player.getRoom() != yard) {//You can only use boltcutter at the yard
+//			System.out.println("You got no use for the boltcutter here");
+////		} else if (player.getRoom().getExit("Parkinglot") == null) {
+//			System.out.println("You use the boltcutter to cut open the net. You can now escape to the parkinglot.");
+//			System.out.println("Find a car and get out of here.");
+////			yard.setExit("Parkinglot", parkinglot);
+//		} else {
+//			System.out.println("You already have opened up to the parkinglot.");
+//		}
 	}
 
 	/**
