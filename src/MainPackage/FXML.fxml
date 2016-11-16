@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.FXMLController">
+   <children>
+      <HBox prefHeight="40.0" prefWidth="720.0">
+         <children>
+            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="40.0" prefWidth="144.0" text="Exit" />
+            <Button fx:id="helpButton" mnemonicParsing="false" onAction="#handleHelpButton" prefHeight="40.0" prefWidth="144.0" text="Help" />
+            <Label fx:id="timeLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
+            <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#handleInventoryButton" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
+            <Label fx:id="capacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Capacity/Weight" />
+         </children></HBox>
+      <HBox layoutY="760.0" prefHeight="40.0" prefWidth="720.0">
+         <children>
+            <Button fx:id="mapButton" mnemonicParsing="false" onAction="#handleMapButton" prefHeight="40.0" prefWidth="144.0" text="Map" />
+            <Label fx:id="currentRoomLabel" alignment="CENTER" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
+            <Label fx:id="levelLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Level" />
+         </children></HBox>
+      <Pane layoutY="0.0" prefHeight="720.0" prefWidth="720.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
+   </children>
+</AnchorPane>
