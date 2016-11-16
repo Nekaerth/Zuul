@@ -1,10 +1,9 @@
 package MainPackage;
 
-
 /**
- * *******************GAME CLASS*************************************
- * The game class cosists off X instance variable and X instance methods
- * The arraylist is imported from the java utility library
+ * *******************GAME CLASS************************************* The game
+ * class cosists off X instance variable and X instance methods The arraylist is
+ * imported from the java utility library
  */
 import java.util.ArrayList;
 
@@ -12,34 +11,34 @@ public class Game {
 
 	private final Parser parser;
 	private Player player;
-	private final ArrayList<Boss> bosses = new ArrayList<>();
+	private ArrayList<Boss> bosses = new ArrayList<>();
 	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
 	/**
 	 * The construter for the game class consists off calling a method The
 	 * createRooms() method and creating a new object of the parser class.
+	 *
 	 * @param rooms
+	 * @param bosses
 	 */
-	public Game(ArrayList<Room> rooms) //Constructor
+	public Game(ArrayList<Room> rooms,ArrayList<Boss> bosses) //Constructor
 	{
 		createRooms(rooms); // calls the createRooms() method
+		this.bosses = bosses;
+		setUpBoss1();
 		parser = new Parser(); // creates a new object of the parser class
 	}
 
 	/**
-	 * This method creates all the rooms which are available and an object of the
-	 * player class
+	 * This method creates all the rooms which are available and an object of
+	 * the player class
 	 */
 	private void createRooms(ArrayList<Room> rooms) //Called from the constructor
 	{
 		this.rooms = rooms;
-
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
-
-		//bosses.add(0, new Boss(employeeCanteen, 100, "boss 1"));
-		//setUpBoss1();
 	}
 
 	/**
@@ -86,68 +85,6 @@ public class Game {
 		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
 	}
 
-//	/**
-//	 * The setCellInventory() method will set the cell inventory when the game.
-//	 * starts
-//	 */
-//	private void setCellInventory() {
-//		Inventory inventory = cell.getInventory();
-//		inventory.putItem("Stone", new Weapon(true, "Stone", false, 1, 1, 11, WeaponType.MELEE));
-//		inventory.putItem("Stick", new Misc(false, "Stick", false));
-//	}
-//
-//	/**
-//	 * This method will set the hidden rooms inventory when the game starts.
-//	 */
-//	private void setHiddenroomInventory() {
-//		Inventory inventory = tunnel.getInventory();
-//		inventory.putItem("Flashlight", new Flashlight(true, "Flashlight", true, 5, 1, 5));
-//	}
-//
-//	/**
-//	 * This method will set the boss rooms inventory when the game starts
-//	 */
-//	private void setBossroomInventory() {
-//		Inventory inventory = employeeCanteen.getInventory();
-//		inventory.putItem("Key", new Key(true, "Key", false, 5, 1));
-//	}
-//
-//	/**
-//	 * This method will set the dining hall inventory when the game starts.
-//	 */
-//	private void setDininghallInventory() {
-//		Inventory inventory = dininghall.getInventory();
-//		inventory.putItem("Key", new Key(true, "Key", true, 5, 1));
-//		inventory.putItem("Plate", new Misc(false, "Plate", false));
-//		inventory.putItem("Fork", new Weapon(true, "Fork", true, 1, 1, 12, WeaponType.MELEE));
-//	}
-//
-//	/**
-//	 * This method will set the office inventory when the game starts.
-//	 */
-//	private void setOfficeInventory() {
-//		Inventory inventory = office.getInventory();
-//		inventory.putItem("Blueprints", new SpecialItem(true, "Blueprints", true, 5, 1));
-//		inventory.putItem("Papers", new Misc(false, "Papers", false));
-//	}
-//
-//	/**
-//	 * This method will set the yard inventory when the game starts.
-//	 */
-//	private void setYardInventory() {
-//		Inventory inventory = yard.getInventory();
-//		inventory.putItem("Knife", new Weapon(true, "Knife", false, 5, 1, 15, WeaponType.MELEE));
-//	}
-//
-//	/**
-//	 * This method will set the storage inventory when the game starts.
-//	 */
-//	private void setStorageInventory() {
-//		Inventory inventory = storage.getInventory();
-//		inventory.putItem("Boltcutter", new SpecialItem(true, "Boltcutter", true, 5, 1));
-//		inventory.putItem("Pistol", new Weapon(true, "Pistol", false, 5, 1, 25, WeaponType.RANGED));
-//		inventory.putItem("Boxes", new Misc(false, "Box", false));
-//	}
 
 	/**
 	 * The play method is used to run the game it starts by calling the
@@ -274,7 +211,7 @@ public class Game {
 
 		Room nextRoom = player.getRoom().getExit(direction); //Finds the next room in the hashmap room and sets this as NextRoom
 
-		if (nextRoom == null) { //Prints this if there is no room that direction / the hashmap doesnt contain the value of the key
+		if (nextRoom == null || nextRoom.isHidden()) { //Prints this if there is no room that direction / the hashmap doesnt contain the value of the key
 			System.out.println("There is no door!");
 		} else if (!nextRoom.isLocked()) {
 
@@ -345,8 +282,8 @@ public class Game {
 	}
 
 	/**
-	 * The quit method is a case of the user input and is used when the user types
-	 * "quit" as a command
+	 * The quit method is a case of the user input and is used when the user
+	 * types "quit" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -360,8 +297,8 @@ public class Game {
 	}
 
 	/**
-	 * The searchRoom method is a case of the user input and is used when the user
-	 * types "search" as a command
+	 * The searchRoom method is a case of the user input and is used when the
+	 * user types "search" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -400,8 +337,8 @@ public class Game {
 		}
 
 		if (item.isPickup()
-						&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
-						&& player.getInventory().size() + 1 <= player.getCapacity()) {
+				&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
+				&& player.getInventory().size() + 1 <= player.getCapacity()) {
 
 			System.out.println("You picked up " + item.getName());
 			switch (item.getType()) {
@@ -418,13 +355,9 @@ public class Game {
 				case FLASHLIGHT:
 					System.out.println("Use it wisely, it won't last very long!");
 					break;
-				case SPECIALITEM:
-					if (item.getName().equalsIgnoreCase("boltcutter")) {
-						System.out.println("This might be usefull for escaping");
-					} else if (item.getName().equalsIgnoreCase("blueprints")) {
+				case BLUEPRINT:
 						System.out.println("The blueprints could be useful for finding new places to go,");
 						System.out.println("just don't wander around for too long");
-					}
 					break;
 				case KEY:
 					System.out.println("Look for a locked door");
@@ -462,8 +395,8 @@ public class Game {
 	}
 
 	/**
-	 * The drop method is a case of the user input and is used when the user types
-	 * "drop" as a command
+	 * The drop method is a case of the user input and is used when the user
+	 * types "drop" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -488,8 +421,8 @@ public class Game {
 	}
 
 	/**
-	 * The use method is a case of the user input and is used when the user types
-	 * "use" as a command
+	 * The use method is a case of the user input and is used when the user
+	 * types "use" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 */
@@ -514,12 +447,10 @@ public class Game {
 			case FLASHLIGHT:
 				useFlashlight(item);
 				break;
-			case SPECIALITEM:
-				if (item.getName().equalsIgnoreCase("blueprints")) {
-					useBlueprints(command);
-				} else if (item.getName().equalsIgnoreCase("boltcutter")) {
-					useBoltcutter(command);
-				}
+			case BLUEPRINT:
+				showAllRooms();
+				System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
+				player.getInventory().removeItem(command.getSecondWord());
 				break;
 			default:
 				break;
@@ -527,8 +458,8 @@ public class Game {
 	}
 
 	/**
-	 * The useKey method is a case when the user types "use" and is used when the
-	 * user types "use key" as a command
+	 * The useKey method is a case when the user types "use" and is used when
+	 * the user types "use key" as a command
 	 *
 	 * @param command is a parameter that needs a command object as an input
 	 * @param key the key is a item you must have in yor inventory to use the
@@ -585,24 +516,24 @@ public class Game {
 	}
 
 	/**
-	 * The useBlueprints method is a case when the user types "use". This method
-	 * is a case of the "use" input from the user
+	 * The showAllRooms method sets the hidden boolean on all rooms to false
+	 * Called when using the blueprint item
 	 *
-	 * @param command the parameter command is what the method requires when it is
-	 * called
+	 * @param command the parameter command is what the method requires when it
+	 * is called
 	 */
-	private void useBlueprints(Command command) {
-//		cell.setExit("Tunnel", tunnel);
-		System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
-		player.getInventory().removeItem(command.getSecondWord());
+	private void showAllRooms() {
+		for (Room r : rooms) {
+			r.setHidden(false);
+		}
 	}
 
 	/**
 	 * The useBoltcutter method is a case when the user types "use". This method
 	 * is a case of the "use" input from the user
 	 *
-	 * @param command the parameter command is what the method requires when it is
-	 * called
+	 * @param command the parameter command is what the method requires when it
+	 * is called
 	 */
 	private void useBoltcutter(Command command) {
 ////		if (player.getRoom() != yard) {//You can only use boltcutter at the yard

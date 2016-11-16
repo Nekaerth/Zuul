@@ -15,7 +15,8 @@ public class Start {
 		WorldLoader wl = new WorldLoader();
 		wl.loadWorld();
 		ArrayList<Room> rooms = wl.connectWorld();
-		Game game = new Game(rooms);
+		ArrayList<Boss> bosses = wl.loadBosses();
+		Game game = new Game(rooms, bosses);
 		game.play();
 	}
 
