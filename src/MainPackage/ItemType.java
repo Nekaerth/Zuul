@@ -12,6 +12,16 @@ package MainPackage;
  */
 public enum ItemType {
 
-	KEY, WEAPON, FLASHLIGHT, SPECIALITEM, MISC;
+	KEY("key"), WEAPON("weapon"), FLASHLIGHT("flashlight"), SPECIALITEM("specialitem"), MISC("misc");
+        
+        String stringItemType;
 
+        private ItemType (String stringItemType) {
+            this.stringItemType = stringItemType;
+        }
+        
+        @Override
+        public String toString() {
+            return stringItemType;
+        }
 }
