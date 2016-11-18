@@ -12,11 +12,11 @@ import java.util.ArrayList;
  *
  * @author Danieln Johansen
  */
-public class roomSaver {
+public class RoomSaver {
 
     ArrayList<Room> roomSaver;
 
-    public roomSaver() {
+    public RoomSaver() {
         roomSaver = new ArrayList<>();
     }
 

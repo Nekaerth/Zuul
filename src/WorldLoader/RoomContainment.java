@@ -9,7 +9,7 @@ package WorldLoader;
  *
  * @author Danieln Johansen
  */
-class roomContainment {
+class RoomContainment {
 
 	private String id;
 	private String name;
@@ -17,6 +17,7 @@ class roomContainment {
 	private boolean locked;
 	private boolean escapeRoom;
 	private boolean numberRoom;
+	private boolean hidden;
 	private String[] linkedID;
 
 	/**
@@ -145,7 +146,7 @@ class roomContainment {
 	}
 
 	/**
-	 *Empties the roomContainment values, so it's ready to save a new room
+	 *Empties the RoomContainment values, so it's ready to save a new room
 	 */
 	public void flush() {
 		this.description = null;
@@ -155,5 +156,28 @@ class roomContainment {
 		this.locked = false;
 		this.name = null;
 		this.numberRoom = false;
+	}
+
+	/**
+	 * @return the hidden
+	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * @param hidden the hidden to set
+	 */
+	public void setHidden(String hidden) {
+		switch (hidden.toLowerCase()) {
+			case "true":
+				this.hidden = true;
+				break;
+			case "false":
+				this.hidden = false;
+				break;
+			default:
+				System.out.println("Error in hidden boolean in creating worlds");
+		}
 	}
 }
