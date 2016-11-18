@@ -12,7 +12,11 @@ public class Start {
 	 * @param args the command line arguments
 	 */
 	public static void main(String[] args) {
-		Game game = new Game();
+		WorldLoader wl = new WorldLoader();
+		wl.loadWorld();
+		ArrayList<Room> rooms = wl.connectWorld();
+		ArrayList<Boss> bosses = wl.loadBosses();
+		Game game = new Game(rooms, bosses);
 		game.play();
 	}
 
