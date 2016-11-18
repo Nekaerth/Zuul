@@ -11,5 +11,16 @@ package MainPackage;
  * @author Danieln Johansen
  */
 public enum WeaponType {
-	MELEE, RANGED;
+	MELEE("melee"), RANGED("ranged");
+        
+        private String stringWeaponType;
+        
+        WeaponType (String stringWeaponType) {
+            this.stringWeaponType = stringWeaponType;
+        }
+        
+        @Override
+        public String toString() {
+            return stringWeaponType;
+        }
 }

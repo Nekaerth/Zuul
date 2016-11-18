@@ -144,7 +144,23 @@ class RoomContainment {
 	public void setLinkedID(String[] linkedID) {
 		this.linkedID = linkedID;
 	}
+        
+        public boolean isHidden() {
+            return hidden;
+        }
 
+        public void setHidden(String hidden) {
+            switch (hidden.toLowerCase()) {
+			case "true":
+				this.hidden = true;
+				break;
+			case "false":
+				this.hidden = false;
+				break;
+			default:
+				System.out.println("Error in hidden boolean in creating worlds");
+		}
+        }
 	/**
 	 *Empties the RoomContainment values, so it's ready to save a new room
 	 */
@@ -156,28 +172,6 @@ class RoomContainment {
 		this.locked = false;
 		this.name = null;
 		this.numberRoom = false;
-	}
-
-	/**
-	 * @return the hidden
-	 */
-	public boolean isHidden() {
-		return hidden;
-	}
-
-	/**
-	 * @param hidden the hidden to set
-	 */
-	public void setHidden(String hidden) {
-		switch (hidden.toLowerCase()) {
-			case "true":
-				this.hidden = true;
-				break;
-			case "false":
-				this.hidden = false;
-				break;
-			default:
-				System.out.println("Error in hidden boolean in creating worlds");
-		}
+                this.hidden = false;
 	}
 }
