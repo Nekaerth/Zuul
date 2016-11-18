@@ -17,7 +17,7 @@ class RoomContainment {
 	private boolean locked;
 	private boolean escapeRoom;
 	private boolean numberRoom;
-        private boolean hidden;
+	private boolean hidden;
 	private String[] linkedID;
 
 	/**
@@ -162,7 +162,7 @@ class RoomContainment {
 		}
         }
 	/**
-	 *Empties the roomContainment values, so it's ready to save a new room
+	 *Empties the RoomContainment values, so it's ready to save a new room
 	 */
 	public void flush() {
 		this.description = null;
