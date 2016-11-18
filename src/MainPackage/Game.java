@@ -236,7 +236,7 @@ public class Game {
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
 				String correctCode;
-				System.out.println("There is a codelock locking the door, to get to the parkinglot you need to enter a 3 digit code: ");
+				System.out.println("There is a codelock locking the door, to get to the " + nextRoom.getName()+ " you need to enter a 3 digit code: ");
 				String inputCode = parser.getCode();
 				if (roomNumber.size() == 3) {
 					correctCode = getCorrectCode();
