@@ -110,4 +110,11 @@ public class Boss extends Person {
 			return false; //Returns false because you didn't die.
 		}
 	}
+
+	/**
+	 * @return the bossType
+	 */
+	public BossType getBossType() {
+		return bossType;
+	}
 }

@@ -40,7 +40,7 @@ public class Game {
 		if (!bosses.isEmpty()) {
 			for (Boss boss : bosses) {
 
-				switch (boss.getType()) {
+				switch (boss.getBossType()) {
 					case BOSSTYPE1:
 						setUpBoss1(boss);
 						break;
@@ -98,7 +98,7 @@ public class Game {
 		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
 	}
 
-	private void setupDefaultBoss(Boss boss) {
+	private void setUpDefaultBoss(Boss boss) {
 		ArrayList<Move> moves = boss.getMoves();
 		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 100));
 	}
@@ -257,13 +257,7 @@ public class Game {
 
 			} else if (nextRoom.getEscapeRoom() == false) {
 				player.setRoom(nextRoom); //Changes players current room to nextRoom.
-//				//Should be changed to more generic reuseable code
-//				if (nextRoom == storage && cellhall.needsBoss() == true) {
-//
-//					bosses.add(1, new Boss(cellhall, 100, "boss 2"));
-//					setUpBoss2();
-//					cellhall.setNeedsBoss(false);
-//				}
+
 
 				for (Boss boss : bosses) {
 					if (player.getRoom() == boss.getRoom() && player.getRoom().needsBoss() == false) {

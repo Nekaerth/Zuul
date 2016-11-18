@@ -5,6 +5,8 @@
  */
 package WorldLoader;
 
+import MainPackage.BossType;
+
 /**
  *
  * @author Danieln Johansen
@@ -13,6 +15,7 @@ public class BossContainment {
 	
 	private String roomId, name;
 	private int hitpoints;
+	private BossType bossType;
 
 	/**
 	 * @return the roomId
@@ -60,6 +63,25 @@ public class BossContainment {
 		roomId = null;
 		name = null;
 		hitpoints = 0;
+	}
+
+	/**
+	 * @return the bossType
+	 */
+	public BossType getBossType() {
+		return bossType;
+	}
+
+	/**
+	 * @param bossType the bossType to set
+	 */
+	public void setBossType(String bossType) {
+		  bossType = bossType.toLowerCase();
+        for (BossType i : BossType.values()) {
+            if (bossType.equalsIgnoreCase(i.toString())) {
+                this.bossType = i;
+            }
+        }
 	}
 	
 	

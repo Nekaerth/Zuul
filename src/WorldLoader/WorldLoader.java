@@ -265,6 +265,9 @@ public class WorldLoader {
 				case "hitpoints":
 					bossC.setHitpoints(strings[length - 1]);
 					break;
+				case "bossType":
+					bossC.setBossType(strings[length - 1]);
+					break;
 				case "name":
 					bossC.setName(strings[length - 1]);
 					finishBoss = true;
@@ -274,7 +277,7 @@ public class WorldLoader {
 			}
 		}
 		if(finishBoss){
-			Boss boss = new Boss(rs.getRoom(bossC.getRoomId()),bossC.getHitpoints(), bossC.getName());
+			Boss boss = new Boss(rs.getRoom(bossC.getRoomId()),bossC.getHitpoints(), bossC.getName(), bossC.getBossType());
 			bosses.add(boss);
 			bossC.flush();
 			finishBoss = false;
