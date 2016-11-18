@@ -258,14 +258,14 @@ public class WorldLoader {
 		String[] strings = evaluateString.split("=");
 		int length = strings.length;
 		for (String s : strings) {
-			switch (s) {
-				case "roomId":
+			switch (s.toLowerCase()) {
+				case "roomid":
 					bossC.setRoomId(strings[length - 1]);
 					break;
 				case "hitpoints":
 					bossC.setHitpoints(strings[length - 1]);
 					break;
-				case "bossType":
+				case "bosstype":
 					bossC.setBossType(strings[length - 1]);
 					break;
 				case "name":
