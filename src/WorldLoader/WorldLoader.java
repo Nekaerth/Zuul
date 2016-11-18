@@ -16,12 +16,15 @@ import java.util.ArrayList;
  */
 public class WorldLoader {
 
-	roomContainment rc = new roomContainment();
-	roomSaver rs = new roomSaver();
+	RoomContainment rc = new RoomContainment();
+	RoomSaver rs = new RoomSaver();
 	boolean finishRoom = false;
 	boolean finishItem = false;
+	boolean finishBoss = false;
+	ArrayList<Boss> bosses = new ArrayList<>();
 	ArrayList<String> links = new ArrayList<>();
-	itemContainment ic = new itemContainment();
+	ItemContainment ic = new ItemContainment();
+	BossContainment bossC = new BossContainment();
 
 	public void loadWorld() {
 		try {
@@ -32,7 +35,6 @@ public class WorldLoader {
 
 			while (buffer.ready()) {
 				String evaluateString = buffer.readLine();
-				//System.out.println(evaluateString);
 				if (createRoom) {
 					createRoom = createRoom(evaluateString);
 
@@ -52,7 +54,6 @@ public class WorldLoader {
 						createItem = true;
 						break;
 					default:
-						//System.out.println("NOTHING");
 						break;
 				}
 			}
@@ -88,6 +89,9 @@ public class WorldLoader {
 				case "numberRoom":
 					rc.setNumberRoom(strings[length - 1]);
 					break;
+				case "hidden":
+					rc.setHidden(strings[length - 1]);
+					break;
 				case "linkedID":
 					String[] linkStrings = strings[length - 1].split(":");
 					rc.setLinkedID(linkStrings);
@@ -98,7 +102,7 @@ public class WorldLoader {
 			}
 		}
 		if (finishRoom) {
-			Room room = new Room(rc.getId(), rc.getDescription(), rc.getNumberRoom(), rc.getLocked(), rc.getEscapeRoom(), rc.getName());
+			Room room = new Room(rc.getId(), rc.getDescription(), rc.getNumberRoom(), rc.getLocked(), rc.getEscapeRoom(), rc.getName(), rc.isHidden());
 			rs.addRoom(room);
 			buildLinkString();
 			finishRoom = false;
@@ -115,7 +119,7 @@ public class WorldLoader {
 			for (String str : links) { //Split every string in links at "=" and save the strings into linkmap
 				//links consist of a string of the format "mainroomID=roomToConnectID:roomToConnectID:.."
 				//This will generate two strings "mainroomID" and "roomToConnectID:roomToConnectID:.."
-				linkMap = str.split("="); //For each iteration through links, iterate through all the rooms saved in roomSaver
+				linkMap = str.split("="); //For each iteration through links, iterate through all the rooms saved in RoomSaver
 				for (Room r : rs.getAllRooms()) { //Compare the id of a room with the id that is the mainroom saved in linkMap
 					if (r.getId().equalsIgnoreCase(linkMap[0])) { //Set r as the mainroom
 						mainRoom = r; //remove the string from the arraylist links
@@ -128,7 +132,7 @@ public class WorldLoader {
 
 			} //Split the second string in linkMap at each ":" and save it into the array values, the second string consists of "roomToConnectID:roomToConnectID:.."
 			String[] values = linkMap[1].split(":"); //Iterate through the array called values
-			for (String str2 : values) { //For each iteration through values, iterate through the rooms saved in roomSaver
+			for (String str2 : values) { //For each iteration through values, iterate through the rooms saved in RoomSaver
 				for (Room r2 : rs.getAllRooms()) { //Compare the id of a room with the string from values. The string from values consist of a "roomToConnectID" string
 					if (r2.getId().equalsIgnoreCase(str2)) { //If true, set the room as the secondRoom
 						secondRoom = r2; //Print out a confirmation message to the console
@@ -137,7 +141,7 @@ public class WorldLoader {
 					}
 				}
 			} //Do this while there are still links left in the links array
-		} while (links.size() > 0); //Return an arraylist of all the rooms saved in roomSaver
+		} while (links.size() > 0); //Return an arraylist of all the rooms saved in RoomSaver
 		return rs.getAllRooms();
 	}
 
@@ -190,9 +194,9 @@ public class WorldLoader {
 					Misc misc = new Misc(ic.isPickup(), ic.getName(), ic.isUseable());
 					rs.addItem(misc, ic.getRoomID());
 					break;
-				case SPECIALITEM:
-					SpecialItem specialItem = new SpecialItem(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity());
-					rs.addItem(specialItem, ic.getRoomID());
+				case BLUEPRINT:
+					Blueprint blueprint = new Blueprint(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity());
+					rs.addItem(blueprint, ic.getRoomID());
 					break;
 				case WEAPON:
 					Weapon weapon = new Weapon(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity(), ic.getDamage(), ic.getWeapontype());
@@ -218,4 +222,67 @@ public class WorldLoader {
 
 	}
 
+	public ArrayList<Boss> loadBosses() {
+		try {
+			boolean createBoss = false;
+			FileReader file;
+			file = new FileReader("bossfile.dne");
+			BufferedReader buffer = new BufferedReader(file);
+
+			while (buffer.ready()) {
+				String evaluateString = buffer.readLine();
+				if (createBoss) {
+					createBoss = createBoss(evaluateString);
+				}
+
+				switch (evaluateString.toLowerCase()) {
+					case "[boss]":
+						System.out.println("boss");
+						createBoss = true;
+						break;
+					default:
+						break;
+				}
+			}
+
+		} catch (Exception e) {
+			System.out.println("noget gik galt");
+			System.out.println(e);
+
+		}
+		return this.bosses;
+
+	}
+
+	private boolean createBoss(String evaluateString) {
+		String[] strings = evaluateString.split("=");
+		int length = strings.length;
+		for (String s : strings) {
+			switch (s) {
+				case "roomId":
+					bossC.setRoomId(strings[length - 1]);
+					break;
+				case "hitpoints":
+					bossC.setHitpoints(strings[length - 1]);
+					break;
+				case "bossType":
+					bossC.setBossType(strings[length - 1]);
+					break;
+				case "name":
+					bossC.setName(strings[length - 1]);
+					finishBoss = true;
+					break;
+				default:
+					break;
+			}
+		}
+		if(finishBoss){
+			Boss boss = new Boss(rs.getRoom(bossC.getRoomId()),bossC.getHitpoints(), bossC.getName(), bossC.getBossType());
+			bosses.add(boss);
+			bossC.flush();
+			finishBoss = false;
+			return false;			
+		}
+		return true;
+	}
 }

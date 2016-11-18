@@ -18,7 +18,7 @@ public class Room {
 	private String name;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	private final Inventory inventory = new Inventory();
-	private boolean numberRoom, escapeRoom, lock, needsBoss = false;
+	private boolean numberRoom, escapeRoom, lock, needsBoss = false, hidden;
 	private int number;
 	private String id;
 
@@ -34,8 +34,9 @@ public class Room {
 	 * @param lock
 	 * @param escapeRoom
 	 * @param name
+	 * @param hidden
 	 */
-	public Room(String id, String description, boolean numberRoom, boolean lock, boolean escapeRoom, String name) { //Constructor der tager en string der beskriver rummet
+	public Room(String id, String description, boolean numberRoom, boolean lock, boolean escapeRoom, String name, boolean hidden) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
 		this.escapeRoom = escapeRoom;
@@ -44,11 +45,12 @@ public class Room {
 		this.numberRoom = numberRoom;
 		this.needsBoss = false;
 		this.lock = lock;
+		this.hidden = hidden;
 		if (numberRoom == true) {
 			number = (int) (Math.random() * 9);
 		}
 	}
-
+	
 	/**
 	 *
 	 * @return the rooms inventory.
@@ -97,7 +99,9 @@ public class Room {
 		String returnString = "Exits:";
 		Set<String> keys = exits.keySet();
 		for (String exit : keys) {
+			if(!exits.get(exit).isHidden()){
 			returnString = returnString + " " + exit;
+			}
 		}
 		return returnString;
 	}
@@ -212,5 +216,19 @@ public class Room {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * @return the hidden
+	 */
+	public boolean isHidden() {
+		return hidden;
+	}
+
+	/**
+	 * @param hidden the hidden to set
+	 */
+	public void setHidden(boolean hidden) {
+		this.hidden = hidden;
 	}
 }

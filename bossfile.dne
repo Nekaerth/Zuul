@@ -1,0 +1,4 @@
+[boss]
+roomId=2
+hitpoints=100
+name=boss

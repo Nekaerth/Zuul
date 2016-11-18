@@ -12,7 +12,7 @@ import MainPackage.ItemType;
  *
  * @author simon
  */
-public class itemContainment {
+public class ItemContainment {
     
     private String id;
     private ItemType type;

@@ -12,7 +12,7 @@ package MainPackage;
  */
 public enum ItemType {
 
-	KEY("key"), WEAPON("weapon"), FLASHLIGHT("flashlight"), SPECIALITEM("specialitem"), MISC("misc");
+	KEY("key"), WEAPON("weapon"), FLASHLIGHT("flashlight"), BLUEPRINT("blueprint"), MISC("misc");
         
         String stringItemType;
 
