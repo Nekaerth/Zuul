@@ -1,27 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="800.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.FXMLController">
-   <children>
-      <HBox prefHeight="40.0" prefWidth="720.0">
+<Pane fx:id="prisonBreak" prefHeight="800.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.FXMLController">
+	<children>
+		<Pane fx:id="gameView" prefHeight="800.0" prefWidth="720.0">
+			<children>
+				<HBox fx:id="topMenu" prefHeight="40.0" prefWidth="720.0">
+					<children>
+						<Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="40.0" prefWidth="144.0" text="Exit" />
+						<Button fx:id="helpButton" mnemonicParsing="false" onAction="#handleHelpButton" prefHeight="40.0" prefWidth="144.0" text="Help" />
+						<Label fx:id="timeLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
+						<Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#handleInventoryButton" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
+						<Label fx:id="capacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Capacity/Weight" />
+					</children>
+				</HBox>
+				<HBox fx:id="bottomMenu" layoutY="760.0" prefHeight="40.0" prefWidth="720.0">
+					<children>
+						<Button fx:id="mapButton" mnemonicParsing="false" onAction="#handleMapButton" prefHeight="40.0" prefWidth="144.0" text="Map" />
+						<Label fx:id="currentRoomLabel" alignment="CENTER" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
+						<Label fx:id="levelLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Level" />
+					</children>
+				</HBox>
+				<Pane fx:id="roomScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" />
+			</children>
+		</Pane>
+		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0" visible="false">
          <children>
-            <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="40.0" prefWidth="144.0" text="Exit" />
-            <Button fx:id="helpButton" mnemonicParsing="false" onAction="#handleHelpButton" prefHeight="40.0" prefWidth="144.0" text="Help" />
-            <Label fx:id="timeLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
-            <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#handleInventoryButton" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
-            <Label fx:id="capacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Capacity/Weight" />
-         </children></HBox>
-      <HBox layoutY="760.0" prefHeight="40.0" prefWidth="720.0">
-         <children>
-            <Button fx:id="mapButton" mnemonicParsing="false" onAction="#handleMapButton" prefHeight="40.0" prefWidth="144.0" text="Map" />
-            <Label fx:id="currentRoomLabel" alignment="CENTER" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
-            <Label fx:id="levelLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Level" />
-         </children></HBox>
-      <Pane layoutY="0.0" prefHeight="720.0" prefWidth="720.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
-   </children>
-</AnchorPane>
+            <Label fx:id="startMenuTitel" alignment="CENTER" layoutY="80.0" prefHeight="80.0" prefWidth="720.0" text="Prison Break">
+               <font>
+                  <Font name="System Bold" size="60.0" />
+               </font>
+            </Label>
+            <Button fx:id="startMenuStartButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Start" />
+            <Button fx:id="startMenuHighScoreButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="High Score" />
+            <Button fx:id="startMenuQuitButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Quit" />
+         </children></Pane>
+	</children>
+</Pane>

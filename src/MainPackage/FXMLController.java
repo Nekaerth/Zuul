@@ -12,6 +12,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -36,6 +38,26 @@ public class FXMLController implements Initializable {
 	private Label currentRoomLabel;
 	@FXML
 	private Label levelLabel;
+	@FXML
+	private Pane prisonBreak;
+	@FXML
+	private Pane gameView;
+	@FXML
+	private HBox topMenu;
+	@FXML
+	private HBox bottomMenu;
+	@FXML
+	private Pane roomScene;
+	@FXML
+	private Pane startMenu;
+	@FXML
+	private Label startMenuTitel;
+	@FXML
+	private Button startMenuStartButton;
+	@FXML
+	private Button startMenuHighScoreButton;
+	@FXML
+	private Button startMenuQuitButton;
 
 	@FXML
 	private void handleExitButton() {
