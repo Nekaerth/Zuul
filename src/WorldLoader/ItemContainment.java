@@ -24,7 +24,7 @@ public class ItemContainment {
     private int charges;
     private String name;
     private int damage;
-    private WeaponType weapontype;
+    private WeaponType weaponType;
     
     
     /**
@@ -195,23 +195,21 @@ public class ItemContainment {
      * @return the weapontype
      */
     public WeaponType getWeapontype() {
-        return weapontype;
+        return weaponType;
     }
 
     /**
      * @param weapontype the weapontype to set
      */
-    public void setWeapontype(String weapontype) {
-        weapontype = weapontype.toLowerCase();
-        switch (weapontype) {
-            case "melee":
-                this.weapontype = WeaponType.MELEE;
-                break;
-            case "range":
-                this.weapontype = WeaponType.RANGED;
-                break;
+    public void setWeapontype(String weaponType) {
+        weaponType = weaponType.toLowerCase();
+        for (WeaponType w : WeaponType.values()) {
+            if (weaponType.equalsIgnoreCase(w.toString())) {
+                this.weaponType = w;
+            }
         }
     }
+    
        public void flush() {
         this.id = null;
         this.type = null;
@@ -223,7 +221,7 @@ public class ItemContainment {
         this.charges = 0;
         this.name = null;
         this.damage = 0;
-        this.weapontype = null;
+        this.weaponType = null;
         }
     }
 
