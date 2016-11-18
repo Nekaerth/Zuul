@@ -5,6 +5,7 @@ package MainPackage;
  * class cosists off X instance variable and X instance methods The arraylist is
  * imported from the java utility library
  */
+import WorldLoader.WorldLoader;
 import java.util.ArrayList;
 
 public class Game {
@@ -19,12 +20,15 @@ public class Game {
 	 * The construter for the game class consists off calling a method The
 	 * createGame() method and creating a new object of the parser class.
 	 *
-	 * @param rooms
-	 * @param bosses
-	 */
-	public Game(ArrayList<Room> rooms, ArrayList<Boss> bosses) //Constructor
+	*/
+	public Game() //Constructor
 	{
+		WorldLoader wl = new WorldLoader();
+		wl.loadWorld();
+		this.rooms = wl.connectWorld();
+		this.bosses = wl.loadBosses();
 		createGame(rooms); // calls the createGame() method
+		
 		parser = new Parser(); // creates a new object of the parser class
 	}
 
