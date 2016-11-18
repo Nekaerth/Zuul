@@ -23,6 +23,7 @@ public class Boss extends Person {
 	 * @param room Sets which room the boss currently is in.
 	 * @param hitpoint Sets the boss's hitpoint.
 	 * @param name Sets the name of the boss.
+         * @param bossType
 	 */
 	public Boss(Room room, int hitpoint, String name, BossType bossType) {
 		super(room, hitpoint);

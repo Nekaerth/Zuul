@@ -113,15 +113,11 @@ public class ItemContainment {
      * @param pickup the pickup to set
      */
     public void setPickup(String pickup) {
-        switch (pickup.toLowerCase()){
-            case "true":
-                this.pickup = true;
-                break;
-            case "false":
-                this.pickup = false;
-                break;
-            default:
-                System.out.println("Error in pickup in");
+        if (pickup.toLowerCase() == "true") {
+            this.pickup = true;
+        }
+        else {
+            this.pickup = false;
         }
     }
 
@@ -136,17 +132,13 @@ public class ItemContainment {
      * @param useable the useable to set
      */
     public void setUseable(String useable) {
-        switch (useable.toLowerCase()) {
-            case "true":
-                this.useable = true;
-                break;
-            case "false":
-                this.useable = false;
-                break;
-            default:
-                System.out.println("Error");
-                
+        if (useable.toLowerCase() == "true") {
+            this.useable = true;
         }
+        else {
+            this.useable = false;
+        }
+        
     }
 
     /**
