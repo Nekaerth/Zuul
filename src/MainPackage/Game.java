@@ -17,16 +17,14 @@ public class Game {
 
 	/**
 	 * The construter for the game class consists off calling a method The
-	 * createRooms() method and creating a new object of the parser class.
+	 * createGame() method and creating a new object of the parser class.
 	 *
 	 * @param rooms
 	 * @param bosses
 	 */
-	public Game(ArrayList<Room> rooms,ArrayList<Boss> bosses) //Constructor
+	public Game(ArrayList<Room> rooms, ArrayList<Boss> bosses) //Constructor
 	{
-		createRooms(rooms); // calls the createRooms() method
-		this.bosses = bosses;
-		setUpBoss1();
+		createGame(rooms); // calls the createGame() method
 		parser = new Parser(); // creates a new object of the parser class
 	}
 
@@ -34,11 +32,27 @@ public class Game {
 	 * This method creates all the rooms which are available and an object of
 	 * the player class
 	 */
-	private void createRooms(ArrayList<Room> rooms) //Called from the constructor
+	private void createGame(ArrayList<Room> rooms) //Called from the constructor
 	{
 		this.rooms = rooms;
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
+		if (!bosses.isEmpty()) {
+			for (Boss boss : bosses) {
+
+				switch (boss.getType()) {
+					case BOSSTYPE1:
+						setUpBoss1(boss);
+						break;
+					case BOSSTYPE2:
+						setUpBoss2(boss);
+						break;
+					default:
+						setUpDefaultBoss(boss);
+						break;
+				}
+			}
+		}
 	}
 
 	/**
@@ -65,19 +79,18 @@ public class Game {
 	 * Sets up the first boss, by adding all moves and adding all items to his
 	 * inventory.
 	 */
-	private void setUpBoss1() {
-		ArrayList<Move> moves = this.bosses.get(0).getMoves();
+	private void setUpBoss1(Boss boss) {
+		ArrayList<Move> moves = boss.getMoves();
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-		this.bosses.get(0).getInventory().putItem("Key", new Key(true, "Key", true, 1, 1));
 	}
 
 	/**
 	 * Sets up the second boss, by adding all moves.
 	 */
-	private void setUpBoss2() {
-		ArrayList<Move> moves = this.bosses.get(1).getMoves();
+	private void setUpBoss2(Boss boss) {
+		ArrayList<Move> moves = boss.getMoves();
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
@@ -85,6 +98,10 @@ public class Game {
 		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
 	}
 
+	private void setupDefaultBoss(Boss boss) {
+		ArrayList<Move> moves = boss.getMoves();
+		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 100));
+	}
 
 	/**
 	 * The play method is used to run the game it starts by calling the
@@ -356,8 +373,8 @@ public class Game {
 					System.out.println("Use it wisely, it won't last very long!");
 					break;
 				case BLUEPRINT:
-						System.out.println("The blueprints could be useful for finding new places to go,");
-						System.out.println("just don't wander around for too long");
+					System.out.println("The blueprints could be useful for finding new places to go,");
+					System.out.println("just don't wander around for too long");
 					break;
 				case KEY:
 					System.out.println("Look for a locked door");
@@ -557,4 +574,5 @@ public class Game {
 		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 		System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
 	}
+
 }
