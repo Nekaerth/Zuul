@@ -43,7 +43,7 @@ public class Player extends Person {
 	 */
 	public int getTime() {
 		return this.time;
-	}
+	}        
 
 	/**
 	 * The subtractTime() method is used as a count down timer to keep track of

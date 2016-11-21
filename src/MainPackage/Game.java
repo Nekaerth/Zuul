@@ -5,6 +5,7 @@ package MainPackage;
  * class cosists off X instance variable and X instance methods The arraylist is
  * imported from the java utility library
  */
+import WorldLoader.WorldLoader;
 import java.util.ArrayList;
 
 public class Game {
@@ -19,12 +20,14 @@ public class Game {
 	 * The construter for the game class consists off calling a method The
 	 * createGame() method and creating a new object of the parser class.
 	 *
-	 * @param rooms
-	 * @param bosses
 	 */
-	public Game(ArrayList<Room> rooms, ArrayList<Boss> bosses) //Constructor
+	public Game() //Constructor
 	{
-		createGame(rooms); // calls the createGame() method
+		WorldLoader wl = new WorldLoader();
+		wl.loadWorld();
+		this.rooms = wl.connectWorld();
+		this.bosses = wl.loadBosses();
+		createGame(); // calls the createGame() method
 		parser = new Parser(); // creates a new object of the parser class
 	}
 
@@ -32,9 +35,9 @@ public class Game {
 	 * This method creates all the rooms which are available and an object of
 	 * the player class
 	 */
-	private void createGame(ArrayList<Room> rooms) //Called from the constructor
+	public void createGame() //Called from the constructor
 	{
-		this.rooms = rooms;
+		
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 		if (!bosses.isEmpty()) {
@@ -189,6 +192,11 @@ public class Game {
 					//If time is typed
 					System.out.println("You have " + player.displayTime() + " left."); //Displays amount of time left, before you lose the game
 					break;
+                                case RESTART:
+                                        wantToQuit = true;
+                                        System.out.println("You restart the game");
+                                        play();
+                                        break;                                
 				default:
 					break;
 			}
@@ -546,7 +554,7 @@ public class Game {
 	 * @param command the parameter command is what the method requires when it
 	 * is called
 	 */
-	private void useBoltcutter(Command command) {
+//	private void useBoltcutter(Command command) {
 ////		if (player.getRoom() != yard) {//You can only use boltcutter at the yard
 //			System.out.println("You got no use for the boltcutter here");
 ////		} else if (player.getRoom().getExit("Parkinglot") == null) {
@@ -556,7 +564,7 @@ public class Game {
 //		} else {
 //			System.out.println("You already have opened up to the parkinglot.");
 //		}
-	}
+//	}
 
 	/**
 	 * The showInventory method will print the items that are currently in the
@@ -568,5 +576,4 @@ public class Game {
 		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 		System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
 	}
-
 }
