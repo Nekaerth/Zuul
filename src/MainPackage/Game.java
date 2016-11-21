@@ -331,6 +331,12 @@ public class Game {
 				case KEY:
 					System.out.println("Look for a locked door");
 					break;
+                                case TIMEINCREASINGITEM:
+                                        if (item instanceof TimeIncreasingItem) {
+                                        player.addTime(((TimeIncreasingItem) item).getTime());
+                                        player.getRoom().getInventory().removeItem(command.getSecondWord());
+                                        return;
+                                        }
 				case MISC:
 					if (item.getName().equalsIgnoreCase("stick")) {
 						System.out.println("The stick is stuck in the wall");

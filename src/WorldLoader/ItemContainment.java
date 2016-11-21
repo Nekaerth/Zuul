@@ -25,6 +25,7 @@ public class ItemContainment {
 	private String name;
 	private int damage;
 	private WeaponType weaponType;
+        private int time;
 
 	/**
 	 * @return the id
@@ -208,5 +209,19 @@ public class ItemContainment {
 			}
 		}
 	}
+
+    /**
+     * @return the time
+     */
+    public int getTime() {
+        return time;
+    }
+
+    /**
+     * @param time the time to set
+     */
+    public void setTime(String time) {
+        this.time = Integer.parseInt(time);
+    }
 
 }

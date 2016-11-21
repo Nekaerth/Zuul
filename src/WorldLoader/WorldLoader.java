@@ -175,6 +175,9 @@ public class WorldLoader {
 				case "charges":
 					ic.setCharges(strings[length - 1]);
 					break;
+                                case "time":
+                                        ic.setTime(strings[length -1]);
+                                        break;
 				case "name":
 					ic.setName(strings[length - 1]);
 					finishItem = true;
@@ -203,7 +206,11 @@ public class WorldLoader {
 					Weapon weapon = new Weapon(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity(), ic.getDamage(), ic.getWeapontype());
 					rs.addItem(weapon, ic.getRoomID());
 					break;
-			}
+                                case TIMEINCREASINGITEM:
+                                        TimeIncreasingItem timeincreasingitem = new TimeIncreasingItem (ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity(), ic.getTime());
+                                        rs.addItem(timeincreasingitem, ic.getRoomID());
+                                        break;
+                        }               
 			finishItem = false;
 			ic = new ItemContainment();
 			return false;
