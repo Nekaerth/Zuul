@@ -26,7 +26,7 @@ public class WorldLoader {
 	ItemContainment ic = new ItemContainment();
 	BossContainment bossC = new BossContainment();
 
-	public void loadWorld() {
+	public ArrayList<Room> loadWorld() {
 		try {
 			boolean createRoom = false, createItem = false;
 			FileReader file;
@@ -63,7 +63,8 @@ public class WorldLoader {
 			System.out.println(e);
 
 		}
-
+		ArrayList<Room> returnRooms = connectWorld();
+		return returnRooms;
 	}
 
 	private boolean createRoom(String evaluateString) {
@@ -112,7 +113,7 @@ public class WorldLoader {
 		return true;
 	}
 
-	public ArrayList<Room> connectWorld() {
+	private ArrayList<Room> connectWorld() {
 		Room mainRoom = null, secondRoom = null;
 		String[] linkMap = {""};
 		do { //Iterate through the arraylist links
@@ -276,13 +277,45 @@ public class WorldLoader {
 					break;
 			}
 		}
-		if(finishBoss){
-			Boss boss = new Boss(rs.getRoom(bossC.getRoomId()),bossC.getHitpoints(), bossC.getName(), bossC.getBossType());
+		if (finishBoss) {
+			Boss boss = new Boss(rs.getRoom(bossC.getRoomId()), bossC.getHitpoints(), bossC.getName());
+			switch (bossC.getBossType()) {
+				case BOSSTYPE1:
+					setUpBoss1(boss);
+					break;
+				case BOSSTYPE2:
+					setUpBoss2(boss);
+					break;
+				default:
+					setUpDefaultBoss(boss);
+					break;
+			}
 			bosses.add(boss);
 			bossC = new BossContainment();
 			finishBoss = false;
-			return false;			
+			return false;
 		}
 		return true;
+	}
+
+	private void setUpBoss1(Boss boss) {
+		ArrayList<Move> moves = boss.getMoves();
+		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
+		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
+		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
+	}
+
+	private void setUpBoss2(Boss boss) {
+		ArrayList<Move> moves = boss.getMoves();
+		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
+		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
+		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
+		moves.add(new Move(Attack.SHOOT, Attack.DUCK, 15));
+		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
+	}
+
+	private void setUpDefaultBoss(Boss boss) {
+		ArrayList<Move> moves = boss.getMoves();
+		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 100));
 	}
 }

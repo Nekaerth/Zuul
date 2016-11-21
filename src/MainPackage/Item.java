@@ -16,7 +16,7 @@ public abstract class Item {
 		this.pickup = pickup;
 		this.name = name;
 		this.weight = weight;
-		this.capacity = capacity;
+		this.capacity = capacity;	
 		this.useable = useable;
 	}
 	

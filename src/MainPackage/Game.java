@@ -24,8 +24,7 @@ public class Game {
 	public Game() //Constructor
 	{
 		WorldLoader wl = new WorldLoader();
-		wl.loadWorld();
-		this.rooms = wl.connectWorld();
+		this.rooms = wl.loadWorld();
 		this.bosses = wl.loadBosses();
 		createGame(); // calls the createGame() method
 		parser = new Parser(); // creates a new object of the parser class
@@ -37,25 +36,8 @@ public class Game {
 	 */
 	private void createGame() //Called from the constructor
 	{
-		
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
-		if (!bosses.isEmpty()) {
-			for (Boss boss : bosses) {
-
-				switch (boss.getBossType()) {
-					case BOSSTYPE1:
-						setUpBoss1(boss);
-						break;
-					case BOSSTYPE2:
-						setUpBoss2(boss);
-						break;
-					default:
-						setUpDefaultBoss(boss);
-						break;
-				}
-			}
-		}
 	}
 
 	/**
@@ -78,33 +60,6 @@ public class Game {
 		moves.add(new Move(Attack.SIDESTEP, 0));
 	}
 
-	/**
-	 * Sets up the first boss, by adding all moves and adding all items to his
-	 * inventory.
-	 */
-	private void setUpBoss1(Boss boss) {
-		ArrayList<Move> moves = boss.getMoves();
-		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
-		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
-		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-	}
-
-	/**
-	 * Sets up the second boss, by adding all moves.
-	 */
-	private void setUpBoss2(Boss boss) {
-		ArrayList<Move> moves = boss.getMoves();
-		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
-		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
-		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
-		moves.add(new Move(Attack.SHOOT, Attack.DUCK, 15));
-		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
-	}
-
-	private void setUpDefaultBoss(Boss boss) {
-		ArrayList<Move> moves = boss.getMoves();
-		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 100));
-	}
 
 	/**
 	 * The play method is used to run the game it starts by calling the
