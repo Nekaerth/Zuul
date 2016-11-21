@@ -59,12 +59,6 @@ public class BossContainment {
 		this.hitpoints = Integer.parseInt(hitpoints);
 	}
 	
-	public void flush(){
-		roomId = null;
-		name = null;
-		hitpoints = 0;
-	}
-
 	/**
 	 * @return the bossType
 	 */

@@ -106,7 +106,7 @@ public class WorldLoader {
 			rs.addRoom(room);
 			buildLinkString();
 			finishRoom = false;
-			rc.flush();
+			rc = new RoomContainment();
 			return false;
 		}
 		return true;
@@ -204,7 +204,7 @@ public class WorldLoader {
 					break;
 			}
 			finishItem = false;
-			ic.flush();
+			ic = new ItemContainment();
 			return false;
 		}
 		return true;
@@ -255,21 +255,21 @@ public class WorldLoader {
 	}
 
 	private boolean createBoss(String evaluateString) {
-		String[] strings = evaluateString.split("=");
-		int length = strings.length;
-		for (String s : strings) {
-			switch (s.toLowerCase()) {
+		String[] splitEvaluateString = evaluateString.split("=");
+		int length = splitEvaluateString.length;
+		for (String bossString : splitEvaluateString) {
+			switch (bossString.toLowerCase()) {
 				case "roomid":
-					bossC.setRoomId(strings[length - 1]);
+					bossC.setRoomId(splitEvaluateString[length - 1]);
 					break;
 				case "hitpoints":
-					bossC.setHitpoints(strings[length - 1]);
+					bossC.setHitpoints(splitEvaluateString[length - 1]);
 					break;
 				case "bosstype":
-					bossC.setBossType(strings[length - 1]);
+					bossC.setBossType(splitEvaluateString[length - 1]);
 					break;
 				case "name":
-					bossC.setName(strings[length - 1]);
+					bossC.setName(splitEvaluateString[length - 1]);
 					finishBoss = true;
 					break;
 				default:
@@ -279,7 +279,7 @@ public class WorldLoader {
 		if(finishBoss){
 			Boss boss = new Boss(rs.getRoom(bossC.getRoomId()),bossC.getHitpoints(), bossC.getName(), bossC.getBossType());
 			bosses.add(boss);
-			bossC.flush();
+			bossC = new BossContainment();
 			finishBoss = false;
 			return false;			
 		}

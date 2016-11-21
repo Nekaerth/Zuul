@@ -16,7 +16,7 @@ import java.util.Scanner;
  *
  * @author Danieln Johansen
  */
-public class HighscoreLoader {
+public class Highscore {
 
 	public static ArrayList<String> getHighscoreList() {
 		ArrayList<String> scores = new ArrayList<>();
