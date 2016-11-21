@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class Boss extends Person {
 
 	private final String name; //The name of the boss
-	private final BossType bossType;
+	
 
 	/**
 	 * This contructor creates a Boss-object. It represent the boss, which
@@ -23,12 +23,10 @@ public class Boss extends Person {
 	 * @param room Sets which room the boss currently is in.
 	 * @param hitpoint Sets the boss's hitpoint.
 	 * @param name Sets the name of the boss.
-         * @param bossType
 	 */
-	public Boss(Room room, int hitpoint, String name, BossType bossType) {
+	public Boss(Room room, int hitpoint, String name) {
 		super(room, hitpoint);
 		this.name = name;
-		this.bossType = bossType;
 	}
 
 	/**
@@ -115,7 +113,5 @@ public class Boss extends Person {
 	/**
 	 * @return the bossType
 	 */
-	public BossType getBossType() {
-		return bossType;
-	}
+
 }

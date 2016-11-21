@@ -6,10 +6,8 @@ package MainPackage;
  * and open the template in the editor.
  */
 
-public class Misc implements Item {
+public class Misc extends Item {
 
-	private boolean pickup, useable;
-	private String name;
 
 	/**
 	 * The constructor for the Weapon class is called when we want to create
@@ -21,9 +19,7 @@ public class Misc implements Item {
 	 * have picked it up
 	 */
 	public Misc(boolean pickup, String name, boolean useable) {
-		this.pickup = pickup;
-		this.name = name;
-		this.useable = useable;
+		super(pickup,name,useable,0,0);
 	}
 
 	/**
@@ -35,67 +31,6 @@ public class Misc implements Item {
 	@Override
 	public ItemType getType() {
 		return ItemType.MISC;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * getName method returns the name of the misc object
-	 *
-	 * @return will return the name of the item in a String
-	 */
-	@Override
-	public String getName() {
-		return this.name;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isPickup method returns the boolean value declared when creating the misc
-	 * object
-	 *
-	 * @return will return a boolean equal to what is declared when creating the
-	 * object
-	 */
-	@Override
-	public boolean isPickup() {
-		return this.pickup;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * isUseable method returns the boolean value declared when creating the misc
-	 * object
-	 *
-	 * @return will return a boolean equal to what is declared when creating the
-	 * object
-	 */
-	@Override
-	public boolean isUseable() {
-		return this.useable;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * getWeight method returns 0 as an int when called on an object of the misc
-	 * class
-	 *
-	 * @return will return 0 as an int
-	 */
-	@Override
-	public int getWeight() {
-		return 0;
-	}
-
-	/**
-	 * We override the instance method which is declare in the interface The
-	 * getCapacity method returns 0 as an int when called on an object of the misc
-	 * class
-	 *
-	 * @return will return 0 as an int
-	 */
-	@Override
-	public int getCapacity() {
-		return 0;
 	}
 
 }

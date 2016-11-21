@@ -43,7 +43,7 @@ public class Player extends Person {
 	 */
 	public int getTime() {
 		return this.time;
-	}        
+	}
 
 	/**
 	 * The subtractTime() method is used as a count down timer to keep track of
@@ -53,6 +53,11 @@ public class Player extends Person {
 	 * @param time is an integer that we subtract from to reduce the time the
 	 * player has left to win the game.
 	 */
+        
+        public void addTime (int time) {
+           this.time += time;
+        }
+        
 	public void subtractTime(int time) {
 		int fiveMinuteMark = (this.time - 1) / 300;
 		this.time -= time;
