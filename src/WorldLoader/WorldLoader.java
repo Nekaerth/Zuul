@@ -207,7 +207,7 @@ public class WorldLoader {
 					rs.addItem(weapon, ic.getRoomID());
 					break;
                                 case TIMEINCREASINGITEM:
-                                        TimeIncreasingItem timeincreasingitem = new TimeIncreasingItem (ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity(), ic.getTime());
+                                        TimeIncreasingItem timeincreasingitem = new TimeIncreasingItem (ic.isPickup(), ic.getName(), ic.isUseable(), ic.getTime());
                                         rs.addItem(timeincreasingitem, ic.getRoomID());
                                         break;
                         }               

@@ -335,6 +335,7 @@ public class Game {
                                         if (item instanceof TimeIncreasingItem) {
                                         player.addTime(((TimeIncreasingItem) item).getTime());
                                         player.getRoom().getInventory().removeItem(command.getSecondWord());
+                                        System.out.println("Your time to escape increased");
                                         return;
                                         }
 				case MISC:

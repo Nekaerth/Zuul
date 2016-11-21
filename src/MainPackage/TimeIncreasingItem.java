@@ -13,8 +13,8 @@ public class TimeIncreasingItem extends Item {
 
     private int time;
     
-    public TimeIncreasingItem(boolean pickup, String name, boolean useable, int weight, int capacity, int time) {
-        super(pickup, name, useable, weight, capacity);
+    public TimeIncreasingItem(boolean pickup, String name, boolean useable, int time) {
+        super(pickup, name, useable, 0, 0);
         this.time = time;
     }
     

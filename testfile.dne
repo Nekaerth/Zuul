@@ -197,3 +197,11 @@ roomID=6
 pickup=false
 useable=false
 name=Box
+[item]
+id=113
+type=timeincreasingitem
+roomID=1
+pickup=true
+useable=false
+time=6000
+name=Test
