@@ -16,60 +16,82 @@ import java.util.ArrayList;
  */
 public class WorldLoader {
 
-	RoomContainment rc = new RoomContainment();
-	RoomSaver rs = new RoomSaver();
-	boolean finishRoom = false;
-	boolean finishItem = false;
-	boolean finishBoss = false;
-	ArrayList<Boss> bosses = new ArrayList<>();
-	ArrayList<String> links = new ArrayList<>();
-	ItemContainment ic = new ItemContainment();
-	BossContainment bossC = new BossContainment();
+	RoomContainment rc = new RoomContainment(); 
+	RoomSaver rs = new RoomSaver(); 
+	boolean finishRoom = false; 
+	boolean finishItem = false; 
+	boolean finishBoss = false; 
+	ArrayList<Boss> bosses = new ArrayList<>(); 
+	ArrayList<String> links = new ArrayList<>(); 
+	ItemContainment ic = new ItemContainment(); 
+	BossContainment bossC = new BossContainment(); 
 
+        /**
+         * The loadWorld method is a try-catch contruction
+         * The method is used to read from a file containing the rooms and items
+         * It uses the BufferedReader to read 1 line at a time from the file
+         * Other methods are then called to create either an item or a room based on the line
+         */
 	public ArrayList<Room> loadWorld() {
 		try {
-			boolean createRoom = false, createItem = false;
-			FileReader file;
-			file = new FileReader("testfile.dne");
-			BufferedReader buffer = new BufferedReader(file);
+			boolean createRoom = false, createItem = false; 
+			FileReader file; // FileReader is used to read from external files
+			file = new FileReader("testfile.dne"); // Reads the content of testfile.dne
+			BufferedReader buffer = new BufferedReader(file); // Initializes a BufferedReader to read the file
 
 			while (buffer.ready()) {
+                            // While the BufferedReader is ready we read the next line in the file
 				String evaluateString = buffer.readLine();
 				if (createRoom) {
+                                    // If createRoom is true the we act on what is in the file
 					createRoom = createRoom(evaluateString);
 
 				} else if (createItem) {
+                                    // If createItem is true the we act on what is in the file
 					createItem = createItem(evaluateString);
 				}
-
+                                
+                                // We use a switch-case to act on the header in the file
+                                // The header being what is in the []
 				switch (evaluateString.toLowerCase()) {
-					case "[room]":
+					case "[room]": // If the header is [room] we set the boolean createRoom 
+                                                       // to true and createItems to false
 						System.out.println("room");
 						createRoom = true;
 						createItem = false;
 						break;
-					case "[item]":
+					case "[item]":// If the header is [item] we set the boolean createRoom 
+                                                      // to false and createItems to true
 						System.out.println("ITEM");
 						createRoom = false;
 						createItem = true;
 						break;
-					default:
+					default: // All switch-case contructions must have a default option
 						break;
 				}
 			}
 
 		} catch (Exception e) {
 			System.out.println("noget gik galt");
-			System.out.println(e);
-
+			System.out.println(e); // Used to print the exception 
+                        //so we know what we are dealing with if something goes wrong in the try-catch construction
 		}
 		ArrayList<Room> returnRooms = connectWorld();
 		return returnRooms;
 	}
-
+        /**
+         * The createRoom method is used to create the rooms based on what is read in the file
+         * It contains a switch-case construction which has cases to alle atributes a room has
+         * @param evaluateString is a String that comes from the file
+         * @return will return a boolean
+         */
 	private boolean createRoom(String evaluateString) {
-		String[] strings = evaluateString.split("=");
+                // We initializes an array of Strings which will contain strings based
+                
+		String[] strings = evaluateString.split("="); 
 		int length = strings.length;
+                // We use an enhanced for loop also known as a for-each loop
+                // to iterate through alle strings read from the file
 		for (String s : strings) {
 			switch (s) {
 				case "id":

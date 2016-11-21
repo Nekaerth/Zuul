@@ -36,6 +36,7 @@ public class Game {
 	 */
 	private void createGame() //Called from the constructor
 	{
+		
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 	}
@@ -147,6 +148,11 @@ public class Game {
 					//If time is typed
 					System.out.println("You have " + player.displayTime() + " left."); //Displays amount of time left, before you lose the game
 					break;
+                                case RESTART:
+                                        wantToQuit = true;
+                                        System.out.println("You restart the game");
+                                        play();
+                                        break;                                
 				default:
 					break;
 			}
@@ -511,7 +517,7 @@ public class Game {
 	 * @param command the parameter command is what the method requires when it
 	 * is called
 	 */
-	private void useBoltcutter(Command command) {
+//	private void useBoltcutter(Command command) {
 ////		if (player.getRoom() != yard) {//You can only use boltcutter at the yard
 //			System.out.println("You got no use for the boltcutter here");
 ////		} else if (player.getRoom().getExit("Parkinglot") == null) {
@@ -521,7 +527,7 @@ public class Game {
 //		} else {
 //			System.out.println("You already have opened up to the parkinglot.");
 //		}
-	}
+//	}
 
 	/**
 	 * The showInventory method will print the items that are currently in the
@@ -533,5 +539,4 @@ public class Game {
 		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
 		System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
 	}
-
 }
