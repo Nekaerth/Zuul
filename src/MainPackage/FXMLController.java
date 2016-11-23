@@ -159,6 +159,7 @@ public class FXMLController implements Initializable {
 
 	@FXML
 	private void handleHighScoreButton(ActionEvent event) {
-		System.out.println("a");
+		startMenu.setVisible(false);
+		highScoreScene.setVisible(true);
 	}
 }
