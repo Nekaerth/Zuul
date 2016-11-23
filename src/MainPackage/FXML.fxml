@@ -65,7 +65,7 @@
 				</Pane>
 			</children>
 		</Pane>
-		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0" visible="false">
+		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0">
 			<children>
 				<Label fx:id="startMenuTitel" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="Prison Break">
 					<font>
@@ -73,7 +73,7 @@
 					</font>
 				</Label>
 				<Button fx:id="startMenuStartButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Start" />
-				<Button fx:id="startMenuHighScoreButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="High Score" />
+				<Button fx:id="startMenuHighScoreButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleHighScoreButton" prefHeight="40.0" prefWidth="240.0" text="High Score" />
 				<Button fx:id="startMenuQuitButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Quit" />
 			</children>
 		</Pane>
@@ -100,7 +100,7 @@
 				<Button fx:id="highScoreSceneBackButton" layoutX="240.0" layoutY="650.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Back" />
 			</children>
 		</Pane>
-		<Pane fx:id="victoryScene" prefHeight="800.0" prefWidth="720.0">
+		<Pane fx:id="victoryScene" prefHeight="800.0" prefWidth="720.0" visible="false">
 			<children>
 				<Label fx:id="victorySceneTitle" alignment="CENTER" layoutY="180.0" prefWidth="720.0" text="You escaped!">
 					<font>

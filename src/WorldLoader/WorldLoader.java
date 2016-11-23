@@ -5,6 +5,8 @@
  */
 package WorldLoader;
 
+
+import Items.*;
 import MainPackage.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -55,13 +57,13 @@ public class WorldLoader {
                                 // The header being what is in the []
 				switch (evaluateString.toLowerCase()) {
 					case "[room]": // If the header is [room] we set the boolean createRoom 
-                                                       // to true and createItems to false
+                                                       // to true and createItem to false
 						System.out.println("room");
 						createRoom = true;
 						createItem = false;
 						break;
 					case "[item]":// If the header is [item] we set the boolean createRoom 
-                                                      // to false and createItems to true
+                                                      // to false and createItem to true
 						System.out.println("ITEM");
 						createRoom = false;
 						createItem = true;
@@ -232,6 +234,9 @@ public class WorldLoader {
                                         TimeIncreasingItem timeincreasingitem = new TimeIncreasingItem (ic.isPickup(), ic.getName(), ic.isUseable(), ic.getTime());
                                         rs.addItem(timeincreasingitem, ic.getRoomID());
                                         break;
+                                case BOLTCUTTER:
+                                        Boltcutter boltcutter = new Boltcutter(ic.isPickup(),ic.getName(), ic.isPickup(), ic.getWeight(), ic.getCapacity());
+                                        rs.addItem(boltcutter, ic.getRoomID());
                         }               
 			finishItem = false;
 			ic = new ItemContainment();
@@ -332,6 +337,7 @@ public class WorldLoader {
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
+		boss.inventory.putItem("Key", new Key(true,"Key",true,1,1));
 	}
 
 	private void setUpBoss2(Boss boss) {

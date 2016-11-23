@@ -1,4 +1,4 @@
-package MainPackage;
+package Items;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,7 +12,7 @@ package MainPackage;
  */
 public enum ItemType {
 
-	KEY("key"), WEAPON("weapon"), FLASHLIGHT("flashlight"), BLUEPRINT("blueprint"), MISC("misc"), TIMEINCREASINGITEM("timeincreasingitem");
+	KEY("key"), WEAPON("weapon"), FLASHLIGHT("flashlight"), BLUEPRINT("blueprint"), MISC("misc"), TIMEINCREASINGITEM("timeincreasingitem"), BOLTCUTTER("boltcutter");
         
         String stringItemType;
 

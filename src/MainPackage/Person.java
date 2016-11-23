@@ -1,6 +1,7 @@
 package MainPackage;
 
 
+import Items.Inventory;
 import java.util.ArrayList;
 
 /**
