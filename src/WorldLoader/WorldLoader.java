@@ -5,6 +5,8 @@
  */
 package WorldLoader;
 
+
+import Items.*;
 import MainPackage.*;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -335,6 +337,7 @@ public class WorldLoader {
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
+		boss.inventory.putItem("Key", new Key(true,"Key",true,1,1));
 	}
 
 	private void setUpBoss2(Boss boss) {

@@ -2,6 +2,7 @@ package MainPackage;
 
 
 
+import Items.Inventory;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.Scanner;

@@ -5,6 +5,7 @@
  */
 package WorldLoader;
 
+import Items.Item;
 import MainPackage.*;
 import java.util.ArrayList;
 

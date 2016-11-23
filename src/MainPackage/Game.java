@@ -5,6 +5,8 @@ package MainPackage;
  * class cosists off X instance variable and X instance methods The arraylist is
  * imported from the java utility library
  */
+
+import Items.*;
 import HighscoreLoader.Highscore;
 import WorldLoader.WorldLoader;
 import java.util.ArrayList;

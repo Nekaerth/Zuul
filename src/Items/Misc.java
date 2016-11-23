@@ -1,4 +1,6 @@
-package MainPackage;
+package Items;
+
+import MainPackage.ItemType;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
