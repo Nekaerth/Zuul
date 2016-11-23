@@ -5,6 +5,13 @@ package MainPackage;
  * class cosists off X instance variable and X instance methods The arraylist is
  * imported from the java utility library
  */
+
+import Items.ItemType;
+import Items.Item;
+import Items.TimeIncreasingItem;
+import Items.Weapon;
+import Items.Flashlight;
+import HighscoreLoader.Highscore;
 import WorldLoader.WorldLoader;
 import java.util.ArrayList;
 
@@ -39,6 +46,7 @@ public class Game {
 
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
+                
 	}
 
 	/**
@@ -75,8 +83,9 @@ public class Game {
 			//og modtager det som et objekt command
 			finished = processCommand(command); //processer commanden
 		}
-		System.out.println("Thank you for playing.  Good bye."); //prints this if you quit the game
-	}
+		System.out.println("Thank you for playing. Good bye."); //prints this if you quit the game
+                System.out.println("Your current highscore is: " + Highscore.calculateScore(player.getTime(), player.getBossKill()));
+	}      
 
 	/**
 	 * The method printWelcome will print the text, and what to type if you need
@@ -149,8 +158,9 @@ public class Game {
 					break;
 				case RESTART:
 					wantToQuit = true;
+                                        Game game = new Game();
 					System.out.println("You restart the game");
-					play();
+					game.play();
 					break;
 				default:
 					break;
@@ -211,6 +221,7 @@ public class Game {
 				if (inputCode != null && inputCode.equalsIgnoreCase(correctCode) == true) {
 
 					System.out.println("Congratulations, you have escaped!");
+                                        player.addBossKill(2);
 					System.out.println("Type \"quit\" to quit the game");
 					player.setRoom(nextRoom);
 
@@ -432,6 +443,10 @@ public class Game {
 				System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
 				player.inventory.removeItem(command.getSecondWord());
 				break;
+                        case BOLTCUTTER:
+                                useBoltcutter(command);
+                                System.out.println("boltcutter test");
+                                break;
 			default:
 				break;
 		}
@@ -456,6 +471,7 @@ public class Game {
 			System.out.println("You can't use key there");
 			return;
 		}
+                
 		if (nextRoom.isLocked()) {
 			nextRoom.unlock();
 			System.out.println("You successfully unlock the door");
@@ -463,6 +479,11 @@ public class Game {
 		} else {
 			System.out.println("The door is already unlocked"); //Prints this if you try to 'use key' any other place than a locked door.
 		}
+                
+                if (nextRoom.isLocked() && nextRoom.getEscapeRoom()) {
+                    nextRoom.unlock();
+                    System.out.println("You opended up the fence to the parkinglot");
+                }
 
 	}
 
@@ -515,17 +536,22 @@ public class Game {
 	 * @param command the parameter command is what the method requires when it
 	 * is called
 	 */
-//	private void useBoltcutter(Command command) {
-////		if (player.getRoom() != yard) {//You can only use boltcutter at the yard
-//			System.out.println("You got no use for the boltcutter here");
-////		} else if (player.getRoom().getExit("Parkinglot") == null) {
-//			System.out.println("You use the boltcutter to cut open the net. You can now escape to the parkinglot.");
-//			System.out.println("Find a car and get out of here.");
-////			yard.setExit("Parkinglot", parkinglot);
-//		} else {
-//			System.out.println("You already have opened up to the parkinglot.");
-//		}
-//	}
+	private void useBoltcutter(Command command) {
+            if (!command.hasSecondWord()) {
+                System.out.println("Use what?");                
+            } else if (!command.hasThirdWord()) {
+                System.out.println("Use boltcutter where?");
+            } else {     
+                Room nextRoom = player.getRoom().getExit(command.getThirdWord());
+                if (!nextRoom.getEscapeRoom()) {
+                    System.out.println("You can't use the boltcutter here");
+                }
+                else if (nextRoom.getEscapeRoom() && nextRoom.isLocked()) {
+                    nextRoom.unlock();
+                    System.out.println("You opened the fence to the parkinglot");
+                }
+            }
+        }
 	/**
 	 * The showInventory method will print the items that are currently in the
 	 * players inventory

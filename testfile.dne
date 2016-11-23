@@ -77,7 +77,7 @@ description=parkinglot
 locked=true
 escapeRoom=true
 numberRoom=false
-hidden=false
+hidden=true
 linkedID=4
 [item]
 id=100
@@ -118,8 +118,8 @@ useable=true
 name=Blueprints
 [item]
 id=104
-type=Key
-roomID=6
+type=Boltcutter
+roomID=1
 weight=1
 capacity=1
 pickup=true

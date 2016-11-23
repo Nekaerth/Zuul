@@ -1,4 +1,4 @@
-package MainPackage;
+package Items;
 
 /**
  * These statements import the Hashmap and set class from the util library.
