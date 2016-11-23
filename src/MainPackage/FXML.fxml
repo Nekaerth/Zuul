@@ -8,115 +8,128 @@
 <?import javafx.scene.layout.*?>
 
 <Pane fx:id="prisonBreak" prefHeight="800.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.FXMLController">
-    <children>
-        <Pane fx:id="gameView" prefHeight="800.0" prefWidth="720.0">
-            <children>
-                <HBox fx:id="topMenu" prefHeight="40.0" prefWidth="720.0">
-                    <children>
-                        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#handleExitButton" prefHeight="40.0" prefWidth="144.0" text="Exit" />
-                        <Button fx:id="helpButton" mnemonicParsing="false" onAction="#handleHelpButton" prefHeight="40.0" prefWidth="144.0" text="Help" />
-                        <Label fx:id="timeLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
-                        <Button fx:id="inventoryButton" mnemonicParsing="false" onAction="#handleInventoryButton" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
-                        <Label fx:id="capacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Capacity/Weight" />
-                    </children>
-                </HBox>
-                <HBox fx:id="bottomMenu" layoutY="760.0" prefHeight="40.0" prefWidth="720.0">
-                    <children>
-                        <Button fx:id="mapButton" mnemonicParsing="false" onAction="#handleMapButton" prefHeight="40.0" prefWidth="144.0" text="Map" />
-                        <Label fx:id="currentRoomLabel" alignment="CENTER" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
-                        <Label fx:id="levelLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Level" />
-                    </children>
-                </HBox>
-                <Pane fx:id="roomScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" />
-            <Pane fx:id="mapScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
-               <children>
-                  <Label fx:id="mapSceneLabel" alignment="CENTER" layoutY="60.0" prefHeight="20.0" prefWidth="720.0" text="Map">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font>
-                  </Label>
-                  <Button fx:id="mapSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Close" />
-               </children>
-            </Pane>
-            <Pane fx:id="helpScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
-               <children>
-                  <Label fx:id="helpSceneTitle" alignment="CENTER" layoutY="60.0" prefHeight="20.0" prefWidth="720.0" text="Help">
-                     <font>
-                        <Font name="System Bold" size="40.0" />
-                     </font></Label>
-                  <TextArea fx:id="helpSceneTextArea" editable="false" layoutX="180.0" layoutY="160.0" prefHeight="400.0" prefWidth="360.0" />
-                  <Button fx:id="helpSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Close" />
-               </children>
-            </Pane>
-            <Pane layoutY="39.0" prefHeight="695.0" prefWidth="720.0">
-               <children>
-                  <Label layoutX="313.0" layoutY="71.0" text="Label" />
-               </children>
-            </Pane>
-            </children>
-        </Pane>
-        <Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0" visible="false">
-            <children>
-                <Label fx:id="startMenuTitel" alignment="CENTER" layoutY="80.0" prefHeight="80.0" prefWidth="720.0" text="Prison Break">
-                    <font>
-                        <Font name="System Bold" size="60.0" />
-                    </font>
-                </Label>
-                <Button fx:id="startMenuStartButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Start" />
-                <Button fx:id="startMenuHighScoreButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="High Score" />
-                <Button fx:id="startMenuQuitButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Quit" />
-            </children>
-        </Pane>
-        <Pane fx:id="highScoreMenu" prefHeight="800.0" prefWidth="720.0" visible="false">
-            <children>
-                <Label fx:id="highScoreMenuTitle" alignment="CENTER" layoutY="80.0" prefHeight="80.0" prefWidth="720.0" text="High score" textAlignment="CENTER">
-                    <font>
-                        <Font name="System Bold" size="60.0" />
-                    </font>
-                </Label>
-                <ListView fx:id="highScoreMenuDisplay" layoutX="180.0" layoutY="200.0" prefHeight="400.0" prefWidth="360.0" />
-                <Button fx:id="highScoreMenuBackButton" layoutX="240.0" layoutY="650.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Back" />
-            </children>
-        </Pane>
-        <Pane fx:id="gameOverScreen" prefHeight="800.0" prefWidth="720.0" visible="false">
-            <children>
-                <Label fx:id="gameOverScreenTitle" alignment="CENTER" layoutY="180.0" prefHeight="80.0" prefWidth="720.0" text="Game Over!">
-                    <font>
-                        <Font name="System Bold" size="60.0" />
-                    </font>
-                </Label>
-                <Button fx:id="gameOverScreenExitButton" layoutX="240.0" layoutY="380.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Exit" />
-            </children>
-        </Pane>
-      <Pane fx:id="victoryScreen" prefHeight="800.0" prefWidth="720.0" visible="false">
-         <children>
-            <Label fx:id="victoryScreenTitle" alignment="CENTER" layoutY="180.0" prefHeight="80.0" prefWidth="720.0" text="You escaped!">
-               <font>
-                  <Font name="System Bold" size="60.0" />
-               </font>
-            </Label>
-            <Button fx:id="victoryScreenEnterButton" layoutX="479.0" layoutY="407.0" mnemonicParsing="false" text="Enter" />
-            <TextField fx:id="victoryScreenTextField" layoutX="270.0" layoutY="407.0" prefHeight="26.0" prefWidth="180.0" />
-            <Label fx:id="victoryScreenNameLabel" alignment="CENTER" layoutX="182.0" layoutY="400.0" prefHeight="40.0" prefWidth="72.0" text="Name:">
-               <font>
-                  <Font size="15.0" />
-               </font></Label>
-            <Label fx:id="victoryScreenScoreLabel" alignment="CENTER" layoutY="309.0" prefHeight="40.0" prefWidth="720.0" text="Score: 0">
-               <font>
-                  <Font size="20.0" />
-               </font></Label>
-         </children>
-      </Pane>
-      <Pane fx:id="difficultyScene" prefHeight="800.0" prefWidth="720.0" visible="false">
-         <children>
-            <Label fx:id="difficultySceneTitle" alignment="CENTER" layoutY="80.0" prefHeight="80.0" prefWidth="720.0" text="Choose difficulty">
-               <font>
-                  <Font name="System Bold" size="60.0" />
-               </font>
-            </Label>
-            <Button fx:id="difficultySceneEasyButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Easy" />
-            <Button fx:id="difficultySceneMediumButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Medium" />
-            <Button fx:id="difficultySceneHardButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Hard" />
-         </children></Pane>
-    </children>
+	<children>
+		<Pane fx:id="gameScene" prefHeight="800.0" prefWidth="720.0" visible="false">
+			<children>
+				<HBox fx:id="topMenu" prefHeight="40.0" prefWidth="720.0">
+					<children>
+						<Button fx:id="topMenuExitButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="144.0" text="Exit" />
+						<Button fx:id="topMenuHelpButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="144.0" text="Help" />
+						<Label fx:id="topMenuTimeLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
+						<Button fx:id="topMenuInventoryButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
+						<Label fx:id="topMenuCapacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Capacity/Weight" />
+					</children>
+				</HBox>
+				<HBox fx:id="bottomMenu" layoutY="760.0" prefHeight="40.0" prefWidth="720.0">
+					<children>
+						<Button fx:id="bottomMenuMapButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="144.0" text="Map" />
+						<Label fx:id="bottomMenuCurrentRoomLabel" alignment="CENTER" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
+						<Label fx:id="bottomMenuLevelLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Level" />
+					</children>
+				</HBox>
+				<Pane fx:id="roomScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false" />
+				<Pane fx:id="helpScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
+					<children>
+						<Label fx:id="helpSceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="Help">
+							<font>
+								<Font name="System Bold" size="40.0" />
+							</font>
+						</Label>
+						<TextArea fx:id="helpSceneTextArea" editable="false" layoutX="180.0" layoutY="160.0" prefHeight="400.0" prefWidth="360.0" />
+						<Button fx:id="helpSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Close" />
+					</children>
+				</Pane>
+				<Pane fx:id="inventoryScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
+					<children>
+						<Label fx:id="inventorySceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="Inventory">
+							<font>
+								<Font name="System Bold" size="40.0" />
+							</font>
+						</Label>
+						<ListView fx:id="inventorySceneItemList" layoutX="180.0" layoutY="140.0" prefHeight="360.0" prefWidth="360.0" />
+						<Button fx:id="inventorySceneDropButton" layoutX="580.0" layoutY="140.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Drop" />
+						<Label fx:id="inventorySceneWeightLabel" alignment="CENTER" layoutY="505.0" prefHeight="40.0" prefWidth="720.0" text="Total weight: 0/0" />
+						<Label fx:id="inventorySceneCapacityLabel" alignment="CENTER" layoutY="545.0" prefHeight="40.0" prefWidth="720.0" text="Total capacity: 0/0" />
+						<Button fx:id="inventorySceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Close" />
+					</children>
+				</Pane>
+				<Pane fx:id="mapScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
+					<children>
+						<Label fx:id="mapSceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="Map">
+							<font>
+								<Font name="System Bold" size="40.0" />
+							</font>
+						</Label>
+						<Button fx:id="mapSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Close" />
+					</children>
+				</Pane>
+			</children>
+		</Pane>
+		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0" visible="false">
+			<children>
+				<Label fx:id="startMenuTitel" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="Prison Break">
+					<font>
+						<Font name="System Bold" size="60.0" />
+					</font>
+				</Label>
+				<Button fx:id="startMenuStartButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Start" />
+				<Button fx:id="startMenuHighScoreButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="High Score" />
+				<Button fx:id="startMenuQuitButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Quit" />
+			</children>
+		</Pane>
+		<Pane fx:id="difficultyScene" prefHeight="800.0" prefWidth="720.0" visible="false">
+			<children>
+				<Label fx:id="difficultySceneTitle" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="Choose difficulty">
+					<font>
+						<Font name="System Bold" size="60.0" />
+					</font>
+				</Label>
+				<Button fx:id="difficultySceneEasyButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Easy" />
+				<Button fx:id="difficultySceneMediumButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Medium" />
+				<Button fx:id="difficultySceneHardButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Hard" />
+			</children>
+		</Pane>
+		<Pane fx:id="highScoreScene" prefHeight="800.0" prefWidth="720.0" visible="false">
+			<children>
+				<Label fx:id="highScoreSceneTitle" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="High score" textAlignment="CENTER">
+					<font>
+						<Font name="System Bold" size="60.0" />
+					</font>
+				</Label>
+				<ListView fx:id="highScoreSceneScoreList" layoutX="180.0" layoutY="200.0" prefHeight="400.0" prefWidth="360.0" />
+				<Button fx:id="highScoreSceneBackButton" layoutX="240.0" layoutY="650.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Back" />
+			</children>
+		</Pane>
+		<Pane fx:id="victoryScene" prefHeight="800.0" prefWidth="720.0">
+			<children>
+				<Label fx:id="victorySceneTitle" alignment="CENTER" layoutY="180.0" prefWidth="720.0" text="You escaped!">
+					<font>
+						<Font name="System Bold" size="60.0" />
+					</font>
+				</Label>
+				<Label fx:id="victorySceneScoreLabel" alignment="CENTER" layoutY="310.0" prefWidth="720.0" text="Score: 0">
+					<font>
+						<Font size="20.0" />
+					</font>
+				</Label>
+				<Label fx:id="victorySceneNameLabel" alignment="CENTER" layoutX="210.0" layoutY="400.0" prefHeight="26.0" text="Name:">
+					<font>
+						<Font size="16.0" />
+					</font>
+				</Label>
+				<TextField fx:id="victorySceneTextField" layoutX="270.0" layoutY="400.0" prefWidth="180.0" />
+				<Button fx:id="victorySceneEnterButton" layoutX="470.0" layoutY="400.0" mnemonicParsing="false" text="Enter" />
+			</children>
+		</Pane>
+		<Pane fx:id="gameOverScene" prefHeight="800.0" prefWidth="720.0" visible="false">
+			<children>
+				<Label fx:id="gameOverSceneTitle" alignment="CENTER" layoutY="180.0" prefWidth="720.0" text="Game Over!">
+					<font>
+						<Font name="System Bold" size="60.0" />
+					</font>
+				</Label>
+				<Button fx:id="gameOverSceneExitButton" layoutX="240.0" layoutY="380.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Exit" />
+			</children>
+		</Pane>
+	</children>
 </Pane>
