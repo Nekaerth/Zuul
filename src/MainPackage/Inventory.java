@@ -86,9 +86,8 @@ public class Inventory {
 	 * @return an integer.
 	 */
 	public int size() {
-		int size = 0;
-		size = inventory.size();
-		return size;
+		return inventory.size();
+		
 	}
 
 	/**
