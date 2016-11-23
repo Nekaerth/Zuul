@@ -103,7 +103,7 @@ public class Boss extends Person {
 		else {
 			System.out.println("You defeated the prison guard!");
 
-			getRoom().getInventory().putInventory(getInventory()); //Drops all boss items into the rooms inventory.
+			getRoom().inventory.putInventory(this.inventory); //Drops all boss items into the rooms inventory.
 			setRoom(null); //Removes the boss (removes it from the room).
 
 			return false; //Returns false because you didn't die.
