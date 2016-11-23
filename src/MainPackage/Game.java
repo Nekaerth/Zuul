@@ -151,8 +151,9 @@ public class Game {
 					break;
 				case RESTART:
 					wantToQuit = true;
+                                        Game game = new Game();
 					System.out.println("You restart the game");
-					play();
+					game.play();
 					break;
 				default:
 					break;
