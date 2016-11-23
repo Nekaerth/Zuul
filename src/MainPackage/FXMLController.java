@@ -154,11 +154,19 @@ public class FXMLController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		//this.stage = (Stage) prisonBreak.getScene().getWindow();
 	}
 
 	@FXML
-	private void handleHighScoreButton(ActionEvent event) {
-		System.out.println("a");
+	private void handleStartMenuButtons(ActionEvent event) {
+		if (event.getSource() == startMenuStartButton) {
+			startMenu.setVisible(false);
+			gameScene.setVisible(true);
+		} else if (event.getSource() == startMenuHighScoreButton) {
+			startMenu.setVisible(false);
+			highScoreScene.setVisible(true);
+		} else if (event.getSource() == startMenuQuitButton) {
+			Stage stage = (Stage) startMenuQuitButton.getScene().getWindow();
+			stage.close();
+		}
 	}
 }

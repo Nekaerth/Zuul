@@ -72,9 +72,9 @@
 						<Font name="System Bold" size="60.0" />
 					</font>
 				</Label>
-				<Button fx:id="startMenuStartButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Start" />
-				<Button fx:id="startMenuHighScoreButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleHighScoreButton" prefHeight="40.0" prefWidth="240.0" text="High Score" />
-				<Button fx:id="startMenuQuitButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Quit" />
+				<Button fx:id="startMenuStartButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleStartMenuButtons" prefHeight="40.0" prefWidth="240.0" text="Start" />
+				<Button fx:id="startMenuHighScoreButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleStartMenuButtons" prefHeight="40.0" prefWidth="240.0" text="High Score" />
+				<Button fx:id="startMenuQuitButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleStartMenuButtons" prefHeight="40.0" prefWidth="240.0" text="Quit" />
 			</children>
 		</Pane>
 		<Pane fx:id="difficultyScene" prefHeight="800.0" prefWidth="720.0" visible="false">
