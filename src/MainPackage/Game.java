@@ -5,6 +5,7 @@ package MainPackage;
  * class cosists off X instance variable and X instance methods The arraylist is
  * imported from the java utility library
  */
+import HighscoreLoader.Highscore;
 import WorldLoader.WorldLoader;
 import java.util.ArrayList;
 
@@ -75,8 +76,9 @@ public class Game {
 			//og modtager det som et objekt command
 			finished = processCommand(command); //processer commanden
 		}
-		System.out.println("Thank you for playing.  Good bye."); //prints this if you quit the game
-	}
+		System.out.println("Thank you for playing. Good bye."); //prints this if you quit the game
+                System.out.println("Your current highscore is: " + Highscore.calculateScore(player.getTime(), player.getBossKill()));
+	}      
 
 	/**
 	 * The method printWelcome will print the text, and what to type if you need
@@ -211,6 +213,7 @@ public class Game {
 				if (inputCode != null && inputCode.equalsIgnoreCase(correctCode) == true) {
 
 					System.out.println("Congratulations, you have escaped!");
+                                        player.addBossKill(2);
 					System.out.println("Type \"quit\" to quit the game");
 					player.setRoom(nextRoom);
 
