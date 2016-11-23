@@ -6,7 +6,11 @@ package MainPackage;
  * imported from the java utility library
  */
 
-import Items.*;
+import Items.ItemType;
+import Items.Item;
+import Items.TimeIncreasingItem;
+import Items.Weapon;
+import Items.Flashlight;
 import HighscoreLoader.Highscore;
 import WorldLoader.WorldLoader;
 import java.util.ArrayList;
@@ -42,6 +46,7 @@ public class Game {
 
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
+                
 	}
 
 	/**

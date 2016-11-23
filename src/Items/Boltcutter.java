@@ -5,8 +5,6 @@
  */
 package Items;
 
-import MainPackage.ItemType;
-
 /**
  *
  * @author Niklas

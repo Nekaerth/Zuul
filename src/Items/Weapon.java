@@ -1,7 +1,5 @@
 package Items;
 
-import MainPackage.ItemType;
-
 
 /**
  * The Weapon class implements the interface Item
