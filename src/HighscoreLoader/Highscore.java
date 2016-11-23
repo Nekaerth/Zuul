@@ -54,4 +54,12 @@ public class Highscore {
 			System.out.println("The method saveHighscore has thrown an exception. " + e);
 		}
 	}
+        
+        public static String calculateScore (int time, int bossKill) {
+            StringBuilder sb = new StringBuilder();
+            int calculateScore = time + (bossKill * 600);
+            sb.append(calculateScore);
+            String score = sb.toString();
+            return score;
+        }
 }

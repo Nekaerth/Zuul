@@ -5,6 +5,7 @@ package MainPackage;
  * class cosists off X instance variable and X instance methods The arraylist is
  * imported from the java utility library
  */
+import HighscoreLoader.Highscore;
 import WorldLoader.WorldLoader;
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class Game {
 	 */
 	private void createGame() //Called from the constructor
 	{
-		
+
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		setUpPlayer();
 	}
@@ -61,7 +62,6 @@ public class Game {
 		moves.add(new Move(Attack.SIDESTEP, 0));
 	}
 
-
 	/**
 	 * The play method is used to run the game it starts by calling the
 	 * printWelcome() method, then a boolean is initialized and as long as the
@@ -76,8 +76,9 @@ public class Game {
 			//og modtager det som et objekt command
 			finished = processCommand(command); //processer commanden
 		}
-		System.out.println("Thank you for playing.  Good bye."); //prints this if you quit the game
-	}
+		System.out.println("Thank you for playing. Good bye."); //prints this if you quit the game
+                System.out.println("Your current highscore is: " + Highscore.calculateScore(player.getTime(), player.getBossKill()));
+	}      
 
 	/**
 	 * The method printWelcome will print the text, and what to type if you need
@@ -148,11 +149,11 @@ public class Game {
 					//If time is typed
 					System.out.println("You have " + player.displayTime() + " left."); //Displays amount of time left, before you lose the game
 					break;
-                                case RESTART:
-                                        wantToQuit = true;
-                                        System.out.println("You restart the game");
-                                        play();
-                                        break;                                
+				case RESTART:
+					wantToQuit = true;
+					System.out.println("You restart the game");
+					play();
+					break;
 				default:
 					break;
 			}
@@ -200,7 +201,7 @@ public class Game {
 			if (nextRoom.getEscapeRoom()) {
 				//Following code is run if the next room is the parkinglot
 				String correctCode;
-				System.out.println("There is a codelock locking the door, to get to the " + nextRoom.getName()+ " you need to enter a 3 digit code: ");
+				System.out.println("There is a codelock locking the door, to get to the " + nextRoom.getName() + " you need to enter a 3 digit code: ");
 				String inputCode = parser.getCode();
 				if (roomNumber.size() == 3) {
 					correctCode = getCorrectCode();
@@ -212,6 +213,7 @@ public class Game {
 				if (inputCode != null && inputCode.equalsIgnoreCase(correctCode) == true) {
 
 					System.out.println("Congratulations, you have escaped!");
+                                        player.addBossKill(2);
 					System.out.println("Type \"quit\" to quit the game");
 					player.setRoom(nextRoom);
 
@@ -221,7 +223,6 @@ public class Game {
 
 			} else if (nextRoom.getEscapeRoom() == false) {
 				player.setRoom(nextRoom); //Changes players current room to nextRoom.
-
 
 				for (Boss boss : bosses) {
 					if (player.getRoom() == boss.getRoom() && player.getRoom().needsBoss() == false) {
@@ -280,9 +281,9 @@ public class Game {
 	private void searchRoom(Command command) {
 		if (command.hasSecondWord()) {
 			System.out.println("Search what?");
-		} else if (!player.getRoom().getInventory().isEmpty()) {  //If there exist any items in inv for currentRoom, prints this.       
+		} else if (!player.getRoom().inventory.isEmpty()) {  //If there exist any items in inv for currentRoom, prints this.       
 			System.out.println("You search the room and find something interesting.");
-			String items = player.getRoom().getInventory().getStringOfAllItems();
+			String items = player.getRoom().inventory.getStringOfAllItems();
 			System.out.println("You find the following items.");
 			System.out.println(items);
 
@@ -305,15 +306,15 @@ public class Game {
 			System.out.println("Pick up what?");
 			return;
 		}
-		Item item = player.getRoom().getInventory().getItem(command.getSecondWord());
+		Item item = player.getRoom().inventory.getItem(command.getSecondWord());
 		if (item == null) {
 			System.out.println("There is no such item.");
 			return;
 		}
 
 		if (item.isPickup()
-				&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
-				&& player.getInventory().size() + 1 <= player.getCapacity()) {
+				&& player.inventory.itemWeight() + item.getWeight() <= player.getWeightCapacity()
+				&& player.inventory.size() + 1 <= player.getCapacity()) {
 
 			System.out.println("You picked up " + item.getName());
 			switch (item.getType()) {
@@ -337,16 +338,13 @@ public class Game {
 				case KEY:
 					System.out.println("Look for a locked door");
 					break;
-                                case TIMEINCREASINGITEM:
-                                        if (item instanceof TimeIncreasingItem) {
-                                        player.addTime(((TimeIncreasingItem) item).getTime());
-                                        player.getRoom().getInventory().removeItem(command.getSecondWord());
-                                        System.out.println("Your time to escape increased");
-                                        return;
-                                        }
-                                case BOLTCUTTER:
-                                        System.out.println("This might useful for escaping");
-                                        break;
+				case TIMEINCREASINGITEM:
+					if (item instanceof TimeIncreasingItem) {
+						player.addTime(((TimeIncreasingItem) item).getTime());
+						player.getRoom().inventory.removeItem(command.getSecondWord());
+						System.out.println("Your time to escape increased");
+						return;
+					}
 				case MISC:
 					if (item.getName().equalsIgnoreCase("stick")) {
 						System.out.println("The stick is stuck in the wall");
@@ -365,16 +363,16 @@ public class Game {
 				default:
 					break;
 			}
-			player.getInventory().putItem(command.getSecondWord(), item);
-			player.getRoom().getInventory().removeItem(command.getSecondWord());
+			//Transfers the item from the room inventory to the player inventory
+			player.inventory.transferItem(player.getRoom().inventory, command.getSecondWord());
 
-		} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
+		} else if (player.inventory.itemWeight() + item.getWeight() > player.getWeightCapacity()) {
 			System.out.println("OOPS!! It's too heavy for you to pickup.");
-			System.out.println("Your weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
+			System.out.println("Your weight is: " + player.inventory.itemWeight() + "/" + player.getWeightCapacity());
 			System.out.println("The item you want to pickup weighs: " + item.getWeight());
 
-		} else if (player.getInventory().size() + 1 > player.getCapacity()) {
-			System.out.println("OOPS!! Your inventory is full: " + player.getInventory().size() + "/" + player.getCapacity() + " items");
+		} else if (player.inventory.size() + 1 > player.getCapacity()) {
+			System.out.println("OOPS!! Your inventory is full: " + player.inventory.size() + "/" + player.getCapacity() + " items");
 			System.out.println("The capacity of the item you want to pickup is: " + item.getCapacity());
 		}
 	}
@@ -390,7 +388,7 @@ public class Game {
 			System.out.println("Drop what?");
 			return;
 		}
-		Item item = player.getInventory().getItem(command.getSecondWord());
+		Item item = player.inventory.getItem(command.getSecondWord());
 		if (item == null) {
 			System.out.println("There is no such item.");
 			return;
@@ -399,8 +397,8 @@ public class Game {
 		if (item.getType() == ItemType.WEAPON) {
 			player.droppedWeapon((Weapon) item);
 		}
-		player.getRoom().getInventory().putItem(command.getSecondWord(), item);
-		player.getInventory().removeItem(command.getSecondWord());
+		//Transfers the item from the player inventory to the room inventory
+		player.getRoom().inventory.transferItem(player.inventory, command.getSecondWord()); 
 		System.out.println("You drop " + item.getName());
 
 	}
@@ -416,7 +414,7 @@ public class Game {
 			System.out.println("Use what?");
 			return;
 		}
-		Item item = player.getInventory().getItem(command.getSecondWord());
+		Item item = player.inventory.getItem(command.getSecondWord());
 		if (item == null) {
 			System.out.println("You don't have that item in your inventory");
 			return;
@@ -435,7 +433,7 @@ public class Game {
 			case BLUEPRINT:
 				showAllRooms();
 				System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
-				player.getInventory().removeItem(command.getSecondWord());
+				player.inventory.removeItem(command.getSecondWord());
 				break;
                         case BOLTCUTTER:
                                 useBoltcutter(command);
@@ -469,7 +467,7 @@ public class Game {
 		if (nextRoom.isLocked()) {
 			nextRoom.unlock();
 			System.out.println("You successfully unlock the door");
-			player.getInventory().removeItem(command.getSecondWord());
+			player.inventory.removeItem(command.getSecondWord());
 		} else {
 			System.out.println("The door is already unlocked"); //Prints this if you try to 'use key' any other place than a locked door.
 		}
@@ -552,8 +550,8 @@ public class Game {
 	 */
 	private void showInventory() { //Shows players current inventory containing; items, weight and capacity.
 		System.out.println("Your inventory contains the following:");
-		System.out.println(player.getInventory().getStringOfAllItems());
-		System.out.println("Your total weight is: " + player.getInventory().itemWeight() + "/" + player.getWeightCapacity());
-		System.out.println("Your total capacity is: " + player.getInventory().size() + "/" + player.getCapacity());
+		System.out.println(player.inventory.getStringOfAllItems());
+		System.out.println("Your total weight is: " + player.inventory.itemWeight() + "/" + player.getWeightCapacity());
+		System.out.println("Your total capacity is: " + player.inventory.size() + "/" + player.getCapacity());
 	}
 }

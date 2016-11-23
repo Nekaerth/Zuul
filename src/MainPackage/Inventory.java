@@ -1,11 +1,11 @@
 package MainPackage;
 
-
 /**
  * These statements import the Hashmap and set class from the util library.
  */
 import java.util.HashMap;
 import java.util.Set;
+
 
 /**
  *
@@ -23,7 +23,7 @@ public class Inventory {
 	 */
 	public Inventory() {
 		inventory = new HashMap<>();
-
+		
 	}
 
 	/**
@@ -46,7 +46,8 @@ public class Inventory {
 	/**
 	 * This method returns the name of an item.
 	 *
-	 * @param name The parameter name is the reference name to the item requested.
+	 * @param name The parameter name is the reference name to the item
+	 * requested.
 	 * @return An Item object.
 	 */
 	public Item getItem(String name) {
@@ -86,8 +87,9 @@ public class Inventory {
 	 * @return an integer.
 	 */
 	public int size() {
-		return inventory.size();
-		
+		int size = 0;
+		size = inventory.size();
+		return size;
 	}
 
 	/**
@@ -110,7 +112,7 @@ public class Inventory {
 	 */
 	public void putItem(String name, Item item) {
 		inventory.put(name, item);
-
+		
 	}
 
 	/**
@@ -132,4 +134,15 @@ public class Inventory {
 		HashMap<String, Item> inventoryItems = inventory.getAllItems();
 		this.inventory.putAll(inventoryItems);
 	}
+	/**
+	 * Transfer the given item specified by the name given in a String, from the given inventory to this inventory
+	 * @param inventory an inventory from either a room or a person
+	 * @param itemName the name of the item given in a String
+	 * 
+	 */
+	public void transferItem(Inventory inventory, String itemName) {
+		this.putItem(itemName, inventory.getItem(itemName));
+		inventory.removeItem(itemName);	
+	}
+	
 }

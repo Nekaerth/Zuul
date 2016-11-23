@@ -17,7 +17,7 @@ public class Room {
 	private final String description;
 	private String name;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
-	private final Inventory inventory = new Inventory();
+	public final Inventory inventory;
 	private boolean numberRoom, escapeRoom, lock, needsBoss = false, hidden;
 	private int number;
 	private String id;
@@ -46,18 +46,12 @@ public class Room {
 		this.needsBoss = false;
 		this.lock = lock;
 		this.hidden = hidden;
+		this.inventory = new Inventory();
 		if (numberRoom == true) {
 			number = (int) (Math.random() * 9);
 		}
 	}
 	
-	/**
-	 *
-	 * @return the rooms inventory.
-	 */
-	public Inventory getInventory() {
-		return this.inventory;
-	}
 
 	/**
 	 * The setExit method is used to declare which exits a room has

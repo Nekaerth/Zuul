@@ -17,7 +17,8 @@ public class Player extends Person {
 	private int time;
 	private final int capacity; //Is the maximum amount of items the player must hold.
 	private final int weightCapacity; //Is the maximum weight that the players items must
-
+        private int bossKill; 
+        
 	/**
 	 * This contructor creates a Player-object. It represent the player, which
 	 * includes hitpoints, available attacks, available items, maximum number of
@@ -34,7 +35,8 @@ public class Player extends Person {
 		this.time = time;
 		this.capacity = capacity;
 		this.weightCapacity = weightCapacity;
-	}
+                this.bossKill = 0;
+	}       
 
 	/**
 	 * The getTime() is a getter method to get the integer "time"
@@ -129,4 +131,18 @@ public class Player extends Person {
 			move.setDamage(10); //Sets Stab damage back to 10
 		}
 	}
+
+    /**
+     * @return the bossKill
+     */
+    public int getBossKill() {
+        return bossKill;
+    }
+
+    /**
+     * @param bossKill the bossKill to set
+     */
+    public void addBossKill(int bossKill) {
+        this.bossKill += bossKill;
+    }
 }
