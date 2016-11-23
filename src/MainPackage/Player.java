@@ -1,6 +1,8 @@
 package MainPackage;
 
 
+import Items.WeaponType;
+import Items.Weapon;
 import java.util.ArrayList;
 
 /**

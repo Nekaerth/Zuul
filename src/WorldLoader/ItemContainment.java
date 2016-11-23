@@ -5,7 +5,7 @@
  */
 package WorldLoader;
 
-import MainPackage.WeaponType;
+import Items.WeaponType;
 import MainPackage.ItemType;
 
 /**

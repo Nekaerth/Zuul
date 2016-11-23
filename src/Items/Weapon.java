@@ -1,4 +1,6 @@
-package MainPackage;
+package Items;
+
+import MainPackage.ItemType;
 
 
 /**
