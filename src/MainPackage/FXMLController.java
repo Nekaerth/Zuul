@@ -59,6 +59,28 @@ public class FXMLController implements Initializable {
 	//Room Pane
 	@FXML
 	private Pane roomScene;
+	@FXML
+	private Label roomSceneInfoTitel;
+	@FXML
+	private Label roomSceneInfoLabel;
+	@FXML
+	private Label roomSceneCurrentItemLabel;
+	@FXML
+	private Button roomSceneUseButton;
+	@FXML
+	private Label roomSceneItemLabel;
+	@FXML
+	private ListView<?> roomSceneItemList;
+	@FXML
+	private Button roomScenePickUpButton;
+	@FXML
+	private Button roomSceneNorthButton;
+	@FXML
+	private Button roomSceneEastButton;
+	@FXML
+	private Button roomSceneSouthButton;
+	@FXML
+	private Button roomSceneWestButton;
 	//Help Pane
 	@FXML
 	private Pane helpScene;
@@ -90,6 +112,9 @@ public class FXMLController implements Initializable {
 	private Label mapSceneTitle;
 	@FXML
 	private Button mapSceneCloseButton;
+	//Boss Pane
+	@FXML
+	private Pane bossScene;
 
 	//Start menu Pane
 	@FXML
@@ -114,6 +139,8 @@ public class FXMLController implements Initializable {
 	private Button difficultySceneMediumButton;
 	@FXML
 	private Button difficultySceneHardButton;
+	@FXML
+	private Button difficultySceneBackButton;
 
 	//High score Pane
 	@FXML
@@ -173,12 +200,16 @@ public class FXMLController implements Initializable {
 		if (event.getSource() == difficultySceneEasyButton) {
 			difficultyScene.setVisible(false);
 			gameScene.setVisible(true);
+			roomScene.setVisible(true);
 		} else if (event.getSource() == difficultySceneMediumButton) {
 			difficultyScene.setVisible(false);
 			gameScene.setVisible(true);
 		} else if (event.getSource() == difficultySceneHardButton) {
 			difficultyScene.setVisible(false);
 			gameScene.setVisible(true);
+		} else if (event.getSource() == difficultySceneBackButton) {
+			difficultyScene.setVisible(false);
+			startMenu.setVisible(true);
 		}
 	}
 
@@ -196,6 +227,23 @@ public class FXMLController implements Initializable {
 		} else if (event.getSource() == bottomMenuMapButton) {
 			roomScene.setVisible(false);
 			mapScene.setVisible(true);
+		}
+	}
+
+	@FXML
+	private void handleRoomSceneButtons(ActionEvent event) {
+		if (event.getSource() == roomSceneUseButton) {
+
+		} else if (event.getSource() == roomScenePickUpButton) {
+
+		} else if (event.getSource() == roomSceneNorthButton) {
+
+		} else if (event.getSource() == roomSceneEastButton) {
+
+		} else if (event.getSource() == roomSceneSouthButton) {
+
+		} else if (event.getSource() == roomSceneWestButton) {
+
 		}
 	}
 
