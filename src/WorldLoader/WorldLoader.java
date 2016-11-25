@@ -33,12 +33,13 @@ public class WorldLoader {
          * The method is used to read from a file containing the rooms and items
          * It uses the BufferedReader to read 1 line at a time from the file
          * Other methods are then called to create either an item or a room based on the line
+         * @param filereadToRead
          */
-	public ArrayList<Room> loadWorld() {
+	public ArrayList<Room> loadWorld(String fileToRead) {
 		try {
 			boolean createRoom = false, createItem = false; 
 			FileReader file; // FileReader is used to read from external files
-			file = new FileReader("testfile.dne"); // Reads the content of testfile.dne
+			file = new FileReader(fileToRead); // Reads the content of testfile.dne
 			BufferedReader buffer = new BufferedReader(file); // Initializes a BufferedReader to read the file
 
 			while (buffer.ready()) {
@@ -257,11 +258,11 @@ public class WorldLoader {
 
 	}
 
-	public ArrayList<Boss> loadBosses() {
+	public ArrayList<Boss> loadBosses(String fileToRead) {
 		try {
 			boolean createBoss = false;
 			FileReader file;
-			file = new FileReader("bossfile.dne");
+			file = new FileReader(fileToRead);
 			BufferedReader buffer = new BufferedReader(file);
 
 			while (buffer.ready()) {
