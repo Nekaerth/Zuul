@@ -25,7 +25,8 @@ public class ItemContainment {
 	private String name;
 	private int damage;
 	private WeaponType weaponType;
-        private int time;
+    private int time;
+	private String nameOfRoomThatFitsThisKey;
 
 	/**
 	 * @return the id
@@ -233,5 +234,13 @@ public class ItemContainment {
     public void setTime(String time) {
         this.time = Integer.parseInt(time);
     }
+
+	public void setNameOfRoomThatFitsThisKey(String nameOfRoomThatFitsThisKey) {
+		this.nameOfRoomThatFitsThisKey=nameOfRoomThatFitsThisKey;
+	}
+	
+	public String getNameOfRoomThatFitsThisKey(){
+		return nameOfRoomThatFitsThisKey;
+	}
 
 }

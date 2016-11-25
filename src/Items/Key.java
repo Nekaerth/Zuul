@@ -7,6 +7,8 @@ package Items;
  */
 public class Key extends Item {
 
+	private String nameOfRoomThatFitsThisKey;
+	
 
 	/**
 	 * The constructor for the Key class is called when we want to create objects
@@ -20,12 +22,20 @@ public class Key extends Item {
 	 * @param capacity is an int that refers to how much space it requires in the
 	 * inventory
 	 */
-	public Key(boolean pickup, String name, boolean useable, int weight, int capacity) {
+	public Key(boolean pickup, String name, boolean useable, int weight, int capacity, String nameOfRoomThatFitsThisKey) {
 		super(pickup,name,useable,weight,capacity);
+		this.nameOfRoomThatFitsThisKey = nameOfRoomThatFitsThisKey;
 	}
 
 	@Override
 	public ItemType getType() {
 		return ItemType.KEY;
+	}
+
+	/**
+	 * @return the nameOfRoomThatFitsThisKey
+	 */
+	public String getNameOfRoomThatFitsThisKey() {
+		return nameOfRoomThatFitsThisKey;
 	}
 }

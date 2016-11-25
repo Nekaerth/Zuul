@@ -5,7 +5,6 @@
  */
 package WorldLoader;
 
-
 import Items.*;
 import MainPackage.*;
 import java.io.BufferedReader;
@@ -18,53 +17,54 @@ import java.util.ArrayList;
  */
 public class WorldLoader {
 
-	RoomContainment rc = new RoomContainment(); 
-	RoomSaver rs = new RoomSaver(); 
-	boolean finishRoom = false; 
-	boolean finishItem = false; 
-	boolean finishBoss = false; 
-	ArrayList<Boss> bosses = new ArrayList<>(); 
-	ArrayList<String> links = new ArrayList<>(); 
-	ItemContainment ic = new ItemContainment(); 
-	BossContainment bossC = new BossContainment(); 
+	RoomContainment rc = new RoomContainment();
+	RoomSaver rs = new RoomSaver();
+	boolean finishRoom = false;
+	boolean finishItem = false;
+	boolean finishBoss = false;
+	ArrayList<Boss> bosses = new ArrayList<>();
+	ArrayList<String> links = new ArrayList<>();
+	ItemContainment ic = new ItemContainment();
+	BossContainment bossC = new BossContainment();
 
-        /**
-         * The loadWorld method is a try-catch contruction
-         * The method is used to read from a file containing the rooms and items
-         * It uses the BufferedReader to read 1 line at a time from the file
-         * Other methods are then called to create either an item or a room based on the line
-         * @param filereadToRead
-         */
+	/**
+	 * The loadWorld method is a try-catch contruction The method is used to
+	 * read from a file containing the rooms and items It uses the
+	 * BufferedReader to read 1 line at a time from the file Other methods are
+	 * then called to create either an item or a room based on the line
+	 *
+	 * @param filereadToRead
+	 */
 	public ArrayList<Room> loadWorld(String fileToRead) {
 		try {
-			boolean createRoom = false, createItem = false; 
+			boolean createRoom = false, createItem = false;
 			FileReader file; // FileReader is used to read from external files
 			file = new FileReader(fileToRead); // Reads the content of testfile.dne
 			BufferedReader buffer = new BufferedReader(file); // Initializes a BufferedReader to read the file
 
 			while (buffer.ready()) {
-                            // While the BufferedReader is ready we read the next line in the file
+				// While the BufferedReader is ready we read the next line in the file
 				String evaluateString = buffer.readLine();
 				if (createRoom) {
-                                    // If createRoom is true the we act on what is in the file
+					// If createRoom is true the we act on what is in the file
 					createRoom = createRoom(evaluateString);
 
 				} else if (createItem) {
-                                    // If createItem is true the we act on what is in the file
+					// If createItem is true the we act on what is in the file
 					createItem = createItem(evaluateString);
 				}
-                                
-                                // We use a switch-case to act on the header in the file
-                                // The header being what is in the []
+
+				// We use a switch-case to act on the header in the file
+				// The header being what is in the []
 				switch (evaluateString.toLowerCase()) {
 					case "[room]": // If the header is [room] we set the boolean createRoom 
-                                                       // to true and createItem to false
+						// to true and createItem to false
 						System.out.println("room");
 						createRoom = true;
 						createItem = false;
 						break;
 					case "[item]":// If the header is [item] we set the boolean createRoom 
-                                                      // to false and createItem to true
+						// to false and createItem to true
 						System.out.println("ITEM");
 						createRoom = false;
 						createItem = true;
@@ -77,24 +77,27 @@ public class WorldLoader {
 		} catch (Exception e) {
 			System.out.println("noget gik galt");
 			System.out.println(e); // Used to print the exception 
-                        //so we know what we are dealing with if something goes wrong in the try-catch construction
+			//so we know what we are dealing with if something goes wrong in the try-catch construction
 		}
 		ArrayList<Room> returnRooms = connectWorld();
 		return returnRooms;
 	}
-        /**
-         * The createRoom method is used to create the rooms based on what is read in the file
-         * It contains a switch-case construction which has cases to alle atributes a room has
-         * @param evaluateString is a String that comes from the file
-         * @return will return a boolean
-         */
+
+	/**
+	 * The createRoom method is used to create the rooms based on what is read
+	 * in the file It contains a switch-case construction which has cases to
+	 * alle atributes a room has
+	 *
+	 * @param evaluateString is a String that comes from the file
+	 * @return will return a boolean
+	 */
 	private boolean createRoom(String evaluateString) {
-                // We initializes an array of Strings which will contain strings based
-                
-		String[] strings = evaluateString.split("="); 
+		// We initializes an array of Strings which will contain strings based
+
+		String[] strings = evaluateString.split("=");
 		int length = strings.length;
-                // We use an enhanced for loop also known as a for-each loop
-                // to iterate through alle strings read from the file
+		// We use an enhanced for loop also known as a for-each loop
+		// to iterate through alle strings read from the file
 		for (String s : strings) {
 			switch (s) {
 				case "id":
@@ -200,9 +203,12 @@ public class WorldLoader {
 				case "charges":
 					ic.setCharges(strings[length - 1]);
 					break;
-                                case "time":
-                                        ic.setTime(strings[length -1]);
-                                        break;
+				case "time":
+					ic.setTime(strings[length - 1]);
+					break;
+				case "roomToUnlock":
+					ic.setNameOfRoomThatFitsThisKey(strings[length - 1]);
+					break;
 				case "name":
 					ic.setName(strings[length - 1]);
 					finishItem = true;
@@ -216,7 +222,7 @@ public class WorldLoader {
 					rs.addItem(flashlight, ic.getRoomID());
 					break;
 				case KEY:
-					Key key = new Key(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity());
+					Key key = new Key(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity(), ic.getNameOfRoomThatFitsThisKey());
 					rs.addItem(key, ic.getRoomID());
 					break;
 				case MISC:
@@ -231,14 +237,14 @@ public class WorldLoader {
 					Weapon weapon = new Weapon(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity(), ic.getDamage(), ic.getWeapontype());
 					rs.addItem(weapon, ic.getRoomID());
 					break;
-                                case TIMEINCREASINGITEM:
-                                        TimeIncreasingItem timeincreasingitem = new TimeIncreasingItem (ic.isPickup(), ic.getName(), ic.isUseable(), ic.getTime());
-                                        rs.addItem(timeincreasingitem, ic.getRoomID());
-                                        break;
-                                case BOLTCUTTER:
-                                        Boltcutter boltcutter = new Boltcutter(ic.isPickup(),ic.getName(), ic.isPickup(), ic.getWeight(), ic.getCapacity());
-                                        rs.addItem(boltcutter, ic.getRoomID());
-                        }               
+				case TIMEINCREASINGITEM:
+					TimeIncreasingItem timeincreasingitem = new TimeIncreasingItem(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getTime());
+					rs.addItem(timeincreasingitem, ic.getRoomID());
+					break;
+				case BOLTCUTTER:
+					Boltcutter boltcutter = new Boltcutter(ic.isPickup(), ic.getName(), ic.isPickup(), ic.getWeight(), ic.getCapacity());
+					rs.addItem(boltcutter, ic.getRoomID());
+			}
 			finishItem = false;
 			ic = new ItemContainment();
 			return false;
@@ -338,7 +344,7 @@ public class WorldLoader {
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-		boss.inventory.putItem("Glock-18", new Weapon(true,"Glock-18",false,5,1,25,WeaponType.RANGED));
+		boss.getInventory().putItem("Glock-18", new Weapon(true, "Glock-18", false, 5, 1, 25, WeaponType.RANGED));
 	}
 
 	private void setUpBoss2(Boss boss) {

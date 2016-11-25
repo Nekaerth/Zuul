@@ -16,7 +16,7 @@ public class Person {
 	private Room room; //Where the person currently is.
 	private int hitpoint; //How much hitpoints the person has.
 	private final ArrayList<Move> moves = new ArrayList<>(); //ArrayList of all moves, that are available to the person.
-	public final Inventory inventory; //An Inventory that holds the persons items
+	private Inventory inventory; //An Inventory that holds the persons items
 
 	/**
 	 * This contructor can creates a Person-object.It represent a person, which
@@ -101,6 +101,13 @@ public class Person {
 			}
 		}
 		return null;
+	}
+
+	/**
+	 * @return the inventory
+	 */
+	public Inventory getInventory() {
+		return inventory;
 	}
 
 }

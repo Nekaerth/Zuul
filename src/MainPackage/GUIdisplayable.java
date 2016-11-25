@@ -22,7 +22,7 @@ public interface GUIdisplayable {
     
     public void use(Item item);
     
-    public void pickUp(Item item);
+    public boolean pickUp(Item item);
     
     public void drop(Item item);
     
