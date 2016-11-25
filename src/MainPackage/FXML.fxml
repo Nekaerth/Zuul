@@ -27,7 +27,21 @@
 						<Label fx:id="bottomMenuLevelLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Level" />
 					</children>
 				</HBox>
-				<Pane fx:id="roomScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false" />
+				<Pane fx:id="roomScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
+					<children>
+						<Label fx:id="roomSceneInfoTitel" layoutX="80.0" layoutY="60.0" prefHeight="40.0" prefWidth="180.0" text="Game info:" />
+						<Label fx:id="roomSceneInfoLabel" layoutX="80.0" layoutY="100.0" prefHeight="40.0" prefWidth="180.0" text="Lastest information" />
+						<Label fx:id="roomSceneCurrentItemLabel" layoutX="80.0" layoutY="520.0" prefHeight="40.0" prefWidth="180.0" text="Current Item" />
+						<Button fx:id="roomSceneUseButton" layoutX="80.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="40.0" prefWidth="180.0" text="Use item" />
+						<Label fx:id="roomSceneItemLabel" alignment="CENTER" layoutX="500.0" layoutY="60.0" prefHeight="40.0" prefWidth="180.0" text="Items in the room:" />
+						<ListView fx:id="roomSceneItemList" layoutX="500.0" layoutY="100.0" prefHeight="240.0" prefWidth="180.0" />
+						<Button fx:id="roomScenePickUpButton" layoutX="500.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="40.0" prefWidth="180.0" text="Pick up" />
+						<Button fx:id="roomSceneNorthButton" layoutX="560.0" layoutY="520.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="60.0" prefWidth="60.0" text="North" />
+						<Button fx:id="roomSceneEastButton" layoutX="620.0" layoutY="580.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="60.0" prefWidth="60.0" text="East" />
+						<Button fx:id="roomSceneSouthButton" layoutX="560.0" layoutY="640.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="60.0" prefWidth="60.0" text="South" />
+						<Button fx:id="roomSceneWestButton" layoutX="500.0" layoutY="580.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="60.0" prefWidth="60.0" text="West" />
+					</children>
+				</Pane>
 				<Pane fx:id="helpScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
 					<children>
 						<Label fx:id="helpSceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="Help">
@@ -63,6 +77,7 @@
 						<Button fx:id="mapSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleMapCloseButton" prefHeight="40.0" prefWidth="240.0" text="Close" />
 					</children>
 				</Pane>
+				<Pane fx:id="bossScene" layoutX="0.0" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false" />
 			</children>
 		</Pane>
 		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0">
@@ -87,6 +102,7 @@
 				<Button fx:id="difficultySceneEasyButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="240.0" text="Easy" />
 				<Button fx:id="difficultySceneMediumButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="240.0" text="Medium" />
 				<Button fx:id="difficultySceneHardButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="240.0" text="Hard" />
+				<Button fx:id="difficultySceneBackButton" layoutX="320.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="80.0" text="Back" />
 			</children>
 		</Pane>
 		<Pane fx:id="highScoreScene" prefHeight="800.0" prefWidth="720.0" visible="false">
