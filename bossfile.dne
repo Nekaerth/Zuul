@@ -1,5 +1,10 @@
 [boss]
-roomId=3
+roomId=8
 hitpoints=100
 bossType=bosstype1
 name=boss
+[boss]
+roomId=4
+hitpoints=100
+bossType=bosstype2
+name=boss2

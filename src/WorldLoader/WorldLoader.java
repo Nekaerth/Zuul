@@ -338,7 +338,7 @@ public class WorldLoader {
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-		boss.inventory.putItem("Key", new Key(true,"Key",true,1,1));
+		boss.inventory.putItem("Glock-18", new Weapon(true,"Glock-18",false,5,1,25,WeaponType.RANGED));
 	}
 
 	private void setUpBoss2(Boss boss) {

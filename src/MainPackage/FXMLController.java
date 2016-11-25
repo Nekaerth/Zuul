@@ -8,6 +8,7 @@ package MainPackage;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -15,9 +16,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -151,6 +152,78 @@ public class FXMLController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		//TODO
+	}
+
+	@FXML
+	private void handleStartMenuButtons(ActionEvent event) {
+		if (event.getSource() == startMenuStartButton) {
+			startMenu.setVisible(false);
+			difficultyScene.setVisible(true);
+		} else if (event.getSource() == startMenuHighScoreButton) {
+			startMenu.setVisible(false);
+			highScoreScene.setVisible(true);
+		} else if (event.getSource() == startMenuQuitButton) {
+			Stage stage = (Stage) startMenuQuitButton.getScene().getWindow();
+			stage.close();
+		}
+	}
+
+	@FXML
+	private void handleDifficultySceneButtons(ActionEvent event) {
+		if (event.getSource() == difficultySceneEasyButton) {
+			difficultyScene.setVisible(false);
+			gameScene.setVisible(true);
+		} else if (event.getSource() == difficultySceneMediumButton) {
+			difficultyScene.setVisible(false);
+			gameScene.setVisible(true);
+		} else if (event.getSource() == difficultySceneHardButton) {
+			difficultyScene.setVisible(false);
+			gameScene.setVisible(true);
+		}
+	}
+
+	@FXML
+	private void handleGameMenuButtons(ActionEvent event) {
+		if (event.getSource() == topMenuExitButton) {
+			gameScene.setVisible(false);
+			startMenu.setVisible(true);
+		} else if (event.getSource() == topMenuHelpButton) {
+			roomScene.setVisible(false);
+			helpScene.setVisible(true);
+		} else if (event.getSource() == topMenuInventoryButton) {
+			roomScene.setVisible(false);
+			inventoryScene.setVisible(true);
+		} else if (event.getSource() == bottomMenuMapButton) {
+			roomScene.setVisible(false);
+			mapScene.setVisible(true);
+		}
+	}
+
+	@FXML
+	private void handleHelpCloseButton(ActionEvent event) {
+		helpScene.setVisible(false);
+		roomScene.setVisible(true);
+	}
+
+	@FXML
+	private void handleInventoryButtons(ActionEvent event) {
+		if (event.getSource() == inventorySceneDropButton) {
+
+		} else if (event.getSource() == inventorySceneCloseButton) {
+			inventoryScene.setVisible(false);
+			roomScene.setVisible(true);
+		}
+	}
+
+	@FXML
+	private void handleMapCloseButton(ActionEvent event) {
+		mapScene.setVisible(false);
+		roomScene.setVisible(true);
+	}
+
+	@FXML
+	private void handleHighScoreSceneCloseButton(ActionEvent event) {
+		highScoreScene.setVisible(false);
+		startMenu.setVisible(true);
 	}
 }
