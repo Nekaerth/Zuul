@@ -205,3 +205,8 @@ pickup=true
 useable=false
 time=6000
 name=Test
+[boss]
+roomId=3
+hitpoints=100
+bossType=bosstype1
+name=boss
