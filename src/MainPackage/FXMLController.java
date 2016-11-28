@@ -190,6 +190,7 @@ public class FXMLController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		game = new GamePlay();
 		inventorySceneItemList.setItems(game.getPlayerInventory());
+		topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
 	}
 
 	@FXML
