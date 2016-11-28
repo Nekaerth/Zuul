@@ -265,6 +265,7 @@ public class FXMLController implements Initializable {
 	private void handleHelpCloseButton(ActionEvent event) {
 		helpScene.setVisible(false);
 		roomScene.setVisible(true);
+		game.constructWorld("Testfile.dne");
 	}
 
 	@FXML
@@ -310,5 +311,11 @@ public class FXMLController implements Initializable {
 	private void handleGameOverSceneExitButton(ActionEvent event) {
 		gameOverScene.setVisible(false);
 		startMenu.setVisible(true);
+	}
+	
+	private void setAllGameSceneInvisibleButOne(Pane pane){
+		if (pane != roomScene) {
+			roomScene.setVisible(false);
+		}
 	}
 }
