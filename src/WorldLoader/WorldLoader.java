@@ -209,6 +209,9 @@ public class WorldLoader {
 				case "roomToUnlock":
 					ic.setNameOfRoomThatFitsThisKey(strings[length - 1]);
 					break;
+                                case "roomBoltcutterCanBeUsedIn":
+                                        ic.setRoomBoltcutterCanBeUsedIn(strings[length - 1]);
+                                        break;
 				case "name":
 					ic.setName(strings[length - 1]);
 					finishItem = true;
@@ -242,7 +245,7 @@ public class WorldLoader {
 					rs.addItem(timeincreasingitem, ic.getRoomID());
 					break;
 				case BOLTCUTTER:
-					Boltcutter boltcutter = new Boltcutter(ic.isPickup(), ic.getName(), ic.isPickup(), ic.getWeight(), ic.getCapacity());
+					Boltcutter boltcutter = new Boltcutter(ic.isPickup(), ic.getName(), ic.isPickup(), ic.getWeight(), ic.getCapacity(), ic.getRoomBoltcutterCanBeUsedIn());
 					rs.addItem(boltcutter, ic.getRoomID());
 			}
 			finishItem = false;
@@ -344,7 +347,7 @@ public class WorldLoader {
 		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
 		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
 		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
-		boss.getInventory().putItem("Glock-18", new Weapon(true, "Glock-18", false, 5, 1, 25, WeaponType.RANGED));
+		boss.getInventory().putItem(new Weapon(true, "Glock-18", false, 5, 1, 25, WeaponType.RANGED));
 	}
 
 	private void setUpBoss2(Boss boss) {

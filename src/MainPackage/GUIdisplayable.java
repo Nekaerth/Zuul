@@ -16,13 +16,13 @@ public interface GUIdisplayable {
 
 	public boolean goRoom(String direction);
 
-	public String getCurrentRoom();
+	public Room getCurrentRoom();
 
 	public ObservableList<Item> getCurrentRoomInventory();
 
-	public void use(Item item);
+	public boolean use(Item item);
 
-	public void pickUp(Item item);
+	public boolean pickUp(Item item);
 
 	public void drop(Item item);
 

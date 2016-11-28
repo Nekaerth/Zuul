@@ -37,7 +37,7 @@ public class RoomSaver {
     public void addItem(Item item, String roomID) {
         for (Room r : roomSaver) {
             if (roomID.equalsIgnoreCase(r.getId())) {
-                r.getInventory().putItem(item.getName(), item);
+                r.getInventory().putItem(item);
                 return;
             }
             
