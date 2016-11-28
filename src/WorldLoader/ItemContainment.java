@@ -27,6 +27,7 @@ public class ItemContainment {
 	private WeaponType weaponType;
     private int time;
 	private String nameOfRoomThatFitsThisKey;
+        private String roomBoltcutterCanBeUsedIn;
 
 	/**
 	 * @return the id
@@ -242,5 +243,19 @@ public class ItemContainment {
 	public String getNameOfRoomThatFitsThisKey(){
 		return nameOfRoomThatFitsThisKey;
 	}
+
+    /**
+     * @return the roomBoltcutterCanBeUsedIn
+     */
+    public String getRoomBoltcutterCanBeUsedIn() {
+        return roomBoltcutterCanBeUsedIn;
+    }
+
+    /**
+     * @param roomBoltcutterCanBeUsedIn the roomBoltcutterCanBeUsedIn to set
+     */
+    public void setRoomBoltcutterCanBeUsedIn(String roomBoltcutterCanBeUsedIn) {
+        this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
+    }
 
 }

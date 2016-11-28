@@ -1,10 +1,10 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Facade class that is used to connect the frontend(GUI) and backend
  */
 package MainPackage;
 
+import Items.Blueprint;
+import Items.Boltcutter;
 import Items.Item;
 import Items.ItemType;
 import Items.Key;
@@ -25,6 +25,12 @@ public class GamePlay implements GUIdisplayable {
 	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
+        /**
+         * The goRoom method is used to change the room the player is in
+         * based on the direction that is given
+         * @param direction is a String used to determine where the player is going
+         * @return boolean false if the player did not move and returns true if the player moved
+         */
 	@Override
 	public boolean goRoom(String direction) {
 
@@ -48,16 +54,28 @@ public class GamePlay implements GUIdisplayable {
 
 	}
 
+        /**
+         * The getCurrentRoom returns the room that the player is currently in
+         * @return an object of Room
+         */
 	@Override
-	public String getCurrentRoom() {
-		return player.getRoom().getName();
+	public Room getCurrentRoom() {
+		return player.getRoom();
 	}
 
+        /**
+         * The getCurrentRoomInventory returns the inventory of the room the player is in
+         * @return an ObservableList of items 
+         */
 	@Override
 	public ObservableList<Item> getCurrentRoomInventory() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return player.getRoom().getInventory().getAllItems();
 	}
 
+        /**
+         * The use method uses a specified item the outcome of the action depends on the item type
+         * @param item is the Item which is to be used
+         */
 	@Override
 	public void use(Item item) {
 		if (item == null) {
@@ -77,7 +95,7 @@ public class GamePlay implements GUIdisplayable {
 				break;
 			case BLUEPRINT:
 				showAllRooms();
-				player.getInventory().removeItem(item.getName());
+				player.getInventory().removeItem(item);
 				break;
 			case BOLTCUTTER:
 				useBoltcutter(item);
@@ -87,6 +105,11 @@ public class GamePlay implements GUIdisplayable {
 		}
 	}
 
+        /**
+         * The pickUp method is used to pick up a specific item, the action depends on the item type
+         * @param item is the item to be picked up
+         * @return a boolean as false if an item is not picked up, returns true of an item is picked up
+         */
 	@Override
 	public boolean pickUp(Item item) {
 		if (item == null) {
@@ -106,8 +129,7 @@ public class GamePlay implements GUIdisplayable {
 				case TIMEINCREASINGITEM:
 					if (item instanceof TimeIncreasingItem) {
 						player.addTime(((TimeIncreasingItem) item).getTime());
-						player.getRoom().getInventory().removeItem(item.getName());
-						System.out.println("Your time to escape increased");
+						player.getRoom().getInventory().removeItem(item);						
 						return true;
 					}
 					break;
@@ -136,7 +158,8 @@ public class GamePlay implements GUIdisplayable {
 
 	@Override
 	public ObservableList<Item> getPlayerInventory() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            return player.getInventory().getAllItems();
+            
 	}
 
 	@Override
@@ -180,26 +203,22 @@ public class GamePlay implements GUIdisplayable {
 
 	private void useKey(Item item) {
 		Key key = (Key) item;
-		Room roomToUnlock;
+		Room roomToUnlock = new Room("", "", false, false, false, "", false);
 		for (Room r : rooms) {
 			if (key.getNameOfRoomThatFitsThisKey().toLowerCase().equals(r.getName().toLowerCase())) {
 				roomToUnlock = r;
 				break;
 			}
 		}
+                
 //Nået hertil fredag
 		if (roomToUnlock.isLocked()) {
-			nextRoom.unlock();
+			roomToUnlock.unlock();
 			System.out.println("You successfully unlock the door");
-			player.getInventory().removeItem(command.getSecondWord());
+			player.getInventory().removeItem(item);
 		} else {
 			System.out.println("The door is already unlocked"); //Prints this if you try to 'use key' any other place than a locked door.
-		}
-
-		if (nextRoom.isLocked() && nextRoom.getEscapeRoom()) {
-			nextRoom.unlock();
-			System.out.println("You opended up the fence to the parkinglot");
-		}
+		}		
 	}
 
 	private void useFlashlight(Item item) {
@@ -212,7 +231,23 @@ public class GamePlay implements GUIdisplayable {
 		}
 	}
 
-	private void useBoltcutter(Item item) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
+	private void useBoltcutter(Item item) { 
+                Boltcutter boltcutter = (Boltcutter) item;
+                Room roomToUnlock = new Room("", "", false, false, false, "", false);
+                for (Room r : rooms) {
+                    if(boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(r.getName().toLowerCase())) {
+                        roomToUnlock = r;
+                        break;
+                    }
+                }                
+                if(roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+                    roomToUnlock.unlock();
+                    player.getInventory().removeItem(item);
+                } else if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+                    System.out.println("You got no use of the boltcutter here");                    
+                } else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
+                    System.out.println("You have allready opended the fence");
+                    System.out.println("Get out of here with the code");
+                }                               
+          }               
 }

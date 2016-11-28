@@ -16,7 +16,7 @@ public interface GUIdisplayable {
     
     public boolean goRoom(String direction);
     
-    public String getCurrentRoom();
+    public Room getCurrentRoom();
     
     public ObservableList<Item> getCurrentRoomInventory();
     

@@ -5,6 +5,8 @@ package Items;
  */
 import java.util.HashMap;
 import java.util.Set;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 /**
@@ -16,13 +18,13 @@ public class Inventory {
 	/**
 	 * New hashmap is initialized.
 	 */
-	private HashMap<String, Item> inventory;
+	private ObservableList<Item> inventory;
 
 	/**
 	 * New hashmap with the name "inventory" is created in the contructor.
 	 */
 	public Inventory() {
-		inventory = new HashMap<>();
+		inventory = FXCollections.observableArrayList();
 		
 	}
 
@@ -30,7 +32,7 @@ public class Inventory {
 	 *
 	 * @return HashMap with all items.
 	 */
-	public HashMap<String, Item> getAllItems() {
+	public ObservableList<Item> getAllItems() {
 		return inventory;
 	}
 
@@ -48,11 +50,16 @@ public class Inventory {
 	 *
 	 * @param name The parameter name is the reference name to the item
 	 * requested.
-	 * @return An Item object.
+	 * @return the index where the item was found        
 	 */
-	public Item getItem(String name) {
-		return inventory.get(name);
-	}
+//	public int getItem(String name) {
+//            for (Item i : inventory) {
+//                if (i.getName().equalsIgnoreCase(name)) {
+//		return inventory.indexOf(i);
+//                }
+//            }
+//            return -1;            
+//	}
 
 	/**
 	 * This method will return a list of all items in the inventory.
@@ -60,10 +67,9 @@ public class Inventory {
 	 * @return Returns the list of items in the inventory.
 	 */
 	public String getStringOfAllItems() {
-		String returnString = "Items:";
-		Set<String> keys = inventory.keySet();
-		for (String item : keys) {
-			returnString += " " + item;
+		String returnString = "Items:";		
+		for (Item item : inventory) {
+			returnString += " " + item.getName();
 		}
 		return returnString;
 	}
@@ -75,7 +81,7 @@ public class Inventory {
 	 */
 	public int itemWeight() {
 		int weight = 0;
-		for (Item item : inventory.values()) {
+		for (Item item : inventory) {
 			weight += item.getWeight();
 		}
 		return weight;
@@ -99,9 +105,9 @@ public class Inventory {
 	 * @param name which is a String.
 	 * @return a boolean that is true if it contains the item.
 	 */
-	public boolean containItem(String name) {
-		return this.inventory.containsKey(name);
-	}
+//	public boolean containItem(String name) {
+//		return this.inventory.containsKey(name);
+//	}
 
 	/**
 	 * This method allow you to put an item that you are carrying into an
@@ -110,8 +116,8 @@ public class Inventory {
 	 * @param name The parameter name is the reference name to the object.
 	 * @param item The parameter item is the object of the class Item.
 	 */
-	public void putItem(String name, Item item) {
-		inventory.put(name, item);
+	public void putItem(Item item) {
+		inventory.add(item);
 		
 	}
 
@@ -120,8 +126,8 @@ public class Inventory {
 	 *
 	 * @param name string, the name of the item to be removed.
 	 */
-	public void removeItem(String name) {
-		inventory.remove(name);
+	public void removeItem(Item item) {
+		inventory.remove(item);
 	}
 
 	/**
@@ -131,8 +137,8 @@ public class Inventory {
 	 * inventory.
 	 */
 	public void putInventory(Inventory inventory) {
-		HashMap<String, Item> inventoryItems = inventory.getAllItems();
-		this.inventory.putAll(inventoryItems);
+		ObservableList<Item> inventoryItems = inventory.getAllItems();
+		this.inventory.addAll(inventoryItems);
 	}
 	/**
 	 * Transfer the given item specified by the name given in a String, from the given inventory to this inventory
@@ -141,8 +147,8 @@ public class Inventory {
 	 * 
 	 */
 	public void transferItem(Inventory inventory, Item item) {
-		this.putItem(item.getName(), item);
-		inventory.removeItem(item.getName());	
+		this.putItem(item);
+		inventory.removeItem(item);	
 	}
 	
 }
