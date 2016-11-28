@@ -3,6 +3,7 @@
  */
 package MainPackage;
 
+import HighscoreLoader.Highscore;
 import Items.Blueprint;
 import Items.Boltcutter;
 import Items.Flashlight;
@@ -130,7 +131,7 @@ public class GamePlay implements GUIdisplayable {
         }
 
         if (item.isPickup()
-                && player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
+                && player.getInventory().getItemWeight() + item.getWeight() <= player.getWeightCapacity()
                 && player.getInventory().size() + 1 <= player.getCapacity()) {
 
             switch (item.getType()) {
@@ -151,7 +152,7 @@ public class GamePlay implements GUIdisplayable {
             //Transfers the item from the room inventory to the player inventory
             player.getInventory().transferItem(player.getRoom().getInventory(), item);
 
-        } else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
+        } else if (player.getInventory().getItemWeight() + item.getWeight() > player.getWeightCapacity()) {
             return false;
         } else if (player.getInventory().size() + 1 > player.getCapacity()) {
             return false;
@@ -274,31 +275,35 @@ public class GamePlay implements GUIdisplayable {
 
     @Override
     public void saveHighScore(String name, int highScore) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		StringBuilder sb = new StringBuilder();
+		sb.append(name);
+		sb.append(" ");
+		sb.append(highScore);
+		Highscore.saveHighscore(sb.toString());
     }
 
     @Override
     public int getHighScore() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       return Highscore.calculateScore(player.getTime(), player.getBossKill());
     }
 
     @Override
     public int getItemCapacity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return player.getCapacity();
     }
 
     @Override
     public int getCurrentItemAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return player.getInventory().getItemCapacity();
     }
 
     @Override
     public int getWeightCapacity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return player.getWeightCapacity();
     }
 
     @Override
     public int getCurrentWeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return player.getInventory().getItemWeight();
     }
 }

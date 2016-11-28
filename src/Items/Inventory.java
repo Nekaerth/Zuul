@@ -79,7 +79,7 @@ public class Inventory {
 	 *
 	 * @return an integer that is the total weight.
 	 */
-	public int itemWeight() {
+	public int getItemWeight() {
 		int weight = 0;
 		for (Item item : inventory) {
 			weight += item.getWeight();
@@ -149,6 +149,14 @@ public class Inventory {
 	public void transferItem(Inventory inventory, Item item) {
 		this.putItem(item);
 		inventory.removeItem(item);	
+	}
+	
+	public int getItemCapacity() {
+		int capacity = 0;
+		for (Item item : inventory) {
+			capacity += item.getCapacity();
+		}
+		return capacity;
 	}
 	
 }
