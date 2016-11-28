@@ -77,13 +77,13 @@ public class GamePlay implements GUIdisplayable {
          * @param item is the Item which is to be used
          */
 	@Override
-	public void use(Item item) {
+	public boolean use(Item item) {
 		if (item == null) {
 			System.out.println("You don't have that item in your inventory");
-			return;
+			return false;
 		}
 		if (!item.isUseable()) {//There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
-			return;
+			return false;
 		}
 
 		switch (item.getType()) {
@@ -103,6 +103,7 @@ public class GamePlay implements GUIdisplayable {
 			default:
 				break;
 		}
+                return true;
 	}
 
         /**
@@ -250,4 +251,34 @@ public class GamePlay implements GUIdisplayable {
                     System.out.println("Get out of here with the code");
                 }                               
           }               
+
+    @Override
+    public void saveHighScore(String name, int highScore) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getHighScore() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getItemCapacity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getCurrentItemAmount() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getWeightCapacity() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int getCurrentWeight() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

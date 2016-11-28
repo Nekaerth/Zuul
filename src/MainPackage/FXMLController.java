@@ -5,8 +5,10 @@
  */
 package MainPackage;
 
+import Items.Item;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -26,6 +28,9 @@ import javafx.stage.Stage;
  * @author Lasse
  */
 public class FXMLController implements Initializable {
+
+	private GamePlay game;
+	private Item currentItem = null;
 
 	//Main Pane
 	@FXML
@@ -96,13 +101,17 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label inventorySceneTitle;
 	@FXML
-	private ListView<?> inventorySceneItemList;
+	private ListView<Item> inventorySceneItemList;
 	@FXML
 	private Button inventorySceneDropButton;
 	@FXML
-	private Label inventorySceneWeightLabel;
+	private Button inventorySceneChooseButton;
 	@FXML
-	private Label inventorySceneCapacityLabel;
+	private Label inventorySceneCurrentItemLabel;
+	@FXML
+	private Label inventorySceneItemAmountLabel;
+	@FXML
+	private Label inventorySceneWeightLabel;
 	@FXML
 	private Button inventorySceneCloseButton;
 	//Map Pane
@@ -179,6 +188,8 @@ public class FXMLController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+		game = new GamePlay();
+		inventorySceneItemList.setItems(game.getPlayerInventory());
 	}
 
 	@FXML
@@ -224,6 +235,8 @@ public class FXMLController implements Initializable {
 		} else if (event.getSource() == topMenuInventoryButton) {
 			roomScene.setVisible(false);
 			inventoryScene.setVisible(true);
+			inventorySceneItemAmountLabel.setText("Item amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
+			inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
 		} else if (event.getSource() == bottomMenuMapButton) {
 			roomScene.setVisible(false);
 			mapScene.setVisible(true);
@@ -256,7 +269,15 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleInventoryButtons(ActionEvent event) {
 		if (event.getSource() == inventorySceneDropButton) {
-
+			if (currentItem != null) {
+				game.drop(currentItem);
+			}
+		} else if (event.getSource() == inventorySceneChooseButton) {
+			currentItem = inventorySceneItemList.getSelectionModel().getSelectedItem();
+			if (currentItem != null) {
+				roomSceneCurrentItemLabel.setText("Current Item: " + currentItem.getName());
+				inventorySceneCurrentItemLabel.setText("Current Item: " + currentItem.getName());
+			}
 		} else if (event.getSource() == inventorySceneCloseButton) {
 			inventoryScene.setVisible(false);
 			roomScene.setVisible(true);
@@ -272,6 +293,21 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleHighScoreSceneCloseButton(ActionEvent event) {
 		highScoreScene.setVisible(false);
+		startMenu.setVisible(true);
+	}
+
+	@FXML
+	private void handleVictorySceneEnterButton(ActionEvent event) {
+		gameOverScene.setVisible(false);
+		startMenu.setVisible(true);
+		String name = victorySceneTextField.getText();
+		int highscore = game.getHighScore();
+		game.saveHighScore(name, highscore);
+	}
+
+	@FXML
+	private void handleGameOverSceneExitButton(ActionEvent event) {
+		gameOverScene.setVisible(false);
 		startMenu.setVisible(true);
 	}
 }

@@ -31,7 +31,7 @@
 					<children>
 						<Label fx:id="roomSceneInfoTitel" layoutX="80.0" layoutY="60.0" prefHeight="40.0" prefWidth="180.0" text="Game info:" />
 						<Label fx:id="roomSceneInfoLabel" layoutX="80.0" layoutY="100.0" prefHeight="40.0" prefWidth="180.0" text="Lastest information" />
-						<Label fx:id="roomSceneCurrentItemLabel" layoutX="80.0" layoutY="520.0" prefHeight="40.0" prefWidth="180.0" text="Current Item" />
+						<Label fx:id="roomSceneCurrentItemLabel" layoutX="80.0" layoutY="520.0" prefHeight="40.0" prefWidth="180.0" text="Current Item: None" />
 						<Button fx:id="roomSceneUseButton" layoutX="80.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="40.0" prefWidth="180.0" text="Use item" />
 						<Label fx:id="roomSceneItemLabel" alignment="CENTER" layoutX="500.0" layoutY="60.0" prefHeight="40.0" prefWidth="180.0" text="Items in the room:" />
 						<ListView fx:id="roomSceneItemList" layoutX="500.0" layoutY="100.0" prefHeight="240.0" prefWidth="180.0" />
@@ -60,10 +60,12 @@
 								<Font name="System Bold" size="40.0" />
 							</font>
 						</Label>
-						<ListView fx:id="inventorySceneItemList" layoutX="180.0" layoutY="140.0" prefHeight="360.0" prefWidth="360.0" />
-						<Button fx:id="inventorySceneDropButton" layoutX="580.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleInventoryButtons" prefHeight="40.0" prefWidth="80.0" text="Drop" />
-						<Label fx:id="inventorySceneWeightLabel" alignment="CENTER" layoutY="505.0" prefHeight="40.0" prefWidth="720.0" text="Total weight: 0/0" />
-						<Label fx:id="inventorySceneCapacityLabel" alignment="CENTER" layoutY="545.0" prefHeight="40.0" prefWidth="720.0" text="Total capacity: 0/0" />
+						<ListView fx:id="inventorySceneItemList" layoutX="180.0" layoutY="140.0" prefHeight="340.0" prefWidth="360.0" />
+						<Button fx:id="inventorySceneDropButton" layoutX="580.0" layoutY="140.0" mnemonicParsing="false" onAction="#handleInventoryButtons" prefHeight="40.0" prefWidth="100.0" text="Drop" />
+						<Button fx:id="inventorySceneChooseButton" layoutX="580.0" layoutY="190.0" mnemonicParsing="false" onAction="#handleInventoryButtons" prefHeight="40.0" prefWidth="100.0" text="Choose" />
+						<Label fx:id="inventorySceneCurrentItemLabel" alignment="CENTER" layoutY="490.0" prefHeight="30.0" prefWidth="720.0" text="Current Item: None" />
+						<Label fx:id="inventorySceneItemAmountLabel" alignment="CENTER" layoutY="520.0" prefHeight="30.0" prefWidth="720.0" text="Item amount: 0/0" />
+						<Label fx:id="inventorySceneWeightLabel" alignment="CENTER" layoutY="550.0" prefHeight="30.0" prefWidth="720.0" text="Weight: 0/0" />
 						<Button fx:id="inventorySceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleInventoryButtons" prefHeight="40.0" prefWidth="240.0" text="Close" />
 					</children>
 				</Pane>
@@ -134,7 +136,7 @@
 					</font>
 				</Label>
 				<TextField fx:id="victorySceneTextField" layoutX="270.0" layoutY="400.0" prefWidth="180.0" />
-				<Button fx:id="victorySceneEnterButton" layoutX="470.0" layoutY="400.0" mnemonicParsing="false" text="Enter" />
+				<Button fx:id="victorySceneEnterButton" layoutX="470.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleVictorySceneEnterButton" text="Enter" />
 			</children>
 		</Pane>
 		<Pane fx:id="gameOverScene" prefHeight="800.0" prefWidth="720.0" visible="false">
@@ -144,7 +146,7 @@
 						<Font name="System Bold" size="60.0" />
 					</font>
 				</Label>
-				<Button fx:id="gameOverSceneExitButton" layoutX="240.0" layoutY="380.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="240.0" text="Exit" />
+				<Button fx:id="gameOverSceneExitButton" layoutX="240.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleGameOverSceneExitButton" prefHeight="40.0" prefWidth="240.0" text="Exit" />
 			</children>
 		</Pane>
 	</children>

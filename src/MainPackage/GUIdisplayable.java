@@ -13,27 +13,38 @@ import javafx.collections.ObservableList;
  * @author Niklas
  */
 public interface GUIdisplayable {
-    
-    public boolean goRoom(String direction);
-    
-    public Room getCurrentRoom();
-    
-    public ObservableList<Item> getCurrentRoomInventory();
-    
-    public void use(Item item);
-    
-    public boolean pickUp(Item item);
-    
-    public void drop(Item item);
-    
-    public ObservableList<Item> getPlayerInventory();
-    
-    public int getTime();
-    
-    public String getHelpDescription();
-    
-    public void constructWorld(String fileToRead);
-    
-    public boolean isBossPresent();
-    
+
+	public boolean goRoom(String direction);
+
+	public Room getCurrentRoom();
+
+	public ObservableList<Item> getCurrentRoomInventory();
+
+	public boolean use(Item item);
+
+	public boolean pickUp(Item item);
+
+	public void drop(Item item);
+
+	public ObservableList<Item> getPlayerInventory();
+
+	public int getTime();
+
+	public String getHelpDescription();
+
+	public void constructWorld(String fileToRead);
+
+	public boolean isBossPresent();
+
+	public void saveHighScore(String name, int highScore);
+
+	public int getHighScore();
+
+	public int getItemCapacity();
+
+	public int getCurrentItemAmount();
+
+	public int getWeightCapacity();
+
+	public int getCurrentWeight();
 }
