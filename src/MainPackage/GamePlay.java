@@ -26,7 +26,7 @@ public class GamePlay implements GUIdisplayable {
     private ArrayList<Boss> bosses = new ArrayList<>();
     private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
     private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
-
+	
     /**
      * The goRoom method is used to change the room the player is in based on
      * the direction that is given
@@ -47,7 +47,8 @@ public class GamePlay implements GUIdisplayable {
             player.subtractTime(10);
 
             if (!nextRoom.getEscapeRoom()) {
-                player.setRoom(nextRoom); //Changes players current room to nextRoom.     
+                player.setRoom(nextRoom); //Changes players current room to nextRoom.
+				//NPC.move();
                 return true;
             }
 
