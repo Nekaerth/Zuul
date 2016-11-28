@@ -16,7 +16,7 @@ public class Inventory {
 	/**
 	 * New hashmap is initialized.
 	 */
-	private final HashMap<String, Item> inventory;
+	private HashMap<String, Item> inventory;
 
 	/**
 	 * New hashmap with the name "inventory" is created in the contructor.
@@ -137,12 +137,12 @@ public class Inventory {
 	/**
 	 * Transfer the given item specified by the name given in a String, from the given inventory to this inventory
 	 * @param inventory an inventory from either a room or a person
-	 * @param itemName the name of the item given in a String
+	 * @param item
 	 * 
 	 */
-	public void transferItem(Inventory inventory, String itemName) {
-		this.putItem(itemName, inventory.getItem(itemName));
-		inventory.removeItem(itemName);	
+	public void transferItem(Inventory inventory, Item item) {
+		this.putItem(item.getName(), item);
+		inventory.removeItem(item.getName());	
 	}
 	
 }

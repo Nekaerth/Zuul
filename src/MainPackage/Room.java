@@ -18,7 +18,7 @@ public class Room {
 	private final String description;
 	private String name;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
-	public final Inventory inventory;
+	private Inventory inventory;
 	private boolean numberRoom, escapeRoom, lock, needsBoss, hidden;
 	private int number;
 	private String id;
@@ -225,5 +225,12 @@ public class Room {
 	 */
 	public void setHidden(boolean hidden) {
 		this.hidden = hidden;
+	}
+
+	/**
+	 * @return the inventory
+	 */
+	public Inventory getInventory() {
+		return inventory;
 	}
 }

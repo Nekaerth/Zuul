@@ -6,6 +6,10 @@
 package MainPackage;
 
 import Items.Item;
+import Items.ItemType;
+import Items.Key;
+import Items.TimeIncreasingItem;
+import Items.Weapon;
 import WorldLoader.WorldLoader;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
@@ -66,20 +70,17 @@ public class GamePlay implements GUIdisplayable {
 
 		switch (item.getType()) {
 			case KEY:
-				useKey(String direction
-				);
+				useKey(item);
 				break;
 			case FLASHLIGHT:
 				useFlashlight(item);
 				break;
 			case BLUEPRINT:
 				showAllRooms();
-				System.out.println("You take a look at the blueprints of the prison and find a secret area behind your cell");
-				player.inventory.removeItem(command.getSecondWord());
+				player.getInventory().removeItem(item.getName());
 				break;
 			case BOLTCUTTER:
-				useBoltcutter(command);
-				System.out.println("boltcutter test");
+				useBoltcutter(item);
 				break;
 			default:
 				break;
@@ -87,13 +88,50 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	@Override
-	public void pickUp(Item item) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	public boolean pickUp(Item item) {
+		if (item == null) {
+			System.out.println("There is no such item.");
+			return false;
+		}
+
+		if (item.isPickup()
+				&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
+				&& player.getInventory().size() + 1 <= player.getCapacity()) {
+
+			switch (item.getType()) {
+				case WEAPON:
+					Weapon weapon = (Weapon) item;
+					player.changePlayerMove(weapon);
+					break;
+				case TIMEINCREASINGITEM:
+					if (item instanceof TimeIncreasingItem) {
+						player.addTime(((TimeIncreasingItem) item).getTime());
+						player.getRoom().getInventory().removeItem(item.getName());
+						System.out.println("Your time to escape increased");
+						return true;
+					}
+					break;
+				default:
+					break;
+			}
+			//Transfers the item from the room inventory to the player inventory
+			player.getInventory().transferItem(player.getRoom().getInventory(), item);
+
+		} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
+			return false;
+		} else if (player.getInventory().size() + 1 > player.getCapacity()) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public void drop(Item item) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		if (item.getType() == ItemType.WEAPON) {
+			player.droppedWeapon((Weapon) item);
+		}
+		//Transfers the item from the player inventory to the room inventory
+		player.getRoom().getInventory().transferItem(player.getInventory(), item);
 	}
 
 	@Override
@@ -140,33 +178,41 @@ public class GamePlay implements GUIdisplayable {
 		return false;
 	}
 
-	@Override
-	public void saveHighScore(String name, int highScore) {
+	private void useKey(Item item) {
+		Key key = (Key) item;
+		Room roomToUnlock;
+		for (Room r : rooms) {
+			if (key.getNameOfRoomThatFitsThisKey().toLowerCase().equals(r.getName().toLowerCase())) {
+				roomToUnlock = r;
+				break;
+			}
+		}
+//Nået hertil fredag
+		if (roomToUnlock.isLocked()) {
+			nextRoom.unlock();
+			System.out.println("You successfully unlock the door");
+			player.getInventory().removeItem(command.getSecondWord());
+		} else {
+			System.out.println("The door is already unlocked"); //Prints this if you try to 'use key' any other place than a locked door.
+		}
+
+		if (nextRoom.isLocked() && nextRoom.getEscapeRoom()) {
+			nextRoom.unlock();
+			System.out.println("You opended up the fence to the parkinglot");
+		}
+	}
+
+	private void useFlashlight(Item item) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
-	@Override
-	public int getHighScore() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	private void showAllRooms() {
+		for (Room r : rooms) {
+			r.setHidden(false);
+		}
 	}
 
-	@Override
-	public int getItemCapacity() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	@Override
-	public int getCurrentItemAmount() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	@Override
-	public int getWeightCapacity() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
-	@Override
-	public int getCurrentWeight() {
+	private void useBoltcutter(Item item) {
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 }
