@@ -7,14 +7,14 @@ package MainPackage;
 
 /**
  *
- * @author 
+ * @author
  */
 public class NPC {
-	
+
 	private Room currentRoom;
-	
-	public void move(){
-		if((int) (Math.random()*100)+1 > 60){
+
+	public void move() {
+		if ((int) (Math.random() * 100) + 1 > 60) {
 			//Code to move the NPC
 		}
 	}
@@ -32,5 +32,5 @@ public class NPC {
 	public void setCurrentRoom(Room currentRoom) {
 		this.currentRoom = currentRoom;
 	}
-	
+
 }

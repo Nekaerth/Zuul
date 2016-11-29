@@ -12,7 +12,7 @@ import MainPackage.BossType;
  * @author Danieln Johansen
  */
 public class BossContainment {
-	
+
 	private String roomId, name;
 	private int hitpoints;
 	private BossType bossType;
@@ -58,7 +58,7 @@ public class BossContainment {
 	public void setHitpoints(String hitpoints) {
 		this.hitpoints = Integer.parseInt(hitpoints);
 	}
-	
+
 	/**
 	 * @return the bossType
 	 */
@@ -70,14 +70,12 @@ public class BossContainment {
 	 * @param bossType the bossType to set
 	 */
 	public void setBossType(String bossType) {
-		  bossType = bossType.toLowerCase();
-        for (BossType i : BossType.values()) {
-            if (bossType.equalsIgnoreCase(i.toString())) {
-                this.bossType = i;
-            }
-        }
+		bossType = bossType.toLowerCase();
+		for (BossType i : BossType.values()) {
+			if (bossType.equalsIgnoreCase(i.toString())) {
+				this.bossType = i;
+			}
+		}
 	}
-	
-	
-	
+
 }

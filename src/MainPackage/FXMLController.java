@@ -312,8 +312,8 @@ public class FXMLController implements Initializable {
 		gameOverScene.setVisible(false);
 		startMenu.setVisible(true);
 	}
-	
-	private void setAllGameSceneInvisibleButOne(Pane pane){
+
+	private void setAllGameSceneInvisibleButOne(Pane pane) {
 		if (pane != roomScene) {
 			roomScene.setVisible(false);
 		}

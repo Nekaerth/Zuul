@@ -11,30 +11,30 @@ package Items;
  */
 public class TimeIncreasingItem extends Item {
 
-    private int time;
-    
-    public TimeIncreasingItem(boolean pickup, String name, boolean useable, int time) {
-        super(pickup, name, useable, 0, 0);
-        this.time = time;
-    }
-    
-    @Override
-    public ItemType getType() {
-        return ItemType.TIMEINCREASINGITEM;
-    }
+	private int time;
 
-    /**
-     * @return the time
-     */
-    public int getTime() {
-        return time;
-    }
+	public TimeIncreasingItem(boolean pickup, String name, boolean useable, int time) {
+		super(pickup, name, useable, 0, 0);
+		this.time = time;
+	}
 
-    /**
-     * @param time the time to set
-     */
-    public void setTime(int time) {
-        this.time = time;
-    }
-    
+	@Override
+	public ItemType getType() {
+		return ItemType.TIMEINCREASINGITEM;
+	}
+
+	/**
+	 * @return the time
+	 */
+	public int getTime() {
+		return time;
+	}
+
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(int time) {
+		this.time = time;
+	}
+
 }

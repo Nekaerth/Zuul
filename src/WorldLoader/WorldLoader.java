@@ -28,10 +28,10 @@ public class WorldLoader {
 	BossContainment bossC = new BossContainment();
 
 	/**
-	 * The loadWorld method is a try-catch contruction The method is used to
-	 * read from a file containing the rooms and items It uses the
-	 * BufferedReader to read 1 line at a time from the file Other methods are
-	 * then called to create either an item or a room based on the line
+	 * The loadWorld method is a try-catch contruction The method is used to read
+	 * from a file containing the rooms and items It uses the BufferedReader to
+	 * read 1 line at a time from the file Other methods are then called to create
+	 * either an item or a room based on the line
 	 *
 	 * @param filereadToRead
 	 */
@@ -84,9 +84,9 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The createRoom method is used to create the rooms based on what is read
-	 * in the file It contains a switch-case construction which has cases to
-	 * alle atributes a room has
+	 * The createRoom method is used to create the rooms based on what is read in
+	 * the file It contains a switch-case construction which has cases to alle
+	 * atributes a room has
 	 *
 	 * @param evaluateString is a String that comes from the file
 	 * @return will return a boolean
@@ -209,9 +209,9 @@ public class WorldLoader {
 				case "roomToUnlock":
 					ic.setNameOfRoomThatFitsThisKey(strings[length - 1]);
 					break;
-                                case "roomBoltcutterCanBeUsedIn":
-                                        ic.setRoomBoltcutterCanBeUsedIn(strings[length - 1]);
-                                        break;
+				case "roomBoltcutterCanBeUsedIn":
+					ic.setRoomBoltcutterCanBeUsedIn(strings[length - 1]);
+					break;
 				case "name":
 					ic.setName(strings[length - 1]);
 					finishItem = true;

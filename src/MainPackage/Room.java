@@ -1,7 +1,5 @@
 package MainPackage;
 
-
-
 import Items.Inventory;
 import java.util.Set;
 import java.util.HashMap;
@@ -52,7 +50,6 @@ public class Room {
 			number = (int) (Math.random() * 9);
 		}
 	}
-	
 
 	/**
 	 * The setExit method is used to declare which exits a room has
@@ -94,8 +91,8 @@ public class Room {
 		String returnString = "Exits:";
 		Set<String> keys = exits.keySet();
 		for (String exit : keys) {
-			if(!exits.get(exit).isHidden()){
-			returnString = returnString + " " + exit;
+			if (!exits.get(exit).isHidden()) {
+				returnString = returnString + " " + exit;
 			}
 		}
 		return returnString;

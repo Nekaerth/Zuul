@@ -10,17 +10,17 @@ package MainPackage;
  * @author Niklas
  */
 public enum BossType {
-    BOSSTYPE1("bosstype1"), BOSSTYPE2("bosstype2");
-    
-    private String stringBossType;
-    
-    BossType (String stringBossType) {
-        this.stringBossType = stringBossType;
-    }
-    
-    @Override
-    public String toString() {
-        return stringBossType;
-    }
-    
+	BOSSTYPE1("bosstype1"), BOSSTYPE2("bosstype2");
+
+	private String stringBossType;
+
+	BossType(String stringBossType) {
+		this.stringBossType = stringBossType;
+	}
+
+	@Override
+	public String toString() {
+		return stringBossType;
+	}
+
 }

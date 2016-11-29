@@ -10,21 +10,21 @@ package Items;
  * @author Niklas
  */
 public class Boltcutter extends Item {
-    
-    private String roomBoltcutterCanBeUsedIn;
 
-    public Boltcutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltcutterCanBeUsedIn) {
-        super(pickup, name, useable, weight, capacity);
-        this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
-    }
+	private String roomBoltcutterCanBeUsedIn;
 
-    @Override
-    public ItemType getType() {
-        return ItemType.BOLTCUTTER;
-    }
-    
-    public String getRoomBoltcutterCanBeUsedIn() {
-        return roomBoltcutterCanBeUsedIn;
-    }
-    
+	public Boltcutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltcutterCanBeUsedIn) {
+		super(pickup, name, useable, weight, capacity);
+		this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
+	}
+
+	@Override
+	public ItemType getType() {
+		return ItemType.BOLTCUTTER;
+	}
+
+	public String getRoomBoltcutterCanBeUsedIn() {
+		return roomBoltcutterCanBeUsedIn;
+	}
+
 }
