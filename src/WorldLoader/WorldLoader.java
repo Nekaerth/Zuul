@@ -33,7 +33,8 @@ public class WorldLoader {
 	 * read 1 line at a time from the file Other methods are then called to create
 	 * either an item or a room based on the line
 	 *
-	 * @param filereadToRead
+         * @param fileToRead
+         * @return 
 	 */
 	public ArrayList<Room> loadWorld(String fileToRead) {
 		try {
@@ -45,7 +46,7 @@ public class WorldLoader {
 			while (buffer.ready()) {
 				// While the BufferedReader is ready we read the next line in the file
 				String evaluateString = buffer.readLine();
-				if (createRoom) {
+				if (createRoom) {   
 					// If createRoom is true the we act on what is in the file
 					createRoom = createRoom(evaluateString);
 

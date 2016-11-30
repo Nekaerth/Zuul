@@ -17,7 +17,7 @@ public class Inventory {
 	/**
 	 * New hashmap is initialized.
 	 */
-	private ObservableList<Item> inventory;
+	ObservableList<Item> inventory;
 
 	/**
 	 * New hashmap with the name "inventory" is created in the contructor.
