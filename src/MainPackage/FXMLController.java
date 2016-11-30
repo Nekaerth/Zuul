@@ -379,7 +379,10 @@ public class FXMLController implements Initializable {
 		bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
 		//updates the info label
 		roomSceneInfoLabel.setText("");
-		//updates the current chosen item label
+		//updates the current chosen item label in roomScene and in inventoryScene
 		roomSceneCurrentItemLabel.setText("Current Item: None");
+		inventorySceneCurrentItemLabel.setText("Current Item: None");
+		//updates the help textarea
+		helpSceneTextArea.setText(game.getHelpDescription());
 	}
 }
