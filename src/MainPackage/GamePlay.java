@@ -163,10 +163,13 @@ public class GamePlay implements GUIdisplayable {
 		return true;
 	}
 
-        /**
-         * The drop method is used to remove an item from the players inventory and add it to the rooms inventory
-         * @param item is the item to be transfered to the rooms inventory from the players inventory
-         */
+	/**
+	 * The drop method is used to remove an item from the players inventory and
+	 * add it to the rooms inventory
+	 *
+	 * @param item is the item to be transfered to the rooms inventory from the
+	 * players inventory
+	 */
 	@Override
 	public void drop(Item item) {
 		if (item.getType() == ItemType.WEAPON) {
@@ -176,20 +179,23 @@ public class GamePlay implements GUIdisplayable {
 		player.getRoom().getInventory().transferItem(player.getInventory(), item);
 	}
 
-        /**
-         * The getPlayerInventory method will return all item in the players inventory
-         * @return will return a list of items 
-         */
+	/**
+	 * The getPlayerInventory method will return all item in the players
+	 * inventory
+	 *
+	 * @return will return a list of items
+	 */
 	@Override
 	public ObservableList<Item> getPlayerInventory() {
 		return player.getInventory().getAllItems();
 
 	}
 
-        /**
-         * The getTime method is used to return the amount of time the player has
-         * @return will return an int equal to the amount of time left
-         */
+	/**
+	 * The getTime method is used to return the amount of time the player has
+	 *
+	 * @return will return an int equal to the amount of time left
+	 */
 	@Override
 	public int getTime() {
 		return player.getTime();
@@ -280,59 +286,47 @@ public class GamePlay implements GUIdisplayable {
 			}
 		}
 
-			if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
-				System.out.println("You got no use of the boltcutter here");
-			} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
-				System.out.println("You have allready opended the fence");
-				System.out.println("Get out of here with the code");
-			}
-		
+		if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+			System.out.println("You got no use of the boltcutter here");
+		} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
+			System.out.println("You have allready opended the fence");
+			System.out.println("Get out of here with the code");
+		}
+
 	}
 
-		@Override
-		public void saveHighScore
-		(String name, int highScore
-		
-			) {
+	@Override
+	public void saveHighScore(String name, int highScore
+	) {
 		StringBuilder sb = new StringBuilder();
-			sb.append(name);
-			sb.append(" ");
-			sb.append(highScore);
-			Highscore.saveHighscore(sb.toString());
-		}
-
-		@Override
-		public int getHighScore
-		
-			() {
-		return Highscore.calculateScore(player.getTime(), player.getBossKill());
-		}
-
-		@Override
-		public int getItemCapacity
-		
-			() {
-		return player.getCapacity();
-		}
-
-		@Override
-		public int getCurrentItemAmount
-		
-			() {
-		return player.getInventory().getItemCapacity();
-		}
-
-		@Override
-		public int getWeightCapacity
-		
-			() {
-		return player.getWeightCapacity();
-		}
-
-		@Override
-		public int getCurrentWeight
-		
-			() {
-		return player.getInventory().getItemWeight();
-		}
+		sb.append(name);
+		sb.append(" ");
+		sb.append(highScore);
+		Highscore.saveHighscore(sb.toString());
 	}
+
+	@Override
+	public int getHighScore() {
+		return Highscore.calculateScore(player.getTime(), player.getBossKill());
+	}
+
+	@Override
+	public int getItemCapacity() {
+		return player.getCapacity();
+	}
+
+	@Override
+	public int getCurrentItemAmount() {
+		return player.getInventory().getItemCapacity();
+	}
+
+	@Override
+	public int getWeightCapacity() {
+		return player.getWeightCapacity();
+	}
+
+	@Override
+	public int getCurrentWeight() {
+		return player.getInventory().getItemWeight();
+	}
+}
