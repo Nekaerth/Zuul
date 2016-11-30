@@ -194,13 +194,8 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleStartMenuButtons(ActionEvent event) {
 		if (event.getSource() == startMenuStartButton) {
-			game = new GamePlay();
-			game.constructWorld("testfile.dne");
-			inventorySceneItemList.setItems(game.getPlayerInventory());
-			roomSceneItemList.setItems(game.getCurrentRoomInventory());
-			topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
+			startGame();
 			setAllButOneMainSceneInvisible(difficultyScene);
-			bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
 		} else if (event.getSource() == startMenuHighScoreButton) {
 			setAllButOneMainSceneInvisible(highScoreScene);
 		} else if (event.getSource() == startMenuQuitButton) {
@@ -251,6 +246,7 @@ public class FXMLController implements Initializable {
 					roomSceneInfoLabel.setText("You can't use " + currentItem.getName() + " here!");
 				}
 			}
+			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomScenePickUpButton) {
 			Item selectedItem = roomSceneItemList.getSelectionModel().getSelectedItem();
 			if (selectedItem != null) {
@@ -258,6 +254,7 @@ public class FXMLController implements Initializable {
 					roomSceneInfoLabel.setText("You can't pick " + selectedItem.getName() + " up!");
 				}
 			}
+			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
 
 		} else if (event.getSource() == roomSceneEastButton) {
@@ -278,7 +275,10 @@ public class FXMLController implements Initializable {
 	private void handleInventoryButtons(ActionEvent event) {
 		if (event.getSource() == inventorySceneDropButton) {
 			Item selectedItem = inventorySceneItemList.getSelectionModel().getSelectedItem();
-			game.drop(selectedItem);
+			if (selectedItem != null) {
+				game.drop(selectedItem);
+			}
+			updateWeightAndItemAmount();
 		} else if (event.getSource() == inventorySceneChooseButton) {
 			currentItem = inventorySceneItemList.getSelectionModel().getSelectedItem();
 			if (currentItem != null) {
@@ -352,5 +352,34 @@ public class FXMLController implements Initializable {
 			gameOverScene.setVisible(false);
 		}
 		pane.setVisible(true);
+	}
+
+	private void updateWeightAndItemAmount() {
+		topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
+		inventorySceneItemAmountLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
+		inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
+	}
+
+	private void startGame() {
+		game = new GamePlay();
+		game.constructWorld("testfile.dne");
+		//updates the players inventory
+		inventorySceneItemList.setItems(game.getPlayerInventory());
+		//updates the current rooms inventory
+		roomSceneItemList.setItems(game.getCurrentRoomInventory());
+		//updates the time label (lav en general metode senere)
+		if (game.getTime() % 60 < 10) {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":0" + game.getTime() % 60);
+		} else {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
+		}
+		//updates the capacity labels
+		updateWeightAndItemAmount();
+		//updates the current room label
+		bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
+		//updates the info label
+		roomSceneInfoLabel.setText("");
+		//updates the current chosen item label
+		roomSceneCurrentItemLabel.setText("Current Item: None");
 	}
 }

@@ -29,8 +29,8 @@ public class GamePlay implements GUIdisplayable {
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
 	/**
-	 * The goRoom method is used to change the room the player is in based on
-	 * the direction that is given
+	 * The goRoom method is used to change the room the player is in based on the
+	 * direction that is given
 	 *
 	 * @param direction is a String used to determine where the player is going
 	 * @return boolean false if the player did not move and returns true if the
@@ -74,8 +74,8 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The getCurrentRoomInventory returns the inventory of the room the player
-	 * is in
+	 * The getCurrentRoomInventory returns the inventory of the room the player is
+	 * in
 	 *
 	 * @return an ObservableList of items
 	 */
@@ -112,8 +112,7 @@ public class GamePlay implements GUIdisplayable {
 				player.getInventory().removeItem(item);
 				break;
 			case BOLTCUTTER:
-				useBoltcutter(item);
-				break;
+				return useBoltcutter(item);
 			default:
 				break;
 		}
@@ -121,12 +120,12 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The pickUp method is used to pick up a specific item, the action depends
-	 * on the item type
+	 * The pickUp method is used to pick up a specific item, the action depends on
+	 * the item type
 	 *
 	 * @param item is the item to be picked up
-	 * @return a boolean as false if an item is not picked up, returns true of
-	 * an item is picked up
+	 * @return a boolean as false if an item is not picked up, returns true of an
+	 * item is picked up
 	 */
 	@Override
 	public boolean pickUp(Item item) {
@@ -136,8 +135,8 @@ public class GamePlay implements GUIdisplayable {
 		}
 
 		if (item.isPickup()
-				&& player.getInventory().getItemWeight() + item.getWeight() <= player.getWeightCapacity()
-				&& player.getInventory().size() + 1 <= player.getCapacity()) {
+						&& player.getInventory().getItemWeight() + item.getWeight() <= player.getWeightCapacity()
+						&& player.getInventory().size() + 1 <= player.getCapacity()) {
 
 			switch (item.getType()) {
 				case WEAPON:
@@ -184,8 +183,7 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The getPlayerInventory method will return all item in the players
-	 * inventory
+	 * The getPlayerInventory method will return all item in the players inventory
 	 *
 	 * @return will return a list of items
 	 */
@@ -277,7 +275,7 @@ public class GamePlay implements GUIdisplayable {
 		}
 	}
 
-	private void useBoltcutter(Item item) {
+	private boolean useBoltcutter(Item item) {
 		Boltcutter boltcutter = (Boltcutter) item;
 		Room roomToUnlock = new Room("", "", false, false, false, "", false);
 		for (Room room : rooms) {
@@ -286,16 +284,19 @@ public class GamePlay implements GUIdisplayable {
 				if (roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
 					roomToUnlock.unlock();
 					player.getInventory().removeItem(item);
+					return true;
 				} else if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
 					System.out.println("You got no use of the boltcutter here");
+					return false;
 				} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
 					System.out.println("You have allready opended the fence");
 					System.out.println("Get out of here with the code");
+					return false;
 				}
 				break;
 			}
 		}
-
+		return false;
 	}
 
 	@Override
@@ -335,7 +336,7 @@ public class GamePlay implements GUIdisplayable {
 
 	@Override
 	public ArrayList<NPC> getAllNpc() {
-		
+
 		return npc;
 	}
 

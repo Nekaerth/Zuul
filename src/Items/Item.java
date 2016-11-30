@@ -42,4 +42,9 @@ public abstract class Item {
 		return this.capacity;
 	}
 
+	@Override
+	public String toString() {
+		return this.name;
+	}
+
 }
