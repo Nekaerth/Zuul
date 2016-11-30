@@ -19,7 +19,7 @@ public class Misc extends Item {
 	 * have picked it up
 	 */
 	public Misc(boolean pickup, String name, boolean useable) {
-		super(pickup,name,useable,0,0);
+		super(false,name,false,0,0);
 	}
 
 	/**

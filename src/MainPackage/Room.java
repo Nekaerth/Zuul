@@ -110,6 +110,8 @@ public class Room {
 	public Room getExit(String direction) {
 		return exits.get(direction);
 	}
+       
+       
 
 	/**
 	 * This method returns the number that is in the room if it is a numberroom,
