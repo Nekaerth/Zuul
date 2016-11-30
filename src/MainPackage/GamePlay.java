@@ -23,6 +23,7 @@ import javafx.collections.ObservableList;
 public class GamePlay implements GUIdisplayable {
 
 	private Player player;
+	private NPC npc;
 	private ArrayList<Boss> bosses = new ArrayList<>();
 	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
@@ -48,7 +49,8 @@ public class GamePlay implements GUIdisplayable {
 
 			if (!nextRoom.getEscapeRoom()) {
 				player.setRoom(nextRoom); //Changes players current room to nextRoom.
-				//NPC.move();
+				npc.move();
+				npc.interactWithPlayer(player);
 				return true;
 			}
 
@@ -197,6 +199,7 @@ public class GamePlay implements GUIdisplayable {
 		this.rooms = wl.loadWorld(fileToRead);
 		this.bosses = wl.loadBosses(fileToRead);
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
+		npc = new NPC();
 		ArrayList<Move> moves = this.player.getMoves();
 		moves.add(new Move(Attack.STAB, 10));
 		moves.add(new Move(Attack.DUCK, 0));
@@ -224,8 +227,6 @@ public class GamePlay implements GUIdisplayable {
 				break;
 			}
 		}
-
-//Nået hertil fredag
 		if (roomToUnlock.isLocked()) {
 			roomToUnlock.unlock();
 			System.out.println("You successfully unlock the door");

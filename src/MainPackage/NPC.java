@@ -5,6 +5,8 @@
  */
 package MainPackage;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author
@@ -14,11 +16,21 @@ public class NPC {
 	private Room currentRoom;
 
 	public void move() {
+		//40% chance of moving
 		if ((int) (Math.random() * 100) + 1 > 60) {
-			//Code to move the NPC
+			ArrayList<String> directions = currentRoom.getListOfExitDirections();
+			int indexOfRandomRoom = (int)(Math.random()*directions.size());
+			Room nextRoom = currentRoom.getExit(directions.get(indexOfRandomRoom));
+			this.setCurrentRoom(nextRoom);
+			
 		}
 	}
 
+	public void interactWithPlayer(Player player){
+		if(player.getRoom().equals(currentRoom)){
+			player.subtractTime(40);
+		}
+	}
 	/**
 	 * @return the currentRoom
 	 */
