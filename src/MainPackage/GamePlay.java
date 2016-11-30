@@ -29,8 +29,8 @@ public class GamePlay implements GUIdisplayable {
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
 	/**
-	 * The goRoom method is used to change the room the player is in based on the
-	 * direction that is given
+	 * The goRoom method is used to change the room the player is in based on
+	 * the direction that is given
 	 *
 	 * @param direction is a String used to determine where the player is going
 	 * @return boolean false if the player did not move and returns true if the
@@ -72,8 +72,8 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The getCurrentRoomInventory returns the inventory of the room the player is
-	 * in
+	 * The getCurrentRoomInventory returns the inventory of the room the player
+	 * is in
 	 *
 	 * @return an ObservableList of items
 	 */
@@ -119,12 +119,12 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The pickUp method is used to pick up a specific item, the action depends on
-	 * the item type
+	 * The pickUp method is used to pick up a specific item, the action depends
+	 * on the item type
 	 *
 	 * @param item is the item to be picked up
-	 * @return a boolean as false if an item is not picked up, returns true of an
-	 * item is picked up
+	 * @return a boolean as false if an item is not picked up, returns true of
+	 * an item is picked up
 	 */
 	@Override
 	public boolean pickUp(Item item) {
@@ -134,8 +134,8 @@ public class GamePlay implements GUIdisplayable {
 		}
 
 		if (item.isPickup()
-						&& player.getInventory().getItemWeight() + item.getWeight() <= player.getWeightCapacity()
-						&& player.getInventory().size() + 1 <= player.getCapacity()) {
+				&& player.getInventory().getItemWeight() + item.getWeight() <= player.getWeightCapacity()
+				&& player.getInventory().size() + 1 <= player.getCapacity()) {
 
 			switch (item.getType()) {
 				case WEAPON:
@@ -199,7 +199,7 @@ public class GamePlay implements GUIdisplayable {
 		this.rooms = wl.loadWorld(fileToRead);
 		this.bosses = wl.loadBosses(fileToRead);
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
-		npc = new NPC();
+		npc = new NPC(rooms.get(rooms.size() - 1));
 		ArrayList<Move> moves = this.player.getMoves();
 		moves.add(new Move(Attack.STAB, 10));
 		moves.add(new Move(Attack.DUCK, 0));
@@ -261,51 +261,66 @@ public class GamePlay implements GUIdisplayable {
 		for (Room r : rooms) {
 			if (boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(r.getName().toLowerCase())) {
 				roomToUnlock = r;
-				break;
+				if (roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+					roomToUnlock.unlock();
+					player.getInventory().removeItem(item);
+				}
 			}
 		}
-		if (roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
-			roomToUnlock.unlock();
-			player.getInventory().removeItem(item);
-		} else if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
-			System.out.println("You got no use of the boltcutter here");
-		} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
-			System.out.println("You have allready opended the fence");
-			System.out.println("Get out of here with the code");
+
+			if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+				System.out.println("You got no use of the boltcutter here");
+			} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
+				System.out.println("You have allready opended the fence");
+				System.out.println("Get out of here with the code");
+			}
+		
+	}
+
+		@Override
+		public void saveHighScore
+		(String name, int highScore
+		
+			) {
+		StringBuilder sb = new StringBuilder();
+			sb.append(name);
+			sb.append(" ");
+			sb.append(highScore);
+			Highscore.saveHighscore(sb.toString());
+		}
+
+		@Override
+		public int getHighScore
+		
+			() {
+		return Highscore.calculateScore(player.getTime(), player.getBossKill());
+		}
+
+		@Override
+		public int getItemCapacity
+		
+			() {
+		return player.getCapacity();
+		}
+
+		@Override
+		public int getCurrentItemAmount
+		
+			() {
+		return player.getInventory().getItemCapacity();
+		}
+
+		@Override
+		public int getWeightCapacity
+		
+			() {
+		return player.getWeightCapacity();
+		}
+
+		@Override
+		public int getCurrentWeight
+		
+			() {
+		return player.getInventory().getItemWeight();
 		}
 	}
-
-	@Override
-	public void saveHighScore(String name, int highScore) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(name);
-		sb.append(" ");
-		sb.append(highScore);
-		Highscore.saveHighscore(sb.toString());
-	}
-
-	@Override
-	public int getHighScore() {
-		return Highscore.calculateScore(player.getTime(), player.getBossKill());
-	}
-
-	@Override
-	public int getItemCapacity() {
-		return player.getCapacity();
-	}
-
-	@Override
-	public int getCurrentItemAmount() {
-		return player.getInventory().getItemCapacity();
-	}
-
-	@Override
-	public int getWeightCapacity() {
-		return player.getWeightCapacity();
-	}
-
-	@Override
-	public int getCurrentWeight() {
-		return player.getInventory().getItemWeight();
-	}
-}

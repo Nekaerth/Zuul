@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class NPC {
 
 	private Room currentRoom;
+	
+	public NPC(Room startRoom){
+		this.currentRoom = startRoom;
+	}
 
 	public void move() {
 		//40% chance of moving
