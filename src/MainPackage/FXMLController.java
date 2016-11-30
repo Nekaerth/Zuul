@@ -200,6 +200,7 @@ public class FXMLController implements Initializable {
 			roomSceneItemList.setItems(game.getCurrentRoomInventory());
 			topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
 			setAllButOneMainSceneInvisible(difficultyScene);
+			bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
 		} else if (event.getSource() == startMenuHighScoreButton) {
 			setAllButOneMainSceneInvisible(highScoreScene);
 		} else if (event.getSource() == startMenuQuitButton) {
@@ -211,12 +212,15 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleDifficultySceneButtons(ActionEvent event) {
 		if (event.getSource() == difficultySceneEasyButton) {
+			bottomMenuLevelLabel.setText("Level: Easy");
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
 		} else if (event.getSource() == difficultySceneMediumButton) {
+			bottomMenuLevelLabel.setText("Level: Medium");
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
 		} else if (event.getSource() == difficultySceneHardButton) {
+			bottomMenuLevelLabel.setText("Level: Hard");
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
 		} else if (event.getSource() == difficultySceneBackButton) {
@@ -242,7 +246,9 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
-
+			if (currentItem != null) {
+				game.use(currentItem);
+			}
 		} else if (event.getSource() == roomScenePickUpButton) {
 			Item selectedItem = roomSceneItemList.getSelectionModel().getSelectedItem();
 			if (selectedItem != null) {
