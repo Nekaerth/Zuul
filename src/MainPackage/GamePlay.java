@@ -13,7 +13,13 @@ import Items.Key;
 import Items.TimeIncreasingItem;
 import Items.Weapon;
 import WorldLoader.WorldLoader;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.ObservableList;
 
 /**
@@ -205,12 +211,20 @@ public class GamePlay implements GUIdisplayable {
 
 	@Override
 	public String getHelpDescription() {
-		StringBuilder sb = new StringBuilder();
-		sb.append("You wake up and realize there's a prisonriot going on. Now's your chance to escape!");
-		sb.append("Hurry! you have limited time to escape, before the warden gets everything under control again.");
-		sb.append("You got 20 minutes, 100 HP and your melee attack damage is 10");
-		sb.append("Click help if you need help");
-		return sb.toString();
+            try {
+                FileReader file = new FileReader("helpfile.dne");
+                BufferedReader buffer = new BufferedReader(file);
+                StringBuilder sb = new StringBuilder();
+                while (buffer.ready()) {                    
+                    sb.append(buffer.readLine());
+                  }
+                return sb.toString();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return " ";
 	}
 
 	@Override
