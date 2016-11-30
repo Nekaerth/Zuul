@@ -154,13 +154,15 @@ public class GamePlay implements GUIdisplayable {
 			}
 			//Transfers the item from the room inventory to the player inventory
 			player.getInventory().transferItem(player.getRoom().getInventory(), item);
-
+			return true;
 		} else if (player.getInventory().getItemWeight() + item.getWeight() > player.getWeightCapacity()) {
 			return false;
 		} else if (player.getInventory().size() + 1 > player.getCapacity()) {
 			return false;
+		} else {
+			return false;
 		}
-		return true;
+
 	}
 
 	/**
@@ -276,21 +278,21 @@ public class GamePlay implements GUIdisplayable {
 	private void useBoltcutter(Item item) {
 		Boltcutter boltcutter = (Boltcutter) item;
 		Room roomToUnlock = new Room("", "", false, false, false, "", false);
-		for (Room r : rooms) {
-			if (boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(r.getName().toLowerCase())) {
-				roomToUnlock = r;
+		for (Room room : rooms) {
+			if (boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(room.getName().toLowerCase())) {
+				System.out.println("YO");
+				roomToUnlock = room;
 				if (roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
 					roomToUnlock.unlock();
 					player.getInventory().removeItem(item);
+				} else if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+					System.out.println("You got no use of the boltcutter here");
+				} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
+					System.out.println("You have allready opended the fence");
+					System.out.println("Get out of here with the code");
 				}
+				break;
 			}
-		}
-
-		if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
-			System.out.println("You got no use of the boltcutter here");
-		} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
-			System.out.println("You have allready opended the fence");
-			System.out.println("Get out of here with the code");
 		}
 
 	}
