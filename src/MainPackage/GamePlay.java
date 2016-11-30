@@ -23,7 +23,7 @@ import javafx.collections.ObservableList;
 public class GamePlay implements GUIdisplayable {
 
 	private Player player;
-	private NPC npc;
+	private ArrayList<NPC> npc = new ArrayList<>();
 	private ArrayList<Boss> bosses = new ArrayList<>();
 	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
@@ -49,8 +49,10 @@ public class GamePlay implements GUIdisplayable {
 
 			if (!nextRoom.getEscapeRoom()) {
 				player.setRoom(nextRoom); //Changes players current room to nextRoom.
-				npc.move();
-				npc.interactWithPlayer(player);
+				for (NPC n : npc) {
+					n.move();
+					n.interactWithPlayer(player);
+				}
 				return true;
 			}
 
@@ -219,7 +221,7 @@ public class GamePlay implements GUIdisplayable {
 		this.rooms = wl.loadWorld(fileToRead);
 		this.bosses = wl.loadBosses(fileToRead);
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
-		npc = new NPC(rooms.get(rooms.size() - 1));
+		npc.add(new NPC(rooms.get(rooms.size() - 1)));
 		ArrayList<Move> moves = this.player.getMoves();
 		moves.add(new Move(Attack.STAB, 10));
 		moves.add(new Move(Attack.DUCK, 0));
@@ -331,4 +333,11 @@ public class GamePlay implements GUIdisplayable {
 	public int getCurrentWeight() {
 		return player.getInventory().getItemWeight();
 	}
+
+	@Override
+	public ArrayList<NPC> getAllNpc() {
+		
+		return npc;
+	}
+
 }
