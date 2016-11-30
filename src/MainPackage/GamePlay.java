@@ -278,7 +278,6 @@ public class GamePlay implements GUIdisplayable {
 		Room roomToUnlock = new Room("", "", false, false, false, "", false);
 		for (Room room : rooms) {
 			if (boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(room.getName().toLowerCase())) {
-				System.out.println("YO");
 				roomToUnlock = room;
 				if (roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
 					roomToUnlock.unlock();

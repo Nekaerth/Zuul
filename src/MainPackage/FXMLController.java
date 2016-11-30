@@ -247,7 +247,9 @@ public class FXMLController implements Initializable {
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
 			if (currentItem != null) {
-				game.use(currentItem);
+				if (!game.use(currentItem)) {
+					roomSceneInfoLabel.setText("You can't use " + currentItem.getName() + " here!");
+				}
 			}
 		} else if (event.getSource() == roomScenePickUpButton) {
 			Item selectedItem = roomSceneItemList.getSelectionModel().getSelectedItem();
