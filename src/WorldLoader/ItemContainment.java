@@ -25,9 +25,9 @@ public class ItemContainment {
 	private String name;
 	private int damage;
 	private WeaponType weaponType;
-    private int time;
+	private int time;
 	private String nameOfRoomThatFitsThisKey;
-        private String roomBoltcutterCanBeUsedIn;
+	private String roomBoltcutterCanBeUsedIn;
 
 	/**
 	 * @return the id
@@ -115,11 +115,11 @@ public class ItemContainment {
 	 * @param pickup the pickup to set
 	 */
 	public void setPickup(String pickup) {
-            if (pickup.toLowerCase().equals("true")) {
-                this.pickup = true;
-            } else {
-                this.pickup = false;
-            }
+		if (pickup.toLowerCase().equals("true")) {
+			this.pickup = true;
+		} else {
+			this.pickup = false;
+		}
 //		switch (pickup.toLowerCase()) {
 //			case "true":
 //				this.pickup = true;
@@ -143,11 +143,11 @@ public class ItemContainment {
 	 * @param useable the useable to set
 	 */
 	public void setUseable(String useable) {
-            if (useable.toLowerCase().equals("true")) {
-                this.useable = true;
-            } else {
-                this.useable = false;
-            }
+		if (useable.toLowerCase().equals("true")) {
+			this.useable = true;
+		} else {
+			this.useable = false;
+		}
 //		switch (useable.toLowerCase()) {
 //			case "true":
 //				this.useable = true;
@@ -222,40 +222,40 @@ public class ItemContainment {
 		}
 	}
 
-    /**
-     * @return the time
-     */
-    public int getTime() {
-        return time;
-    }
+	/**
+	 * @return the time
+	 */
+	public int getTime() {
+		return time;
+	}
 
-    /**
-     * @param time the time to set
-     */
-    public void setTime(String time) {
-        this.time = Integer.parseInt(time);
-    }
+	/**
+	 * @param time the time to set
+	 */
+	public void setTime(String time) {
+		this.time = Integer.parseInt(time);
+	}
 
 	public void setNameOfRoomThatFitsThisKey(String nameOfRoomThatFitsThisKey) {
-		this.nameOfRoomThatFitsThisKey=nameOfRoomThatFitsThisKey;
+		this.nameOfRoomThatFitsThisKey = nameOfRoomThatFitsThisKey;
 	}
-	
-	public String getNameOfRoomThatFitsThisKey(){
+
+	public String getNameOfRoomThatFitsThisKey() {
 		return nameOfRoomThatFitsThisKey;
 	}
 
-    /**
-     * @return the roomBoltcutterCanBeUsedIn
-     */
-    public String getRoomBoltcutterCanBeUsedIn() {
-        return roomBoltcutterCanBeUsedIn;
-    }
+	/**
+	 * @return the roomBoltcutterCanBeUsedIn
+	 */
+	public String getRoomBoltcutterCanBeUsedIn() {
+		return roomBoltcutterCanBeUsedIn;
+	}
 
-    /**
-     * @param roomBoltcutterCanBeUsedIn the roomBoltcutterCanBeUsedIn to set
-     */
-    public void setRoomBoltcutterCanBeUsedIn(String roomBoltcutterCanBeUsedIn) {
-        this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
-    }
+	/**
+	 * @param roomBoltcutterCanBeUsedIn the roomBoltcutterCanBeUsedIn to set
+	 */
+	public void setRoomBoltcutterCanBeUsedIn(String roomBoltcutterCanBeUsedIn) {
+		this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
+	}
 
 }

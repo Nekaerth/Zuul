@@ -73,11 +73,11 @@ class RoomContainment {
 	 * @param locked the locked to set
 	 */
 	public void setLocked(String locked) {
-	if (locked.toLowerCase().equals("true")) {
-            this.locked = true;
-        } else {
-            this.locked = false;
-            }
+		if (locked.toLowerCase().equals("true")) {
+			this.locked = true;
+		} else {
+			this.locked = false;
+		}
 //        switch (locked.toLowerCase()) {
 //            case "true":
 //                this.locked = true;
@@ -101,12 +101,11 @@ class RoomContainment {
 	 * @param escapeRoom the escapeRoom to set
 	 */
 	public void setEscapeRoom(String escapeRoom) {
-	if (escapeRoom.toLowerCase().equals("true")) {
-            this.escapeRoom = true;
-        }
-        else {
-            this.escapeRoom = false;
-        }
+		if (escapeRoom.toLowerCase().equals("true")) {
+			this.escapeRoom = true;
+		} else {
+			this.escapeRoom = false;
+		}
 //        switch (escapeRoom.toLowerCase()) {
 //            case "true":
 //                this.escapeRoom = true;
@@ -117,8 +116,7 @@ class RoomContainment {
 //            default:
 //                break;
 //        }
-            
-                
+
 	}
 
 	/**
@@ -132,12 +130,11 @@ class RoomContainment {
 	 * @param numberRoom the numberRoom to set
 	 */
 	public void setNumberRoom(String numberRoom) {
-	if (numberRoom.toLowerCase().equals("true")) {
-            this.numberRoom = true;
-        }
-        else {
-            this.numberRoom = false;
-        }
+		if (numberRoom.toLowerCase().equals("true")) {
+			this.numberRoom = true;
+		} else {
+			this.numberRoom = false;
+		}
 //        switch (numberRoom.toLowerCase()) {
 //            case "true":
 //                this.hidden = true;

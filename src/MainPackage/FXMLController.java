@@ -189,7 +189,9 @@ public class FXMLController implements Initializable {
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		game = new GamePlay();
+		game.constructWorld("testfile.dne");
 		inventorySceneItemList.setItems(game.getPlayerInventory());
+		topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
 	}
 
 	@FXML
@@ -309,5 +311,24 @@ public class FXMLController implements Initializable {
 	private void handleGameOverSceneExitButton(ActionEvent event) {
 		gameOverScene.setVisible(false);
 		startMenu.setVisible(true);
+	}
+
+	private void setAllGameSceneInvisibleButOne(Pane pane) {
+		if (pane != roomScene) {
+			roomScene.setVisible(false);
+		}
+		if (pane != helpScene) {
+			roomScene.setVisible(false);
+		}
+		if (pane != inventoryScene) {
+			roomScene.setVisible(false);
+		}
+		if (pane != mapScene) {
+			roomScene.setVisible(false);
+		}
+		if (pane != bossScene) {
+			roomScene.setVisible(false);
+		}
+		pane.setVisible(true);
 	}
 }

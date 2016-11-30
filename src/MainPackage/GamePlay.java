@@ -3,8 +3,10 @@
  */
 package MainPackage;
 
+import HighscoreLoader.Highscore;
 import Items.Blueprint;
 import Items.Boltcutter;
+import Items.Flashlight;
 import Items.Item;
 import Items.ItemType;
 import Items.Key;
@@ -25,12 +27,14 @@ public class GamePlay implements GUIdisplayable {
 	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
 	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
 
-        /**
-         * The goRoom method is used to change the room the player is in
-         * based on the direction that is given
-         * @param direction is a String used to determine where the player is going
-         * @return boolean false if the player did not move and returns true if the player moved
-         */
+	/**
+	 * The goRoom method is used to change the room the player is in based on the
+	 * direction that is given
+	 *
+	 * @param direction is a String used to determine where the player is going
+	 * @return boolean false if the player did not move and returns true if the
+	 * player moved
+	 */
 	@Override
 	public boolean goRoom(String direction) {
 
@@ -43,7 +47,8 @@ public class GamePlay implements GUIdisplayable {
 			player.subtractTime(10);
 
 			if (!nextRoom.getEscapeRoom()) {
-				player.setRoom(nextRoom); //Changes players current room to nextRoom.     
+				player.setRoom(nextRoom); //Changes players current room to nextRoom.
+				//NPC.move();
 				return true;
 			}
 
@@ -54,28 +59,33 @@ public class GamePlay implements GUIdisplayable {
 
 	}
 
-        /**
-         * The getCurrentRoom returns the room that the player is currently in
-         * @return an object of Room
-         */
+	/**
+	 * The getCurrentRoom returns the room that the player is currently in
+	 *
+	 * @return an object of Room
+	 */
 	@Override
 	public Room getCurrentRoom() {
 		return player.getRoom();
 	}
 
-        /**
-         * The getCurrentRoomInventory returns the inventory of the room the player is in
-         * @return an ObservableList of items 
-         */
+	/**
+	 * The getCurrentRoomInventory returns the inventory of the room the player is
+	 * in
+	 *
+	 * @return an ObservableList of items
+	 */
 	@Override
 	public ObservableList<Item> getCurrentRoomInventory() {
 		return player.getRoom().getInventory().getAllItems();
 	}
 
-        /**
-         * The use method uses a specified item the outcome of the action depends on the item type
-         * @param item is the Item which is to be used
-         */
+	/**
+	 * The use method uses a specified item the outcome of the action depends on
+	 * the item type
+	 *
+	 * @param item is the Item which is to be used
+	 */
 	@Override
 	public boolean use(Item item) {
 		if (item == null) {
@@ -103,14 +113,17 @@ public class GamePlay implements GUIdisplayable {
 			default:
 				break;
 		}
-                return true;
+		return true;
 	}
 
-        /**
-         * The pickUp method is used to add a specific item to the players inventory, the action depends on the item type
-         * @param item is the item to be picked up
-         * @return a boolean as false if an item is not picked up, returns true of an item is picked up
-         */
+	/**
+	 * The pickUp method is used to pick up a specific item, the action depends on
+	 * the item type
+	 *
+	 * @param item is the item to be picked up
+	 * @return a boolean as false if an item is not picked up, returns true of an
+	 * item is picked up
+	 */
 	@Override
 	public boolean pickUp(Item item) {
 		if (item == null) {
@@ -119,8 +132,8 @@ public class GamePlay implements GUIdisplayable {
 		}
 
 		if (item.isPickup()
-				&& player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
-				&& player.getInventory().size() + 1 <= player.getCapacity()) {
+						&& player.getInventory().getItemWeight() + item.getWeight() <= player.getWeightCapacity()
+						&& player.getInventory().size() + 1 <= player.getCapacity()) {
 
 			switch (item.getType()) {
 				case WEAPON:
@@ -130,7 +143,7 @@ public class GamePlay implements GUIdisplayable {
 				case TIMEINCREASINGITEM:
 					if (item instanceof TimeIncreasingItem) {
 						player.addTime(((TimeIncreasingItem) item).getTime());
-						player.getRoom().getInventory().removeItem(item);						
+						player.getRoom().getInventory().removeItem(item);
 						return true;
 					}
 					break;
@@ -140,7 +153,7 @@ public class GamePlay implements GUIdisplayable {
 			//Transfers the item from the room inventory to the player inventory
 			player.getInventory().transferItem(player.getRoom().getInventory(), item);
 
-		} else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
+		} else if (player.getInventory().getItemWeight() + item.getWeight() > player.getWeightCapacity()) {
 			return false;
 		} else if (player.getInventory().size() + 1 > player.getCapacity()) {
 			return false;
@@ -167,8 +180,8 @@ public class GamePlay implements GUIdisplayable {
          */
 	@Override
 	public ObservableList<Item> getPlayerInventory() {
-            return player.getInventory().getAllItems();
-            
+		return player.getInventory().getAllItems();
+
 	}
 
         /**
@@ -223,7 +236,7 @@ public class GamePlay implements GUIdisplayable {
 				break;
 			}
 		}
-                
+
 //Nået hertil fredag
 		if (roomToUnlock.isLocked()) {
 			roomToUnlock.unlock();
@@ -231,11 +244,20 @@ public class GamePlay implements GUIdisplayable {
 			player.getInventory().removeItem(item);
 		} else {
 			System.out.println("The door is already unlocked"); //Prints this if you try to 'use key' any other place than a locked door.
-		}		
+		}
 	}
 
 	private void useFlashlight(Item item) {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		Flashlight flashlight = (Flashlight) item; //Uses up charges on players flashlight, and prints line below telling you how many charges you have left.
+		if (flashlight.getCharges() > 0) {
+			flashlight.subtractCharge(1);
+			if (player.getRoom().isNumberRoom()) {
+				player.getRoom().getNumber();
+				if (roomNumber.contains(player.getRoom()) == false) { //add a room to the arraylist roomNumber, that tracks the rooms with numbers in them
+					roomNumber.add(player.getRoom());
+				}
+			}
+		}
 	}
 
 	private void showAllRooms() {
@@ -244,53 +266,57 @@ public class GamePlay implements GUIdisplayable {
 		}
 	}
 
-	private void useBoltcutter(Item item) { 
-                Boltcutter boltcutter = (Boltcutter) item;
-                Room roomToUnlock = new Room("", "", false, false, false, "", false);
-                for (Room r : rooms) {
-                    if(boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(r.getName().toLowerCase())) {
-                        roomToUnlock = r;
-                        break;
-                    }
-                }                
-                if(roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
-                    roomToUnlock.unlock();
-                    player.getInventory().removeItem(item);
-                } else if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
-                    System.out.println("You got no use of the boltcutter here");                    
-                } else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
-                    System.out.println("You have allready opended the fence");
-                    System.out.println("Get out of here with the code");
-                }                               
-          }               
+	private void useBoltcutter(Item item) {
+		Boltcutter boltcutter = (Boltcutter) item;
+		Room roomToUnlock = new Room("", "", false, false, false, "", false);
+		for (Room r : rooms) {
+			if (boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(r.getName().toLowerCase())) {
+				roomToUnlock = r;
+				break;
+			}
+		}
+		if (roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+			roomToUnlock.unlock();
+			player.getInventory().removeItem(item);
+		} else if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+			System.out.println("You got no use of the boltcutter here");
+		} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
+			System.out.println("You have allready opended the fence");
+			System.out.println("Get out of here with the code");
+		}
+	}
 
-    @Override
-    public void saveHighScore(String name, int highScore) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public void saveHighScore(String name, int highScore) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(name);
+		sb.append(" ");
+		sb.append(highScore);
+		Highscore.saveHighscore(sb.toString());
+	}
 
-    @Override
-    public int getHighScore() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public int getHighScore() {
+		return Highscore.calculateScore(player.getTime(), player.getBossKill());
+	}
 
-    @Override
-    public int getItemCapacity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public int getItemCapacity() {
+		return player.getCapacity();
+	}
 
-    @Override
-    public int getCurrentItemAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public int getCurrentItemAmount() {
+		return player.getInventory().getItemCapacity();
+	}
 
-    @Override
-    public int getWeightCapacity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public int getWeightCapacity() {
+		return player.getWeightCapacity();
+	}
 
-    @Override
-    public int getCurrentWeight() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+	@Override
+	public int getCurrentWeight() {
+		return player.getInventory().getItemWeight();
+	}
 }

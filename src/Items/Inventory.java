@@ -8,7 +8,6 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
 /**
  *
  * @author Semesterprojektgruppe 13 (Autumn 2016)
@@ -25,7 +24,7 @@ public class Inventory {
 	 */
 	public Inventory() {
 		inventory = FXCollections.observableArrayList();
-		
+
 	}
 
 	/**
@@ -48,9 +47,8 @@ public class Inventory {
 	/**
 	 * This method returns the name of an item.
 	 *
-	 * @param name The parameter name is the reference name to the item
-	 * requested.
-	 * @return the index where the item was found        
+	 * @param name The parameter name is the reference name to the item requested.
+	 * @return the index where the item was found
 	 */
 //	public int getItem(String name) {
 //            for (Item i : inventory) {
@@ -60,14 +58,13 @@ public class Inventory {
 //            }
 //            return -1;            
 //	}
-
 	/**
 	 * This method will return a list of all items in the inventory.
 	 *
 	 * @return Returns the list of items in the inventory.
 	 */
 	public String getStringOfAllItems() {
-		String returnString = "Items:";		
+		String returnString = "Items:";
 		for (Item item : inventory) {
 			returnString += " " + item.getName();
 		}
@@ -79,7 +76,7 @@ public class Inventory {
 	 *
 	 * @return an integer that is the total weight.
 	 */
-	public int itemWeight() {
+	public int getItemWeight() {
 		int weight = 0;
 		for (Item item : inventory) {
 			weight += item.getWeight();
@@ -108,7 +105,6 @@ public class Inventory {
 //	public boolean containItem(String name) {
 //		return this.inventory.containsKey(name);
 //	}
-
 	/**
 	 * This method allow you to put an item that you are carrying into an
 	 * inventory.
@@ -118,7 +114,7 @@ public class Inventory {
 	 */
 	public void putItem(Item item) {
 		inventory.add(item);
-		
+
 	}
 
 	/**
@@ -140,15 +136,26 @@ public class Inventory {
 		ObservableList<Item> inventoryItems = inventory.getAllItems();
 		this.inventory.addAll(inventoryItems);
 	}
+
 	/**
-	 * Transfer the given item specified by the name given in a String, from the given inventory to this inventory
+	 * Transfer the given item specified by the name given in a String, from the
+	 * given inventory to this inventory
+	 *
 	 * @param inventory an inventory from either a room or a person
 	 * @param item
-	 * 
+	 *
 	 */
 	public void transferItem(Inventory inventory, Item item) {
 		this.putItem(item);
-		inventory.removeItem(item);	
+		inventory.removeItem(item);
 	}
-	
+
+	public int getItemCapacity() {
+		int capacity = 0;
+		for (Item item : inventory) {
+			capacity += item.getCapacity();
+		}
+		return capacity;
+	}
+
 }

@@ -1,6 +1,5 @@
 package MainPackage;
 
-
 import Items.WeaponType;
 import Items.Weapon;
 import java.util.ArrayList;
@@ -19,8 +18,8 @@ public class Player extends Person {
 	private int time;
 	private final int capacity; //Is the maximum amount of items the player must hold.
 	private final int weightCapacity; //Is the maximum weight that the players items must
-        private int bossKill; 
-        
+	private int bossKill;
+
 	/**
 	 * This contructor creates a Player-object. It represent the player, which
 	 * includes hitpoints, available attacks, available items, maximum number of
@@ -37,8 +36,8 @@ public class Player extends Person {
 		this.time = time;
 		this.capacity = capacity;
 		this.weightCapacity = weightCapacity;
-                this.bossKill = 0;
-	}       
+		this.bossKill = 0;
+	}
 
 	/**
 	 * The getTime() is a getter method to get the integer "time"
@@ -57,11 +56,10 @@ public class Player extends Person {
 	 * @param time is an integer that we subtract from to reduce the time the
 	 * player has left to win the game.
 	 */
-        
-        public void addTime (int time) {
-           this.time += time;
-        }
-        
+	public void addTime(int time) {
+		this.time += time;
+	}
+
 	public void subtractTime(int time) {
 		int fiveMinuteMark = (this.time - 1) / 300;
 		this.time -= time;
@@ -111,7 +109,7 @@ public class Player extends Person {
 			Move move = getMove("Stab");
 			move.setDamage(weapon.getDamage()); //Changes damage of the Stab move
 		} //If the item is a range weapon
-		else if (weapon.weaponType()== WeaponType.RANGED) {
+		else if (weapon.weaponType() == WeaponType.RANGED) {
 			ArrayList<Move> moves = getMoves();
 			moves.add(new Move(Attack.SHOOT, weapon.getDamage())); //Adds a Shoot move
 		}
@@ -134,17 +132,17 @@ public class Player extends Person {
 		}
 	}
 
-    /**
-     * @return the bossKill
-     */
-    public int getBossKill() {
-        return bossKill;
-    }
+	/**
+	 * @return the bossKill
+	 */
+	public int getBossKill() {
+		return bossKill;
+	}
 
-    /**
-     * @param bossKill the bossKill to set
-     */
-    public void addBossKill(int bossKill) {
-        this.bossKill += bossKill;
-    }
+	/**
+	 * @param bossKill the bossKill to set
+	 */
+	public void addBossKill(int bossKill) {
+		this.bossKill += bossKill;
+	}
 }

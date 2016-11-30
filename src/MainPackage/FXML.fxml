@@ -17,7 +17,7 @@
 						<Button fx:id="topMenuHelpButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Help" />
 						<Label fx:id="topMenuTimeLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
 						<Button fx:id="topMenuInventoryButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
-						<Label fx:id="topMenuCapacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Capacity/Weight" />
+						<Label fx:id="topMenuCapacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Item Amount: 0/0&#10;Weight: 0/0" />
 					</children>
 				</HBox>
 				<HBox fx:id="bottomMenu" layoutY="760.0" prefHeight="40.0" prefWidth="720.0">

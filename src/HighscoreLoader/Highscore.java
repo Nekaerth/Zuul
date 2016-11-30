@@ -45,20 +45,19 @@ public class Highscore {
 	}
 
 	public static void saveHighscore(String highscore) {
-		
-		try (FileWriter highscoreFile = new FileWriter("highscore.dne",true)) {
+
+		try (FileWriter highscoreFile = new FileWriter("highscore.dne", true)) {
 			highscoreFile.write(highscore + System.lineSeparator());
 			highscoreFile.flush();
 		} catch (Exception e) {
 			System.out.println("The method saveHighscore has thrown an exception. " + e);
 		}
 	}
-        
-        public static String calculateScore (int time, int bossKill) {
-            StringBuilder sb = new StringBuilder();
-            int calculateScore = time + (bossKill * 600);
-            sb.append(calculateScore);
-            String score = sb.toString();
-            return score;
-        }
+
+	public static int calculateScore(int time, int bossKill) {
+
+		int calculateScore = time + (bossKill * 600);
+
+		return calculateScore;
+	}
 }

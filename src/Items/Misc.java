@@ -5,9 +5,7 @@ package Items;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 public class Misc extends Item {
-
 
 	/**
 	 * The constructor for the Weapon class is called when we want to create

@@ -1,6 +1,5 @@
 package MainPackage;
 
-
 import Items.Inventory;
 import java.util.ArrayList;
 
@@ -28,7 +27,7 @@ public class Person {
 	public Person(Room room, int hitpoint) {
 		this.room = room;
 		this.hitpoint = hitpoint;
-		this.inventory  = new Inventory();
+		this.inventory = new Inventory();
 	}
 
 	/**

@@ -1,6 +1,5 @@
 package MainPackage;
 
-
 /**
  * This class represent an Move, which can be used both for the player and the
  * boss. It contains two Attack attributes; one to represent what kind of move
