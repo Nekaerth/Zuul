@@ -230,7 +230,7 @@ public class WorldLoader {
 					rs.addItem(key, ic.getRoomID());
 					break;
 				case MISC:
-					Misc misc = new Misc(ic.isPickup(), ic.getName(), ic.isUseable());
+					Misc misc = new Misc(false, ic.getName(), false);
 					rs.addItem(misc, ic.getRoomID());
 					break;
 				case BLUEPRINT:
@@ -238,7 +238,7 @@ public class WorldLoader {
 					rs.addItem(blueprint, ic.getRoomID());
 					break;
 				case WEAPON:
-					Weapon weapon = new Weapon(ic.isPickup(), ic.getName(), ic.isUseable(), ic.getWeight(), ic.getCapacity(), ic.getDamage(), ic.getWeapontype());
+					Weapon weapon = new Weapon(ic.isPickup(), ic.getName(), false, ic.getWeight(), ic.getCapacity(), ic.getDamage(), ic.getWeapontype());
 					rs.addItem(weapon, ic.getRoomID());
 					break;
 				case TIMEINCREASINGITEM:
