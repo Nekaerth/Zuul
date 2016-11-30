@@ -163,6 +163,10 @@ public class GamePlay implements GUIdisplayable {
 		return true;
 	}
 
+        /**
+         * The drop method is used to remove an item from the players inventory and add it to the rooms inventory
+         * @param item is the item to be transfered to the rooms inventory from the players inventory
+         */
 	@Override
 	public void drop(Item item) {
 		if (item.getType() == ItemType.WEAPON) {
@@ -172,12 +176,20 @@ public class GamePlay implements GUIdisplayable {
 		player.getRoom().getInventory().transferItem(player.getInventory(), item);
 	}
 
+        /**
+         * The getPlayerInventory method will return all item in the players inventory
+         * @return will return a list of items 
+         */
 	@Override
 	public ObservableList<Item> getPlayerInventory() {
 		return player.getInventory().getAllItems();
 
 	}
 
+        /**
+         * The getTime method is used to return the amount of time the player has
+         * @return will return an int equal to the amount of time left
+         */
 	@Override
 	public int getTime() {
 		return player.getTime();
