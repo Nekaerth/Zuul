@@ -38,21 +38,20 @@ public class WorldLoader {
 	 */
 	public ArrayList<Room> loadWorld(String fileToRead) {
 		try {
-			boolean createRoom = false, createItem = false;
-			FileReader file; // FileReader is used to read from external files
-			file = new FileReader(fileToRead); // Reads the content of testfile.dne
+			boolean shouldCreateRoom = false, shouldCreateItem = false;			
+			FileReader file = new FileReader(fileToRead); // Reads the content of testfile.dne
 			BufferedReader buffer = new BufferedReader(file); // Initializes a BufferedReader to read the file
 
 			while (buffer.ready()) {
 				// While the BufferedReader is ready we read the next line in the file
 				String evaluateString = buffer.readLine();
-				if (createRoom) {   
+				if (shouldCreateRoom) {   
 					// If createRoom is true the we act on what is in the file
-					createRoom = createRoom(evaluateString);
+					shouldCreateRoom = createRoom(evaluateString);
 
-				} else if (createItem) {
+				} else if (shouldCreateItem) {
 					// If createItem is true the we act on what is in the file
-					createItem = createItem(evaluateString);
+					shouldCreateItem = createItem(evaluateString);
 				}
 
 				// We use a switch-case to act on the header in the file
@@ -61,25 +60,21 @@ public class WorldLoader {
 					case "[room]": // If the header is [room] we set the boolean createRoom 
 						// to true and createItem to false
 						System.out.println("room");
-						createRoom = true;
-						createItem = false;
+						shouldCreateRoom = true;
+						shouldCreateItem = false;
 						break;
 					case "[item]":// If the header is [item] we set the boolean createRoom 
 						// to false and createItem to true
 						System.out.println("ITEM");
-						createRoom = false;
-						createItem = true;
+						shouldCreateRoom = false;
+						shouldCreateItem = true;
 						break;
 					default: // All switch-case contructions must have a default option
 						break;
 				}
 			}
 
-		} catch (Exception e) {
-			System.out.println("noget gik galt");
-			System.out.println(e); // Used to print the exception 
-			//so we know what we are dealing with if something goes wrong in the try-catch construction
-		}
+		} catch (Exception e) {}
 		ArrayList<Room> returnRooms = connectWorld();
 		return returnRooms;
 	}
