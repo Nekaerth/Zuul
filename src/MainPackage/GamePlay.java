@@ -57,15 +57,15 @@ public class GamePlay implements GUIdisplayable {
 				visitedRooms.add(nextRoom);
 			}
 
-                player.setRoom(nextRoom); //Changes players current room to nextRoom.
-                for (NPC n : npc) {
-                    n.move();
-                }
-                npcInteractWithPlayer();
-                return true;
-            
-        }
-        return false;
+			player.setRoom(nextRoom); //Changes players current room to nextRoom.
+			for (NPC n : npc) {
+				n.move();
+			}
+			npcInteractWithPlayer();
+			return true;
+
+		}
+		return false;
 
 	}
 
@@ -267,7 +267,6 @@ public class GamePlay implements GUIdisplayable {
 	public ArrayList<Boss> getBosses() {
 		return bosses;
 	}
-	
 
 	private boolean useKey(Item item) {
 		Key key = (Key) item;
@@ -304,31 +303,31 @@ public class GamePlay implements GUIdisplayable {
 		}
 	}
 
-    private boolean useBoltcutter(Item item) {
-        Boltcutter boltcutter = (Boltcutter) item;
-        Room roomToUnlock = new Room("", "", false, false, false, "", false);
-        for (Room room : rooms) {
-			for(String str : room.getListOfExitDirections()){
-            if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
-                roomToUnlock = room.getExit(str);
-                if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
-                    roomToUnlock.unlock();
-                    player.getInventory().removeItem(item);
-                    return true;
-                } else if (!roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
-                    System.out.println("You got no use of the boltcutter here");
-                    return false;
-                } else if (roomToUnlock.isEscapeAbleRoom() && !roomToUnlock.isLocked()) {
-                    System.out.println("You have allready opended the fence");
-                    System.out.println("Get out of here with the code");
-                    return false;
-                }
-                break;
-            }
+	private boolean useBoltcutter(Item item) {
+		Boltcutter boltcutter = (Boltcutter) item;
+		Room roomToUnlock = new Room("", "", false, false, false, "", false);
+		for (Room room : rooms) {
+			for (String str : room.getListOfExitDirections()) {
+				if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
+					roomToUnlock = room.getExit(str);
+					if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
+						roomToUnlock.unlock();
+						player.getInventory().removeItem(item);
+						return true;
+					} else if (!roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
+						System.out.println("You got no use of the boltcutter here");
+						return false;
+					} else if (roomToUnlock.isEscapeAbleRoom() && !roomToUnlock.isLocked()) {
+						System.out.println("You have allready opended the fence");
+						System.out.println("Get out of here with the code");
+						return false;
+					}
+					break;
+				}
 			}
-        }
-        return false;
-    }
+		}
+		return false;
+	}
 
 	@Override
 	public void saveHighScore(String name, int highScore
@@ -373,5 +372,10 @@ public class GamePlay implements GUIdisplayable {
 	@Override
 	public ArrayList<NPC> getAllNpc() {
 		return npc;
+	}
+
+	@Override
+	public Player getPlayer() {
+		return player;
 	}
 }

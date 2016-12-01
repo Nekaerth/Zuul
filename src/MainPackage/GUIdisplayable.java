@@ -38,11 +38,11 @@ public interface GUIdisplayable {
 	public void constructWorld(String fileToRead);
 
 	public boolean isBossPresent();
-	
+
 	public ArrayList<Boss> getBosses();
 
 	public void saveHighScore(String name, int highScore);
-	
+
 	public ArrayList<String> getHighScoreList();
 
 	public int getHighScore();
@@ -55,4 +55,5 @@ public interface GUIdisplayable {
 
 	public int getCurrentWeight();
 
+	public Player getPlayer();
 }

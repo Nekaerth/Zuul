@@ -7,6 +7,7 @@ package MainPackage;
 
 import Items.Item;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -131,13 +132,13 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label bossSceneCounterMoveLabel;
 	@FXML
-	private Button playerAttack1;
+	private Button bossSceneAttackButton1;
 	@FXML
-	private Button playerAttack2;
+	private Button bossSceneAttackButton2;
 	@FXML
-	private Button playerAttack3;
+	private Button bossSceneAttackButton3;
 	@FXML
-	private Button playerAttack4;
+	private Button bossSceneAttackButton4;
 	@FXML
 	private Label bossScenePlayerHitpointLabel;
 	@FXML
@@ -432,6 +433,32 @@ public class FXMLController implements Initializable {
 	}
 
 	private void bossFight() {
-		//TODO
+		setAllButOneGameSceneInvisible(bossScene);
+		Boss currentBoss = null;
+
+		//finds which boss to fight
+		for (Boss boss : game.getBosses()) {
+			if (game.getCurrentRoom() == boss.getRoom()) {
+				currentBoss = boss;
+				break;
+			}
+		}
+
+		//currentBoss = new Boss(game.getCurrentRoom(), 100, "Kurt");
+		//If there was no boss to fight, cancel the boss fight
+		if (currentBoss == null) {
+			return;
+		}
+		//updates the title in bossScene
+		bossSceneTitle.setText("You are fighting " + currentBoss.getName());
+		//updates counter attack buttons
+		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(0).getName());
+		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(1).getName());
+		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(2).getName());
+		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(3).getName());
+		//updates player and boss hitpoints
+		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
+		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
+
 	}
 }

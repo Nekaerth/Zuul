@@ -81,21 +81,21 @@
 				</Pane>
 				<Pane fx:id="bossScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
 					<children>
-						<Label fx:id="bossSceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="You are fighting boss">
+						<Label fx:id="bossSceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="You are fighting bossName">
 							<font>
 								<Font name="System Bold" size="40.0" />
 							</font>
 						</Label>
-						<Label fx:id="bossSceneBossAttackLabel" alignment="CENTER" layoutY="140.0" prefWidth="720.0" text="bossName is using bossAttack" textFill="#b90404">
+						<Label fx:id="bossSceneBossAttackLabel" alignment="CENTER" layoutY="140.0" prefWidth="720.0" text="" textFill="#b90404">
 							<font>
 								<Font name="System Bold" size="20.0" />
 							</font>
 						</Label>
 						<Label fx:id="bossSceneCounterMoveLabel" alignment="CENTER" layoutY="290.0" prefWidth="720.0" text="Choose your counter move:" />
-						<Button fx:id="playerAttack1" layoutX="150.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack1" />
-						<Button fx:id="playerAttack2" layoutX="370.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack2" />
-						<Button fx:id="playerAttack3" layoutX="150.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack3" />
-						<Button fx:id="playerAttack4" layoutX="370.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack4" />
+						<Button fx:id="bossSceneAttackButton1" layoutX="150.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack1" />
+						<Button fx:id="bossSceneAttackButton2" layoutX="370.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack2" />
+						<Button fx:id="bossSceneAttackButton3" layoutX="150.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack3" />
+						<Button fx:id="bossSceneAttackButton4" layoutX="370.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack4" />
 						<Label fx:id="bossScenePlayerHitpointLabel" alignment="CENTER" layoutY="600.0" prefWidth="360.0" text="Your Hitpoints: 0" />
 						<Label fx:id="bossSceneBossHitpointLabel" alignment="CENTER" layoutX="360.0" layoutY="600.0" prefWidth="360.0" text="bossName Hitpoints: 0" />
 					</children>
