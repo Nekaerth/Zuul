@@ -228,6 +228,7 @@ public class GamePlay implements GUIdisplayable {
 			StringBuilder sb = new StringBuilder();
 			while (buffer.ready()) {
 				sb.append(buffer.readLine());
+                                sb.append("\n");
 			}
 			return sb.toString();
 		} catch (FileNotFoundException ex) {
