@@ -40,6 +40,8 @@ public interface GUIdisplayable {
 	public boolean isBossPresent();
 
 	public void saveHighScore(String name, int highScore);
+	
+	public ArrayList<String> getHighScoreList();
 
 	public int getHighScore();
 

@@ -285,7 +285,7 @@ public class FXMLController implements Initializable {
 	}
 
 	@FXML
-	private void handleHelpCloseButton(ActionEvent event) {
+	private void handleHelpButtons(ActionEvent event) {
 		setAllButOneGameSceneInvisible(roomScene);
 	}
 
@@ -309,7 +309,7 @@ public class FXMLController implements Initializable {
 	}
 
 	@FXML
-	private void handleMapCloseButton(ActionEvent event) {
+	private void handleMapButtons(ActionEvent event) {
 		setAllButOneGameSceneInvisible(roomScene);
 	}
 
@@ -319,12 +319,12 @@ public class FXMLController implements Initializable {
 	}
 
 	@FXML
-	private void handleHighScoreSceneCloseButton(ActionEvent event) {
+	private void handleHighScoreSceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 	}
 
 	@FXML
-	private void handleVictorySceneEnterButton(ActionEvent event) {
+	private void handleVictorySceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 		String name = victorySceneTextField.getText();
 		int highscore = game.getHighScore();
@@ -332,7 +332,7 @@ public class FXMLController implements Initializable {
 	}
 
 	@FXML
-	private void handleGameOverSceneExitButton(ActionEvent event) {
+	private void handleGameOverSceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 	}
 
