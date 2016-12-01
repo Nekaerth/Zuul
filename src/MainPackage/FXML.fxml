@@ -50,7 +50,7 @@
 							</font>
 						</Label>
 						<TextArea fx:id="helpSceneTextArea" editable="false" layoutX="180.0" layoutY="160.0" prefHeight="400.0" prefWidth="360.0" />
-						<Button fx:id="helpSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleHelpCloseButton" prefHeight="40.0" prefWidth="240.0" text="Close" />
+						<Button fx:id="helpSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleHelpButtons" prefHeight="40.0" prefWidth="240.0" text="Close" />
 					</children>
 				</Pane>
 				<Pane fx:id="inventoryScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
@@ -76,7 +76,7 @@
 								<Font name="System Bold" size="40.0" />
 							</font>
 						</Label>
-						<Button fx:id="mapSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleMapCloseButton" prefHeight="40.0" prefWidth="240.0" text="Close" />
+						<Button fx:id="mapSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleMapButtons" prefHeight="40.0" prefWidth="240.0" text="Close" />
 					</children>
 				</Pane>
 				<Pane fx:id="bossScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
@@ -135,7 +135,7 @@
 					</font>
 				</Label>
 				<ListView fx:id="highScoreSceneScoreList" layoutX="180.0" layoutY="200.0" prefHeight="400.0" prefWidth="360.0" />
-				<Button fx:id="highScoreSceneBackButton" layoutX="240.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleHighScoreSceneCloseButton" prefHeight="40.0" prefWidth="240.0" text="Back" />
+				<Button fx:id="highScoreSceneBackButton" layoutX="240.0" layoutY="650.0" mnemonicParsing="false" onAction="#handleHighScoreSceneButtons" prefHeight="40.0" prefWidth="240.0" text="Back" />
 			</children>
 		</Pane>
 		<Pane fx:id="victoryScene" prefHeight="800.0" prefWidth="720.0" visible="false">
@@ -156,7 +156,7 @@
 					</font>
 				</Label>
 				<TextField fx:id="victorySceneTextField" layoutX="270.0" layoutY="400.0" prefWidth="180.0" />
-				<Button fx:id="victorySceneEnterButton" layoutX="470.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleVictorySceneEnterButton" text="Enter" />
+				<Button fx:id="victorySceneEnterButton" layoutX="470.0" layoutY="400.0" mnemonicParsing="false" onAction="#handleVictorySceneButtons" text="Enter" />
 			</children>
 		</Pane>
 		<Pane fx:id="gameOverScene" prefHeight="800.0" prefWidth="720.0" visible="false">
@@ -166,7 +166,7 @@
 						<Font name="System Bold" size="60.0" />
 					</font>
 				</Label>
-				<Button fx:id="gameOverSceneExitButton" layoutX="240.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleGameOverSceneExitButton" prefHeight="40.0" prefWidth="240.0" text="Exit" />
+				<Button fx:id="gameOverSceneExitButton" layoutX="240.0" layoutY="380.0" mnemonicParsing="false" onAction="#handleGameOverSceneButtons" prefHeight="40.0" prefWidth="240.0" text="Exit" />
 			</children>
 		</Pane>
 	</children>

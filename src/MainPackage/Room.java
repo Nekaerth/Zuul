@@ -55,16 +55,16 @@ public class Room {
 	 * The setExit method is used to declare which exits a room has
 	 *
 	 * @param direction is a string parameter used to declare where the exit is
-	 * @param neighbor is a room parameter used to declare what room the
-	 * direction refers to
+	 * @param neighbor is a room parameter used to declare what room the direction
+	 * refers to
 	 */
 	public void setExit(String direction, Room neighbor) {
 		exits.put(direction, neighbor);
 	}
 
 	/**
-	 * This method returns a string of the description of the room and the pre
-	 * fix "you are"
+	 * This method returns a string of the description of the room and the pre fix
+	 * "you are"
 	 *
 	 * @return a string with the description
 	 */
@@ -73,8 +73,8 @@ public class Room {
 	}
 
 	/**
-	 * This method returns a string of the description of the room and the pre
-	 * fix "you are" the string also contains all the exits out of the room
+	 * This method returns a string of the description of the room and the pre fix
+	 * "you are" the string also contains all the exits out of the room
 	 *
 	 * @return a string with a description and exits
 	 */
@@ -107,15 +107,13 @@ public class Room {
 	public Room getExit(String direction) {
 		return exits.get(direction.toLowerCase());
 	}
-       
-       
 
 	/**
 	 * This method returns the number that is in the room if it is a numberroom,
 	 * else it returns -1.
 	 *
-	 * @return an int. If the room is not a number room it returns -1. if it is,
-	 * a random number
+	 * @return an int. If the room is not a number room it returns -1. if it is, a
+	 * random number
 	 */
 	public int getNumber() {
 		if (escapeCode) {
@@ -127,7 +125,7 @@ public class Room {
 
 	/**
 	 * The setEscapeAbleRoom method is a setter method that sets the value of the
- boolean escapeRoom to true
+	 * boolean escapeRoom to true
 	 */
 	public void setEscapeAbleRoom() {
 		this.escapableRoom = true;
@@ -135,8 +133,8 @@ public class Room {
 	}
 
 	/**
-	 * The getEscapeRomm is a getter method that returns the current value of
-	 * the boolean escapeRoom
+	 * The getEscapeRomm is a getter method that returns the current value of the
+	 * boolean escapeRoom
 	 *
 	 * @return will return the current boolean value of escapeRoom
 	 */
@@ -144,8 +142,8 @@ public class Room {
 		return this.escapableRoom;
 
 		/**
-		 * The lockRoom method is a setter method that will set the boolean
-		 * value lock to true
+		 * The lockRoom method is a setter method that will set the boolean value
+		 * lock to true
 		 */
 	}
 
@@ -176,14 +174,13 @@ public class Room {
 
 	/**
 	 * The hasEscapeCode method will return the current boolean value of
- hasEscapeCode
+	 * hasEscapeCode
 	 *
 	 * @return will return the current boolean value
 	 */
 	public boolean hasEscapeCode() {
 		return escapeCode;
 	}
-
 
 	/**
 	 * @return the id
@@ -232,7 +229,7 @@ public class Room {
 		ArrayList<String> directionsArray = new ArrayList<>();
 		directionsArray.addAll(directions);
 		return directionsArray;
-		
+
 	}
 
 }
