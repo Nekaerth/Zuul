@@ -9,10 +9,6 @@ import Items.Item;
 import MainPackage.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author Danieln Johansen
- */
 public class RoomSaver {
 
 	ArrayList<Room> roomSaver;
