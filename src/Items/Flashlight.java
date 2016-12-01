@@ -1,15 +1,12 @@
 package Items;
 
-
 /**
  *
  * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Flashlight extends Item {
 
-	
 	private int charges;
-	
 
 	/**
 	 * The constructor for the Flashlight class is called when we want to create
@@ -23,7 +20,7 @@ public class Flashlight extends Item {
 	 * @param charges is an int that refers to how many charges the item has
 	 */
 	public Flashlight(boolean pickup, String name, boolean useable, int weight, int capacity, int charges) {
-		super(pickup,name,useable,weight,capacity);
+		super(pickup, name, useable, weight, capacity);
 		this.charges = charges;
 	}
 

@@ -1,14 +1,12 @@
 package Items;
 
-
 /**
- * The Weapon class implements the interface Item
- * It is used to create weapons which is a specific type of items
+ * The Weapon class implements the interface Item It is used to create weapons
+ * which is a specific type of items
  *
  * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Weapon extends Item {
-
 
 	private int damage;
 	private WeaponType weaponType;
@@ -29,7 +27,7 @@ public class Weapon extends Item {
 	 * @param weaponType is a String that refers to the type e.g. ranged or melee
 	 */
 	public Weapon(boolean pickup, String name, boolean useable, int weight, int capacity, int damage, WeaponType weaponType) {
-		super(pickup,name,useable,weight,capacity);
+		super(pickup, name, useable, weight, capacity);
 		this.damage = damage;
 		this.weaponType = weaponType;
 	}
@@ -46,11 +44,11 @@ public class Weapon extends Item {
 	}
 
 	/**
-	 * The weaponType method returns the WeaponType declared when creating the weapon
-	 * object
+	 * The weaponType method returns the WeaponType declared when creating the
+	 * weapon object
 	 *
-	 * @return will return a WeaponType enum equal to what is declared when creating the
-	 * object
+	 * @return will return a WeaponType enum equal to what is declared when
+	 * creating the object
 	 */
 	public WeaponType weaponType() {
 		return weaponType;

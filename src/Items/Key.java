@@ -1,6 +1,5 @@
 package Items;
 
-
 /**
  *
  * @author Semesterprojektgruppe 13 (Autumn 2016)
@@ -8,7 +7,6 @@ package Items;
 public class Key extends Item {
 
 	private String nameOfRoomThatFitsThisKey;
-	
 
 	/**
 	 * The constructor for the Key class is called when we want to create objects
@@ -23,7 +21,7 @@ public class Key extends Item {
 	 * inventory
 	 */
 	public Key(boolean pickup, String name, boolean useable, int weight, int capacity, String nameOfRoomThatFitsThisKey) {
-		super(pickup,name,useable,weight,capacity);
+		super(pickup, name, useable, weight, capacity);
 		this.nameOfRoomThatFitsThisKey = nameOfRoomThatFitsThisKey;
 	}
 

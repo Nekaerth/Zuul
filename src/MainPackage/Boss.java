@@ -1,6 +1,5 @@
 package MainPackage;
 
-
 import java.util.Scanner;
 
 /**
@@ -14,7 +13,6 @@ import java.util.Scanner;
 public class Boss extends Person {
 
 	private final String name; //The name of the boss
-	
 
 	/**
 	 * This contructor creates a Boss-object. It represent the boss, which
@@ -105,7 +103,7 @@ public class Boss extends Person {
 
 			getRoom().getInventory().putInventory(this.getInventory()); //Drops all boss items into the rooms inventory.
 			setRoom(null); //Removes the boss (removes it from the room).
-                        player.addBossKill(1);
+			player.addBossKill(1);
 			return false; //Returns false because you didn't die.
 		}
 	}
@@ -113,5 +111,4 @@ public class Boss extends Person {
 	/**
 	 * @return the bossType
 	 */
-
 }

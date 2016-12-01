@@ -22,6 +22,7 @@ public class GUI extends Application {
 		//stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
+		stage.setTitle("Prison Break");
 	}
 
 	/**

@@ -9,43 +9,39 @@ import Items.Item;
 import MainPackage.*;
 import java.util.ArrayList;
 
-/**
- *
- * @author Danieln Johansen
- */
 public class RoomSaver {
 
-    ArrayList<Room> roomSaver;
+	ArrayList<Room> roomSaver;
 
-    public RoomSaver() {
-        roomSaver = new ArrayList<>();
-    }
+	public RoomSaver() {
+		roomSaver = new ArrayList<>();
+	}
 
-    public void addRoom(Room room) {
-        roomSaver.add(room);
-    }
+	public void addRoom(Room room) {
+		roomSaver.add(room);
+	}
 
-    public Room getRoom(String id) {
-        for (Room r : roomSaver) {
-            if (r.getId().equalsIgnoreCase(id)) {
-                return r;
-            }
-        }
-        return null;
-    }
+	public Room getRoom(String id) {
+		for (Room r : roomSaver) {
+			if (r.getId().equalsIgnoreCase(id)) {
+				return r;
+			}
+		}
+		return null;
+	}
 
-    public void addItem(Item item, String roomID) {
-        for (Room r : roomSaver) {
-            if (roomID.equalsIgnoreCase(r.getId())) {
-                r.getInventory().putItem(item);
-                return;
-            }
-            
-        }
-        System.out.println("Item not added, "+item.getName());
-    }
+	public void addItem(Item item, String roomID) {
+		for (Room r : roomSaver) {
+			if (roomID.equalsIgnoreCase(r.getId())) {
+				r.getInventory().putItem(item);
+				return;
+			}
 
-    public ArrayList<Room> getAllRooms() {
-        return roomSaver;
-    }
+		}
+		System.out.println("Item not added, " + item.getName());
+	}
+
+	public ArrayList<Room> getAllRooms() {
+		return roomSaver;
+	}
 }

@@ -75,7 +75,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label roomSceneItemLabel;
 	@FXML
-	private ListView<?> roomSceneItemList;
+	private ListView<Item> roomSceneItemList;
 	@FXML
 	private Button roomScenePickUpButton;
 	@FXML
@@ -188,18 +188,16 @@ public class FXMLController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-		game = new GamePlay();
-		inventorySceneItemList.setItems(game.getPlayerInventory());
+
 	}
 
 	@FXML
 	private void handleStartMenuButtons(ActionEvent event) {
 		if (event.getSource() == startMenuStartButton) {
-			startMenu.setVisible(false);
-			difficultyScene.setVisible(true);
+			startGame();
+			setAllButOneMainSceneInvisible(difficultyScene);
 		} else if (event.getSource() == startMenuHighScoreButton) {
-			startMenu.setVisible(false);
-			highScoreScene.setVisible(true);
+			setAllButOneMainSceneInvisible(highScoreScene);
 		} else if (event.getSource() == startMenuQuitButton) {
 			Stage stage = (Stage) startMenuQuitButton.getScene().getWindow();
 			stage.close();
@@ -209,69 +207,78 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleDifficultySceneButtons(ActionEvent event) {
 		if (event.getSource() == difficultySceneEasyButton) {
-			difficultyScene.setVisible(false);
-			gameScene.setVisible(true);
-			roomScene.setVisible(true);
+			bottomMenuLevelLabel.setText("Level: Easy");
+			setAllButOneMainSceneInvisible(gameScene);
+			setAllButOneGameSceneInvisible(roomScene);
 		} else if (event.getSource() == difficultySceneMediumButton) {
-			difficultyScene.setVisible(false);
-			gameScene.setVisible(true);
+			bottomMenuLevelLabel.setText("Level: Medium");
+			setAllButOneMainSceneInvisible(gameScene);
+			setAllButOneGameSceneInvisible(roomScene);
 		} else if (event.getSource() == difficultySceneHardButton) {
-			difficultyScene.setVisible(false);
-			gameScene.setVisible(true);
+			bottomMenuLevelLabel.setText("Level: Hard");
+			setAllButOneMainSceneInvisible(gameScene);
+			setAllButOneGameSceneInvisible(roomScene);
 		} else if (event.getSource() == difficultySceneBackButton) {
-			difficultyScene.setVisible(false);
-			startMenu.setVisible(true);
+			setAllButOneMainSceneInvisible(startMenu);
 		}
 	}
 
 	@FXML
 	private void handleGameMenuButtons(ActionEvent event) {
 		if (event.getSource() == topMenuExitButton) {
-			gameScene.setVisible(false);
-			startMenu.setVisible(true);
+			setAllButOneMainSceneInvisible(startMenu);
 		} else if (event.getSource() == topMenuHelpButton) {
-			roomScene.setVisible(false);
-			helpScene.setVisible(true);
+			setAllButOneGameSceneInvisible(helpScene);
 		} else if (event.getSource() == topMenuInventoryButton) {
-			roomScene.setVisible(false);
-			inventoryScene.setVisible(true);
+			setAllButOneGameSceneInvisible(inventoryScene);
 			inventorySceneItemAmountLabel.setText("Item amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
-			inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
+			inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
 		} else if (event.getSource() == bottomMenuMapButton) {
-			roomScene.setVisible(false);
-			mapScene.setVisible(true);
+			setAllButOneGameSceneInvisible(mapScene);
 		}
 	}
 
 	@FXML
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
-
+			if (currentItem != null) {
+				if (!game.use(currentItem)) {
+					roomSceneInfoLabel.setText("You can't use " + currentItem.getName() + " here!");
+				}
+			}
+			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomScenePickUpButton) {
-
+			Item selectedItem = roomSceneItemList.getSelectionModel().getSelectedItem();
+			if (selectedItem != null) {
+				if (!game.pickUp(selectedItem)) {
+					roomSceneInfoLabel.setText("You can't pick " + selectedItem.getName() + " up!");
+				}
+			}
+			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
-
+			goRoom("North");
 		} else if (event.getSource() == roomSceneEastButton) {
-
+			goRoom("East");
 		} else if (event.getSource() == roomSceneSouthButton) {
-
+			goRoom("South");
 		} else if (event.getSource() == roomSceneWestButton) {
-
+			goRoom("West");
 		}
 	}
 
 	@FXML
 	private void handleHelpCloseButton(ActionEvent event) {
-		helpScene.setVisible(false);
-		roomScene.setVisible(true);
+		setAllButOneGameSceneInvisible(roomScene);
 	}
 
 	@FXML
 	private void handleInventoryButtons(ActionEvent event) {
 		if (event.getSource() == inventorySceneDropButton) {
-			if (currentItem != null) {
-				game.drop(currentItem);
+			Item selectedItem = inventorySceneItemList.getSelectionModel().getSelectedItem();
+			if (selectedItem != null) {
+				game.drop(selectedItem);
 			}
+			updateWeightAndItemAmount();
 		} else if (event.getSource() == inventorySceneChooseButton) {
 			currentItem = inventorySceneItemList.getSelectionModel().getSelectedItem();
 			if (currentItem != null) {
@@ -279,27 +286,23 @@ public class FXMLController implements Initializable {
 				inventorySceneCurrentItemLabel.setText("Current Item: " + currentItem.getName());
 			}
 		} else if (event.getSource() == inventorySceneCloseButton) {
-			inventoryScene.setVisible(false);
-			roomScene.setVisible(true);
+			setAllButOneGameSceneInvisible(roomScene);
 		}
 	}
 
 	@FXML
 	private void handleMapCloseButton(ActionEvent event) {
-		mapScene.setVisible(false);
-		roomScene.setVisible(true);
+		setAllButOneGameSceneInvisible(roomScene);
 	}
 
 	@FXML
 	private void handleHighScoreSceneCloseButton(ActionEvent event) {
-		highScoreScene.setVisible(false);
-		startMenu.setVisible(true);
+		setAllButOneMainSceneInvisible(startMenu);
 	}
 
 	@FXML
 	private void handleVictorySceneEnterButton(ActionEvent event) {
-		gameOverScene.setVisible(false);
-		startMenu.setVisible(true);
+		setAllButOneMainSceneInvisible(startMenu);
 		String name = victorySceneTextField.getText();
 		int highscore = game.getHighScore();
 		game.saveHighScore(name, highscore);
@@ -307,7 +310,97 @@ public class FXMLController implements Initializable {
 
 	@FXML
 	private void handleGameOverSceneExitButton(ActionEvent event) {
-		gameOverScene.setVisible(false);
-		startMenu.setVisible(true);
+		setAllButOneMainSceneInvisible(startMenu);
+	}
+
+	private void setAllButOneGameSceneInvisible(Pane pane) {
+		if (pane != roomScene) {
+			roomScene.setVisible(false);
+		}
+		if (pane != helpScene) {
+			helpScene.setVisible(false);
+		}
+		if (pane != inventoryScene) {
+			inventoryScene.setVisible(false);
+		}
+		if (pane != mapScene) {
+			mapScene.setVisible(false);
+		}
+		if (pane != bossScene) {
+			bossScene.setVisible(false);
+		}
+		pane.setVisible(true);
+	}
+
+	private void setAllButOneMainSceneInvisible(Pane pane) {
+		if (pane != startMenu) {
+			startMenu.setVisible(false);
+		}
+		if (pane != difficultyScene) {
+			difficultyScene.setVisible(false);
+		}
+		if (pane != gameScene) {
+			gameScene.setVisible(false);
+		}
+		if (pane != highScoreScene) {
+			highScoreScene.setVisible(false);
+		}
+		if (pane != victoryScene) {
+			victoryScene.setVisible(false);
+		}
+		if (pane != gameOverScene) {
+			gameOverScene.setVisible(false);
+		}
+		pane.setVisible(true);
+	}
+
+	private void updateWeightAndItemAmount() {
+		topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
+		inventorySceneItemAmountLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
+		inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
+	}
+
+	private void startGame() {
+		game = new GamePlay();
+		game.constructWorld("testfile.dne");
+		//updates the players inventory
+		inventorySceneItemList.setItems(game.getPlayerInventory());
+		//updates the current rooms inventory
+		roomSceneItemList.setItems(game.getCurrentRoomInventory());
+		//updates the time label (lav en general metode senere)
+		updateTime();
+		//updates the capacity labels
+		updateWeightAndItemAmount();
+		//updates the current room label
+		bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
+		//updates the info label
+		roomSceneInfoLabel.setText("");
+		//updates the current chosen item label in roomScene and in inventoryScene
+		roomSceneCurrentItemLabel.setText("Current Item: None");
+		inventorySceneCurrentItemLabel.setText("Current Item: None");
+		//updates the help textarea
+		helpSceneTextArea.setText(game.getHelpDescription());
+	}
+
+	private void goRoom(String direction) {
+		if (game.getCurrentRoom().getExit(direction) == null) {
+			roomSceneInfoLabel.setText("There is no door in this direction.");
+			return;
+		}
+		if (game.goRoom(direction)) {
+			roomSceneItemList.setItems(game.getCurrentRoomInventory());
+			bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
+		} else {
+			roomSceneInfoLabel.setText("This door is locked, you need a key.");
+		}
+		updateTime();
+	}
+
+	private void updateTime() {
+		if (game.getTime() % 60 < 10) {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":0" + game.getTime() % 60);
+		} else {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
+		}
 	}
 }
