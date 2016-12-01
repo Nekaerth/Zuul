@@ -139,14 +139,14 @@ public class WorldLoader {
 
 	private ArrayList<Room> connectWorld() {
 		Room mainRoom = null, secondRoom = null;
-		String[] linkMap = {""};
+		String[] splitLinkArray = {""};
 		do { //Iterate through the arraylist links
 			for (String str : links) { //Split every string in links at "=" and save the strings into linkmap
 				//links consist of a string of the format "mainroomID=roomToConnectID:roomToConnectID:.."
 				//This will generate two strings "mainroomID" and "roomToConnectID:roomToConnectID:.."
-				linkMap = str.split("="); //For each iteration through links, iterate through all the rooms saved in RoomSaver
+				splitLinkArray = str.split("="); //For each iteration through links, iterate through all the rooms saved in RoomSaver
 				for (Room r : rs.getAllRooms()) { //Compare the id of a room with the id that is the mainroom saved in linkMap
-					if (r.getId().equalsIgnoreCase(linkMap[0])) { //Set r as the mainroom
+					if (r.getId().equalsIgnoreCase(splitLinkArray[0])) { //Set r as the mainroom
 						mainRoom = r; //remove the string from the arraylist links
 						links.remove(str); //Break out of the for each loop
 						break;
@@ -156,13 +156,14 @@ public class WorldLoader {
 				break;
 
 			} //Split the second string in linkMap at each ":" and save it into the array values, the second string consists of "roomToConnectID:roomToConnectID:.."
-			String[] values = linkMap[1].split(":"); //Iterate through the array called values
+			String[] values = splitLinkArray[1].split(":"); //Iterate through the array called values
 			for (String str2 : values) { //For each iteration through values, iterate through the rooms saved in RoomSaver
 				for (Room r2 : rs.getAllRooms()) { //Compare the id of a room with the string from values. The string from values consist of a "roomToConnectID" string
-					if (r2.getId().equalsIgnoreCase(str2)) { //If true, set the room as the secondRoom
+					String[] roomIdAndDirection = str2.split(";");
+					if (r2.getId().equalsIgnoreCase(roomIdAndDirection[0])) { //If true, set the room as the secondRoom
 						secondRoom = r2; //Print out a confirmation message to the console
-						System.out.println("connected rooms"); //connect the mainroom and the secondroom by calling the setExit() method on mainRoom
-						mainRoom.setExit(secondRoom.getName(), secondRoom);
+						System.out.println(roomIdAndDirection[1]); //connect the mainroom and the secondroom by calling the setExit() method on mainRoom
+						mainRoom.setExit(roomIdAndDirection[1], secondRoom);
 					}
 				}
 			} //Do this while there are still links left in the links array
