@@ -264,6 +264,11 @@ public class GamePlay implements GUIdisplayable {
 		return false;
 	}
 
+	@Override
+	public ArrayList<Boss> getBosses() {
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+	}
+
 	private boolean useKey(Item item) {
 		Key key = (Key) item;
 		Room roomToUnlock = new Room("", "", false, false, false, "", false);

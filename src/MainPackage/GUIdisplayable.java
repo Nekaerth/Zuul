@@ -38,6 +38,8 @@ public interface GUIdisplayable {
 	public void constructWorld(String fileToRead);
 
 	public boolean isBossPresent();
+	
+	public ArrayList<Boss> getBosses();
 
 	public void saveHighScore(String name, int highScore);
 	
