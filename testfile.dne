@@ -30,7 +30,7 @@ id=4
 name=Yard
 description=yard
 locked=false
-escapeRoom=false
+escapeRoom=true
 numberRoom=false
 hidden=false
 linkedID=2;west:9;south
@@ -87,6 +87,7 @@ weight=1
 capacity=1
 pickup=true
 useable=true
+roomToUnlock=office
 name=Officekey
 [item]
 id=101
@@ -96,6 +97,7 @@ weight=1
 capacity=1
 pickup=true
 useable=true
+roomToUnlock=storage
 name=Storagekey
 [item]
 id=102
