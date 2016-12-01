@@ -47,7 +47,7 @@ public class GamePlay implements GUIdisplayable {
 
 		Room nextRoom = player.getRoom().getExit(direction); //Finds the next room in the hashmap room and sets this as NextRoom
 
-		if (nextRoom == null || nextRoom.isHidden()) { //Prints this if there is no room that direction / the hashmap doesnt contain the value of the key
+		if (nextRoom == null || nextRoom.isHidden() || nextRoom.isLocked() ) { //Prints this if there is no room that direction / the hashmap doesnt contain the value of the key
 			return false;
 		} else if (!nextRoom.isLocked()) {
 
@@ -61,10 +61,7 @@ public class GamePlay implements GUIdisplayable {
 				}
 				return true;
 			}
-
-		} else if (nextRoom.isLocked()) {
-			return false;
-		}
+		} 
 		return false;
 
 	}
@@ -95,6 +92,7 @@ public class GamePlay implements GUIdisplayable {
 	 * the item type
 	 *
 	 * @param item is the Item which is to be used
+     * @return 
 	 */
 	@Override
 	public boolean use(Item item) {

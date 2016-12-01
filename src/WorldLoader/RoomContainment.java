@@ -16,7 +16,7 @@ class RoomContainment {
 	private String description;
 	private boolean locked;
 	private boolean escapeRoom;
-	private boolean numberRoom;
+	private boolean containsHiddenNumber;
 	private boolean hidden;
 	private String[] linkedID;
 
@@ -78,16 +78,6 @@ class RoomContainment {
 		} else {
 			this.locked = false;
 		}
-//        switch (locked.toLowerCase()) {
-//            case "true":
-//                this.locked = true;
-//                break;
-//            case "false":
-//                this.locked = false;
-//                break;
-//            default:
-//                break;
-//        }
 	}
 
 	/**
@@ -106,45 +96,24 @@ class RoomContainment {
 		} else {
 			this.escapeRoom = false;
 		}
-//        switch (escapeRoom.toLowerCase()) {
-//            case "true":
-//                this.escapeRoom = true;
-//                break;
-//            case "false":
-//                this.escapeRoom = false;
-//                break;
-//            default:
-//                break;
-//        }
-
 	}
 
 	/**
 	 * @return the numberRoom
 	 */
-	public boolean getNumberRoom() {
-		return numberRoom;
+	public boolean getContainsHiddenNumber() {
+		return containsHiddenNumber;
 	}
 
 	/**
 	 * @param numberRoom the numberRoom to set
 	 */
-	public void setNumberRoom(String numberRoom) {
+	public void setContainsHiddenNumber(String numberRoom) {
 		if (numberRoom.toLowerCase().equals("true")) {
-			this.numberRoom = true;
+			this.containsHiddenNumber = true;
 		} else {
-			this.numberRoom = false;
+			this.containsHiddenNumber = false;
 		}
-//        switch (numberRoom.toLowerCase()) {
-//            case "true":
-//                this.hidden = true;
-//                break;
-//            case "false":
-//                this.hidden = false;
-//                break;
-//            default:
-//                break;
-//        }
 	}
 
 	/**
