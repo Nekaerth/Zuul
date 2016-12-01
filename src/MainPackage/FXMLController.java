@@ -124,6 +124,24 @@ public class FXMLController implements Initializable {
 	//Boss Pane
 	@FXML
 	private Pane bossScene;
+	@FXML
+	private Label bossSceneTitle;
+	@FXML
+	private Label bossSceneBossAttackLabel;
+	@FXML
+	private Label bossSceneCounterMoveLabel;
+	@FXML
+	private Button playerAttack1;
+	@FXML
+	private Button playerAttack2;
+	@FXML
+	private Button playerAttack3;
+	@FXML
+	private Button playerAttack4;
+	@FXML
+	private Label bossScenePlayerHitpointLabel;
+	@FXML
+	private Label bossSceneBossHitpointLabel;
 
 	//Start menu Pane
 	@FXML
@@ -296,6 +314,11 @@ public class FXMLController implements Initializable {
 	}
 
 	@FXML
+	private void handleBossButtons(ActionEvent event) {
+
+	}
+
+	@FXML
 	private void handleHighScoreSceneCloseButton(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 	}
@@ -390,10 +413,13 @@ public class FXMLController implements Initializable {
 		if (game.goRoom(direction)) {
 			roomSceneItemList.setItems(game.getCurrentRoomInventory());
 			bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
+			updateTime();
+			if (game.isBossPresent()) {
+				bossFight();
+			}
 		} else {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");
 		}
-		updateTime();
 	}
 
 	private void updateTime() {
@@ -402,5 +428,9 @@ public class FXMLController implements Initializable {
 		} else {
 			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
 		}
+	}
+
+	private void bossFight() {
+		//TODO
 	}
 }

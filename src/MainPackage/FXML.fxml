@@ -79,7 +79,27 @@
 						<Button fx:id="mapSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleMapCloseButton" prefHeight="40.0" prefWidth="240.0" text="Close" />
 					</children>
 				</Pane>
-				<Pane fx:id="bossScene" layoutX="0.0" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false" />
+				<Pane fx:id="bossScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
+					<children>
+						<Label fx:id="bossSceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="You are fighting boss">
+							<font>
+								<Font name="System Bold" size="40.0" />
+							</font>
+						</Label>
+						<Label fx:id="bossSceneBossAttackLabel" alignment="CENTER" layoutY="140.0" prefWidth="720.0" text="bossName is using bossAttack" textFill="#b90404">
+							<font>
+								<Font name="System Bold" size="20.0" />
+							</font>
+						</Label>
+						<Label fx:id="bossSceneCounterMoveLabel" alignment="CENTER" layoutY="290.0" prefWidth="720.0" text="Choose your counter move:" />
+						<Button fx:id="playerAttack1" layoutX="150.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack1" />
+						<Button fx:id="playerAttack2" layoutX="370.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack2" />
+						<Button fx:id="playerAttack3" layoutX="150.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack3" />
+						<Button fx:id="playerAttack4" layoutX="370.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack4" />
+						<Label fx:id="bossScenePlayerHitpointLabel" alignment="CENTER" layoutY="600.0" prefWidth="360.0" text="Your Hitpoints: 0" />
+						<Label fx:id="bossSceneBossHitpointLabel" alignment="CENTER" layoutX="360.0" layoutY="600.0" prefWidth="360.0" text="bossName Hitpoints: 0" />
+					</children>
+				</Pane>
 			</children>
 		</Pane>
 		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0">
