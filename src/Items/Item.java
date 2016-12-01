@@ -8,30 +8,30 @@ package Items;
  */
 public abstract class Item {
 
-	private boolean pickup, useable;
+	private boolean pickUpAble, useAble;
 	private String name;
 	private int weight, capacity;
 
-	public Item(boolean pickup, String name, boolean useable, int weight, int capacity) {
-		this.pickup = pickup;
+	public Item(boolean pickup, String name, boolean useAble, int weight, int capacity) {
+		this.pickUpAble = pickup;
 		this.name = name;
 		this.weight = weight;
 		this.capacity = capacity;
-		this.useable = useable;
+		this.useAble = useAble;
 	}
 
-	public abstract ItemType getType();
+	public abstract ItemType getItemType();
 
 	public String getName() {
 		return this.name;
 	}
 
-	public boolean isPickup() {
-		return this.pickup;
+	public boolean isPickUpAble() {
+		return this.pickUpAble;
 	}
 
 	public boolean isUseable() {
-		return this.useable;
+		return this.useAble;
 	}
 
 	public int getWeight() {

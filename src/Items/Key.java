@@ -26,7 +26,7 @@ public class Key extends Item {
 	}
 
 	@Override
-	public ItemType getType() {
+	public ItemType getItemType() {
 		return ItemType.KEY;
 	}
 

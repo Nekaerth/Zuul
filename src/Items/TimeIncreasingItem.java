@@ -19,7 +19,7 @@ public class TimeIncreasingItem extends Item {
 	}
 
 	@Override
-	public ItemType getType() {
+	public ItemType getItemType() {
 		return ItemType.TIMEINCREASINGITEM;
 	}
 

@@ -47,7 +47,7 @@ public interface GUIdisplayable {
 
 	public int getCurrentItemAmount();
 
-	public int getWeightCapacity();
+	public int getMaxWeight();
 
 	public int getCurrentWeight();
 

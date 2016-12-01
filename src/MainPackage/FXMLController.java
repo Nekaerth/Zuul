@@ -250,7 +250,7 @@ public class FXMLController implements Initializable {
 		} else if (event.getSource() == topMenuInventoryButton) {
 			setAllButOneGameSceneInvisible(inventoryScene);
 			inventorySceneItemAmountLabel.setText("Item amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
-			inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
+			inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
 		} else if (event.getSource() == bottomMenuMapButton) {
 			setAllButOneGameSceneInvisible(mapScene);
 		}
@@ -378,9 +378,9 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateWeightAndItemAmount() {
-		topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
+		topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
 		inventorySceneItemAmountLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
-		inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getWeightCapacity());
+		inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
 	}
 
 	private void startGame() {
