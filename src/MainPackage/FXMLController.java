@@ -247,13 +247,19 @@ public class FXMLController implements Initializable {
 		if (event.getSource() == topMenuExitButton) {
 			setAllButOneMainSceneInvisible(startMenu);
 		} else if (event.getSource() == topMenuHelpButton) {
-			setAllButOneGameSceneInvisible(helpScene);
+			if (!bossScene.isVisible()) {
+				setAllButOneGameSceneInvisible(helpScene);
+			}
 		} else if (event.getSource() == topMenuInventoryButton) {
-			setAllButOneGameSceneInvisible(inventoryScene);
-			inventorySceneItemAmountLabel.setText("Item amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
-			inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
+			if (!bossScene.isVisible()) {
+				setAllButOneGameSceneInvisible(inventoryScene);
+				inventorySceneItemAmountLabel.setText("Item amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
+				inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
+			}
 		} else if (event.getSource() == bottomMenuMapButton) {
-			setAllButOneGameSceneInvisible(mapScene);
+			if (!bossScene.isVisible()) {
+				setAllButOneGameSceneInvisible(mapScene);
+			}
 		}
 	}
 
@@ -272,6 +278,7 @@ public class FXMLController implements Initializable {
 				if (!game.pickUp(selectedItem)) {
 					roomSceneInfoLabel.setText("You can't pick " + selectedItem.getName() + " up!");
 				}
+				updateTime();
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
@@ -443,8 +450,6 @@ public class FXMLController implements Initializable {
 				break;
 			}
 		}
-
-		//currentBoss = new Boss(game.getCurrentRoom(), 100, "Kurt");
 		//If there was no boss to fight, cancel the boss fight
 		if (currentBoss == null) {
 			return;
@@ -459,6 +464,5 @@ public class FXMLController implements Initializable {
 		//updates player and boss hitpoints
 		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
 		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
-
 	}
 }
