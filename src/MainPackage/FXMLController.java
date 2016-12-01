@@ -406,7 +406,8 @@ public class FXMLController implements Initializable {
 	}
 
 	private void goRoom(String direction) {
-		if (game.getCurrentRoom().getExit(direction) == null) {
+		Room nextRoom = game.getCurrentRoom().getExit(direction);
+		if (nextRoom == null || nextRoom.isHidden()) {
 			roomSceneInfoLabel.setText("There is no door in this direction.");
 			return;
 		}
