@@ -47,7 +47,7 @@ public class GamePlay implements GUIdisplayable {
 
 		Room nextRoom = player.getRoom().getExit(direction); //Finds the next room in the hashmap room and sets this as NextRoom
 
-		if (nextRoom == null || nextRoom.isHidden() || nextRoom.isLocked() ) { //Prints this if there is no room that direction / the hashmap doesnt contain the value of the key
+		if (nextRoom == null || nextRoom.isHidden() || nextRoom.isLocked()) { //Prints this if there is no room that direction / the hashmap doesnt contain the value of the key
 			return false;
 		} else if (!nextRoom.isLocked()) {
 
@@ -61,7 +61,7 @@ public class GamePlay implements GUIdisplayable {
 				}
 				return true;
 			}
-		} 
+		}
 		return false;
 
 	}
@@ -92,7 +92,7 @@ public class GamePlay implements GUIdisplayable {
 	 * the item type
 	 *
 	 * @param item is the Item which is to be used
-     * @return 
+	 * @return
 	 */
 	@Override
 	public boolean use(Item item) {
@@ -209,20 +209,20 @@ public class GamePlay implements GUIdisplayable {
 
 	@Override
 	public String getHelpDescription() {
-            try {
-                FileReader file = new FileReader("helpfile.dne");
-                BufferedReader buffer = new BufferedReader(file);
-                StringBuilder sb = new StringBuilder();
-                while (buffer.ready()) {                    
-                    sb.append(buffer.readLine());
-                  }
-                return sb.toString();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            return " ";
+		try {
+			FileReader file = new FileReader("helpfile.dne");
+			BufferedReader buffer = new BufferedReader(file);
+			StringBuilder sb = new StringBuilder();
+			while (buffer.ready()) {
+				sb.append(buffer.readLine());
+			}
+			return sb.toString();
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(GamePlay.class.getName()).log(Level.SEVERE, null, ex);
+		}
+		return " ";
 	}
 
 	@Override

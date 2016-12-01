@@ -256,9 +256,9 @@ public class FXMLController implements Initializable {
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
-			goRoom("Cellhall");
+			goRoom("North");
 		} else if (event.getSource() == roomSceneEastButton) {
-			goRoom("Yard");
+			goRoom("East");
 		} else if (event.getSource() == roomSceneSouthButton) {
 			goRoom("South");
 		} else if (event.getSource() == roomSceneWestButton) {
