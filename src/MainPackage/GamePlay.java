@@ -265,8 +265,9 @@ public class GamePlay implements GUIdisplayable {
 
 	@Override
 	public ArrayList<Boss> getBosses() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return bosses;
 	}
+	
 
 	private boolean useKey(Item item) {
 		Key key = (Key) item;
@@ -341,7 +342,7 @@ public class GamePlay implements GUIdisplayable {
 
 	@Override
 	public ArrayList<String> getHighScoreList() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		return Highscore.getHighscoreList();
 	}
 
 	@Override
