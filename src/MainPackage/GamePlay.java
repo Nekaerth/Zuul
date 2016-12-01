@@ -53,7 +53,7 @@ public class GamePlay implements GUIdisplayable {
 
 			player.subtractTime(10);
 
-			if (!nextRoom.getEscapeRoom()) {
+			if (!nextRoom.isEscapeAbleRoom()) {
 				player.setRoom(nextRoom); //Changes players current room to nextRoom.
 				for (NPC n : npc) {
 					n.move();
@@ -272,7 +272,7 @@ public class GamePlay implements GUIdisplayable {
 		Flashlight flashlight = (Flashlight) item; //Uses up charges on players flashlight, and prints line below telling you how many charges you have left.
 		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
-			if (player.getRoom().isNumberRoom()) {
+			if (player.getRoom().hasEscapeCode()) {
 				player.getRoom().getNumber();
 				if (roomNumber.contains(player.getRoom()) == false) { //add a room to the arraylist roomNumber, that tracks the rooms with numbers in them
 					roomNumber.add(player.getRoom());
@@ -293,14 +293,14 @@ public class GamePlay implements GUIdisplayable {
 		for (Room room : rooms) {
 			if (boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(room.getName().toLowerCase())) {
 				roomToUnlock = room;
-				if (roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+				if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
 					roomToUnlock.unlock();
 					player.getInventory().removeItem(item);
 					return true;
-				} else if (!roomToUnlock.getEscapeRoom() && roomToUnlock.isLocked()) {
+				} else if (!roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
 					System.out.println("You got no use of the boltcutter here");
 					return false;
-				} else if (roomToUnlock.getEscapeRoom() && !roomToUnlock.isLocked()) {
+				} else if (roomToUnlock.isEscapeAbleRoom() && !roomToUnlock.isLocked()) {
 					System.out.println("You have allready opended the fence");
 					System.out.println("Get out of here with the code");
 					return false;

@@ -18,7 +18,7 @@ public class Room {
 	private String name;
 	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	private Inventory inventory;
-	private boolean numberRoom, escapeRoom, lock, needsBoss, hidden;
+	private boolean escapeCode, escapableRoom, locked, hidden;
 	private int number;
 	private String id;
 
@@ -39,12 +39,11 @@ public class Room {
 	public Room(String id, String description, boolean numberRoom, boolean lock, boolean escapeRoom, String name, boolean hidden) { //Constructor der tager en string der beskriver rummet
 		this.description = description; //this.desription er variablen i Classen Room.
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
-		this.escapeRoom = escapeRoom;
+		this.escapableRoom = escapeRoom;
 		this.id = id;
 		this.name = name;
-		this.numberRoom = numberRoom;
-		this.needsBoss = false;
-		this.lock = lock;
+		this.escapeCode = numberRoom;
+		this.locked = lock;
 		this.hidden = hidden;
 		this.inventory = new Inventory();
 		if (numberRoom == true) {
@@ -106,7 +105,7 @@ public class Room {
 	 * @return a Room in the given direction
 	 */
 	public Room getExit(String direction) {
-		return exits.get(direction);
+		return exits.get(direction.toLowerCase());
 	}
        
        
@@ -119,7 +118,7 @@ public class Room {
 	 * a random number
 	 */
 	public int getNumber() {
-		if (numberRoom) {
+		if (escapeCode) {
 			return number;
 		} else {
 			return -1;
@@ -127,11 +126,11 @@ public class Room {
 	}
 
 	/**
-	 * The setEscapeRoom method is a setter method that sets the value of the
-	 * boolean escapeRoom to true
+	 * The setEscapeAbleRoom method is a setter method that sets the value of the
+ boolean escapeRoom to true
 	 */
-	public void setEscapeRoom() {
-		this.escapeRoom = true;
+	public void setEscapeAbleRoom() {
+		this.escapableRoom = true;
 
 	}
 
@@ -141,8 +140,8 @@ public class Room {
 	 *
 	 * @return will return the current boolean value of escapeRoom
 	 */
-	public boolean getEscapeRoom() {
-		return this.escapeRoom;
+	public boolean isEscapeAbleRoom() {
+		return this.escapableRoom;
 
 		/**
 		 * The lockRoom method is a setter method that will set the boolean
@@ -155,7 +154,7 @@ public class Room {
 	 *
 	 */
 	public void LockRoom() {
-		lock = true;
+		locked = true;
 	}
 
 	/**
@@ -164,7 +163,7 @@ public class Room {
 	 * @return will return the current boolean value of lock
 	 */
 	public boolean isLocked() {
-		return lock;
+		return locked;
 	}
 
 	/**
@@ -172,26 +171,19 @@ public class Room {
 	 * lock to false
 	 */
 	public void unlock() {
-		lock = false;
+		locked = false;
 	}
 
 	/**
-	 * The isNumberRoom method will return the current boolean value of
-	 * numberRoom
+	 * The hasEscapeCode method will return the current boolean value of
+ hasEscapeCode
 	 *
 	 * @return will return the current boolean value
 	 */
-	public boolean isNumberRoom() {
-		return numberRoom;
+	public boolean hasEscapeCode() {
+		return escapeCode;
 	}
 
-	public boolean needsBoss() {
-		return needsBoss;
-	}
-
-	public void setNeedsBoss(boolean needsBoss) {
-		this.needsBoss = needsBoss;
-	}
 
 	/**
 	 * @return the id

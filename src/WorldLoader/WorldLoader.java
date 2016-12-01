@@ -162,7 +162,7 @@ public class WorldLoader {
 					if (r2.getId().equalsIgnoreCase(roomIdAndDirection[0])) { //If true, set the room as the secondRoom
 						secondRoom = r2; //Print out a confirmation message to the console
 						System.out.println(roomIdAndDirection[1]); //connect the mainroom and the secondroom by calling the setExit() method on mainRoom
-						mainRoom.setExit(roomIdAndDirection[1], secondRoom);
+						mainRoom.setExit(roomIdAndDirection[1].toLowerCase(), secondRoom);
 					}
 				}
 			} //Do this while there are still links left in the links array
