@@ -256,13 +256,13 @@ public class FXMLController implements Initializable {
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
-
+			goRoom("North");
 		} else if (event.getSource() == roomSceneEastButton) {
-
+			goRoom("East");
 		} else if (event.getSource() == roomSceneSouthButton) {
-
+			goRoom("South");
 		} else if (event.getSource() == roomSceneWestButton) {
-
+			goRoom("West");
 		}
 	}
 
@@ -368,11 +368,7 @@ public class FXMLController implements Initializable {
 		//updates the current rooms inventory
 		roomSceneItemList.setItems(game.getCurrentRoomInventory());
 		//updates the time label (lav en general metode senere)
-		if (game.getTime() % 60 < 10) {
-			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":0" + game.getTime() % 60);
-		} else {
-			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
-		}
+		updateTime();
 		//updates the capacity labels
 		updateWeightAndItemAmount();
 		//updates the current room label
@@ -384,5 +380,27 @@ public class FXMLController implements Initializable {
 		inventorySceneCurrentItemLabel.setText("Current Item: None");
 		//updates the help textarea
 		helpSceneTextArea.setText(game.getHelpDescription());
+	}
+
+	private void goRoom(String direction) {
+		if (game.getCurrentRoom().getExit(direction) == null) {
+			roomSceneInfoLabel.setText("There is no door in this direction.");
+			return;
+		}
+		if (game.goRoom(direction)) {
+			roomSceneItemList.setItems(game.getCurrentRoomInventory());
+			bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
+		} else {
+			roomSceneInfoLabel.setText("This door is locked, you need a key.");
+		}
+		updateTime();
+	}
+
+	private void updateTime() {
+		if (game.getTime() % 60 < 10) {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":0" + game.getTime() % 60);
+		} else {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
+		}
 	}
 }

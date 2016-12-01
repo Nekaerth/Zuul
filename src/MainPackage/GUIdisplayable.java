@@ -18,7 +18,7 @@ public interface GUIdisplayable {
 	public boolean goRoom(String direction);
 
 	public Room getCurrentRoom();
-	
+
 	public ArrayList<NPC> getAllNpc();
 
 	public ObservableList<Item> getCurrentRoomInventory();
@@ -50,5 +50,5 @@ public interface GUIdisplayable {
 	public int getWeightCapacity();
 
 	public int getCurrentWeight();
-	
+
 }
