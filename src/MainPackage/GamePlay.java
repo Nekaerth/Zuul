@@ -57,14 +57,13 @@ public class GamePlay implements GUIdisplayable {
                 visitedRooms.add(nextRoom);
             }
 
-            if (!nextRoom.isEscapeAbleRoom()) {
                 player.setRoom(nextRoom); //Changes players current room to nextRoom.
                 for (NPC n : npc) {
                     n.move();
                 }
                 npcInteractWithPlayer();
                 return true;
-            }
+            
         }
         return false;
 
@@ -304,8 +303,9 @@ public class GamePlay implements GUIdisplayable {
         Boltcutter boltcutter = (Boltcutter) item;
         Room roomToUnlock = new Room("", "", false, false, false, "", false);
         for (Room room : rooms) {
-            if (boltcutter.getRoomBoltcutterCanBeUsedIn().toLowerCase().equals(room.getName().toLowerCase())) {
-                roomToUnlock = room;
+			for(String str : room.getListOfExitDirections()){
+            if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
+                roomToUnlock = room.getExit(str);
                 if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
                     roomToUnlock.unlock();
                     player.getInventory().removeItem(item);
@@ -320,6 +320,7 @@ public class GamePlay implements GUIdisplayable {
                 }
                 break;
             }
+			}
         }
         return false;
     }
