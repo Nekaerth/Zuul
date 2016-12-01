@@ -41,7 +41,7 @@ public class Weapon extends Item {
 	 * @return will return a value of the type ItemType enum
 	 */
 	@Override
-	public ItemType getType() {
+	public ItemType getItemType() {
 		return ItemType.WEAPON;
 	}
 

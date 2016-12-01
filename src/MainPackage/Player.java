@@ -18,7 +18,7 @@ public class Player extends Person {
 
 	private int time;
 	private final int capacity; //Is the maximum amount of items the player must hold.
-	private final int weightCapacity; //Is the maximum weight that the players items must
+	private final int maxWeight; //Is the maximum weight that the players items must
         private int bossKill; 
         
 	/**
@@ -30,13 +30,13 @@ public class Player extends Person {
 	 * @param hitpoint Sets the players hitpoint.
 	 * @param time Sets how much time the player has.
 	 * @param capacity Sets the players maximum item capacity.
-	 * @param weightCapacity Sets the players maximum item weight capacity.
+	 * @param maxWeight Sets the players maximum item weight capacity.
 	 */
-	public Player(Room room, int hitpoint, int time, int capacity, int weightCapacity) {
+	public Player(Room room, int hitpoint, int time, int capacity, int maxWeight) {
 		super(room, hitpoint);
 		this.time = time;
 		this.capacity = capacity;
-		this.weightCapacity = weightCapacity;
+		this.maxWeight = maxWeight;
                 this.bossKill = 0;
 	}       
 
@@ -94,8 +94,8 @@ public class Player extends Person {
 	 *
 	 * @return the maximum weight that the players items must weight in total.
 	 */
-	public int getWeightCapacity() {
-		return this.weightCapacity;
+	public int getMaxWeight() {
+		return this.maxWeight;
 	}
 
 	/**

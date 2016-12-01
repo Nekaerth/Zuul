@@ -20,7 +20,7 @@ public abstract class Item {
 		this.useable = useable;
 	}
 	
-	public abstract ItemType getType();
+	public abstract ItemType getItemType();
 
 	public String getName(){
 		return this.name;

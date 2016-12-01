@@ -94,7 +94,7 @@ public class GamePlay implements GUIdisplayable {
             return false;
         }
 
-        switch (item.getType()) {
+        switch (item.getItemType()) {
             case KEY:
                 useKey(item);
                 break;
@@ -125,15 +125,14 @@ public class GamePlay implements GUIdisplayable {
     @Override
     public boolean pickUp(Item item) {
         if (item == null) {
-            System.out.println("There is no such item.");
             return false;
         }
 
         if (item.isPickup()
-                && player.getInventory().itemWeight() + item.getWeight() <= player.getWeightCapacity()
+                && player.getInventory().itemWeight() + item.getWeight() <= player.getMaxWeight()
                 && player.getInventory().size() + 1 <= player.getCapacity()) {
 
-            switch (item.getType()) {
+            switch (item.getItemType()) {
                 case WEAPON:
                     Weapon weapon = (Weapon) item;
                     player.changePlayerMove(weapon);
@@ -151,7 +150,7 @@ public class GamePlay implements GUIdisplayable {
             //Transfers the item from the room inventory to the player inventory
             player.getInventory().transferItem(player.getRoom().getInventory(), item);
 
-        } else if (player.getInventory().itemWeight() + item.getWeight() > player.getWeightCapacity()) {
+        } else if (player.getInventory().itemWeight() + item.getWeight() > player.getMaxWeight()) {
             return false;
         } else if (player.getInventory().size() + 1 > player.getCapacity()) {
             return false;
@@ -161,7 +160,7 @@ public class GamePlay implements GUIdisplayable {
 
     @Override
     public void drop(Item item) {
-        if (item.getType() == ItemType.WEAPON) {
+        if (item.getItemType() == ItemType.WEAPON) {
             player.droppedWeapon((Weapon) item);
         }
         //Transfers the item from the player inventory to the room inventory

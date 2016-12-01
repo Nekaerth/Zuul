@@ -141,7 +141,7 @@ public class WorldLoader {
 		return true;
 	}
 
-	private ArrayList<Room> connectWorld() {
+private ArrayList<Room> connectWorld() {
 		Room mainRoom = null, secondRoom = null;
 		String[] linkMap = {""};
 		do { //Iterate through the arraylist links
@@ -165,7 +165,7 @@ public class WorldLoader {
 				for (Room r2 : rs.getAllRooms()) { //Compare the id of a room with the string from values. The string from values consist of a "roomToConnectID" string
 					if (r2.getId().equalsIgnoreCase(str2)) { //If true, set the room as the secondRoom
 						secondRoom = r2; //Print out a confirmation message to the console
-						System.out.println("connected rooms"); //connect the mainroom and the secondroom by calling the setExit() method on mainRoom
+						//connect the mainroom and the secondroom by calling the setExit() method on mainRoom
 						mainRoom.setExit(secondRoom.getName(), secondRoom);
 					}
 				}
