@@ -29,11 +29,21 @@ import javafx.collections.ObservableList;
 public class GamePlay implements GUIdisplayable {
 
 	private Player player;
-	private ArrayList<NPC> npc = new ArrayList<>();
-	private ArrayList<Boss> bosses = new ArrayList<>();
-	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
-	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
-	private ArrayList<Room> visitedRooms = new ArrayList<>();
+	private ArrayList<NPC> npc;
+	private ArrayList<Boss> bosses;
+	private ArrayList<Room> rooms; // initializes the rooms available
+	private ArrayList<Room> roomNumber; //An arraylist of rooms that contains a hidden number
+	private ArrayList<Room> visitedRooms;
+	private Highscore highscore;
+	
+	public GamePlay(){
+		this.highscore = new Highscore();
+		this.bosses = new ArrayList<>();
+		this.rooms = new ArrayList<>(); // initializes the rooms available
+		this.roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
+		this.visitedRooms = new ArrayList<>();
+		this.npc = new ArrayList<>();
+	}
 
 	/**
 	 * The goRoom method is used to change the room the player is in based on the
@@ -331,18 +341,17 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	@Override
-	public void saveHighScore(String name, int highScore
-	) {
+	public void saveHighScore(String name, int highScore) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name);
 		sb.append(" ");
 		sb.append(highScore);
-		Highscore.saveHighscore(sb.toString());
+		highscore.saveHighscore(sb.toString());
 	}
 
 	@Override
-	public ArrayList<String> getHighScoreList() {
-		return Highscore.getHighscoreList();
+	public ObservableList<String> getHighScoreList() {
+		return highscore.getHighscoreList();
 	}
 
 	@Override
