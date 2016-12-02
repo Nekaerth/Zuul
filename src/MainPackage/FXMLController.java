@@ -457,10 +457,11 @@ public class FXMLController implements Initializable {
 		//updates the title in bossScene
 		bossSceneTitle.setText("You are fighting " + currentBoss.getName());
 		//updates counter attack buttons
+                
 		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(0).getName());
-		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(1).getName());
-		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(2).getName());
-		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(3).getName());
+		bossSceneAttackButton2.setText(game.getPlayer().getMoves().get(1).getName());
+		bossSceneAttackButton3.setText(game.getPlayer().getMoves().get(2).getName());
+		bossSceneAttackButton4.setText(game.getPlayer().getMoves().get(3).getName());
 		//updates player and boss hitpoints
 		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
 		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
