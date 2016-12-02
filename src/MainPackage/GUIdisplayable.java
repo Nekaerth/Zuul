@@ -17,8 +17,6 @@ public interface GUIdisplayable {
 
 	public boolean goRoom(String direction);
 
-	public Room getCurrentRoom();
-
 	public ArrayList<NPC> getAllNpc();
 
 	public ObservableList<Item> getCurrentRoomInventory();
@@ -28,8 +26,6 @@ public interface GUIdisplayable {
 	public boolean pickUp(Item item);
 
 	public void drop(Item item);
-
-	public ObservableList<Item> getPlayerInventory();
 
 	public int getTime();
 
@@ -46,14 +42,6 @@ public interface GUIdisplayable {
 	public ArrayList<String> getHighScoreList();
 
 	public int getHighScore();
-
-	public int getItemCapacity();
-
-	public int getCurrentItemAmount();
-
-	public int getMaxWeight();
-
-	public int getCurrentWeight();
 
 	public Player getPlayer();
 }

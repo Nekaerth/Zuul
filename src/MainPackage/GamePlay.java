@@ -86,11 +86,6 @@ public class GamePlay implements GUIdisplayable {
 	 *
 	 * @return an object of Room
 	 */
-	@Override
-	public Room getCurrentRoom() {
-		return player.getRoom();
-	}
-
 	/**
 	 * The getCurrentRoomInventory returns the inventory of the room the player is
 	 * in
@@ -204,12 +199,6 @@ public class GamePlay implements GUIdisplayable {
 	 *
 	 * @return will return a list of items
 	 */
-	@Override
-	public ObservableList<Item> getPlayerInventory() {
-		return player.getInventory().getAllItems();
-
-	}
-
 	/**
 	 * The getTime method is used to return the amount of time the player has
 	 *
@@ -228,7 +217,7 @@ public class GamePlay implements GUIdisplayable {
 			StringBuilder sb = new StringBuilder();
 			while (buffer.ready()) {
 				sb.append(buffer.readLine());
-                                sb.append("\n");
+				sb.append("\n");
 			}
 			return sb.toString();
 		} catch (FileNotFoundException ex) {
@@ -348,26 +337,6 @@ public class GamePlay implements GUIdisplayable {
 	@Override
 	public int getHighScore() {
 		return Highscore.calculateScore(player.getTime(), player.getBossKill());
-	}
-
-	@Override
-	public int getItemCapacity() {
-		return player.getCapacity();
-	}
-
-	@Override
-	public int getCurrentItemAmount() {
-		return player.getInventory().getItemCapacity();
-	}
-
-	@Override
-	public int getMaxWeight() {
-		return player.getMaxWeight();
-	}
-
-	@Override
-	public int getCurrentWeight() {
-		return player.getInventory().getItemWeight();
 	}
 
 	@Override

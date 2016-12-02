@@ -32,6 +32,7 @@ public class FXMLController implements Initializable {
 
 	private GamePlay game;
 	private Item currentItem = null;
+	private Player player;
 
 	//Main Pane
 	@FXML
@@ -253,8 +254,7 @@ public class FXMLController implements Initializable {
 		} else if (event.getSource() == topMenuInventoryButton) {
 			if (!bossScene.isVisible()) {
 				setAllButOneGameSceneInvisible(inventoryScene);
-				inventorySceneItemAmountLabel.setText("Item amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
-				inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
+				updateWeightAndItemAmount();
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
 			if (!bossScene.isVisible()) {
@@ -386,16 +386,22 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateWeightAndItemAmount() {
-		topMenuCapacityLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity() + "\nWeight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
-		inventorySceneItemAmountLabel.setText("Item Amount: " + game.getCurrentItemAmount() + "/" + game.getItemCapacity());
-		inventorySceneWeightLabel.setText("Weight: " + game.getCurrentWeight() + "/" + game.getMaxWeight());
+		int itemAmount = player.getCapacity();
+		int itemCapacity = player.getInventory().getItemCapacity();
+		int weight = player.getInventory().getItemWeight();
+		int Maxweight = player.getMaxWeight();
+
+		topMenuCapacityLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity + "\nWeight: " + weight + "/" + Maxweight);
+		inventorySceneItemAmountLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity);
+		inventorySceneWeightLabel.setText("Weight: " + weight + "/" + Maxweight);
 	}
 
 	private void startGame() {
 		game = new GamePlay();
 		game.constructWorld("testfile.dne");
+		player = game.getPlayer();
 		//updates the players inventory
-		inventorySceneItemList.setItems(game.getPlayerInventory());
+		inventorySceneItemList.setItems(player.getInventory().getAllItems());
 		//updates the current rooms inventory
 		roomSceneItemList.setItems(game.getCurrentRoomInventory());
 		//updates the time label (lav en general metode senere)
@@ -403,7 +409,7 @@ public class FXMLController implements Initializable {
 		//updates the capacity labels
 		updateWeightAndItemAmount();
 		//updates the current room label
-		bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
+		bottomMenuCurrentRoomLabel.setText(player.getRoom().getName());
 		//updates the info label
 		roomSceneInfoLabel.setText("");
 		//updates the current chosen item label in roomScene and in inventoryScene
@@ -414,14 +420,14 @@ public class FXMLController implements Initializable {
 	}
 
 	private void goRoom(String direction) {
-		Room nextRoom = game.getCurrentRoom().getExit(direction);
+		Room nextRoom = player.getRoom().getExit(direction);
 		if (nextRoom == null || nextRoom.isHidden()) {
 			roomSceneInfoLabel.setText("There is no door in this direction.");
 			return;
 		}
 		if (game.goRoom(direction)) {
 			roomSceneItemList.setItems(game.getCurrentRoomInventory());
-			bottomMenuCurrentRoomLabel.setText(game.getCurrentRoom().getName());
+			bottomMenuCurrentRoomLabel.setText(player.getRoom().getName());
 			updateTime();
 			if (game.isBossPresent()) {
 				bossFight();
@@ -445,7 +451,7 @@ public class FXMLController implements Initializable {
 
 		//finds which boss to fight
 		for (Boss boss : game.getBosses()) {
-			if (game.getCurrentRoom() == boss.getRoom()) {
+			if (player.getRoom() == boss.getRoom()) {
 				currentBoss = boss;
 				break;
 			}
@@ -457,7 +463,7 @@ public class FXMLController implements Initializable {
 		//updates the title in bossScene
 		bossSceneTitle.setText("You are fighting " + currentBoss.getName());
 		//updates counter attack buttons
-                
+
 		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(0).getName());
 		bossSceneAttackButton2.setText(game.getPlayer().getMoves().get(1).getName());
 		bossSceneAttackButton3.setText(game.getPlayer().getMoves().get(2).getName());
