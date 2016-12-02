@@ -33,6 +33,7 @@ public class FXMLController implements Initializable {
 	private GamePlay game;
 	private Item currentItem = null;
 	private Player player;
+	private Boss currentBoss;
 
 	//Main Pane
 	@FXML
@@ -323,7 +324,18 @@ public class FXMLController implements Initializable {
 
 	@FXML
 	private void handleBossButtons(ActionEvent event) {
-
+		if (event.getSource() == bossSceneAttackButton1) {
+			currentBoss.compareMoves(player.getMoves().get(0));
+		} else if (event.getSource() == bossSceneAttackButton2) {
+			currentBoss.compareMoves(player.getMoves().get(1));
+		} else if (event.getSource() == bossSceneAttackButton3) {
+			currentBoss.compareMoves(player.getMoves().get(2));
+		} else if (event.getSource() == bossSceneAttackButton4) {
+			currentBoss.compareMoves(player.getMoves().get(3));
+		}
+		//updates player and boss hitpoints
+		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
+		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
 	}
 
 	@FXML
@@ -386,8 +398,8 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateWeightAndItemAmount() {
-		int itemAmount = player.getCapacity();
-		int itemCapacity = player.getInventory().getItemCapacity();
+		int itemAmount = player.getInventory().getItemCapacity();
+		int itemCapacity = player.getCapacity();
 		int weight = player.getInventory().getItemWeight();
 		int Maxweight = player.getMaxWeight();
 
@@ -447,7 +459,6 @@ public class FXMLController implements Initializable {
 
 	private void bossFight() {
 		setAllButOneGameSceneInvisible(bossScene);
-		Boss currentBoss = null;
 
 		//finds which boss to fight
 		for (Boss boss : game.getBosses()) {
@@ -471,5 +482,8 @@ public class FXMLController implements Initializable {
 		//updates player and boss hitpoints
 		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
 		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
+		//the boss makes first attack
+		currentBoss.setCurrentMoveAtRandom();
+		bossSceneBossAttackLabel.setText(currentBoss.getName() + " uses: " + currentBoss.getCurrentMove().getName());
 	}
 }

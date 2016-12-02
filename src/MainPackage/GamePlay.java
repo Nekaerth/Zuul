@@ -243,21 +243,6 @@ public class GamePlay implements GUIdisplayable {
 
 	}
 
-	@Override
-	public boolean isBossPresent() {
-		for (Boss boss : bosses) {
-			if (player.getRoom() == boss.getRoom()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public ArrayList<Boss> getBosses() {
-		return bosses;
-	}
-
 	private boolean useKey(Item item) {
 		Key key = (Key) item;
 		Room roomToUnlock = new Room("", "", false, false, false, "", false);
@@ -347,5 +332,27 @@ public class GamePlay implements GUIdisplayable {
 	@Override
 	public Player getPlayer() {
 		return player;
+	}
+
+	@Override
+	public boolean isBossPresent() {
+		for (Boss boss : bosses) {
+			if (player.getRoom() == boss.getRoom()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public ArrayList<Boss> getBosses() {
+		return bosses;
+	}
+
+	@Override
+	public void compareMoves(Boss boss, Move bossMove, Move playerMove) {
+		//TODO
+		player.subtractHitpoint(5);
+		boss.subtractHitpoint(10);
 	}
 }
