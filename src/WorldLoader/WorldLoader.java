@@ -8,7 +8,9 @@ package WorldLoader;
 import Items.*;
 import MainPackage.*;
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class WorldLoader {
@@ -70,7 +72,8 @@ public class WorldLoader {
                 }
             }
 
-        } catch (Exception e) {
+        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
         }
         ArrayList<Room> returnRooms = connectWorld();
         return returnRooms;
@@ -133,7 +136,6 @@ public class WorldLoader {
         }
         return true;
     }
-
 
     private ArrayList<Room> connectWorld() {
         Room mainRoom = null, secondRoom = null;
