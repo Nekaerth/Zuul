@@ -35,7 +35,7 @@ public interface GUIdisplayable {
 
 	public void saveHighScore(String name, int highScore);
 
-	public ArrayList<String> getHighScoreList();
+	public ObservableList<String> getHighScoreList();
 
 	public int getHighScore();
 

@@ -5,10 +5,12 @@
  */
 package MainPackage;
 
+import HighscoreLoader.Highscore;
 import Items.Item;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,7 +32,7 @@ import javafx.stage.Stage;
  */
 public class FXMLController implements Initializable {
 
-	private GamePlay game;
+	private GUIdisplayable game;
 	private Item currentItem = null;
 	private Player player;
 	private Boss currentBoss;
@@ -178,7 +180,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label highScoreSceneTitle;
 	@FXML
-	private ListView<?> highScoreSceneScoreList;
+	private ListView<String> highScoreSceneScoreList;
 	@FXML
 	private Button highScoreSceneBackButton;
 
@@ -209,7 +211,8 @@ public class FXMLController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-
+		game = new GamePlay();
+		highScoreSceneScoreList.setItems(game.getHighScoreList());
 	}
 
 	@FXML
@@ -409,7 +412,6 @@ public class FXMLController implements Initializable {
 	}
 
 	private void startGame() {
-		game = new GamePlay();
 		game.constructWorld("testfile.dne");
 		player = game.getPlayer();
 		//updates the players inventory

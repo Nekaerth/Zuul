@@ -6,10 +6,16 @@
 package HighscoreLoader;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 /**
  *
@@ -17,41 +23,48 @@ import java.util.Scanner;
  */
 public class Highscore {
 
-	public static ArrayList<String> getHighscoreList() {
-		ArrayList<String> scores = new ArrayList<>();
+	ObservableList<String> highscore;
+	public Highscore(){
+		highscore = FXCollections.observableArrayList();
+	}
+	
+	public ObservableList<String> getHighscoreList() {
 		try {
 
 			Scanner scannerFile = new Scanner(new File("highscore.dne"));
 			while (scannerFile.hasNext()) {
-				scores.add(scannerFile.nextLine());
+				highscore.add(scannerFile.nextLine());
 			}
 
-			scores = sortHighscore(scores);
+			sortHighscore();
 
-		} catch (Exception e) {
-			System.out.println("The method getHighscoreList has thrown an exception. " + e);
+		} catch (FileNotFoundException ex) { 
+			System.out.println(ex);
 		}
-		return scores;
+		return highscore;
 	}
 
-	public static ArrayList<String> sortHighscore(ArrayList<String> scores) {
+	public ObservableList<String> sortHighscore() {
 
-		Collections.sort(scores, (String s1, String s2) -> {
+		Collections.sort(highscore, (String s1, String s2) -> {
 			int score1 = Integer.parseInt(s1.split("\\s")[1]); // score in s1
 			int score2 = Integer.parseInt(s2.split("\\s")[1]); // score in s2
 			return score2 - score1;
 		});
-		return scores;
+		return highscore;
 	}
 
-	public static void saveHighscore(String highscore) {
+	public void saveHighscore(String highscore) {
+		this.highscore.add(highscore);
+		sortHighscore();
 
-		try (FileWriter highscoreFile = new FileWriter("highscore.dne", true)) {
+ 		try (FileWriter highscoreFile = new FileWriter("highscore.dne", true)) {
 			highscoreFile.write(highscore + System.lineSeparator());
 			highscoreFile.flush();
-		} catch (Exception e) {
-			System.out.println("The method saveHighscore has thrown an exception. " + e);
+		} catch (IOException ex) {
+			System.out.println(ex);
 		}
+
 	}
 
 	public static int calculateScore(int time, int bossKill) {
