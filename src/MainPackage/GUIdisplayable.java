@@ -17,8 +17,6 @@ public interface GUIdisplayable {
 
 	public boolean goRoom(String direction);
 
-	public Room getCurrentRoom();
-
 	public ArrayList<NPC> getAllNpc();
 
 	public ObservableList<Item> getCurrentRoomInventory();
@@ -29,31 +27,23 @@ public interface GUIdisplayable {
 
 	public void drop(Item item);
 
-	public ObservableList<Item> getPlayerInventory();
-
 	public int getTime();
 
 	public String getHelpDescription();
 
 	public void constructWorld(String fileToRead);
 
+	public void saveHighScore(String name, int highScore);
+
+	public ObservableList<String> getHighScoreList();
+
+	public int getHighScore();
+
+	public Player getPlayer();
+
 	public boolean isBossPresent();
 
 	public ArrayList<Boss> getBosses();
 
-	public void saveHighScore(String name, int highScore);
-
-	public ArrayList<String> getHighScoreList();
-
-	public int getHighScore();
-
-	public int getItemCapacity();
-
-	public int getCurrentItemAmount();
-
-	public int getMaxWeight();
-
-	public int getCurrentWeight();
-
-	public Player getPlayer();
+	public void compareMoves(Boss boss, Move bossMove, Move playerMove);
 }

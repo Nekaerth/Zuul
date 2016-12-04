@@ -35,23 +35,21 @@ public class Boss extends Person {
 		return this.name;
 	}
 
-	/**
-	 * Returns an move at random. It is be used at boss fight.
-	 *
-	 * @return An move at random.
-	 */
-	public Move getRandomMove() {
+	public void setCurrentMoveAtRandom() {
 		int randomNumber = (int) (getMoves().size() * Math.random()); //Creates a random number between 0 and x, where x is the number of available moves
 		int count = 0;
 		//Goes through all moves
 		for (Move move : getMoves()) {
 			//If randomNumber is equal to the current move index
 			if (randomNumber == count) {
-				return move; //Return current move
+				this.setCurrentMove(move);
 			}
 			count++;
 		}
-		return null;
+	}
+
+	public void compareMoves(Move playerMove) {
+
 	}
 
 	/**
@@ -61,6 +59,7 @@ public class Boss extends Person {
 	 * @param player the player that fights the boss.
 	 * @return returns a boolean of whether or not the player has won.
 	 */
+	/*
 	public boolean bossFight(Player player) {
 		//This loop runs until the player or the boss has no hipoints left. In each iteration the boss attacks once and the player defence once.
 		while (player.getHitpoint() > 0 && getHitpoint() > 0) {
@@ -107,7 +106,7 @@ public class Boss extends Person {
 			return false; //Returns false because you didn't die.
 		}
 	}
-
+	 */
 	/**
 	 * @return the bossType
 	 */

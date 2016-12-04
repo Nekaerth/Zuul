@@ -29,11 +29,21 @@ import javafx.collections.ObservableList;
 public class GamePlay implements GUIdisplayable {
 
 	private Player player;
-	private ArrayList<NPC> npc = new ArrayList<>();
-	private ArrayList<Boss> bosses = new ArrayList<>();
-	private ArrayList<Room> rooms = new ArrayList<>(); // initializes the rooms available
-	private ArrayList<Room> roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
-	private ArrayList<Room> visitedRooms = new ArrayList<>();
+	private ArrayList<NPC> npc;
+	private ArrayList<Boss> bosses;
+	private ArrayList<Room> rooms; // initializes the rooms available
+	private ArrayList<Room> roomNumber; //An arraylist of rooms that contains a hidden number
+	private ArrayList<Room> visitedRooms;
+	private Highscore highscore;
+	
+	public GamePlay(){
+		this.highscore = new Highscore();
+		this.bosses = new ArrayList<>();
+		this.rooms = new ArrayList<>(); // initializes the rooms available
+		this.roomNumber = new ArrayList<>(); //An arraylist of rooms that contains a hidden number
+		this.visitedRooms = new ArrayList<>();
+		this.npc = new ArrayList<>();
+	}
 
 	/**
 	 * The goRoom method is used to change the room the player is in based on the
@@ -86,11 +96,6 @@ public class GamePlay implements GUIdisplayable {
 	 *
 	 * @return an object of Room
 	 */
-	@Override
-	public Room getCurrentRoom() {
-		return player.getRoom();
-	}
-
 	/**
 	 * The getCurrentRoomInventory returns the inventory of the room the player is
 	 * in
@@ -204,12 +209,6 @@ public class GamePlay implements GUIdisplayable {
 	 *
 	 * @return will return a list of items
 	 */
-	@Override
-	public ObservableList<Item> getPlayerInventory() {
-		return player.getInventory().getAllItems();
-
-	}
-
 	/**
 	 * The getTime method is used to return the amount of time the player has
 	 *
@@ -228,7 +227,7 @@ public class GamePlay implements GUIdisplayable {
 			StringBuilder sb = new StringBuilder();
 			while (buffer.ready()) {
 				sb.append(buffer.readLine());
-                                sb.append("\n");
+				sb.append("\n");
 			}
 			return sb.toString();
 		} catch (FileNotFoundException ex) {
@@ -252,21 +251,6 @@ public class GamePlay implements GUIdisplayable {
 		moves.add(new Move(Attack.JUMP, 0));
 		moves.add(new Move(Attack.SIDESTEP, 0));
 
-	}
-
-	@Override
-	public boolean isBossPresent() {
-		for (Boss boss : bosses) {
-			if (player.getRoom() == boss.getRoom()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
-	public ArrayList<Boss> getBosses() {
-		return bosses;
 	}
 
 	private boolean useKey(Item item) {
@@ -331,43 +315,22 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	@Override
-	public void saveHighScore(String name, int highScore
-	) {
+	public void saveHighScore(String name, int highScore) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(name);
 		sb.append(" ");
 		sb.append(highScore);
-		Highscore.saveHighscore(sb.toString());
+		highscore.saveHighscore(sb.toString());
 	}
 
 	@Override
-	public ArrayList<String> getHighScoreList() {
-		return Highscore.getHighscoreList();
+	public ObservableList<String> getHighScoreList() {
+		return highscore.getHighscoreList();
 	}
 
 	@Override
 	public int getHighScore() {
 		return Highscore.calculateScore(player.getTime(), player.getBossKill());
-	}
-
-	@Override
-	public int getItemCapacity() {
-		return player.getCapacity();
-	}
-
-	@Override
-	public int getCurrentItemAmount() {
-		return player.getInventory().getItemCapacity();
-	}
-
-	@Override
-	public int getMaxWeight() {
-		return player.getMaxWeight();
-	}
-
-	@Override
-	public int getCurrentWeight() {
-		return player.getInventory().getItemWeight();
 	}
 
 	@Override
@@ -378,5 +341,27 @@ public class GamePlay implements GUIdisplayable {
 	@Override
 	public Player getPlayer() {
 		return player;
+	}
+
+	@Override
+	public boolean isBossPresent() {
+		for (Boss boss : bosses) {
+			if (player.getRoom() == boss.getRoom()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public ArrayList<Boss> getBosses() {
+		return bosses;
+	}
+
+	@Override
+	public void compareMoves(Boss boss, Move bossMove, Move playerMove) {
+		//TODO
+		player.subtractHitpoint(5);
+		boss.subtractHitpoint(10);
 	}
 }
