@@ -54,27 +54,14 @@ public class WorldLoader {
 
                 // We use a switch-case to act on the header in the file
                 // The header being what is in the []
-                switch (evaluateString.toLowerCase()) {
-                    case "[room]": // If the header is [room] we set the boolean createRoom 
-                        // to true and createItem to false
-                        System.out.println("room");
-                        shouldCreateRoom = true;
-                        shouldCreateItem = false;
-                        break;
-                    case "[item]":// If the header is [item] we set the boolean createRoom 
-                        // to false and createItem to true
-                        System.out.println("ITEM");
-                        shouldCreateRoom = false;
-                        shouldCreateItem = true;
-                        break;
-                    default: // All switch-case contructions must have a default option
-                        break;
-                }
+                if (evaluateString.toLowerCase().equals("[room]"))
+                    shouldCreateRoom = true;
+                else if (evaluateString.toLowerCase().equals("[item]"))
+                    shouldCreateItem = true;
             }
-
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
-        }
+        } 
         ArrayList<Room> returnRooms = connectWorld();
         return returnRooms;
     }

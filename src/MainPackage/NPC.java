@@ -25,8 +25,7 @@ public class NPC {
 			ArrayList<String> directions = currentRoom.getListOfExitDirections();
 			int indexOfRandomRoom = (int)(Math.random()*directions.size());
 			Room nextRoom = currentRoom.getExit(directions.get(indexOfRandomRoom));
-			this.setCurrentRoom(nextRoom);
-			
+			this.setCurrentRoom(nextRoom);			
 		}
 	}
 
