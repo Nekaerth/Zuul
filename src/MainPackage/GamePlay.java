@@ -253,11 +253,11 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	private boolean useKey(Item item) {
-		Key key = (Key) item;
+		Key key = (Key) item;	
 		Room roomToUnlock = new Room("", "", false, false, false, "", false);
-		for (Room r : rooms) {
-			if (key.getNameOfRoomThatFitsThisKey().toLowerCase().equals(r.getName().toLowerCase())) {
-				roomToUnlock = r;
+		for (String r : player.getRoom().getListOfExitDirections()) {
+			roomToUnlock = player.getRoom().getExit(r);
+			if (key.getNameOfRoomThatFitsThisKey().equalsIgnoreCase(roomToUnlock.getName())) {
 				if (roomToUnlock.isLocked()) {
 					roomToUnlock.unlock();
 					player.getInventory().removeItem(item);
