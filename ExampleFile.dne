@@ -1,0 +1,63 @@
+[room]
+id=1
+name=
+description=
+locked=true/false
+escapeRoom=true/false
+hasEscapeCode=true/false
+hidden=true/false
+linkedID=id;direction:id;direction:id;direction:id;direction (max 4)
+[room]
+id=2
+name=ExampleRoom
+description=This is a description of a room
+locked=false
+escapeRoom=false
+hasEscapeCode=true
+hidden=false
+linkedID=1;south:3;north:4;east:5;west
+[item]
+type=key/weapon/blueprint/boltcutter/misc/flashlight/timeincreasingitem
+roomID=id of a room
+name=
+
+For everything but misc:
+weight=integer
+capacity=integer
+pickup=true/false
+useable=true/false
+
+For keys only:
+roomToUnlock=office
+
+For flashlights only:
+charges=integer
+
+For weapons only:
+damage=integer
+weaponType=melee/ranged
+
+For timeincreasingitems only:
+time=integer
+
+[item]
+id=101
+type=key
+roomID=1
+weight=1
+capacity=1
+pickup=true
+useable=true
+roomToUnlock=storage
+name=examplekey
+
+[boss]
+roomId=id of a room
+hitpoints=integer
+bossType=bosstype1/bosstype2
+name=
+[boss]
+roomId=4
+hitpoints=100
+bossType=bosstype2
+name=boss2
