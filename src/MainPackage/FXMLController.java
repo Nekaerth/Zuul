@@ -144,6 +144,8 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Button bossSceneAttackButton4;
 	@FXML
+	private Label bossSceneInfoLabel;
+	@FXML
 	private Label bossScenePlayerHitpointLabel;
 	@FXML
 	private Label bossSceneBossHitpointLabel;
@@ -218,7 +220,6 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleStartMenuButtons(ActionEvent event) {
 		if (event.getSource() == startMenuStartButton) {
-			startGame();
 			setAllButOneMainSceneInvisible(difficultyScene);
 		} else if (event.getSource() == startMenuHighScoreButton) {
 			setAllButOneMainSceneInvisible(highScoreScene);
@@ -234,14 +235,17 @@ public class FXMLController implements Initializable {
 			bottomMenuLevelLabel.setText("Level: Easy");
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
+			startGame("testfile.dne");
 		} else if (event.getSource() == difficultySceneMediumButton) {
 			bottomMenuLevelLabel.setText("Level: Medium");
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
+			startGame("scenario2.dne");
 		} else if (event.getSource() == difficultySceneHardButton) {
 			bottomMenuLevelLabel.setText("Level: Hard");
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
+			startGame("scenario3.dne");
 		} else if (event.getSource() == difficultySceneBackButton) {
 			setAllButOneMainSceneInvisible(startMenu);
 		}
@@ -271,9 +275,9 @@ public class FXMLController implements Initializable {
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
 			if (currentItem != null) {
-				if (!game.use(currentItem)) {
-					roomSceneInfoLabel.setText("You can't use " + currentItem.getName() + " here!");
-				}
+				use(currentItem);
+			} else {
+				roomSceneInfoLabel.setText("");
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomScenePickUpButton) {
@@ -305,15 +309,19 @@ public class FXMLController implements Initializable {
 	private void handleInventoryButtons(ActionEvent event) {
 		if (event.getSource() == inventorySceneDropButton) {
 			Item selectedItem = inventorySceneItemList.getSelectionModel().getSelectedItem();
+			//Drops only item, if a item is selected
 			if (selectedItem != null) {
 				game.drop(selectedItem);
+			}
+			//The two CurrentItemLabel is updated, if you drop the item that you have chosen as your current item
+			if (selectedItem == currentItem) {
+				updateCurrentItemLabel("None");
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == inventorySceneChooseButton) {
 			currentItem = inventorySceneItemList.getSelectionModel().getSelectedItem();
 			if (currentItem != null) {
-				roomSceneCurrentItemLabel.setText("Current Item: " + currentItem.getName());
-				inventorySceneCurrentItemLabel.setText("Current Item: " + currentItem.getName());
+				updateCurrentItemLabel(currentItem.getName());
 			}
 		} else if (event.getSource() == inventorySceneCloseButton) {
 			setAllButOneGameSceneInvisible(roomScene);
@@ -397,8 +405,8 @@ public class FXMLController implements Initializable {
 		pane.setVisible(true);
 	}
 
-	private void startGame() {
-		game.constructWorld("testfile.dne");
+	private void startGame(String fileName) {
+		game.constructWorld(fileName);
 		player = game.getPlayer();
 		//updates the players inventory
 		inventorySceneItemList.setItems(player.getInventory().getAllItems());
@@ -438,6 +446,30 @@ public class FXMLController implements Initializable {
 		inventorySceneWeightLabel.setText("Weight: " + weight + "/" + Maxweight);
 	}
 
+	private void use(Item item) {
+		if (!game.use(item)) {
+			roomSceneInfoLabel.setText("You can't use " + currentItem.getName() + " here!");
+			return;
+		}
+		switch (item.getItemType()) {
+			case KEY:
+				roomSceneInfoLabel.setText("You have unlocked a door!");
+				updateCurrentItemLabel("None");
+				break;
+			case FLASHLIGHT:
+				//TODO
+				break;
+			case BLUEPRINT:
+				//TODO
+				break;
+			case BOLTCUTTER:
+				//TODO
+				break;
+			default:
+				break;
+		}
+	}
+
 	private void goRoom(String direction) {
 		Room nextRoom = player.getRoom().getExit(direction);
 		//Checks if there is a door in that direction
@@ -459,6 +491,11 @@ public class FXMLController implements Initializable {
 		} else {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");
 		}
+	}
+
+	private void updateCurrentItemLabel(String itemName) {
+		roomSceneCurrentItemLabel.setText("Current Item: " + itemName);
+		inventorySceneCurrentItemLabel.setText("Current Item: " + itemName);
 	}
 
 	private void beginBossFight() {
@@ -493,14 +530,18 @@ public class FXMLController implements Initializable {
 		player.setCurrentMove(playerMove);
 		//Executes an attack and checks who hits who
 		if (currentBoss.playerHitsBoss(player)) {
-			//TODO inform that the player won the attack(remember to mention time left/used)
+			//Updates the info label
+			bossSceneInfoLabel.setText("You countered " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
+							+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
 		} else {
-			//TODO inform that the boss won the attack
+			//Updates the info label
+			bossSceneInfoLabel.setText("You failed to counter " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
+							+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
 		}
 		//The bosses next move is chosen
 		currentBoss.setCurrentMoveAtRandom();
 		bossSceneBossAttackLabel.setText(currentBoss.getName() + " uses: " + currentBoss.getCurrentMove().getName());
-		//updates player and boss hitpoints
+		//Updates player and boss hitpoints
 		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
 		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
 		//Checks if the boss is defeated

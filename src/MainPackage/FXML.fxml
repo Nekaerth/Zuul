@@ -96,6 +96,11 @@
 						<Button fx:id="bossSceneAttackButton2" layoutX="370.0" layoutY="320.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack2" />
 						<Button fx:id="bossSceneAttackButton3" layoutX="150.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack3" />
 						<Button fx:id="bossSceneAttackButton4" layoutX="370.0" layoutY="370.0" mnemonicParsing="false" onAction="#handleBossButtons" prefHeight="40.0" prefWidth="200.0" text="Attack4" />
+						<Label fx:id="bossSceneInfoLabel" alignment="CENTER" layoutY="440.0" prefWidth="720.0" text="">
+							<font>
+								<Font name="System Bold" size="15.0" />
+							</font>
+						</Label>
 						<Label fx:id="bossScenePlayerHitpointLabel" alignment="CENTER" layoutY="600.0" prefWidth="360.0" text="Your Hitpoints: 0" />
 						<Label fx:id="bossSceneBossHitpointLabel" alignment="CENTER" layoutX="360.0" layoutY="600.0" prefWidth="360.0" text="bossName Hitpoints: 0" />
 					</children>
