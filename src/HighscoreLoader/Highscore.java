@@ -37,7 +37,7 @@ public class Highscore {
 			sortHighscore();
 
 		} catch (FileNotFoundException ex) {
-			System.out.println("FileNotFoundException in getHighscoreList method in Highscore");
+			System.out.println("FileNotFoundException in getHighscoreList method in Highscore" + ex);
 		}
 		return highscore;
 	}
@@ -60,7 +60,7 @@ public class Highscore {
 			highscoreFile.write(highscore + System.lineSeparator());
 			highscoreFile.flush();
 		} catch (IOException ex) {
-			System.out.println("IOException in method saveHighscore() in Highscore");
+			System.out.println("IOException in method saveHighscore() in Highscore" + ex);
 		}
 
 	}

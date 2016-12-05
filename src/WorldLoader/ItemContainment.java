@@ -30,20 +30,6 @@ public class ItemContainment {
 	private String roomBoltcutterCanBeUsedIn;
 
 	/**
-	 * @return the id
-	 */
-	public String getId() {
-		return id;
-	}
-
-	/**
-	 * @param id the id to set
-	 */
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	/**
 	 * @return the type
 	 */
 	public ItemType getType() {
@@ -115,21 +101,7 @@ public class ItemContainment {
 	 * @param pickup the pickup to set
 	 */
 	public void setPickup(String pickup) {
-		if (pickup.toLowerCase().equals("true")) {
-			this.pickup = true;
-		} else {
-			this.pickup = false;
-		}
-//		switch (pickup.toLowerCase()) {
-//			case "true":
-//				this.pickup = true;
-//				break;
-//			case "false":
-//				this.pickup = false;
-//				break;
-//			default:
-//				System.out.println("Error in pickup in");
-//		}
+		this.pickup =pickup.equalsIgnoreCase("true");		
 	}
 
 	/**
@@ -143,22 +115,7 @@ public class ItemContainment {
 	 * @param useable the useable to set
 	 */
 	public void setUseable(String useable) {
-		if (useable.toLowerCase().equals("true")) {
-			this.useable = true;
-		} else {
-			this.useable = false;
-		}
-//		switch (useable.toLowerCase()) {
-//			case "true":
-//				this.useable = true;
-//				break;
-//			case "false":
-//				this.useable = false;
-//				break;
-//			default:
-//				System.out.println("Error");
-//
-//		}
+		this.useable = useable.equalsIgnoreCase("true");			
 	}
 
 	/**

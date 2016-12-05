@@ -36,9 +36,7 @@ public class RoomSaver {
 				r.getInventory().putItem(item);
 				return;
 			}
-
 		}
-		System.out.println("Item not added, " + item.getName());
 	}
 
 	public ArrayList<Room> getAllRooms() {

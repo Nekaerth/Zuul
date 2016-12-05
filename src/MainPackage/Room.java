@@ -4,8 +4,6 @@ import Items.Inventory;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
-import java.util.Scanner;
-
 /**
  * The Room class is used to create rooms and methods that can describe the
  * rooms. The class consists of X instance variable and X instance methods
@@ -14,9 +12,8 @@ import java.util.Scanner;
  */
 public class Room {
 
-	private final String description;
 	private String name;
-	private final HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
+	private HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	private Inventory inventory;
 	private boolean escapeCode, escapableRoom, locked, hidden;
 	private int number;
@@ -36,8 +33,7 @@ public class Room {
 	 * @param name
 	 * @param hidden
 	 */
-	public Room(String id, String description, boolean numberRoom, boolean lock, boolean escapeRoom, String name, boolean hidden) { //Constructor der tager en string der beskriver rummet
-		this.description = description; //this.desription er variablen i Classen Room.
+	public Room(String id, boolean numberRoom, boolean lock, boolean escapeRoom, String name, boolean hidden) { //Constructor der tager en string der beskriver rummet
 		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
 		this.escapableRoom = escapeRoom;
 		this.id = id;
@@ -60,26 +56,6 @@ public class Room {
 	 */
 	public void setExit(String direction, Room neighbor) {
 		exits.put(direction, neighbor);
-	}
-
-	/**
-	 * This method returns a string of the description of the room and the pre fix
-	 * "you are"
-	 *
-	 * @return a string with the description
-	 */
-	public String getShortDescription() {
-		return "You are " + description;
-	}
-
-	/**
-	 * This method returns a string of the description of the room and the pre fix
-	 * "you are" the string also contains all the exits out of the room
-	 *
-	 * @return a string with a description and exits
-	 */
-	public String getLongDescription() {
-		return "You are " + description + "\n" + getExitString(); //Giver en længere beskrivelse af rummet og giver hvilke exits der findes
 	}
 
 	/**

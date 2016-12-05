@@ -13,7 +13,6 @@ class RoomContainment {
 
 	private String id;
 	private String name;
-	private String description;
 	private boolean locked;
 	private boolean escapeRoom;
 	private boolean containsHiddenNumber;
@@ -49,20 +48,6 @@ class RoomContainment {
 	}
 
 	/**
-	 * @return the description
-	 */
-	public String getDescription() {
-		return description;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	/**
 	 * @return the locked
 	 */
 	public boolean getLocked() {
@@ -73,12 +58,8 @@ class RoomContainment {
 	 * @param locked the locked to set
 	 */
 	public void setLocked(String locked) {
-		if (locked.toLowerCase().equals("true")) {
-			this.locked = true;
-		} else {
-			this.locked = false;
-		}
-	}
+            this.locked = locked.equalsIgnoreCase("true");
+        }
 
 	/**
 	 * @return the escapeRoom
@@ -91,11 +72,7 @@ class RoomContainment {
 	 * @param escapeRoom the escapeRoom to set
 	 */
 	public void setEscapeRoom(String escapeRoom) {
-		if (escapeRoom.toLowerCase().equals("true")) {
-			this.escapeRoom = true;
-		} else {
-			this.escapeRoom = false;
-		}
+            this.escapeRoom = escapeRoom.equalsIgnoreCase("true");
 	}
 
 	/**
@@ -108,12 +85,8 @@ class RoomContainment {
 	/**
 	 * @param numberRoom the numberRoom to set
 	 */
-	public void setContainsHiddenNumber(String numberRoom) {
-		if (numberRoom.toLowerCase().equals("true")) {
-			this.containsHiddenNumber = true;
-		} else {
-			this.containsHiddenNumber = false;
-		}
+	public void setContainsHiddenNumber(String containsHiddenNumber) {
+            this.containsHiddenNumber = containsHiddenNumber.equalsIgnoreCase("true");
 	}
 
 	/**
@@ -135,16 +108,6 @@ class RoomContainment {
 	}
 
 	public void setHidden(String hidden) {
-		switch (hidden.toLowerCase()) {
-			case "true":
-				this.hidden = true;
-				break;
-			case "false":
-				this.hidden = false;
-				break;
-			default:
-				System.out.println("Error in hidden boolean in creating worlds");
-		}
+            this.hidden = hidden.equalsIgnoreCase("true");		
 	}
-
 }
