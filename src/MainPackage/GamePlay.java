@@ -12,6 +12,7 @@ import Items.ItemType;
 import Items.Key;
 import Items.TimeIncreasingItem;
 import Items.Weapon;
+import Items.WeaponType;
 import WorldLoader.WorldLoader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -246,11 +247,10 @@ public class GamePlay implements GUIdisplayable {
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		npc.add(new NPC(rooms.get(rooms.size() - 1)));
 		ArrayList<Move> moves = this.player.getMoves();
-		moves.add(new Move(Attack.STAB, 10));
-		moves.add(new Move(Attack.DUCK, 0));
-		moves.add(new Move(Attack.JUMP, 0));
-		moves.add(new Move(Attack.SIDESTEP, 0));
-
+		moves.add(new Move(10, Attack.STAB, WeaponType.RANGED));
+		moves.add(new Move(0, Attack.DUCK, WeaponType.MELEE));
+		moves.add(new Move(0, Attack.JUMP, WeaponType.MELEE));
+		moves.add(new Move(0, Attack.SIDESTEP, WeaponType.MELEE));
 	}
 
 	private boolean useKey(Item item) {
@@ -330,7 +330,7 @@ public class GamePlay implements GUIdisplayable {
 
 	@Override
 	public int getHighScore() {
-		return Highscore.calculateScore(player.getTime(), player.getBossKill());
+		return Highscore.calculateScore(player.getTime(), player.getAmountOfBossKill());
 	}
 
 	@Override

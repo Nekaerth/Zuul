@@ -1,5 +1,7 @@
 package MainPackage;
 
+import Items.WeaponType;
+
 /**
  * This class represent an Move, which can be used both for the player and the
  * boss. It contains two Attack attributes; one to represent what kind of move
@@ -13,31 +15,35 @@ public class Move {
 	private Attack attack = null; //An enum which represent what kind of move it is
 	private Attack counterAttack = null; //An enum which tells what attack can counter this move
 	private int damage; //How much damage the move deals
+	private WeaponType weaponType;
 
 	/**
 	 * This constructor returns an Move-object which is meant for the player,
 	 * because it does not contain a counterAttack.
 	 *
-	 * @param attack Sets the type of attack.
-	 * @param damage Sets the attack damage.
+	 * @param damage The attack damage.
+	 * @param attack The type of attack.
+	 * @param weaponType
 	 */
-	public Move(Attack attack, int damage) {
-		this.attack = attack;
+	public Move(int damage, Attack attack, WeaponType weaponType) {
 		this.damage = damage;
+		this.attack = attack;
+		this.weaponType = weaponType;
 	}
 
 	/**
 	 * This constructor returns an Attack-object which is meant for the boss,
 	 * because it does contain a counterMove.
 	 *
-	 * @param attack Sets the type of attack.
-	 * @param counterAttack Sets the type of counter attack.
-	 * @param damage Sets the move damage.
+	 * @param damage The move damage.
+	 * @param attack The type of attack.
+	 * @param counterAttack The type of counter attack.
+	 * @param weaponType
 	 */
-	public Move(Attack attack, Attack counterAttack, int damage) {
+	public Move(int damage, Attack attack, Attack counterAttack) {
+		this.damage = damage;
 		this.attack = attack;
 		this.counterAttack = counterAttack;
-		this.damage = damage;
 	}
 
 	/**

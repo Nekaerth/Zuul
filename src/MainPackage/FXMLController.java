@@ -397,17 +397,6 @@ public class FXMLController implements Initializable {
 		pane.setVisible(true);
 	}
 
-	private void updateWeightAndItemAmount() {
-		int itemAmount = player.getInventory().getItemCapacity();
-		int itemCapacity = player.getItemCapacity();
-		int weight = player.getInventory().getItemWeight();
-		int Maxweight = player.getMaxWeight();
-
-		topMenuCapacityLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity + "\nWeight: " + weight + "/" + Maxweight);
-		inventorySceneItemAmountLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity);
-		inventorySceneWeightLabel.setText("Weight: " + weight + "/" + Maxweight);
-	}
-
 	private void startGame() {
 		game.constructWorld("testfile.dne");
 		player = game.getPlayer();
@@ -430,6 +419,25 @@ public class FXMLController implements Initializable {
 		helpSceneTextArea.setText(game.getHelpDescription());
 	}
 
+	private void updateTime() {
+		if (game.getTime() % 60 < 10) {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":0" + game.getTime() % 60);
+		} else {
+			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
+		}
+	}
+
+	private void updateWeightAndItemAmount() {
+		int itemAmount = player.getInventory().getItemCapacity();
+		int itemCapacity = player.getItemCapacity();
+		int weight = player.getInventory().getItemWeight();
+		int Maxweight = player.getMaxWeight();
+
+		topMenuCapacityLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity + "\nWeight: " + weight + "/" + Maxweight);
+		inventorySceneItemAmountLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity);
+		inventorySceneWeightLabel.setText("Weight: " + weight + "/" + Maxweight);
+	}
+
 	private void goRoom(String direction) {
 		Room nextRoom = player.getRoom().getExit(direction);
 		//Checks if there is a door in that direction
@@ -450,14 +458,6 @@ public class FXMLController implements Initializable {
 			}
 		} else {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");
-		}
-	}
-
-	private void updateTime() {
-		if (game.getTime() % 60 < 10) {
-			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":0" + game.getTime() % 60);
-		} else {
-			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
 		}
 	}
 
@@ -505,7 +505,7 @@ public class FXMLController implements Initializable {
 		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
 		//Checks if the boss is defeated
 		if (currentBoss.getHitpoint() == 0) {
-			player.addBossKill(1);
+			player.addOneBossKill();
 			player.getRoom().getInventory().putInventory(currentBoss.getInventory());
 			currentBoss.setRoom(null);
 			setAllButOneGameSceneInvisible(roomScene);

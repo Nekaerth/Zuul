@@ -329,23 +329,23 @@ public class WorldLoader {
 
 	private void setUpBoss1(Boss boss) {
 		ArrayList<Move> moves = boss.getMoves();
-		moves.add(new Move(Attack.LASH, Attack.JUMP, 10));
-		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 10));
-		moves.add(new Move(Attack.PUNCH, Attack.STAB, 10));
+		moves.add(new Move(10, Attack.LASH, Attack.JUMP));
+		moves.add(new Move(10, Attack.CHARGE, Attack.SIDESTEP));
+		moves.add(new Move(10, Attack.PUNCH, Attack.STAB));
 		boss.getInventory().putItem(new Weapon(true, "Glock-18", false, 5, 1, 25, WeaponType.RANGED));
 	}
 
 	private void setUpBoss2(Boss boss) {
 		ArrayList<Move> moves = boss.getMoves();
-		moves.add(new Move(Attack.LASH, Attack.JUMP, 15));
-		moves.add(new Move(Attack.CHARGE, Attack.SIDESTEP, 15));
-		moves.add(new Move(Attack.PUNCH, Attack.STAB, 15));
-		moves.add(new Move(Attack.SHOOT, Attack.DUCK, 15));
-		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 5));
+		moves.add(new Move(15, Attack.LASH, Attack.JUMP));
+		moves.add(new Move(15, Attack.CHARGE, Attack.SIDESTEP));
+		moves.add(new Move(15, Attack.PUNCH, Attack.STAB));
+		moves.add(new Move(15, Attack.SHOOT, Attack.DUCK));
+		moves.add(new Move(5, Attack.LAUGH, Attack.SHOOT));
 	}
 
 	private void setUpDefaultBoss(Boss boss) {
 		ArrayList<Move> moves = boss.getMoves();
-		moves.add(new Move(Attack.LAUGH, Attack.SHOOT, 100));
+		moves.add(new Move(100, Attack.LAUGH, Attack.SHOOT));
 	}
 }

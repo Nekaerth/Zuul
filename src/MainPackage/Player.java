@@ -18,7 +18,7 @@ public class Player extends Person {
 	private int time;
 	private final int itemCapacity; //Is the maximum amount of items the player must hold.
 	private final int maxWeight; //Is the maximum weight that the players items must
-	private int bossKill;
+	private int amountOfBossKill;
 
 	/**
 	 * This contructor creates a Player-object. It represent the player, which
@@ -36,7 +36,7 @@ public class Player extends Person {
 		this.time = time;
 		this.itemCapacity = itemCapacity;
 		this.maxWeight = maxWeight;
-		this.bossKill = 0;
+		this.amountOfBossKill = 0;
 	}
 
 	/**
@@ -100,7 +100,7 @@ public class Player extends Person {
 		} //If the item is a range weapon
 		else if (weapon.weaponType() == WeaponType.RANGED) {
 			ArrayList<Move> moves = getMoves();
-			moves.add(new Move(Attack.SHOOT, weapon.getDamage())); //Adds a Shoot move
+			moves.add(new Move(weapon.getDamage(), Attack.SHOOT, WeaponType.MELEE)); //Adds a Shoot move
 		}
 	}
 
@@ -122,16 +122,16 @@ public class Player extends Person {
 	}
 
 	/**
-	 * @return the bossKill
+	 * @return The amount of boss kills
 	 */
-	public int getBossKill() {
-		return bossKill;
+	public int getAmountOfBossKill() {
+		return amountOfBossKill;
 	}
 
 	/**
-	 * @param bossKill the bossKill to set
+	 *
 	 */
-	public void addBossKill(int bossKill) {
-		this.bossKill += bossKill;
+	public void addOneBossKill() {
+		this.amountOfBossKill++;
 	}
 }
