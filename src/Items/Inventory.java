@@ -1,10 +1,6 @@
 package Items;
 
-/**
- * These statements import the Hashmap and set class from the util library.
- */
-import java.util.HashMap;
-import java.util.Set;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 

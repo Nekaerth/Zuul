@@ -4,7 +4,6 @@
 package MainPackage;
 
 import HighscoreLoader.Highscore;
-import Items.Blueprint;
 import Items.Boltcutter;
 import Items.Flashlight;
 import Items.Item;
