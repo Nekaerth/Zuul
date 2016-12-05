@@ -21,30 +21,32 @@ import javafx.stage.Stage;
  */
 public class AlertBox {
 
-    public static void isCode() {
-        Stage window = new Stage();
-        window.initModality(Modality.NONE);
-        window.setTitle("Test");
-        window.setMinWidth(400);
-        window.setMinHeight(400);
+	public static void tryCode() {
+		Stage window = new Stage();
+		window.initModality(Modality.NONE);
+		window.setTitle("Test");
+		window.setMinWidth(400);
+		window.setMinHeight(400);
 
-        Label label = new Label();
-        label.setText("test Label");
-        Button enterButton = new Button("Enter");
-        enterButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                window.close();
-            }
-        });
+		Label label = new Label();
+		label.setText("test Label");
+		
+		Button enterButton = new Button("Enter");
+		
+		enterButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				window.close();
+			}
+		});
 
-        VBox layout = new VBox(10);
-        layout.getChildren().addAll(label, enterButton);
-        layout.setAlignment(Pos.CENTER);
+		VBox layout = new VBox(10);
+		layout.getChildren().addAll(label, enterButton);
+		layout.setAlignment(Pos.CENTER);
 
-        Scene alertBox = new Scene(layout);
-        window.setScene(alertBox);
-        window.showAndWait();
-    }
+		Scene alertBox = new Scene(layout);
+		window.setScene(alertBox);
+		window.showAndWait();
+	}
 
 }

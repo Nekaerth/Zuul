@@ -6,6 +6,7 @@
 package MainPackage;
 
 import Items.Item;
+import Items.Key;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -28,9 +29,9 @@ import javafx.stage.Stage;
 public class FXMLController implements Initializable {
 
 	private GUIdisplayable game;
-	private Item currentItem = null;
 	private Player player;
 	private Boss currentBoss;
+	private Item currentItem;
 
 	//Main Pane
 	@FXML
@@ -448,7 +449,8 @@ public class FXMLController implements Initializable {
 		}
 		switch (item.getItemType()) {
 			case KEY:
-				roomSceneInfoLabel.setText("You have unlocked a door!");
+				Key key = (Key) item;
+				roomSceneInfoLabel.setText("You have unlocked the door to " + key.getNameOfRoomThatFitsThisKey() + "!");
 				updateCurrentItemLabel("None");
 				break;
 			case FLASHLIGHT:
