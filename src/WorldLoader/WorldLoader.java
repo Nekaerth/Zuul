@@ -10,8 +10,8 @@ import MainPackage.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class WorldLoader {
 
@@ -37,12 +37,12 @@ public class WorldLoader {
 	public ArrayList<Room> loadWorld(String fileToRead) {
 		try {
 			boolean shouldCreateRoom = false, shouldCreateItem = false;
-			FileReader file = new FileReader(fileToRead); // Reads the content of testfile.dne
-			BufferedReader buffer = new BufferedReader(file); // Initializes a BufferedReader to read the file
+			FileReader file = new FileReader(fileToRead); // Reads the content of a given file name
+			Scanner scanner = new Scanner(file);
 
-			while (buffer.ready()) {
+			while (scanner.hasNext()) {
 				// While the BufferedReader is ready we read the next line in the file
-				String evaluateString = buffer.readLine();
+				String evaluateString = scanner.nextLine();
 				if (shouldCreateRoom) {
 					// If createRoom is true the we act on what is in the file
 					shouldCreateRoom = createRoom(evaluateString);
@@ -52,17 +52,18 @@ public class WorldLoader {
 					shouldCreateItem = createItem(evaluateString);
 				}
 
-				// We use a switch-case to act on the header in the file
+				// We use a if else if to act on the header in the file
 				// The header being what is in the []
-				if (evaluateString.toLowerCase().equals("[room]")) {
+					if(evaluateString.toLowerCase().equals("[room]")){
 					shouldCreateRoom = true;
-				} else if (evaluateString.toLowerCase().equals("[item]")) {
+					} else if (evaluateString.toLowerCase().equals("[item]")){
 					shouldCreateItem = true;
-				}
+					}
+				
 			}
 		} catch (FileNotFoundException e) {
-		} catch (IOException e) {
-		}
+			System.out.println("File not found exception in method loadWorld()");
+		} 
 		ArrayList<Room> returnRooms = connectWorld();
 		return returnRooms;
 	}

@@ -9,11 +9,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -40,7 +37,7 @@ public class Highscore {
 			sortHighscore();
 
 		} catch (FileNotFoundException ex) {
-			System.out.println(ex);
+			System.out.println("FileNotFoundException in getHighscoreList method in Highscore");
 		}
 		return highscore;
 	}
@@ -63,7 +60,7 @@ public class Highscore {
 			highscoreFile.write(highscore + System.lineSeparator());
 			highscoreFile.flush();
 		} catch (IOException ex) {
-			System.out.println(ex);
+			System.out.println("IOException in method saveHighscore() in Highscore");
 		}
 
 	}
