@@ -282,11 +282,11 @@ public class GamePlay implements GUIdisplayable {
 
     private boolean useBoltcutter(Item item) {
         Boltcutter boltcutter = (Boltcutter) item;
-        Room roomToUnlock = new Room("", false, false, false, "", false);
+        Room roomToUnlock;
         for (Room room : rooms) {
             for (String str : room.getListOfExitDirections()) {
-                if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
-                    roomToUnlock = room.getExit(str);
+				roomToUnlock = room.getExit(str);
+				if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
                     if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
                         roomToUnlock.unlock();
                         player.getInventory().removeItem(item);
