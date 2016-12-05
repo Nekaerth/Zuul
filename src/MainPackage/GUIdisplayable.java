@@ -41,9 +41,5 @@ public interface GUIdisplayable {
 
 	public Player getPlayer();
 
-	public boolean isBossPresent();
-
 	public ArrayList<Boss> getBosses();
-
-	public void compareMoves(Boss boss, Move bossMove, Move playerMove);
 }

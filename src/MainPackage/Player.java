@@ -16,10 +16,10 @@ import java.util.ArrayList;
 public class Player extends Person {
 
 	private int time;
-	private final int capacity; //Is the maximum amount of items the player must hold.
+	private final int itemCapacity; //Is the maximum amount of items the player must hold.
 	private final int maxWeight; //Is the maximum weight that the players items must
-        private int bossKill; 
-        
+	private int bossKill;
+
 	/**
 	 * This contructor creates a Player-object. It represent the player, which
 	 * includes hitpoints, available attacks, available items, maximum number of
@@ -28,16 +28,16 @@ public class Player extends Person {
 	 * @param room Sets which room the player currently is in.
 	 * @param hitpoint Sets the players hitpoint.
 	 * @param time Sets how much time the player has.
-	 * @param capacity Sets the players maximum item capacity.
+	 * @param itemCapacity Sets the players maximum item capacity.
 	 * @param maxWeight Sets the players maximum item weight capacity.
 	 */
-	public Player(Room room, int hitpoint, int time, int capacity, int maxWeight) {
+	public Player(Room room, int hitpoint, int time, int itemCapacity, int maxWeight) {
 		super(room, hitpoint);
 		this.time = time;
-		this.capacity = capacity;
+		this.itemCapacity = itemCapacity;
 		this.maxWeight = maxWeight;
-                this.bossKill = 0;
-	}       
+		this.bossKill = 0;
+	}
 
 	/**
 	 * The getTime() is a getter method to get the integer "time"
@@ -61,31 +61,20 @@ public class Player extends Person {
 	}
 
 	public void subtractTime(int time) {
-		int fiveMinuteMark = (this.time - 1) / 300;
 		this.time -= time;
-		int newFiveMinuteMark = (this.time - 1) / 300;
-		if (fiveMinuteMark > newFiveMinuteMark) {
-			System.out.println("You have " + displayTime() + " left.");
+		//If time goes below 0, then it sets the time to 0 instead
+		if (this.time < 0) {
+			this.time = 0;
 		}
-	}
 
-	/**
-	 *
-	 * @return will return the time that the player has left in minutes and
-	 * seconds as a String
-	 */
-	public String displayTime() {
-		int minutes = this.time / 60;
-		int seconds = this.time % 60;
-		return minutes + " min and " + seconds + " sec";
 	}
 
 	/**
 	 *
 	 * @return the maximum amount item the player can hold.
 	 */
-	public int getCapacity() {
-		return this.capacity;
+	public int getItemCapacity() {
+		return this.itemCapacity;
 	}
 
 	/**

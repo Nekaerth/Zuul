@@ -22,5 +22,4 @@ public enum BossType {
 	public String toString() {
 		return stringBossType;
 	}
-
 }

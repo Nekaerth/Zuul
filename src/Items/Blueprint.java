@@ -5,7 +5,6 @@ package Items;
  * @author Semesterprojektgruppe 13 (Autumn 2016)
  */
 public class Blueprint extends Item {
-    
 
 	/**
 	 * The constructor for the specialItem class is called when we want to create

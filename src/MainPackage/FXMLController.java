@@ -328,17 +328,14 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleBossButtons(ActionEvent event) {
 		if (event.getSource() == bossSceneAttackButton1) {
-			currentBoss.compareMoves(player.getMoves().get(0));
+			oneAttackCycle(player.getMoves().get(0));
 		} else if (event.getSource() == bossSceneAttackButton2) {
-			currentBoss.compareMoves(player.getMoves().get(1));
+			oneAttackCycle(player.getMoves().get(1));
 		} else if (event.getSource() == bossSceneAttackButton3) {
-			currentBoss.compareMoves(player.getMoves().get(2));
+			oneAttackCycle(player.getMoves().get(2));
 		} else if (event.getSource() == bossSceneAttackButton4) {
-			currentBoss.compareMoves(player.getMoves().get(3));
+			oneAttackCycle(player.getMoves().get(3));
 		}
-		//updates player and boss hitpoints
-		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
-		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
 	}
 
 	@FXML
@@ -402,7 +399,7 @@ public class FXMLController implements Initializable {
 
 	private void updateWeightAndItemAmount() {
 		int itemAmount = player.getInventory().getItemCapacity();
-		int itemCapacity = player.getCapacity();
+		int itemCapacity = player.getItemCapacity();
 		int weight = player.getInventory().getItemWeight();
 		int Maxweight = player.getMaxWeight();
 
@@ -418,7 +415,7 @@ public class FXMLController implements Initializable {
 		inventorySceneItemList.setItems(player.getInventory().getAllItems());
 		//updates the current rooms inventory
 		roomSceneItemList.setItems(game.getCurrentRoomInventory());
-		//updates the time label (lav en general metode senere)
+		//updates the time label
 		updateTime();
 		//updates the capacity labels
 		updateWeightAndItemAmount();
@@ -435,16 +432,21 @@ public class FXMLController implements Initializable {
 
 	private void goRoom(String direction) {
 		Room nextRoom = player.getRoom().getExit(direction);
+		//Checks if there is a door in that direction
 		if (nextRoom == null || nextRoom.isHidden()) {
 			roomSceneInfoLabel.setText("There is no door in this direction.");
 			return;
 		}
+		//Goes to room if door is not locked
 		if (game.goRoom(direction)) {
 			roomSceneItemList.setItems(game.getCurrentRoomInventory());
 			bottomMenuCurrentRoomLabel.setText(player.getRoom().getName());
 			updateTime();
-			if (game.isBossPresent()) {
-				bossFight();
+			//Checks if a boss is present
+			for (Boss boss : game.getBosses()) {
+				if (boss.getRoom() == player.getRoom()) {
+					beginBossFight();
+				}
 			}
 		} else {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");
@@ -459,9 +461,8 @@ public class FXMLController implements Initializable {
 		}
 	}
 
-	private void bossFight() {
+	private void beginBossFight() {
 		setAllButOneGameSceneInvisible(bossScene);
-
 		//finds which boss to fight
 		for (Boss boss : game.getBosses()) {
 			if (player.getRoom() == boss.getRoom()) {
@@ -476,7 +477,6 @@ public class FXMLController implements Initializable {
 		//updates the title in bossScene
 		bossSceneTitle.setText("You are fighting " + currentBoss.getName());
 		//updates counter attack buttons
-
 		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(0).getName());
 		bossSceneAttackButton2.setText(game.getPlayer().getMoves().get(1).getName());
 		bossSceneAttackButton3.setText(game.getPlayer().getMoves().get(2).getName());
@@ -487,5 +487,32 @@ public class FXMLController implements Initializable {
 		//the boss makes first attack
 		currentBoss.setCurrentMoveAtRandom();
 		bossSceneBossAttackLabel.setText(currentBoss.getName() + " uses: " + currentBoss.getCurrentMove().getName());
+	}
+
+	private void oneAttackCycle(Move playerMove) {
+		player.setCurrentMove(playerMove);
+		//Executes an attack and checks who hits who
+		if (currentBoss.playerHitsBoss(player)) {
+			//TODO inform that the player won the attack(remember to mention time left/used)
+		} else {
+			//TODO inform that the boss won the attack
+		}
+		//The bosses next move is chosen
+		currentBoss.setCurrentMoveAtRandom();
+		bossSceneBossAttackLabel.setText(currentBoss.getName() + " uses: " + currentBoss.getCurrentMove().getName());
+		//updates player and boss hitpoints
+		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
+		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
+		//Checks if the boss is defeated
+		if (currentBoss.getHitpoint() == 0) {
+			player.addBossKill(1);
+			player.getRoom().getInventory().putInventory(currentBoss.getInventory());
+			currentBoss.setRoom(null);
+			setAllButOneGameSceneInvisible(roomScene);
+		}
+		//Checks if the player is defeated or if the time has run out
+		if (player.getHitpoint() == 0 || player.getTime() == 0) {
+			setAllButOneMainSceneInvisible(gameOverScene);
+		}
 	}
 }

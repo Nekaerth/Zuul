@@ -24,10 +24,11 @@ import javafx.collections.ObservableList;
 public class Highscore {
 
 	ObservableList<String> highscore;
-	public Highscore(){
+
+	public Highscore() {
 		highscore = FXCollections.observableArrayList();
 	}
-	
+
 	public ObservableList<String> getHighscoreList() {
 		try {
 
@@ -38,7 +39,7 @@ public class Highscore {
 
 			sortHighscore();
 
-		} catch (FileNotFoundException ex) { 
+		} catch (FileNotFoundException ex) {
 			System.out.println(ex);
 		}
 		return highscore;
@@ -58,7 +59,7 @@ public class Highscore {
 		this.highscore.add(highscore);
 		sortHighscore();
 
- 		try (FileWriter highscoreFile = new FileWriter("highscore.dne", true)) {
+		try (FileWriter highscoreFile = new FileWriter("highscore.dne", true)) {
 			highscoreFile.write(highscore + System.lineSeparator());
 			highscoreFile.flush();
 		} catch (IOException ex) {

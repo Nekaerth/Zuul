@@ -14,7 +14,7 @@ public class Person {
 
 	private Room room; //Where the person currently is.
 	private int hitpoint; //How much hitpoints the person has.
-	private Inventory inventory; //An Inventory that holds the persons items
+	private Inventory inventory = new Inventory(); //An Inventory that holds the persons items
 	private ArrayList<Move> moves = new ArrayList<>(); //ArrayList of all moves, that are available to the person.
 	private Move currentMove;
 
@@ -28,7 +28,6 @@ public class Person {
 	public Person(Room room, int hitpoint) {
 		this.room = room;
 		this.hitpoint = hitpoint;
-		this.inventory = new Inventory();
 	}
 
 	/**
@@ -68,32 +67,18 @@ public class Person {
 	}
 
 	/**
+	 * @return the inventory
+	 */
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	/**
 	 *
 	 * @return a ArrayList of all avialble moves.
 	 */
 	public ArrayList<Move> getMoves() {
 		return moves;
-	}
-
-	public Move getCurrentMove() {
-		return currentMove;
-	}
-
-	public void setCurrentMove(Move move) {
-		this.currentMove = move;
-	}
-
-	/**
-	 *
-	 * @return a String which contains a list with all available moves.
-	 */
-	public String getMoveString() {
-		String list = "";
-		//Goes through all attacks and adds their name to the String
-		for (Move move : moves) {
-			list += move.getName() + ", ";
-		}
-		return list.substring(0, list.length() - 2);
 	}
 
 	/**
@@ -111,11 +96,11 @@ public class Person {
 		return null;
 	}
 
-	/**
-	 * @return the inventory
-	 */
-	public Inventory getInventory() {
-		return inventory;
+	public Move getCurrentMove() {
+		return currentMove;
 	}
 
+	public void setCurrentMove(Move move) {
+		this.currentMove = move;
+	}
 }

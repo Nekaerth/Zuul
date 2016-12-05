@@ -35,8 +35,8 @@ public class GamePlay implements GUIdisplayable {
 	private ArrayList<Room> roomNumber; //An arraylist of rooms that contains a hidden number
 	private ArrayList<Room> visitedRooms;
 	private Highscore highscore;
-	
-	public GamePlay(){
+
+	public GamePlay() {
 		this.highscore = new Highscore();
 		this.bosses = new ArrayList<>();
 		this.rooms = new ArrayList<>(); // initializes the rooms available
@@ -158,7 +158,7 @@ public class GamePlay implements GUIdisplayable {
 
 		if (item.isPickUpAble()
 						&& player.getInventory().getItemWeight() + item.getWeight() <= player.getMaxWeight()
-						&& player.getInventory().size() + 1 <= player.getCapacity()) {
+						&& player.getInventory().size() + 1 <= player.getItemCapacity()) {
 
 			switch (item.getItemType()) {
 				case WEAPON:
@@ -180,7 +180,7 @@ public class GamePlay implements GUIdisplayable {
 			return true;
 		} else if (player.getInventory().getItemWeight() + item.getWeight() > player.getMaxWeight()) {
 			return false;
-		} else if (player.getInventory().size() + 1 > player.getCapacity()) {
+		} else if (player.getInventory().size() + 1 > player.getItemCapacity()) {
 			return false;
 		} else {
 			return false;
@@ -344,24 +344,7 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	@Override
-	public boolean isBossPresent() {
-		for (Boss boss : bosses) {
-			if (player.getRoom() == boss.getRoom()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	@Override
 	public ArrayList<Boss> getBosses() {
 		return bosses;
-	}
-
-	@Override
-	public void compareMoves(Boss boss, Move bossMove, Move playerMove) {
-		//TODO
-		player.subtractHitpoint(5);
-		boss.subtractHitpoint(10);
 	}
 }
