@@ -35,11 +35,11 @@ public class TimeIncreasingItem extends Item {
 
 	/**
 	 * Returns the amount of time in seconds as an int that this item contains
+	 *
 	 * @return int
 	 */
 	public int getTime() {
 		return time;
 	}
-
 
 }

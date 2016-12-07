@@ -45,8 +45,8 @@ public abstract class Item {
 	}
 
 	/**
-	 * Returns a boolean that is true if the item can be picked up and false if
-	 * it cannot be picked up.
+	 * Returns a boolean that is true if the item can be picked up and false if it
+	 * cannot be picked up.
 	 *
 	 * @return boolean
 	 */
@@ -66,22 +66,27 @@ public abstract class Item {
 
 	/**
 	 * Returns the weight of the item as an int
+	 *
 	 * @return int
 	 */
 	public int getWeight() {
 		return this.weight;
 	}
+
 	/**
 	 * Returns the capacity of the item as an int
+	 *
 	 * @return int
 	 */
 	public int getCapacity() {
 		return this.capacity;
 	}
+
 	/**
-	 * Returns a string representation of a Item object.
-	 * The string representation is the name of the item
-	 * @return String 
+	 * Returns a string representation of a Item object. The string representation
+	 * is the name of the item
+	 *
+	 * @return String
 	 */
 	@Override
 	public String toString() {

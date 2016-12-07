@@ -36,8 +36,8 @@ public class Boltcutter extends Item {
 	}
 
 	/**
-	 * Returns a string that contains the name of the room that the boltcutter
-	 * can be used in
+	 * Returns a string that contains the name of the room that the boltcutter can
+	 * be used in
 	 *
 	 * @return String
 	 */

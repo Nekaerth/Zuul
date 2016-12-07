@@ -13,14 +13,17 @@ public enum BossType {
 	BOSSTYPE1("bosstype1"), BOSSTYPE2("bosstype2");
 
 	private String stringBossType;
+
 	/**
-	 * The contructor of the Enum BoosType. It is automatically called when a
-	 * Enum is used
-	 * @param stringBossType 
+	 * The contructor of the Enum BoosType. It is automatically called when a Enum
+	 * is used
+	 *
+	 * @param stringBossType
 	 */
 	BossType(String stringBossType) {
 		this.stringBossType = stringBossType;
 	}
+
 	/**
 	 * Returns a string representation of an BossType. The representation is a
 	 * String version of the enum BossType

@@ -47,11 +47,10 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The goRoom method is used to change the room the player is in based on
-	 * the direction that is given
+	 * The goRoom method is used to change the room the player is in based on the
+	 * direction that is given
 	 *
-	 * @param direction is a Direction used to determine where the player is
-	 * going
+	 * @param direction is a Direction used to determine where the player is going
 	 * @return boolean false if the player did not move and returns true if the
 	 * player did move
 	 */
@@ -98,8 +97,8 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The getCurrentRoomInventory returns the inventory of the room the player
-	 * is in
+	 * The getCurrentRoomInventory returns the inventory of the room the player is
+	 * in
 	 *
 	 * @return an ObservableList of items
 	 */
@@ -144,12 +143,12 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The pickUp method is used to pick up a specific item, the action depends
-	 * on the item type
+	 * The pickUp method is used to pick up a specific item, the action depends on
+	 * the item type
 	 *
 	 * @param item is the item to be picked up
-	 * @return a boolean as false if an item is not picked up, returns true of
-	 * an item is picked up
+	 * @return a boolean as false if an item is not picked up, returns true of an
+	 * item is picked up
 	 */
 	@Override
 	public boolean pickUp(Item item) {
@@ -158,8 +157,8 @@ public class GamePlay implements GUIdisplayable {
 		}
 
 		if (item.isPickUpAble()
-				&& player.getInventory().getTotalItemWeight() + item.getWeight() <= player.getMaxWeight()
-				&& player.getInventory().size() + 1 <= player.getMaxItemCapacity()) {
+						&& player.getInventory().getTotalItemWeight() + item.getWeight() <= player.getMaxWeight()
+						&& player.getInventory().size() + 1 <= player.getMaxItemCapacity()) {
 
 			switch (item.getItemType()) {
 				case WEAPON:
@@ -206,16 +205,6 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * The getTime method is used to return the amount of time the player has
-	 *
-	 * @return will return an int equal to the amount of time left
-	 */
-	@Override
-	public int getTime() {
-		return player.getTime();
-	}
-
-	/**
 	 * Returns a String that has been read in from the file "helpfile.dne"
 	 *
 	 * @return String
@@ -258,8 +247,8 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * Returns a boolean that is true if an Item of the type key has been used
-	 * and false if it wasn't used. A key item unlocks a Room if it is used
+	 * Returns a boolean that is true if an Item of the type key has been used and
+	 * false if it wasn't used. A key item unlocks a Room if it is used
 	 *
 	 * @param item
 	 * @return boolean
@@ -281,9 +270,9 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * Uses a flashlight, when a flashlight is used it checks whether or not
-	 * there are any secret numbers in the room. if there is they are added to
-	 * the list of numbers found
+	 * Uses a flashlight, when a flashlight is used it checks whether or not there
+	 * are any secret numbers in the room. if there is they are added to the list
+	 * of numbers found
 	 *
 	 * @param item
 	 */
@@ -310,8 +299,8 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	/**
-	 * Returns a boolean that is true if the boltcutter has been used and false
-	 * if the boltcutter haven't been used Using a boltcutter does so that the
+	 * Returns a boolean that is true if the boltcutter has been used and false if
+	 * the boltcutter haven't been used Using a boltcutter does so that the
 	 * escapeable room is able to finish the game
 	 *
 	 * @param item
@@ -393,13 +382,14 @@ public class GamePlay implements GUIdisplayable {
 
 	/**
 	 * Returns an ArrayList containing all the bosses in the game
+	 *
 	 * @return ArrayList containing Boss
 	 */
 	@Override
 	public ArrayList<Boss> getBosses() {
 		return bosses;
 	}
-	
+
 	/**
 	 * The getCorrectCode method returns the hidden code that is found in all
 	 * rooms, the order of the code is determined by the order of the arraylist

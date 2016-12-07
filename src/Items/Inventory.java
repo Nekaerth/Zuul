@@ -12,8 +12,7 @@ public class Inventory {
 	ObservableList<Item> inventory;
 
 	/**
-	 * New ObservableList with the name "inventory" is created in the
-	 * contructor.
+	 * New ObservableList with the name "inventory" is created in the contructor.
 	 */
 	public Inventory() {
 		inventory = FXCollections.observableArrayList();

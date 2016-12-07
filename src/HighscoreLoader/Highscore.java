@@ -1,7 +1,3 @@
-/*
- * 
-
- */
 package HighscoreLoader;
 
 import java.io.File;

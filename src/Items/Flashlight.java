@@ -25,8 +25,9 @@ public class Flashlight extends Item {
 	}
 
 	/**
-	 * The abstract method which is declared in the abstract class Item is overrided so that
-	 * The getType method returns the enum value corresponding to this item type
+	 * The abstract method which is declared in the abstract class Item is
+	 * overrided so that The getType method returns the enum value corresponding
+	 * to this item type
 	 *
 	 * @return will return a value of the type ItemType enum
 	 */
@@ -36,7 +37,8 @@ public class Flashlight extends Item {
 	}
 
 	/**
-	 * The getCharges method returns the int value that contains how many charges that are left
+	 * The getCharges method returns the int value that contains how many charges
+	 * that are left
 	 *
 	 * @return will return an int of how many charges is left
 	 */
