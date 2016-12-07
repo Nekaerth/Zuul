@@ -133,6 +133,10 @@ public class WorldLoader {
         return true;
     }
 
+    /**
+     * The connectWorld method is used to link
+     * @return 
+     */
     private ArrayList<Room> connectWorld() {
         Room mainRoom = null, secondRoom = null;
         String[] splitLinkArray = {""};
@@ -144,8 +148,8 @@ public class WorldLoader {
                 for (Room r : rs.getAllRooms()) { //Compare the id of a room with the id that is the mainroom saved in linkMap
                     if (r.getId().equalsIgnoreCase(splitLinkArray[0])) { //Set r as the mainroom
                         mainRoom = r; //remove the string from the arraylist links
-                        links.remove(str); //Break out of the for each loop
-                        break;
+                        links.remove(str); 
+                        break;//Break out of the for each loop
                     }
 
                 } //break out of the outer for each loop

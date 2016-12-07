@@ -10,7 +10,7 @@ package MainPackage;
  * @author Niklas
  */
 public enum Direction {
-    NORTH("north"), SOUTH("south"), EAST("east"), WEST("west");
+    NORTH("north"), SOUTH("south"), EAST("east"), WEST("west"), UNKNOWN("?");
     
     private String directionString;
     
