@@ -216,6 +216,9 @@ public class WorldLoader {
                 case "damage":
                     ic.setDamage(strings[length-1]);
                     break;
+                case "weaponType":
+                    ic.setWeapontype(strings[length-1]);
+                    break;
                 case "roomToUnlock":
                     ic.setNameOfRoomThatFitsThisKey(strings[length - 1]);
                     break;                
