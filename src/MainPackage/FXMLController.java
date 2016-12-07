@@ -6,6 +6,7 @@
 package MainPackage;
 
 import Items.Item;
+import Items.Key;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -28,9 +29,9 @@ import javafx.stage.Stage;
 public class FXMLController implements Initializable {
 
 	private GUIdisplayable game;
-	private Item currentItem = null;
 	private Player player;
 	private Boss currentBoss;
+	private Item currentItem;
 
 	//Main Pane
 	@FXML
@@ -431,9 +432,9 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateWeightAndItemAmount() {
-		int itemAmount = player.getInventory().getItemCapacity();
+		int itemAmount = player.getInventory().getTotalItemCapacity();
 		int itemCapacity = player.getItemCapacity();
-		int weight = player.getInventory().getItemWeight();
+		int weight = player.getInventory().getTotalItemWeight();
 		int Maxweight = player.getMaxWeight();
 
 		topMenuCapacityLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity + "\nWeight: " + weight + "/" + Maxweight);
@@ -448,7 +449,8 @@ public class FXMLController implements Initializable {
 		}
 		switch (item.getItemType()) {
 			case KEY:
-				roomSceneInfoLabel.setText("You have unlocked a door!");
+				Key key = (Key) item;
+				roomSceneInfoLabel.setText("You have unlocked the door to " + key.getNameOfRoomThatFitsThisKey() + "!");
 				updateCurrentItemLabel("None");
 				break;
 			case FLASHLIGHT:

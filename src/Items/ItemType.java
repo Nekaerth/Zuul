@@ -1,13 +1,8 @@
 package Items;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 /**
  *
- * @author Danieln Johansen
+ * @author Semesterprojekt Gruppe 13 (Autumn 2016)
  */
 public enum ItemType {
 
@@ -15,10 +10,22 @@ public enum ItemType {
 
 	String stringItemType;
 
+	/**
+	 * The contructor of the Enum ItemType. It is automatically called when a
+	 * Enum is used
+	 *
+	 * @param stringItemType
+	 */
 	private ItemType(String stringItemType) {
 		this.stringItemType = stringItemType;
 	}
 
+	/**
+	 * Returns a string representation of an ItemType.
+	 * The representation is a String version of the enum ItemType
+	 *
+	 * @return String
+	 */
 	@Override
 	public String toString() {
 		return stringItemType;

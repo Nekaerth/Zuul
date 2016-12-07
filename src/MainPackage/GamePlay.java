@@ -157,7 +157,7 @@ public class GamePlay implements GUIdisplayable {
         }
 
         if (item.isPickUpAble()
-                && player.getInventory().getItemWeight() + item.getWeight() <= player.getMaxWeight()
+                && player.getInventory().getTotalItemWeight() + item.getWeight() <= player.getMaxWeight()
                 && player.getInventory().size() + 1 <= player.getItemCapacity()) {
 
             switch (item.getItemType()) {
@@ -178,7 +178,7 @@ public class GamePlay implements GUIdisplayable {
             //Transfers the item from the room inventory to the player inventory
             player.getInventory().transferItem(player.getRoom().getInventory(), item);
             return true;
-        } else if (player.getInventory().getItemWeight() + item.getWeight() > player.getMaxWeight()) {
+        } else if (player.getInventory().getTotalItemWeight() + item.getWeight() > player.getMaxWeight()) {
             return false;
         } else if (player.getInventory().size() + 1 > player.getItemCapacity()) {
             return false;
@@ -282,11 +282,11 @@ public class GamePlay implements GUIdisplayable {
 
     private boolean useBoltcutter(Item item) {
         Boltcutter boltcutter = (Boltcutter) item;
-        Room roomToUnlock = new Room("", false, false, false, "", false);
+        Room roomToUnlock;
         for (Room room : rooms) {
             for (String str : room.getListOfExitDirections()) {
-                if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
-                    roomToUnlock = room.getExit(str);
+				roomToUnlock = room.getExit(str);
+				if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
                     if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
                         roomToUnlock.unlock();
                         player.getInventory().removeItem(item);

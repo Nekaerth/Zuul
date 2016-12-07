@@ -1,10 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
+
  */
 package HighscoreLoader;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -16,7 +14,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Danieln Johansen
+ * @author Semesterprojekt gruppe 13 (Autumn 2016)
  */
 public class Highscore {
 
@@ -26,22 +24,35 @@ public class Highscore {
 		highscore = FXCollections.observableArrayList();
 	}
 
+	/**
+	 * Loads in the highscore list from the file "highscore.dne" and returns an
+	 * observablelist of the highscores
+	 *
+	 * @return ObservableList of type String
+	 */
 	public ObservableList<String> getHighscoreList() {
 		try {
-
 			Scanner scannerFile = new Scanner(new File("highscore.dne"));
 			while (scannerFile.hasNext()) {
 				highscore.add(scannerFile.nextLine());
 			}
-
 			sortHighscore();
-
 		} catch (FileNotFoundException ex) {
-			System.out.println("FileNotFoundException in getHighscoreList method in Highscore" + ex);
+			try {
+				System.out.println("FileNotFoundException in getHighscoreList method in Highscore" + ex);
+				File f = new File("highscore.dne");
+				f.createNewFile();
+			} catch (IOException ex1) {
+				System.out.println("IOException " + ex);
+			}
 		}
 		return highscore;
 	}
 
+	/**
+	 *
+	 * @return
+	 */
 	public ObservableList<String> sortHighscore() {
 
 		Collections.sort(highscore, (String s1, String s2) -> {
@@ -51,6 +62,11 @@ public class Highscore {
 		});
 		return highscore;
 	}
+
+	/**
+	 *
+	 * @param highscore
+	 */
 
 	public void saveHighscore(String highscore) {
 		this.highscore.add(highscore);
@@ -65,6 +81,12 @@ public class Highscore {
 
 	}
 
+	/**
+	 *
+	 * @param time
+	 * @param bossKill
+	 * @return
+	 */
 	public static int calculateScore(int time, int bossKill) {
 
 		int calculateScore = time + (bossKill * 600);
