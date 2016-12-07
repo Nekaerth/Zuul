@@ -1,8 +1,7 @@
 package MainPackage;
 
 import HighscoreLoader.Score;
-import Items.Item;
-import Items.Key;
+import Items.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -209,8 +208,9 @@ public class FXMLController implements Initializable {
 
 	/**
 	 * Initializes the controller class.
-     * @param url
-     * @param rb
+	 *
+	 * @param url
+	 * @param rb
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
@@ -464,7 +464,12 @@ public class FXMLController implements Initializable {
 				updateCurrentItemLabel("None");
 				break;
 			case FLASHLIGHT:
-				//TODO
+				Flashlight flashlight = (Flashlight) item;
+				if (player.getRoom().hasEscapeCode()) {
+					roomSceneInfoLabel.setText("You have used the flashlight. You find the number " + player.getRoom().getNumber() + "\nYou have " + flashlight.getCharges() + " charges left!");
+				} else {
+					roomSceneInfoLabel.setText("You have used the flashlight. You find nothing!\nYou have " + flashlight.getCharges() + " charges left!");
+				}
 				break;
 			case BLUEPRINT:
 				//TODO
