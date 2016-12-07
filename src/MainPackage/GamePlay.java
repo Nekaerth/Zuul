@@ -399,4 +399,25 @@ public class GamePlay implements GUIdisplayable {
 	public ArrayList<Boss> getBosses() {
 		return bosses;
 	}
+	
+	/**
+	 * The getCorrectCode method returns the hidden code that is found in all
+	 * rooms, the order of the code is determined by the order of the arraylist
+	 *
+	 * @return returns a string with the correct key code
+	 */
+	public String getCorrectCode() {
+		StringBuilder correctCode = new StringBuilder();
+		for (Room room : roomNumber) {
+			if (room.hasEscapeCode()) {
+				correctCode.append(room.getNumber());
+			}
+		}
+		return correctCode.toString();
+	}
+
+	@Override
+	public boolean isCodeCorrect(String userCode) {
+		return userCode.equalsIgnoreCase(getCorrectCode());
+	}
 }
