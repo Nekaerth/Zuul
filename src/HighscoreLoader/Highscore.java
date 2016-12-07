@@ -18,7 +18,7 @@ import javafx.collections.ObservableList;
  */
 public class Highscore {
 
-	ObservableList<String> highscore;
+	ObservableList<Score> highscore;
 
 	public Highscore() {
 		highscore = FXCollections.observableArrayList();
@@ -30,11 +30,25 @@ public class Highscore {
 	 *
 	 * @return ObservableList of type String
 	 */
-	public ObservableList<String> getHighscoreList() {
+	public ObservableList<Score> getHighscoreList() {
 		try {
+			
+			int scoreValue = -1;
+			String name = null;
+			boolean shouldAddScore = false;
 			Scanner scannerFile = new Scanner(new File("highscore.dne"));
 			while (scannerFile.hasNext()) {
-				highscore.add(scannerFile.nextLine());
+				if(scannerFile.hasNextInt()){
+					shouldAddScore = true;
+					scoreValue = scannerFile.nextInt();
+				} else {
+					name = scannerFile.next();
+				}
+				
+				if(shouldAddScore){
+				addHighscore(scoreValue, name);
+				shouldAddScore = false;
+				}
 			}
 			sortHighscore();
 		} catch (FileNotFoundException ex) {
@@ -53,27 +67,23 @@ public class Highscore {
 	 *
 	 * @return
 	 */
-	public ObservableList<String> sortHighscore() {
-
-		Collections.sort(highscore, (String s1, String s2) -> {
-			int score1 = Integer.parseInt(s1.split("\\s")[1]); // score in s1
-			int score2 = Integer.parseInt(s2.split("\\s")[1]); // score in s2
-			return score2 - score1;
-		});
+	public ObservableList<Score> sortHighscore() {
+		Collections.sort(highscore);
 		return highscore;
 	}
 
 	/**
 	 *
-	 * @param highscore
+	 * @param scoreValue
+	 * @param name
 	 */
 
-	public void saveHighscore(String highscore) {
-		this.highscore.add(highscore);
+	public void saveHighscore(int scoreValue, String name) {
+		this.highscore.add(new Score(name, scoreValue));
 		sortHighscore();
 
 		try (FileWriter highscoreFile = new FileWriter("highscore.dne", true)) {
-			highscoreFile.write(highscore + System.lineSeparator());
+			highscoreFile.write(name + " " + scoreValue + System.lineSeparator());
 			highscoreFile.flush();
 		} catch (IOException ex) {
 			System.out.println("IOException in method saveHighscore() in Highscore" + ex);
@@ -92,5 +102,11 @@ public class Highscore {
 		int calculateScore = time + (bossKill * 600);
 
 		return calculateScore;
+	}
+
+	private void addHighscore(int scoreValue, String name) {
+		if(scoreValue != -1 && name != null){
+			highscore.add(new Score(name, scoreValue));
+		}
 	}
 }

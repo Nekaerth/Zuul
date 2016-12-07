@@ -4,6 +4,7 @@
 package MainPackage;
 
 import HighscoreLoader.Highscore;
+import HighscoreLoader.Score;
 import Items.Boltcutter;
 import Items.Flashlight;
 import Items.Item;
@@ -343,15 +344,11 @@ public class GamePlay implements GUIdisplayable {
 	 * Saves the given parameters as a highscore
 	 *
 	 * @param name
-	 * @param highScore
+	 * @param score
 	 */
 	@Override
-	public void saveHighScore(String name, int highScore) {
-		StringBuilder sb = new StringBuilder();
-		sb.append(name);
-		sb.append(" ");
-		sb.append(highScore);
-		highscore.saveHighscore(sb.toString());
+	public void saveHighScore(String name, int score) {
+		this.highscore.saveHighscore(score, name);
 	}
 
 	/**
@@ -360,7 +357,7 @@ public class GamePlay implements GUIdisplayable {
 	 * @return ObservableList containing scores
 	 */
 	@Override
-	public ObservableList<String> getHighScoreList() {
+	public ObservableList<Score> getHighScoreList() {
 		return highscore.getHighscoreList();
 	}
 

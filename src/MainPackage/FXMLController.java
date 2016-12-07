@@ -5,6 +5,7 @@
  */
 package MainPackage;
 
+import HighscoreLoader.Score;
 import Items.Item;
 import Items.Key;
 import java.net.URL;
@@ -182,7 +183,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label highScoreSceneTitle;
 	@FXML
-	private ListView<String> highScoreSceneScoreList;
+	private ListView<Score> highScoreSceneScoreList;
 	@FXML
 	private Button highScoreSceneBackButton;
 

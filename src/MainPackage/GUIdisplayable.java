@@ -5,6 +5,7 @@
  */
 package MainPackage;
 
+import HighscoreLoader.Score;
 import Items.Item;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
@@ -35,7 +36,7 @@ public interface GUIdisplayable {
 
 	public void saveHighScore(String name, int highScore);
 
-	public ObservableList<String> getHighScoreList();
+	public ObservableList<Score> getHighScoreList();
 
 	public int calculateHighScore();
 
