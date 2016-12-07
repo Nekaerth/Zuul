@@ -35,20 +35,20 @@ public class WorldLoader {
         this.ic = new ItemContainment();
         this.bossC = new BossContainment();
     }
-    
+
     /**
      * The loadWorld method is a try-catch contruction The method is used to
-     * read from a file containing the rooms and items It uses the
-     * BufferedReader to read 1 line at a time from the file Other methods are
-     * then called to create either an item or a room based on the line
+     * read from a file containing the rooms and items It uses the Scanner to
+     * read 1 line at a time from the file Other methods are then called to
+     * create either an item or a room based on the line read
      *
-     * @param fileToRead
-     * @return
-     */           
+     * @param fileToRead is a String which must contain the file name
+     * @return will return an ArrayList<> of the rooms which has been created
+     */
     public ArrayList<Room> loadWorld(String fileToRead) {
         try {
             boolean shouldCreateRoom = false, shouldCreateItem = false;
-            FileReader file = new FileReader(fileToRead); // Reads the content of a given file name
+            FileReader file = new FileReader(fileToRead); // Reads the content of the given file
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNext()) {
@@ -70,6 +70,7 @@ public class WorldLoader {
                     shouldCreateItem = true;
                 }
             }
+            //the FileNotFoundException is thrown if the given file doesnt exsist
         } catch (FileNotFoundException e) {
             System.out.println("File not found exception in method loadWorld()" + e);
         }
@@ -79,9 +80,9 @@ public class WorldLoader {
 
     /**
      * The createRoom method is used to create the rooms based on what is read
-     * in the file It contains a switch-case construction which has cases to
-     * alle atributes a room has
-     *
+     * in the file. 
+     * It contains a switch-case construction which has cases to
+     * all atributes a room can have
      * @param evaluateString is a String that comes from the file
      * @return will return a boolean
      */
@@ -132,6 +133,10 @@ public class WorldLoader {
         return true;
     }
 
+    /**
+     * The connectWorld method is used to link
+     * @return 
+     */
     private ArrayList<Room> connectWorld() {
         Room mainRoom = null, secondRoom = null;
         String[] splitLinkArray = {""};
@@ -143,8 +148,8 @@ public class WorldLoader {
                 for (Room r : rs.getAllRooms()) { //Compare the id of a room with the id that is the mainroom saved in linkMap
                     if (r.getId().equalsIgnoreCase(splitLinkArray[0])) { //Set r as the mainroom
                         mainRoom = r; //remove the string from the arraylist links
-                        links.remove(str); //Break out of the for each loop
-                        break;
+                        links.remove(str); 
+                        break;//Break out of the for each loop
                     }
 
                 } //break out of the outer for each loop
@@ -157,7 +162,9 @@ public class WorldLoader {
                     String[] roomIdAndDirection = str2.split(";");
                     if (r2.getId().equalsIgnoreCase(roomIdAndDirection[0])) { //If true, set the room as the secondRoom
                         secondRoom = r2; //Print out a confirmation message to the console
-                        mainRoom.setExit(roomIdAndDirection[1].toLowerCase(), secondRoom);
+						//Find the correct Direction as an Enum type
+						Direction direction = findDirection(roomIdAndDirection[1].toLowerCase());
+                        mainRoom.setExit(direction, secondRoom);
                     }
                 }
             } //Do this while there are still links left in the links array
@@ -267,7 +274,7 @@ public class WorldLoader {
                 if (shouldCreateBoss) {
                     shouldCreateBoss = hasCreatedBoss(evaluateString);
                 }
-                
+
                 if (evaluateString.equalsIgnoreCase("[boss]")) {
                     shouldCreateBoss = true;
                 }
@@ -275,7 +282,7 @@ public class WorldLoader {
 
         } catch (FileNotFoundException ex) {
             System.out.println("File not found exception in loadBosses method" + ex);
-        } 
+        }
         return this.bosses;
 
     }
@@ -344,4 +351,8 @@ public class WorldLoader {
         ArrayList<Move> moves = boss.getMoves();
         moves.add(new Move(100, Attack.LAUGH, Attack.SHOOT));
     }
+	
+	private Direction findDirection(String directionString){
+		
+	}
 }

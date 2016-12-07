@@ -438,9 +438,9 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateWeightAndItemAmount() {
-		int itemAmount = player.getInventory().getItemCapacity();
+		int itemAmount = player.getInventory().getTotalItemCapacity();
 		int itemCapacity = player.getItemCapacity();
-		int weight = player.getInventory().getItemWeight();
+		int weight = player.getInventory().getTotalItemWeight();
 		int Maxweight = player.getMaxWeight();
 
 		topMenuCapacityLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity + "\nWeight: " + weight + "/" + Maxweight);
