@@ -83,7 +83,7 @@ public class Room {
 	 * This method returns the room in a given direction that is the parameter
 	 *
 	 * @param direction, a Direction
-	 * @return a Room in the given direction
+	 * @return a Room in the given direction if there is no room it returns null
 	 */
 	public Room getExit(Direction direction) {
 		return exits.get(direction);
