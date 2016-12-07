@@ -4,7 +4,7 @@ package Items;
  * The Weapon class implements the interface Item It is used to create weapons
  * which is a specific type of items
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Weapon extends Item {
 

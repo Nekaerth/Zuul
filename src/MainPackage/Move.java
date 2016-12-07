@@ -8,13 +8,13 @@ import Items.WeaponType;
  * it is and one to tell what attack can counter the move. Lastly it contains an
  * int attribute that tells how much damage the attack does.
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Move {
 
-	private Attack attack = null; //An enum which represent what kind of move it is
-	private Attack counterAttack = null; //An enum which tells what attack can counter this move
-	private int damage; //How much damage the move deals
+	private Attack attack = null; 
+	private Attack counterAttack = null; 
+	private int damage;
 	private WeaponType weaponType;
 
 	/**
@@ -38,8 +38,7 @@ public class Move {
 	 * @param damage The move damage.
 	 * @param attack The type of attack.
 	 * @param counterAttack The type of counter attack.
-	 * @param weaponType
-	 */
+	*/
 	public Move(int damage, Attack attack, Attack counterAttack) {
 		this.damage = damage;
 		this.attack = attack;
@@ -47,23 +46,23 @@ public class Move {
 	}
 
 	/**
-	 *
-	 * @return The name of the move, which is also the name of the attack.
+	 * Returns the name of the move, which is also the name of the attack. 
+	 * @return String name of the Attack
 	 */
 	public String getName() {
 		return this.attack.toString();
 	}
 
 	/**
-	 *
-	 * @return The damage of the move.
+	 * Returns the damage of the move as an int
+	 * @return int The damage of the move.
 	 */
 	public int getDamage() {
 		return this.damage;
 	}
 
 	/**
-	 *
+	 * Sets the damage of the move
 	 * @param damage Sets the move damage.
 	 */
 	public void setDamage(int damage) {
@@ -71,7 +70,7 @@ public class Move {
 	}
 
 	/**
-	 *
+	 *	Returns the attack
 	 * @return the attack, which is an enum.
 	 */
 	public Attack getAttack() {
@@ -79,7 +78,7 @@ public class Move {
 	}
 
 	/**
-	 *
+	 * Returns the counter attack
 	 * @return the counterAttack, which is an enum.
 	 */
 	public Attack getCounterAttack() {

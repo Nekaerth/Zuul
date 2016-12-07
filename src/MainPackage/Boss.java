@@ -1,14 +1,12 @@
 package MainPackage;
 
-import java.util.Scanner;
-
 /**
  * This class represent a boss. It extends the Person class to adobt the
  * hitpoints, available attacks and an inventory. Notice it does not include the
  * position of the boss. The boss class has a name variable. It also has method
  * for returning a random move.
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Boss extends Person {
 

@@ -2,7 +2,7 @@ package Items;
 
 /**
  *
- * @author Semesterprojekt Gruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class TimeIncreasingItem extends Item {
 

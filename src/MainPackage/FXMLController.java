@@ -1,5 +1,6 @@
 package MainPackage;
 
+import HighscoreLoader.Score;
 import Items.Item;
 import Items.Key;
 import java.net.URL;
@@ -180,7 +181,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label highScoreSceneTitle;
 	@FXML
-	private ListView<String> highScoreSceneScoreList;
+	private ListView<Score> highScoreSceneScoreList;
 	@FXML
 	private Button highScoreSceneBackButton;
 
@@ -252,7 +253,12 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleGameMenuButtons(ActionEvent event) {
 		if (event.getSource() == topMenuExitButton) {
-			setAllButOneMainSceneInvisible(startMenu);
+			AlertBox.tryCode(0);
+			/*
+			if (AlertBox.exitInfoBox()) {
+				setAllButOneMainSceneInvisible(startMenu);
+			}
+			*/
 		} else if (event.getSource() == topMenuHelpButton) {
 			if (!bossScene.isVisible()) {
 				setAllButOneGameSceneInvisible(helpScene);
@@ -356,7 +362,7 @@ public class FXMLController implements Initializable {
 	private void handleVictorySceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 		String name = victorySceneTextField.getText();
-		int highscore = game.getHighScore();
+		int highscore = game.calculateHighScore();
 		game.saveHighScore(name, highscore);
 	}
 
@@ -438,7 +444,7 @@ public class FXMLController implements Initializable {
 
 	private void updateWeightAndItemAmount() {
 		int itemAmount = player.getInventory().getTotalItemCapacity();
-		int itemCapacity = player.getItemCapacity();
+		int itemCapacity = player.getMaxItemCapacity();
 		int weight = player.getInventory().getTotalItemWeight();
 		int Maxweight = player.getMaxWeight();
 
@@ -576,11 +582,11 @@ public class FXMLController implements Initializable {
 		if (currentBoss.playerHitsBoss(player)) {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You countered " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-							+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
+					+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
 		} else {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You failed to counter " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-							+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
+					+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
 		}
 		//The bosses next move is chosen
 		currentBoss.setCurrentMoveAtRandom();

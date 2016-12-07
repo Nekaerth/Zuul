@@ -1,7 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The WorldLoader class is used to load the game world by reading from an external file
+ * 
+ * @author Termproject Group 13 (Autumn 2016)
  */
 package WorldLoader;
 
@@ -43,7 +43,7 @@ public class WorldLoader {
      * create either an item or a room based on the line read
      *
      * @param fileToRead is a String which must contain the file name
-     * @return will return an ArrayList<> of the rooms which has been created
+     * @return will return an ArrayList of the rooms which has been created
      */
     public ArrayList<Room> loadWorld(String fileToRead) {
         try {
@@ -56,11 +56,11 @@ public class WorldLoader {
                 String evaluateString = scanner.nextLine();
                 if (shouldCreateRoom) {
                     // If createRoom is true the we act on what is in the file
-                    shouldCreateRoom = createRoom(evaluateString);
+                    shouldCreateRoom = hasCreatedRoom(evaluateString);
 
                 } else if (shouldCreateItem) {
                     // If createItem is true the we act on what is in the file
-                    shouldCreateItem = createItem(evaluateString);
+                    shouldCreateItem = hasCreatedItem(evaluateString);
                 }
                 // We use a if else if to act on the header in the file
                 // The header being what is in the []
@@ -79,14 +79,14 @@ public class WorldLoader {
     }
 
     /**
-     * The createRoom method is used to create the rooms based on what is read
-     * in the file. 
-     * It contains a switch-case construction which has cases to
-     * all atributes a room can have
+     * The hasCreatedRoom method is used to create the rooms based on what is
+     * read in the file. It contains a switch-case construction which has cases
+     * to all atributes a room can have
+     *
      * @param evaluateString is a String that comes from the file
      * @return will return a boolean
      */
-    private boolean createRoom(String evaluateString) {
+    private boolean hasCreatedRoom(String evaluateString) {
         // We initializes an array of Strings which will contain strings based
 
         String[] strings = evaluateString.split("=");
@@ -134,8 +134,10 @@ public class WorldLoader {
     }
 
     /**
-     * The connectWorld method is used to link
-     * @return 
+     * The connectWorld method is used to link the rooms read from the file
+     * together
+     *
+     * @return an ArrayList of rooms
      */
     private ArrayList<Room> connectWorld() {
         Room mainRoom = null, secondRoom = null;
@@ -144,11 +146,11 @@ public class WorldLoader {
             for (String str : links) { //Split every string in links at "=" and save the strings into linkmap
                 //links consist of a string of the format "mainroomID=roomToConnectID:roomToConnectID:.."
                 //This will generate two strings "mainroomID" and "roomToConnectID:roomToConnectID:.."
-                splitLinkArray = str.split("="); //For each iteration through links, iterate through all the rooms saved in RoomSaver
-                for (Room r : rs.getAllRooms()) { //Compare the id of a room with the id that is the mainroom saved in linkMap
-                    if (r.getId().equalsIgnoreCase(splitLinkArray[0])) { //Set r as the mainroom
-                        mainRoom = r; //remove the string from the arraylist links
-                        links.remove(str); 
+                splitLinkArray = str.split("=");
+                for (Room r : rs.getAllRooms()) { //For each iteration through links, iterate through all the rooms saved in RoomSaver
+                    if (r.getId().equalsIgnoreCase(splitLinkArray[0])) { //Compare the id of a room with the id that is the mainroom saved in linkMap
+                        mainRoom = r; //Set r as the mainroom
+                        links.remove(str); //remove the string from the arraylist links
                         break;//Break out of the for each loop
                     }
 
@@ -162,9 +164,11 @@ public class WorldLoader {
                     String[] roomIdAndDirection = str2.split(";");
                     if (r2.getId().equalsIgnoreCase(roomIdAndDirection[0])) { //If true, set the room as the secondRoom
                         secondRoom = r2; //Print out a confirmation message to the console
-						//Find the correct Direction as an Enum type
-						Direction direction = findDirection(roomIdAndDirection[1].toLowerCase());
-                        mainRoom.setExit(direction, secondRoom);
+                        //Find the correct Direction as an Enum type
+                        Direction direction = findDirection(roomIdAndDirection[1].toLowerCase());
+                        if (Direction.UNKNOWN != direction) {
+                            mainRoom.setExit(direction, secondRoom);
+                        }
                     }
                 }
             } //Do this while there are still links left in the links array
@@ -172,7 +176,15 @@ public class WorldLoader {
         return rs.getAllRooms();
     }
 
-    private boolean createItem(String evaluateString) {
+    /**
+     * The hasCreatedItem method is used to create items baed on what is read
+     * from the file
+     *
+     * @param evaluateString is the line from the file
+     * @return will return a boolean as true if an item is done being created,
+     * and false if it is not
+     */
+    private boolean hasCreatedItem(String evaluateString) {
         String[] strings = evaluateString.split("=");
         int length = strings.length;
         for (String a : strings) {
@@ -250,6 +262,11 @@ public class WorldLoader {
         return true;
     }
 
+    /**
+     * The buildLinkString method is used create a String using StringBuilder
+     * the String contains the Id of a room which is follow by = and then the
+     * room id's that it is linked to
+     */
     private void buildLinkString() {
         StringBuilder sb = new StringBuilder();
         sb.append(rc.getId());
@@ -262,6 +279,15 @@ public class WorldLoader {
 
     }
 
+    /**
+     * The loadBosses method is a try-catch construction used to read from an
+     * external file It uses the scanner to read 1 line at a time and then act
+     * on that.
+     *
+     * @param fileToRead is the file that is to be read from
+     * @return will return an Arraylist of the bosses that bosses that have been
+     * created.
+     */
     public ArrayList<Boss> loadBosses(String fileToRead) {
         try {
             boolean shouldCreateBoss = false;
@@ -287,6 +313,14 @@ public class WorldLoader {
 
     }
 
+    /**
+     * The hasCreatedBoss method is used to create a boss with the atributes
+     * read from the file.
+     *
+     * @param evaluateString is the line that is read from the file
+     * @return will return a boolean as true if a boss has succesfully been
+     * created and will return false if a boss was not created.
+     */
     private boolean hasCreatedBoss(String evaluateString) {
         String[] splitEvaluateString = evaluateString.split("=");
         int length = splitEvaluateString.length;
@@ -330,6 +364,13 @@ public class WorldLoader {
         return true;
     }
 
+    /**
+     * The setUpBoss1 method is used to determine what attacks the boss have
+     * those are put into an arraylist. The items that the boss carry are also
+     * determined in this method
+     *
+     * @param boss is the boss that will contain these attacks and items.
+     */
     private void setUpBoss1(Boss boss) {
         ArrayList<Move> moves = boss.getMoves();
         moves.add(new Move(10, Attack.LASH, Attack.JUMP));
@@ -338,6 +379,12 @@ public class WorldLoader {
         boss.getInventory().putItem(new Weapon(true, "Glock-18", false, 5, 1, 25, WeaponType.RANGED));
     }
 
+    /**
+     * The setUpBoss2 method is used to determine what attacks the boss have
+     * those are put into an arraylist.
+     *
+     * @param boss is the boss that will contain these attacks
+     */
     private void setUpBoss2(Boss boss) {
         ArrayList<Move> moves = boss.getMoves();
         moves.add(new Move(15, Attack.LASH, Attack.JUMP));
@@ -347,18 +394,24 @@ public class WorldLoader {
         moves.add(new Move(5, Attack.LAUGH, Attack.SHOOT));
     }
 
+    /**
+     * The setUpDefaultBoss method is used to determine what attacks the boss
+     * have those are put into an arraylist.
+     *
+     * @param boss is the boss that will contain these attacks
+     */
     private void setUpDefaultBoss(Boss boss) {
         ArrayList<Move> moves = boss.getMoves();
         moves.add(new Move(100, Attack.LAUGH, Attack.SHOOT));
     }
-	
-	private Direction findDirection(String directionString){
-		directionString = directionString.toLowerCase();
-		for (Direction dir : Direction.values()) {
-			if (directionString.equalsIgnoreCase(dir.toString())) {
-				return dir;
-			}
-		}
-	return Direction.UNKNOWN;	
-	}
+
+    private Direction findDirection(String directionString) {
+        directionString = directionString.toLowerCase();
+        for (Direction dir : Direction.values()) {
+            if (directionString.equalsIgnoreCase(dir.toString())) {
+                return dir;
+            }
+        }
+        return Direction.UNKNOWN;
+    }
 }
