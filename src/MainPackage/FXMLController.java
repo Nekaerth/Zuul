@@ -292,13 +292,13 @@ public class FXMLController implements Initializable {
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
-			goRoom("North");
+			goRoom(Direction.NORTH);
 		} else if (event.getSource() == roomSceneEastButton) {
-			goRoom("East");
+			goRoom(Direction.EAST);
 		} else if (event.getSource() == roomSceneSouthButton) {
-			goRoom("South");
+			goRoom(Direction.SOUTH);
 		} else if (event.getSource() == roomSceneWestButton) {
-			goRoom("West");
+			goRoom(Direction.WEST);
 		}
 	}
 
@@ -473,7 +473,7 @@ public class FXMLController implements Initializable {
 		}
 	}
 
-	private void goRoom(String direction) {
+	private void goRoom(Direction direction) {
 		Room nextRoom = player.getRoom().getExit(direction);
 		//Checks if there is a door in that direction
 		if (nextRoom == null || nextRoom.isHidden()) {
