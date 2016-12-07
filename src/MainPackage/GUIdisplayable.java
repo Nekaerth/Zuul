@@ -15,7 +15,7 @@ import javafx.collections.ObservableList;
  */
 public interface GUIdisplayable {
 
-	public boolean goRoom(String direction);
+	public boolean goRoom(Direction direction);
 
 	public ArrayList<NPC> getAllNpc();
 

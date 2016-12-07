@@ -13,7 +13,7 @@ import java.util.HashMap;
 public class Room {
 
 	private String name;
-	private HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
+	private HashMap<Direction, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	private Inventory inventory;
 	private boolean escapeCode, escapableRoom, locked, hidden;
 	private int number;
@@ -26,7 +26,6 @@ public class Room {
 	 * create a boss
 	 *
 	 * @param id
-	 * @param description string
 	 * @param numberRoom boolean
 	 * @param lock
 	 * @param escapeRoom
@@ -54,7 +53,7 @@ public class Room {
 	 * @param neighbor is a room parameter used to declare what room the direction
 	 * refers to
 	 */
-	public void setExit(String direction, Room neighbor) {
+	public void setExit(Direction direction, Room neighbor) {
 		exits.put(direction, neighbor);
 	}
 
@@ -65,10 +64,10 @@ public class Room {
 	 */
 	public String getExitString() {
 		String returnString = "Exits:";
-		Set<String> keys = exits.keySet();
-		for (String exit : keys) {
+		Set<Direction> keys = exits.keySet();
+		for (Direction exit : keys) {
 			if (!exits.get(exit).isHidden()) {
-				returnString = returnString + " " + exit;
+				returnString = returnString + " " + exit.toString();
 			}
 		}
 		return returnString;
@@ -80,8 +79,8 @@ public class Room {
 	 * @param direction, a string
 	 * @return a Room in the given direction
 	 */
-	public Room getExit(String direction) {
-		return exits.get(direction.toLowerCase());
+	public Room getExit(Direction direction) {
+		return exits.get(direction);
 	}
 
 	/**
@@ -200,10 +199,20 @@ public class Room {
 		return inventory;
 	}
 
-	public ArrayList<String> getListOfExitDirections() {
-		Set<String> directions = exits.keySet();
+	public ArrayList<String> getStringListOfExitDirections() {
+		Set<Direction> directions = exits.keySet();
 		ArrayList<String> directionsArray = new ArrayList<>();
+		for(Direction dir : directions){
+		directionsArray.add(dir.toString());
+		}
+		return directionsArray;
+
+	}
+		public ArrayList<Direction> getListOfExitDirections() {
+		Set<Direction> directions = exits.keySet();
+		ArrayList<Direction> directionsArray = new ArrayList<>();
 		directionsArray.addAll(directions);
+		
 		return directionsArray;
 
 	}

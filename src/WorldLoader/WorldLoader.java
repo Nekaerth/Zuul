@@ -353,6 +353,12 @@ public class WorldLoader {
     }
 	
 	private Direction findDirection(String directionString){
-		
+		directionString = directionString.toLowerCase();
+		for (Direction dir : Direction.values()) {
+			if (directionString.equalsIgnoreCase(dir.toString())) {
+				return dir;
+			}
+		}
+	return Direction.UNKNOWN;	
 	}
 }
