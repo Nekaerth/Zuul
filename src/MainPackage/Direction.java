@@ -1,25 +1,32 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MainPackage;
 
 /**
  *
- * @author Niklas
+ * @author Semesterproject Group 13 (Autumn 2016)
  */
 public enum Direction {
-    NORTH("north"), SOUTH("south"), EAST("east"), WEST("west"), UNKNOWN("?");
-    
-    private String directionString;
-    
-    Direction(String directionString){
-        this.directionString = directionString;
-    }
-    
-    @Override
-    public String toString(){
-        return this.directionString;
-    }
+	NORTH("north"), SOUTH("south"), EAST("east"), WEST("west"), UNKNOWN("?");
+
+	private String directionString;
+
+	/**
+	 * The contructor of the Enum Direction. It is automatically called when a
+	 * Enum is used
+	 *
+	 * @param stringBossType
+	 */
+	Direction(String directionString) {
+		this.directionString = directionString;
+	}
+
+	/**
+	 * Returns a string representation of an Direction. The representation is a
+	 * String version of the enum Direction
+	 *
+	 * @return String
+	 */
+	@Override
+	public String toString() {
+		return this.directionString;
+	}
 }

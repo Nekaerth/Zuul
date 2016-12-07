@@ -8,19 +8,19 @@ import java.util.ArrayList;
  * class attributes includes room, hitpoint, moves and inventory. Among its
  * methods are getMoveString() and getMove().
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Semesterproject Group 13 (Autumn 2016)
  */
-public class Person {
+public abstract class Person {
 
 	private Room room; //Where the person currently is.
 	private int hitpoint; //How much hitpoints the person has.
-	private Inventory inventory = new Inventory(); //An Inventory that holds the persons items
-	private ArrayList<Move> moves = new ArrayList<>(); //ArrayList of all moves, that are available to the person.
+	private Inventory inventory; //An Inventory that holds the persons items
+	private ArrayList<Move> moves; //ArrayList of all moves, that are available to the person.
 	private Move currentMove;
 
 	/**
 	 * This contructor can creates a Person-object.It represent a person, which
-	 * includes hitpoints, available attacks and available items.
+	 * includes hitpoints and available attacks
 	 *
 	 * @param room Sets which room the person currently is in.
 	 * @param hitpoint Sets the persons hitpoint.
@@ -28,17 +28,21 @@ public class Person {
 	public Person(Room room, int hitpoint) {
 		this.room = room;
 		this.hitpoint = hitpoint;
+		this.inventory = new Inventory();
+		this.moves = new ArrayList<>();
 	}
 
 	/**
+	 * Returns the room which the person currently is in.
 	 *
-	 * @return the room which the person currently is in.
+	 * @return Room
 	 */
 	public Room getRoom() {
 		return this.room;
 	}
 
 	/**
+	 * Changes the room that the person is in
 	 *
 	 * @param room which room to change current room to.
 	 */
@@ -47,16 +51,18 @@ public class Person {
 	}
 
 	/**
+	 * Returns the hitpoints of the person as an int
 	 *
-	 * @return the hitpoint for a person.
+	 * @return int
 	 */
 	public int getHitpoint() {
 		return hitpoint;
 	}
 
 	/**
+	 * subtracts a given amount in the parameter from the persons hitpoints
 	 *
-	 * @param damage how much to subtract from the persons hitpoits.
+	 * @param int damage how much to subtract from the persons hitpoits.
 	 */
 	public void subtractHitpoint(int damage) {
 		this.hitpoint -= damage;
@@ -67,6 +73,8 @@ public class Person {
 	}
 
 	/**
+	 * Returns the inventory of the person
+	 *
 	 * @return the inventory
 	 */
 	public Inventory getInventory() {
@@ -74,14 +82,16 @@ public class Person {
 	}
 
 	/**
+	 * Returns an ArrayList of all the available moves
 	 *
-	 * @return a ArrayList of all avialble moves.
+	 * @return an ArrayList containing Move
 	 */
 	public ArrayList<Move> getMoves() {
 		return moves;
 	}
 
 	/**
+	 * Returns a move based on a String that is the name of the move
 	 *
 	 * @param moveName name of the requested move.
 	 * @return the requested attack.
@@ -96,10 +106,20 @@ public class Person {
 		return null;
 	}
 
+	/**
+	 * Returns the current move of the person
+	 *
+	 * @return Move
+	 */
 	public Move getCurrentMove() {
 		return currentMove;
 	}
 
+	/**
+	 * Sets the current move of the person
+	 *
+	 * @param move
+	 */
 	public void setCurrentMove(Move move) {
 		this.currentMove = move;
 	}

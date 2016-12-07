@@ -37,7 +37,7 @@ public interface GUIdisplayable {
 
 	public ObservableList<String> getHighScoreList();
 
-	public int getHighScore();
+	public int calculateHighScore();
 
 	public Player getPlayer();
 
