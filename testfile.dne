@@ -121,8 +121,8 @@ name=Blueprints
 [item]
 id=104
 type=Boltcutter
-roomID=1
-weight=1
+roomID=6
+weight=15
 capacity=1
 pickup=true
 useable=true

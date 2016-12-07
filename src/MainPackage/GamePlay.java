@@ -250,7 +250,7 @@ public class GamePlay implements GUIdisplayable {
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		npc.add(new NPC(rooms.get(rooms.size() - 1)));
 		ArrayList<Move> moves = this.player.getMoves();
-		moves.add(new Move(10, Attack.STAB, WeaponType.RANGED));
+		moves.add(new Move(10, Attack.STAB, WeaponType.MELEE));
 		moves.add(new Move(0, Attack.DUCK, WeaponType.MELEE));
 		moves.add(new Move(0, Attack.JUMP, WeaponType.MELEE));
 		moves.add(new Move(0, Attack.SIDESTEP, WeaponType.MELEE));
