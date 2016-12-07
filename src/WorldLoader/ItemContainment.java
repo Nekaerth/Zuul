@@ -56,7 +56,7 @@ public class ItemContainment {
 
 	/**
          * The setRoomID is used to set the roomId for an item
-	 * @param roomID the roomID for an item
+	 * @param roomId the roomID for an item
 	 */
 	public void setRoomID(String roomId) {
 		this.roomId = roomId;
