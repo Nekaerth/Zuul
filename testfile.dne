@@ -4,7 +4,7 @@ name=Cell
 description=testing this description
 locked=false
 escapeRoom=false
-numberRoom=true
+hasEscapeCode=false
 hidden=false
 linkedID=2;north:7;south
 [room]
@@ -13,7 +13,7 @@ name=Cellhall
 description=testing descr
 locked=false
 escapeRoom=false
-numberRoom=true
+hasEscapeCode=false
 hidden=false
 linkedID=1;south:3;north:4;east:5;west
 [room]
@@ -22,7 +22,7 @@ name=Dininghall
 description=dining
 locked=false
 escapeRoom=false
-numberRoom=true
+hasEscapeCode=true
 hidden=false
 linkedID=2;south
 [room]
@@ -31,7 +31,7 @@ name=Yard
 description=yard
 locked=false
 escapeRoom=false
-numberRoom=false
+hasEscapeCode=false
 hidden=false
 linkedID=2;west:9;south
 [room]
@@ -40,7 +40,7 @@ name=Office
 description=office
 locked=true
 escapeRoom=false
-numberRoom=true
+hasEscapeCode=true
 hidden=false
 linkedID=2;east:6;west
 [room]
@@ -49,7 +49,7 @@ name=Storage
 description=storage
 locked=true
 escapeRoom=false
-numberRoom=false
+hasEscapeCode=false
 hidden=false
 linkedID=5;east
 [room]
@@ -58,25 +58,25 @@ name=Tunnel
 description=tunnel
 locked=false
 escapeRoom=false
-numberRoom=true
+hasEscapeCode=true
 hidden=true
-linkedID=8;west:1;north
+linkedID=1;north:8;west
 [room]
 id=8
 name=Canteen
 description=in the employee canteen
 locked=false
 escapeRoom=false
-numberRoom=false
+hasEscapeCode=false
 hidden=false
-linkedID=7;east
+linkedID=7;east:1;north
 [room]
 id=9
 name=Parkinglot
 description=parkinglot
 locked=true
 escapeRoom=true
-numberRoom=false
+hasEscapeCode=false
 hidden=true
 linkedID=4;north
 [item]
@@ -136,7 +136,7 @@ weight=1
 capacity=1
 pickup=true
 useable=true
-damage=11
+damage=110
 weaponType=melee
 name=Stone
 [item]

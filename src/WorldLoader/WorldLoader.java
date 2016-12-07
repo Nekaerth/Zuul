@@ -213,9 +213,12 @@ public class WorldLoader {
                 case "time":
                     ic.setTime(strings[length - 1]);
                     break;
+                case "damage":
+                    ic.setDamage(strings[length-1]);
+                    break;
                 case "roomToUnlock":
                     ic.setNameOfRoomThatFitsThisKey(strings[length - 1]);
-                    break;
+                    break;                
                 case "roomBoltcutterCanBeUsedIn":
                     ic.setRoomBoltcutterCanBeUsedIn(strings[length - 1]);
                     break;

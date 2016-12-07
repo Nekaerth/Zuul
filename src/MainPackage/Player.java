@@ -100,12 +100,28 @@ public class Player extends Person {
 	public void changePlayerMove(Weapon weapon) {
 		//If the item is a melee weapon
 		if (weapon.weaponType() == WeaponType.MELEE) {
+			ArrayList<Move> moves = getMoves();
 			Move move = getMove("Stab");
-			move.setDamage(weapon.getDamage()); //Changes damage of the Stab move
+			if(move == null){
+			Move moveToRemove = getMove("Shoot");
+			moves.remove(moveToRemove);
+			moves.add(new Move(weapon.getDamage(),Attack.STAB,WeaponType.MELEE));
+			} else {
+				move.setDamage(weapon.getDamage());//Changes damage of the Stab move
+			}
+			 
 		} //If the item is a range weapon
 		else if (weapon.weaponType() == WeaponType.RANGED) {
 			ArrayList<Move> moves = getMoves();
-			moves.add(new Move(weapon.getDamage(), Attack.SHOOT, WeaponType.MELEE)); //Adds a Shoot move
+			Move move = getMove("Shoot");
+			if(move == null){
+			Move moveToRemove = getMove("Stab");
+			moves.remove(moveToRemove);
+			moves.add(new Move(weapon.getDamage(),Attack.SHOOT,WeaponType.RANGED));
+			} else {
+				move.setDamage(weapon.getDamage());//Changes damage of the Shoot move
+			}
+			
 		}
 	}
 
