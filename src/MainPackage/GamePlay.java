@@ -293,8 +293,8 @@ public class GamePlay implements GUIdisplayable {
 	 * Sets all rooms hidden boolean to false
 	 */
 	private void showAllRooms() {
-		for (Room r : rooms) {
-			r.setHidden(false);
+		for (Room room : rooms) {
+			room.setHidden(false);
 		}
 	}
 

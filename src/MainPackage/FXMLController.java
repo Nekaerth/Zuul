@@ -2,13 +2,13 @@ package MainPackage;
 
 import HighscoreLoader.Score;
 import Items.*;
-import java.awt.Color;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -17,8 +17,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class FXMLController implements Initializable {
@@ -27,7 +25,7 @@ public class FXMLController implements Initializable {
 	private Player player;
 	private Boss currentBoss;
 	private Item currentItem;
-	private ArrayList<Room> alreadyMappedRooms = new ArrayList<>();
+	private ArrayList<Room> alreadyMappedRooms = new ArrayList<>(); //Keeps track of which rooms has been printed on the map
 
 	//Main Pane
 	@FXML
@@ -265,9 +263,10 @@ public class FXMLController implements Initializable {
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
 			if (!bossScene.isVisible()) {
-				//TODO clear map each time
+				//Clears the map and the alreadyMappedRooms-list before constructing the map again
+				mapSceneGridPane.getChildren().clear();
 				alreadyMappedRooms.clear();
-				updateMap(player.getRoom(), 3, 3);
+				updateMap(player.getRoom(), 2, 2);
 				setAllButOneGameSceneInvisible(mapScene);
 			}
 		}
@@ -276,12 +275,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
-			if (currentItem != null) {
-				use(currentItem);
-				updateWeightAndItemAmount();
-			} else {
-				roomSceneInfoLabel.setText("You have not selected an item to use!");
-			}
+			use(currentItem);
 		} else if (event.getSource() == roomScenePickUpButton) {
 			Item selectedItem = roomSceneItemList.getSelectionModel().getSelectedItem();
 			if (selectedItem != null) {
@@ -454,18 +448,31 @@ public class FXMLController implements Initializable {
 	}
 
 	private void use(Item item) {
+		//Checks if current item is null
+		if (item == null) {
+			roomSceneInfoLabel.setText("You have not selected an item to use!");
+			return;
+		}
+		//Try using the item. If it fails the method stops. Otherwise it continue
 		if (!game.use(item)) {
 			roomSceneInfoLabel.setText("You can't use " + currentItem.getName() + " here!");
 			return;
 		}
+		updateWeightAndItemAmount();
+		//Set current item to null, if the item was used up
+		if (!player.getInventory().getAllItems().contains(item)) {
+			currentItem = null;
+			updateCurrentItemLabel("None");
+		}
+		//Gives different messages in the info label depending on which item was used
 		switch (item.getItemType()) {
 			case KEY:
 				Key key = (Key) item;
 				roomSceneInfoLabel.setText("You have unlocked the door to " + key.getNameOfRoomThatFitsThisKey() + "!");
-				updateCurrentItemLabel("None");
 				break;
 			case FLASHLIGHT:
 				Flashlight flashlight = (Flashlight) item;
+				//Updates info label depending on if you find something or not
 				if (player.getRoom().hasEscapeCode()) {
 					roomSceneInfoLabel.setText("You have used the flashlight. You find the number " + player.getRoom().getNumber() + ".\nYou have " + flashlight.getCharges() + " charges left!");
 				} else {
@@ -508,6 +515,7 @@ public class FXMLController implements Initializable {
 				//Checks if you type the correct code or not
 				if (game.isCodeCorrect(AlertBox.getCode())) {
 					//If correct you win
+					victorySceneScoreLabel.setText("Score: " + game.calculateHighScore());
 					setAllButOneMainSceneInvisible(victoryScene);
 				} else {
 					//If incorrect you go back to previous room
@@ -526,9 +534,19 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateMap(Room room, int row, int column) {
-		Text roomName = new Text(room.getName());
-		roomName.setFont(new Font(12));
-		mapSceneGridPane.add(roomName, row, column);
+		Pane pane = new Pane();
+		//Adds the room name to pane
+		Label roomName = new Label(room.getName());
+		roomName.setPrefWidth(90);
+		roomName.setAlignment(Pos.CENTER);
+		//Adds all children
+		pane.getChildren().addAll(roomName);
+		//Only draw the room if it is within the grid pane
+		int gridWidth = mapSceneGridPane.getColumnConstraints().size();
+		int gridHeight = mapSceneGridPane.getRowConstraints().size();
+		if (0 <= row && row < gridWidth && 0 <= column && column < gridHeight) {
+			mapSceneGridPane.add(pane, row, column);
+		}
 		alreadyMappedRooms.add(room);
 		for (Direction direction : room.getListOfExitDirections()) {
 			switch (direction) {
