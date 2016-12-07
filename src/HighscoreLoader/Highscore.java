@@ -3,6 +3,7 @@
 
  */
 package HighscoreLoader;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -32,22 +33,22 @@ public class Highscore {
 	 */
 	public ObservableList<Score> getHighscoreList() {
 		try {
-			
+
 			int scoreValue = -1;
 			String name = null;
 			boolean shouldAddScore = false;
 			Scanner scannerFile = new Scanner(new File("highscore.dne"));
 			while (scannerFile.hasNext()) {
-				if(scannerFile.hasNextInt()){
+				if (scannerFile.hasNextInt()) {
 					shouldAddScore = true;
 					scoreValue = scannerFile.nextInt();
 				} else {
 					name = scannerFile.next();
 				}
-				
-				if(shouldAddScore){
-				addHighscore(scoreValue, name);
-				shouldAddScore = false;
+
+				if (shouldAddScore) {
+					addHighscore(scoreValue, name);
+					shouldAddScore = false;
 				}
 			}
 			sortHighscore();
@@ -64,6 +65,7 @@ public class Highscore {
 	}
 
 	/**
+	 * Sorts the highscore
 	 *
 	 * @return
 	 */
@@ -73,11 +75,12 @@ public class Highscore {
 	}
 
 	/**
+	 * Saves a given score value and name as a score and adds it to the list of
+	 * highscores
 	 *
 	 * @param scoreValue
 	 * @param name
 	 */
-
 	public void saveHighscore(int scoreValue, String name) {
 		this.highscore.add(new Score(name, scoreValue));
 		sortHighscore();
@@ -92,6 +95,7 @@ public class Highscore {
 	}
 
 	/**
+	 * Calculates a score based on the time left and the amount of bosskills
 	 *
 	 * @param time
 	 * @param bossKill
@@ -104,8 +108,15 @@ public class Highscore {
 		return calculateScore;
 	}
 
+	/**
+	 * Adds a scoreValue and name to the highscore list as a score
+	 *
+	 * @param int score value
+	 * @param String name
+	 *
+	 */
 	private void addHighscore(int scoreValue, String name) {
-		if(scoreValue != -1 && name != null){
+		if (scoreValue != -1 && name != null) {
 			highscore.add(new Score(name, scoreValue));
 		}
 	}
