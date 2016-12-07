@@ -22,7 +22,7 @@ public class NPC {
 	public void move() {
 		//40% chance of moving
 		if ((int) (Math.random() * 100) + 1 > 60) {
-			ArrayList<String> directions = currentRoom.getListOfExitDirections();
+			ArrayList<Direction> directions = currentRoom.getListOfExitDirections();
 			int indexOfRandomRoom = (int) (Math.random() * directions.size());
 			Room nextRoom = currentRoom.getExit(directions.get(indexOfRandomRoom));
 			this.setCurrentRoom(nextRoom);
