@@ -1,5 +1,7 @@
 /**
  * The WorldLoader class is used to load the game world by reading from an external file
+ * 
+ * @author Termprojectgroup 13 (autum 2016)
  */
 package WorldLoader;
 
@@ -39,6 +41,7 @@ public class WorldLoader {
      * read from a file containing the rooms and items It uses the Scanner to
      * read 1 line at a time from the file Other methods are then called to
      * create either an item or a room based on the line read
+     *
      * @param fileToRead is a String which must contain the file name
      * @return will return an ArrayList of the rooms which has been created
      */
@@ -76,10 +79,10 @@ public class WorldLoader {
     }
 
     /**
-     * The hasCreatedRoom method is used to create the rooms based on what is read
-     * in the file. 
-     * It contains a switch-case construction which has cases to
-     * all atributes a room can have
+     * The hasCreatedRoom method is used to create the rooms based on what is
+     * read in the file. It contains a switch-case construction which has cases
+     * to all atributes a room can have
+     *
      * @param evaluateString is a String that comes from the file
      * @return will return a boolean
      */
@@ -131,7 +134,9 @@ public class WorldLoader {
     }
 
     /**
-     * The connectWorld method is used to link the rooms read from the file together
+     * The connectWorld method is used to link the rooms read from the file
+     * together
+     *
      * @return an ArrayList of rooms
      */
     private ArrayList<Room> connectWorld() {
@@ -141,7 +146,7 @@ public class WorldLoader {
             for (String str : links) { //Split every string in links at "=" and save the strings into linkmap
                 //links consist of a string of the format "mainroomID=roomToConnectID:roomToConnectID:.."
                 //This will generate two strings "mainroomID" and "roomToConnectID:roomToConnectID:.."
-                splitLinkArray = str.split("="); 
+                splitLinkArray = str.split("=");
                 for (Room r : rs.getAllRooms()) { //For each iteration through links, iterate through all the rooms saved in RoomSaver
                     if (r.getId().equalsIgnoreCase(splitLinkArray[0])) { //Compare the id of a room with the id that is the mainroom saved in linkMap
                         mainRoom = r; //Set r as the mainroom
@@ -159,22 +164,25 @@ public class WorldLoader {
                     String[] roomIdAndDirection = str2.split(";");
                     if (r2.getId().equalsIgnoreCase(roomIdAndDirection[0])) { //If true, set the room as the secondRoom
                         secondRoom = r2; //Print out a confirmation message to the console
-						//Find the correct Direction as an Enum type
-						Direction direction = findDirection(roomIdAndDirection[1].toLowerCase());
-						if(Direction.UNKNOWN != direction){
-                        mainRoom.setExit(direction, secondroom);
-						}
+                        //Find the correct Direction as an Enum type
+                        Direction direction = findDirection(roomIdAndDirection[1].toLowerCase());
+                        if (Direction.UNKNOWN != direction) {
+                            mainRoom.setExit(direction, secondRoom);
+                        }
                     }
                 }
             } //Do this while there are still links left in the links array
         } while (links.size() > 0); //Return an arraylist of all the rooms saved in RoomSaver
         return rs.getAllRooms();
     }
-    
+
     /**
-     * The hasCreatedItem method is used to create items baed on what is read from the file
+     * The hasCreatedItem method is used to create items baed on what is read
+     * from the file
+     *
      * @param evaluateString is the line from the file
-     * @return will return a boolean as true if an item is done being created, and false if it is not
+     * @return will return a boolean as true if an item is done being created,
+     * and false if it is not
      */
     private boolean hasCreatedItem(String evaluateString) {
         String[] strings = evaluateString.split("=");
@@ -256,8 +264,8 @@ public class WorldLoader {
 
     /**
      * The buildLinkString method is used create a String using StringBuilder
-     * the String contains the Id of a room which is follow by = and then the room id's 
-     * that it is linked to
+     * the String contains the Id of a room which is follow by = and then the
+     * room id's that it is linked to
      */
     private void buildLinkString() {
         StringBuilder sb = new StringBuilder();
@@ -272,10 +280,13 @@ public class WorldLoader {
     }
 
     /**
-     * The loadBosses method is a try-catch construction used to read from an external file
-     * It uses the scanner to read 1 line at a time and then act on that.
+     * The loadBosses method is a try-catch construction used to read from an
+     * external file It uses the scanner to read 1 line at a time and then act
+     * on that.
+     *
      * @param fileToRead is the file that is to be read from
-     * @return will return an Arraylist of the bosses that bosses that have been created.
+     * @return will return an Arraylist of the bosses that bosses that have been
+     * created.
      */
     public ArrayList<Boss> loadBosses(String fileToRead) {
         try {
@@ -301,13 +312,14 @@ public class WorldLoader {
         return this.bosses;
 
     }
-    
+
     /**
-     * The hasCreatedBoss method is used to create a boss with the atributes 
+     * The hasCreatedBoss method is used to create a boss with the atributes
      * read from the file.
+     *
      * @param evaluateString is the line that is read from the file
-     * @return will return a boolean as true if a boss has succesfully been created
-     * and will return false if a boss was not created.
+     * @return will return a boolean as true if a boss has succesfully been
+     * created and will return false if a boss was not created.
      */
     private boolean hasCreatedBoss(String evaluateString) {
         String[] splitEvaluateString = evaluateString.split("=");
@@ -354,8 +366,9 @@ public class WorldLoader {
 
     /**
      * The setUpBoss1 method is used to determine what attacks the boss have
-     * those are put into an arraylist.
-     * The items that the boss carry are also determined in this method
+     * those are put into an arraylist. The items that the boss carry are also
+     * determined in this method
+     *
      * @param boss is the boss that will contain these attacks and items.
      */
     private void setUpBoss1(Boss boss) {
@@ -366,9 +379,10 @@ public class WorldLoader {
         boss.getInventory().putItem(new Weapon(true, "Glock-18", false, 5, 1, 25, WeaponType.RANGED));
     }
 
-     /**
+    /**
      * The setUpBoss2 method is used to determine what attacks the boss have
      * those are put into an arraylist.
+     *
      * @param boss is the boss that will contain these attacks
      */
     private void setUpBoss2(Boss boss) {
@@ -381,22 +395,23 @@ public class WorldLoader {
     }
 
     /**
-     * The setUpDefaultBoss method is used to determine what attacks the boss have
-     * those are put into an arraylist.
+     * The setUpDefaultBoss method is used to determine what attacks the boss
+     * have those are put into an arraylist.
+     *
      * @param boss is the boss that will contain these attacks
      */
     private void setUpDefaultBoss(Boss boss) {
         ArrayList<Move> moves = boss.getMoves();
         moves.add(new Move(100, Attack.LAUGH, Attack.SHOOT));
     }
-	
-	private Direction findDirection(String directionString){
-		directionString = directionString.toLowerCase();
-		for (Direction dir : Direction.values()) {
-			if (directionString.equalsIgnoreCase(dir.toString())) {
-				return dir;
-			}
-		}
-	return Direction.UNKNOWN;	
-	}
+
+    private Direction findDirection(String directionString) {
+        directionString = directionString.toLowerCase();
+        for (Direction dir : Direction.values()) {
+            if (directionString.equalsIgnoreCase(dir.toString())) {
+                return dir;
+            }
+        }
+        return Direction.UNKNOWN;
+    }
 }
