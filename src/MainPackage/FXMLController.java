@@ -483,6 +483,7 @@ public class FXMLController implements Initializable {
 	}
 
 	private void goRoom(Direction direction) {
+		Room previousRoom = player.getRoom();
 		Room nextRoom = player.getRoom().getExit(direction);
 		//Checks if there is a door in that direction
 		if (nextRoom == null || nextRoom.isHidden()) {
@@ -502,7 +503,11 @@ public class FXMLController implements Initializable {
 			}
 			//Checks if room is escape able
 			if (nextRoom.isEscapeableRoom()) {
-				game.isCodeCorrect(AlertBox.getCode());
+				if (game.isCodeCorrect(AlertBox.getCode())) {
+					setAllButOneMainSceneInvisible(victoryScene);
+				} else {
+					goRoom(nextRoom.getDirection(previousRoom));
+				}
 			}
 		} else {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");

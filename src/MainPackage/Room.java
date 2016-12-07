@@ -61,6 +61,15 @@ public class Room {
 		exits.put(direction, neighbor);
 	}
 
+	public Direction getDirection(Room room) {
+		for (Direction direction : getListOfExitDirections()) {
+			if (getExit(direction) == room) {
+				return direction;
+			}
+		}
+		return null;
+	}
+
 	/**
 	 * This method returns a string of all the exits out of the room
 	 *
