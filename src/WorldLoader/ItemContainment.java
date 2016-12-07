@@ -1,20 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * The ItemContainment class is used to set and return 
+ * the value of atributes related to items
+ * 
+ * @author Termprojectgroup (autum 2016)
  */
 package WorldLoader;
 
 import Items.WeaponType;
 import Items.ItemType;
 
-/**
- *
- * @author simon
- */
 public class ItemContainment {
 
-	private String id;
 	private ItemType type;
 	private String roomId;
 	private int weight;
@@ -30,14 +26,16 @@ public class ItemContainment {
 	private String roomBoltcutterCanBeUsedIn;
 
 	/**
-	 * @return the type
+         * The getType method is used to the the type of an item
+	 * @return the type of the item
 	 */
 	public ItemType getType() {
 		return type;
 	}
 
 	/**
-	 * @param type the key to set
+         * The setType method is used to set the type of an item
+	 * @param type is the type that the item should be set to
 	 */
 	public void setType(String type) {
 		type = type.toLowerCase();
@@ -49,27 +47,31 @@ public class ItemContainment {
 	}
 
 	/**
-	 * @return the roomID
+         * The getRoomID is used to get the roomID where an item is
+	 * @return the roomID for an item
 	 */
 	public String getRoomID() {
 		return roomId;
 	}
 
 	/**
-	 * @param roomID the roomID to set
+         * The setRoomID is used to set the roomId for an item
+	 * @param roomID the roomID for an item
 	 */
 	public void setRoomID(String roomId) {
 		this.roomId = roomId;
 	}
 
 	/**
-	 * @return the weight
+         * The getWeight method is used to get the weight of an item
+	 * @return the weight of the item
 	 */
 	public int getWeight() {
 		return weight;
 	}
 
 	/**
+         * The setWeight method is used to set the weight of an item
 	 * @param weight the weight to set
 	 */
 	public void setWeight(String weight) {
@@ -77,55 +79,63 @@ public class ItemContainment {
 	}
 
 	/**
-	 * @return the capacity
+         * The getCapacity method is used to get the capacity of an item
+	 * @return the capacity of the item
 	 */
 	public int getCapacity() {
 		return capacity;
 	}
 
 	/**
-	 * @param capacity the capacity to set
+         * The setCapacity method is used to set the capacity of an item
+	 * @param capacity the capacity of the item to set
 	 */
 	public void setCapacity(String capacity) {
 		this.capacity = Integer.parseInt(capacity);
 	}
 
 	/**
-	 * @return the pickup
+         * The isPickup method is used to get the value of the boolean pickup
+	 * @return the boolean pickup
 	 */
 	public boolean isPickup() {
 		return pickup;
 	}
 
 	/**
-	 * @param pickup the pickup to set
+         * The setPickup method is used to set the boolean value of pickup
+	 * @param pickup is the String that will set the value of the boolean
 	 */
 	public void setPickup(String pickup) {
 		this.pickup =pickup.equalsIgnoreCase("true");		
 	}
 
 	/**
-	 * @return the useable
+         * The isUseable method is used to get the value of the useable boolean
+	 * @return the alue of the boolean useable
 	 */
 	public boolean isUseable() {
 		return useable;
 	}
 
 	/**
-	 * @param useable the useable to set
+         * The setUseable method is used to set the value of the useable boolean
+	 * @param useable is the String that will set the value of the boolean
 	 */
 	public void setUseable(String useable) {
 		this.useable = useable.equalsIgnoreCase("true");			
 	}
 
 	/**
-	 * @return the name
+         * The getName method is used to get the name of an item
+	 * @return the name of the item
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
+         * The setName method is used to set the name of an item
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -133,13 +143,15 @@ public class ItemContainment {
 	}
 
 	/**
-	 * @return the charges
+         * The getCharges method is used to get the amount of charges 
+	 * @return the amount of charges
 	 */
 	public int getCharges() {
 		return charges;
 	}
 
 	/**
+         * The setCharges methodd is used to set the amount of charges
 	 * @param charges the charges to set
 	 */
 	public void setCharges(String charges) {
@@ -147,6 +159,7 @@ public class ItemContainment {
 	}
 
 	/**
+         * The getDamage method is used to get the damage for an item
 	 * @return the damage
 	 */
 	public int getDamage() {
@@ -154,6 +167,7 @@ public class ItemContainment {
 	}
 
 	/**
+         * The setdamage is used to set the damage for an item
 	 * @param damage the damage to set
 	 */
 	public void setDamage(String damage) {
@@ -161,6 +175,7 @@ public class ItemContainment {
 	}
 
 	/**
+         * The getWeaponType is used to get the weaponType of an item
 	 * @return the weapontype
 	 */
 	public WeaponType getWeapontype() {
@@ -168,7 +183,8 @@ public class ItemContainment {
 	}
 
 	/**
-	 * @param weapontype the weapontype to set
+         * The setWeaponType is used set the weaponType of an item
+         * @param weaponType is a String equal to a weaponType 
 	 */
 	public void setWeapontype(String weaponType) {
 		weaponType = weaponType.toLowerCase();
@@ -180,6 +196,7 @@ public class ItemContainment {
 	}
 
 	/**
+         * The getTime method is used to get the time 
 	 * @return the time
 	 */
 	public int getTime() {
@@ -187,29 +204,40 @@ public class ItemContainment {
 	}
 
 	/**
+         * The setTime method is used to set the time
 	 * @param time the time to set
 	 */
 	public void setTime(String time) {
 		this.time = Integer.parseInt(time);
 	}
 
+        /**
+         * The setNameOfRoomThatFitsThisKey method is used to set what room a key can be used in
+         * @param nameOfRoomThatFitsThisKey is the name of the room a key can be used in
+         */
 	public void setNameOfRoomThatFitsThisKey(String nameOfRoomThatFitsThisKey) {
 		this.nameOfRoomThatFitsThisKey = nameOfRoomThatFitsThisKey;
 	}
 
+        /**
+         * The getNameOfRoomThatFitsThisKey is used to get the String where a key can be used
+         * @return a String where a key can be used
+         */
 	public String getNameOfRoomThatFitsThisKey() {
 		return nameOfRoomThatFitsThisKey;
 	}
 
 	/**
-	 * @return the roomBoltcutterCanBeUsedIn
+         * The getRoomBoltcutterCanBeUsedIn is used to get the String where a boltcutter can be used
+	 * @return a String where a boltcutter can be used
 	 */
 	public String getRoomBoltcutterCanBeUsedIn() {
 		return roomBoltcutterCanBeUsedIn;
 	}
 
 	/**
-	 * @param roomBoltcutterCanBeUsedIn the roomBoltcutterCanBeUsedIn to set
+         * The setRoomBoltcutterCanBeUsedIn is used to set where a boltcutter can be used
+	 * @param roomBoltcutterCanBeUsedIn a String equal to the name of a room where the boltcutter can be used
 	 */
 	public void setRoomBoltcutterCanBeUsedIn(String roomBoltcutterCanBeUsedIn) {
 		this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
