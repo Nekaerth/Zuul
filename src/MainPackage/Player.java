@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * maximum item weight capacity. It has a method for changing and adding
  * attacks, when picking up weapon items.
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject 13 (Autumn 2016)
  */
 public class Player extends Person {
 
@@ -49,6 +49,13 @@ public class Player extends Person {
 	}
 
 	/**
+	 * Adds a specified amount of time to the players time
+	 * @param time 
+	 */
+	public void addTime(int time) {
+		this.time += time;
+	}
+	/**
 	 * The subtractTime() method is used as a count down timer to keep track of
 	 * how much time the player has left. Time is used as a ressource that you
 	 * spend while moving through rooms and looking for items.
@@ -56,10 +63,6 @@ public class Player extends Person {
 	 * @param time is an integer that we subtract from to reduce the time the
 	 * player has left to win the game.
 	 */
-	public void addTime(int time) {
-		this.time += time;
-	}
-
 	public void subtractTime(int time) {
 		this.time -= time;
 		//If time goes below 0, then it sets the time to 0 instead
@@ -70,15 +73,16 @@ public class Player extends Person {
 	}
 
 	/**
+	 * Returns the maximum item capacity for the player 
 	 *
-	 * @return the maximum amount item the player can hold.
+	 * @return int
 	 */
-	public int getItemCapacity() {
+	public int getMaxItemCapacity() {
 		return this.itemCapacity;
 	}
 
 	/**
-	 *
+	 * Returns the max weight of items that the player can hold
 	 * @return the maximum weight that the players items must weight in total.
 	 */
 	public int getMaxWeight() {
@@ -86,7 +90,8 @@ public class Player extends Person {
 	}
 
 	/**
-	 * Takes an item name as argument. If the item is a melee weapon, the damage
+	 * Changes the players move
+	 * Takes an item as argument. If the item is a melee weapon, the damage
 	 * of the Stab move is changed. If the item is a range weapon, then a Shoot
 	 * move is added to player moves.
 	 *
@@ -105,7 +110,7 @@ public class Player extends Person {
 	}
 
 	/**
-	 *
+	 *	Changes a players move, and is used to revert the effects of picking up an item
 	 * @param weapon Takes a weapon item which effect on moves should be reversed
 	 */
 	public void droppedWeapon(Weapon weapon) {
@@ -122,6 +127,7 @@ public class Player extends Person {
 	}
 
 	/**
+	 * Returns the amount of bosses killed by the player
 	 * @return The amount of boss kills
 	 */
 	public int getAmountOfBossKill() {
@@ -129,7 +135,7 @@ public class Player extends Person {
 	}
 
 	/**
-	 *
+	 * Adds a bosskill to the player
 	 */
 	public void addOneBossKill() {
 		this.amountOfBossKill++;

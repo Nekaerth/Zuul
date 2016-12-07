@@ -5,6 +5,7 @@
  */
 package MainPackage;
 
+import HighscoreLoader.Score;
 import Items.Item;
 import Items.Key;
 import java.net.URL;
@@ -17,8 +18,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -121,6 +124,8 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label mapSceneTitle;
 	@FXML
+	private GridPane mapSceneGridPane;
+	@FXML
 	private Button mapSceneCloseButton;
 	//Boss Pane
 	@FXML
@@ -178,7 +183,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Label highScoreSceneTitle;
 	@FXML
-	private ListView<String> highScoreSceneScoreList;
+	private ListView<Score> highScoreSceneScoreList;
 	@FXML
 	private Button highScoreSceneBackButton;
 
@@ -267,6 +272,7 @@ public class FXMLController implements Initializable {
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
 			if (!bossScene.isVisible()) {
+				mapSceneGridPane.add(new Text("test"), 0, 0);
 				setAllButOneGameSceneInvisible(mapScene);
 			}
 		}
@@ -291,13 +297,13 @@ public class FXMLController implements Initializable {
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
-			goRoom("North");
+			goRoom(Direction.NORTH);
 		} else if (event.getSource() == roomSceneEastButton) {
-			goRoom("East");
+			goRoom(Direction.EAST);
 		} else if (event.getSource() == roomSceneSouthButton) {
-			goRoom("South");
+			goRoom(Direction.SOUTH);
 		} else if (event.getSource() == roomSceneWestButton) {
-			goRoom("West");
+			goRoom(Direction.WEST);
 		}
 	}
 
@@ -356,7 +362,7 @@ public class FXMLController implements Initializable {
 	private void handleVictorySceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 		String name = victorySceneTextField.getText();
-		int highscore = game.getHighScore();
+		int highscore = game.calculateHighScore();
 		game.saveHighScore(name, highscore);
 	}
 
@@ -437,9 +443,9 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateWeightAndItemAmount() {
-		int itemAmount = player.getInventory().getItemCapacity();
-		int itemCapacity = player.getItemCapacity();
-		int weight = player.getInventory().getItemWeight();
+		int itemAmount = player.getInventory().getTotalItemCapacity();
+		int itemCapacity = player.getMaxItemCapacity();
+		int weight = player.getInventory().getTotalItemWeight();
 		int Maxweight = player.getMaxWeight();
 
 		topMenuCapacityLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity + "\nWeight: " + weight + "/" + Maxweight);
@@ -472,7 +478,7 @@ public class FXMLController implements Initializable {
 		}
 	}
 
-	private void goRoom(String direction) {
+	private void goRoom(Direction direction) {
 		Room nextRoom = player.getRoom().getExit(direction);
 		//Checks if there is a door in that direction
 		if (nextRoom == null || nextRoom.isHidden()) {
@@ -498,6 +504,10 @@ public class FXMLController implements Initializable {
 	private void updateCurrentItemLabel(String itemName) {
 		roomSceneCurrentItemLabel.setText("Current Item: " + itemName);
 		inventorySceneCurrentItemLabel.setText("Current Item: " + itemName);
+	}
+
+	private void updateMap(Room room, String direction, int row, int column) {
+		mapSceneGridPane.add(new Text(room.getName()), column, row);
 	}
 
 	private void beginBossFight() {

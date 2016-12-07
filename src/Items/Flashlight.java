@@ -2,7 +2,7 @@ package Items;
 
 /**
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Flashlight extends Item {
 
@@ -25,9 +25,8 @@ public class Flashlight extends Item {
 	}
 
 	/**
-	 * We override the instance method which is declare in the interface The
-	 * isPickup method returns the boolean value declared when creating the
-	 * flashlight object
+	 * The abstract method which is declared in the abstract class Item is overrided so that
+	 * The getType method returns the enum value corresponding to this item type
 	 *
 	 * @return will return a value of the type ItemType enum
 	 */
@@ -37,11 +36,9 @@ public class Flashlight extends Item {
 	}
 
 	/**
-	 * The getCharges method returns the int value declared when creating the
-	 * flashlight object
+	 * The getCharges method returns the int value that contains how many charges that are left
 	 *
-	 * @return will return an int equal to what is declared when creating the
-	 * object
+	 * @return will return an int of how many charges is left
 	 */
 	public int getCharges() {
 		return this.charges;

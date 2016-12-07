@@ -1,9 +1,7 @@
 package Items;
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Misc extends Item {
 
@@ -13,17 +11,16 @@ public class Misc extends Item {
 	 *
 	 * @param pickup is a boolean used to check if the item can be picked up
 	 * @param name is a String that refers to the name of the misc
-	 * @param useable is a boolean used to check if the item can be used once you
-	 * have picked it up
+	 * @param useable is a boolean used to check if the item can be used once
+	 * you have picked it up
 	 */
 	public Misc(boolean pickup, String name, boolean useable) {
 		super(pickup, name, useable, 0, 0);
 	}
 
 	/**
-	 * We override the instance method which is declare in the interface The
-	 * getType method returns the enum value corresponding to this item type
-	 *
+	 * The abstract method which is declared in the abstract class Item is overrided so that
+	 * The getType method returns the enum value corresponding to this item type
 	 * @return will return a value of the type ItemType enum
 	 */
 	@Override

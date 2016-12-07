@@ -5,17 +5,18 @@
  */
 package MainPackage;
 
+import HighscoreLoader.Score;
 import Items.Item;
 import java.util.ArrayList;
 import javafx.collections.ObservableList;
 
 /**
  *
- * @author Niklas
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public interface GUIdisplayable {
 
-	public boolean goRoom(String direction);
+	public boolean goRoom(Direction direction);
 
 	public ArrayList<NPC> getAllNpc();
 
@@ -35,11 +36,14 @@ public interface GUIdisplayable {
 
 	public void saveHighScore(String name, int highScore);
 
-	public ObservableList<String> getHighScoreList();
+	public ObservableList<Score> getHighScoreList();
 
-	public int getHighScore();
+	public int calculateHighScore();
 
 	public Player getPlayer();
 
 	public ArrayList<Boss> getBosses();
+	
+	public boolean isCodeCorrect(String userCode);
+	
 }

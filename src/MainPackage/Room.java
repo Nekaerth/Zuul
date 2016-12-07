@@ -4,37 +4,40 @@ import Items.Inventory;
 import java.util.ArrayList;
 import java.util.Set;
 import java.util.HashMap;
+
 /**
  * The Room class is used to create rooms and methods that can describe the
  * rooms. The class consists of X instance variable and X instance methods
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Room {
 
 	private String name;
-	private HashMap<String, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
+	private HashMap<Direction, Room> exits; // Et form for array der indeholder en key og en value. For at få value skal key'en gives og der er associationer mellem disse
 	private Inventory inventory;
 	private boolean escapeCode, escapableRoom, locked, hidden;
 	private int number;
 	private String id;
 
 	/**
-	 * The constructor of the class Room. The constructor takes 3 parameters: A
-	 * description of the room, a boolean that says whether or not the room
-	 * contains a number and a boolean that says whether or not the room need to
-	 * create a boss
+	 * The constructor of the class Room. The constructor takes 6 parameters:
+	 * Anid of a room, a boolean that says whether or not the room contains a
+	 * number, a boolean that says whether or not the room is locked, a boolean
+	 * that says whether or not the room is a escape able room, a String that is
+	 * the name of the room and a boolean that says whether or not the room is
+	 * hidden
+	 *
 	 *
 	 * @param id
-	 * @param description string
 	 * @param numberRoom boolean
 	 * @param lock
 	 * @param escapeRoom
 	 * @param name
 	 * @param hidden
 	 */
-	public Room(String id, boolean numberRoom, boolean lock, boolean escapeRoom, String name, boolean hidden) { //Constructor der tager en string der beskriver rummet
-		exits = new HashMap<>(); //exits opretter en ny hashmap der indeholder key som string og room som value.
+	public Room(String id, boolean numberRoom, boolean lock, boolean escapeRoom, String name, boolean hidden) {
+		exits = new HashMap<>();
 		this.escapableRoom = escapeRoom;
 		this.id = id;
 		this.name = name;
@@ -42,6 +45,7 @@ public class Room {
 		this.locked = lock;
 		this.hidden = hidden;
 		this.inventory = new Inventory();
+		//Generates a random number for the room, if its a room containing a number
 		if (numberRoom == true) {
 			number = (int) (Math.random() * 9);
 		}
@@ -50,11 +54,12 @@ public class Room {
 	/**
 	 * The setExit method is used to declare which exits a room has
 	 *
-	 * @param direction is a string parameter used to declare where the exit is
-	 * @param neighbor is a room parameter used to declare what room the direction
-	 * refers to
+	 * @param direction is a Direction parameter used to declare where the exit
+	 * is
+	 * @param neighbor is a room parameter used to declare what room the
+	 * direction refers to
 	 */
-	public void setExit(String direction, Room neighbor) {
+	public void setExit(Direction direction, Room neighbor) {
 		exits.put(direction, neighbor);
 	}
 
@@ -65,10 +70,10 @@ public class Room {
 	 */
 	public String getExitString() {
 		String returnString = "Exits:";
-		Set<String> keys = exits.keySet();
-		for (String exit : keys) {
+		Set<Direction> keys = exits.keySet();
+		for (Direction exit : keys) {
 			if (!exits.get(exit).isHidden()) {
-				returnString = returnString + " " + exit;
+				returnString = returnString + " " + exit.toString();
 			}
 		}
 		return returnString;
@@ -77,19 +82,19 @@ public class Room {
 	/**
 	 * This method returns the room in a given direction that is the parameter
 	 *
-	 * @param direction, a string
-	 * @return a Room in the given direction
+	 * @param direction, a Direction
+	 * @return a Room in the given direction if there is no room it returns null
 	 */
-	public Room getExit(String direction) {
-		return exits.get(direction.toLowerCase());
+	public Room getExit(Direction direction) {
+		return exits.get(direction);
 	}
 
 	/**
 	 * This method returns the number that is in the room if it is a numberroom,
 	 * else it returns -1.
 	 *
-	 * @return an int. If the room is not a number room it returns -1. if it is, a
-	 * random number
+	 * @return an int. If the room is not a number room it returns -1. if it is,
+	 * a random number
 	 */
 	public int getNumber() {
 		if (escapeCode) {
@@ -100,8 +105,8 @@ public class Room {
 	}
 
 	/**
-	 * The setEscapeAbleRoom method is a setter method that sets the value of the
-	 * boolean escapeRoom to true
+	 * The setEscapeAbleRoom method is a setter method that sets the value of
+	 * the boolean escapeRoom to true
 	 */
 	public void setEscapeAbleRoom() {
 		this.escapableRoom = true;
@@ -109,8 +114,8 @@ public class Room {
 	}
 
 	/**
-	 * The getEscapeRomm is a getter method that returns the current value of the
-	 * boolean escapeRoom
+	 * The getEscapeRoom is a getter method that returns the current value of
+	 * the boolean escapeableRoom
 	 *
 	 * @return will return the current boolean value of escapeRoom
 	 */
@@ -118,8 +123,8 @@ public class Room {
 		return this.escapableRoom;
 
 		/**
-		 * The lockRoom method is a setter method that will set the boolean value
-		 * lock to true
+		 * The lockRoom method is a setter method that will set the boolean
+		 * value lock to true
 		 */
 	}
 
@@ -150,7 +155,7 @@ public class Room {
 
 	/**
 	 * The hasEscapeCode method will return the current boolean value of
-	 * hasEscapeCode
+	 * EscapeCode
 	 *
 	 * @return will return the current boolean value
 	 */
@@ -159,20 +164,26 @@ public class Room {
 	}
 
 	/**
-	 * @return the id
+	 * Returns the id of a room
+	 *
+	 * @return String id
 	 */
 	public String getId() {
 		return id;
 	}
 
 	/**
-	 * @return the name
+	 * Returns the name of the room
+	 *
+	 * @return String name
 	 */
 	public String getName() {
 		return name;
 	}
 
 	/**
+	 * Sets the name of the room
+	 *
 	 * @param name the name to set
 	 */
 	public void setName(String name) {
@@ -180,6 +191,8 @@ public class Room {
 	}
 
 	/**
+	 * Returns whether or not the room is hidden
+	 *
 	 * @return the hidden
 	 */
 	public boolean isHidden() {
@@ -187,6 +200,8 @@ public class Room {
 	}
 
 	/**
+	 * Sets the rooms hidden attribute, based on the parameter that is given
+	 *
 	 * @param hidden the hidden to set
 	 */
 	public void setHidden(boolean hidden) {
@@ -194,16 +209,25 @@ public class Room {
 	}
 
 	/**
-	 * @return the inventory
+	 * Returns the inventory of a Room
+	 *
+	 * @return inventory of a room
+	 *
 	 */
 	public Inventory getInventory() {
 		return inventory;
 	}
 
-	public ArrayList<String> getListOfExitDirections() {
-		Set<String> directions = exits.keySet();
-		ArrayList<String> directionsArray = new ArrayList<>();
+	/**
+	 * Returns an ArrayList containing Directions of all the exits in this room
+	 *
+	 * @return ArrayList containing Direction
+	 */
+	public ArrayList<Direction> getListOfExitDirections() {
+		Set<Direction> directions = exits.keySet();
+		ArrayList<Direction> directionsArray = new ArrayList<>();
 		directionsArray.addAll(directions);
+
 		return directionsArray;
 
 	}

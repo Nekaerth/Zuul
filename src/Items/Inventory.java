@@ -1,22 +1,19 @@
 package Items;
 
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Inventory {
 
-	/**
-	 * New hashmap is initialized.
-	 */
 	ObservableList<Item> inventory;
 
 	/**
-	 * New hashmap with the name "inventory" is created in the contructor.
+	 * New ObservableList with the name "inventory" is created in the
+	 * contructor.
 	 */
 	public Inventory() {
 		inventory = FXCollections.observableArrayList();
@@ -24,8 +21,9 @@ public class Inventory {
 	}
 
 	/**
+	 * Returns an observable list of all the items in the inventory
 	 *
-	 * @return HashMap with all items.
+	 * @return ObservableList with all items.
 	 */
 	public ObservableList<Item> getAllItems() {
 		return inventory;
@@ -41,38 +39,11 @@ public class Inventory {
 	}
 
 	/**
-	 * This method returns the name of an item.
-	 *
-	 * @param name The parameter name is the reference name to the item requested.
-	 * @return the index where the item was found
-	 */
-//	public int getItem(String name) {
-//            for (Item i : inventory) {
-//                if (i.getName().equalsIgnoreCase(name)) {
-//		return inventory.indexOf(i);
-//                }
-//            }
-//            return -1;            
-//	}
-	/**
-	 * This method will return a list of all items in the inventory.
-	 *
-	 * @return Returns the list of items in the inventory.
-	 */
-	public String getStringOfAllItems() {
-		String returnString = "Items:";
-		for (Item item : inventory) {
-			returnString += " " + item.getName();
-		}
-		return returnString;
-	}
-
-	/**
 	 * This method will calculate the total weight of items in a inventory.
 	 *
 	 * @return an integer that is the total weight.
 	 */
-	public int getItemWeight() {
+	public int getTotalItemWeight() {
 		int weight = 0;
 		for (Item item : inventory) {
 			weight += item.getWeight();
@@ -86,37 +57,22 @@ public class Inventory {
 	 * @return an integer.
 	 */
 	public int size() {
-		int size = 0;
-		size = inventory.size();
-		return size;
+		return inventory.size();
 	}
 
 	/**
-	 * This method checks if the inventory contains an item with the name of the
-	 * parameter.
+	 * Adds a given item to the inventory
 	 *
-	 * @param name which is a String.
-	 * @return a boolean that is true if it contains the item.
-	 */
-//	public boolean containItem(String name) {
-//		return this.inventory.containsKey(name);
-//	}
-	/**
-	 * This method allow you to put an item that you are carrying into an
-	 * inventory.
-	 *
-	 * @param name The parameter name is the reference name to the object.
-	 * @param item The parameter item is the object of the class Item.
+	 * @param item The parameter item is the item to add.
 	 */
 	public void putItem(Item item) {
 		inventory.add(item);
-
 	}
 
 	/**
-	 * This method removes an item from an inventory.
+	 * The given item is removed from the inventory.
 	 *
-	 * @param name string, the name of the item to be removed.
+	 * @param item The item to remove
 	 */
 	public void removeItem(Item item) {
 		inventory.remove(item);
@@ -134,11 +90,10 @@ public class Inventory {
 	}
 
 	/**
-	 * Transfer the given item specified by the name given in a String, from the
-	 * given inventory to this inventory
+	 * Transfer the given item from the given inventory to this inventory
 	 *
 	 * @param inventory an inventory from either a room or a person
-	 * @param item
+	 * @param item the item to transfer from one inventory to another
 	 *
 	 */
 	public void transferItem(Inventory inventory, Item item) {
@@ -146,7 +101,12 @@ public class Inventory {
 		inventory.removeItem(item);
 	}
 
-	public int getItemCapacity() {
+	/**
+	 * Returns the total capacity of all the items in the inventory
+	 *
+	 * @return int The total capacity of all items in the inventory
+	 */
+	public int getTotalItemCapacity() {
 		int capacity = 0;
 		for (Item item : inventory) {
 			capacity += item.getCapacity();

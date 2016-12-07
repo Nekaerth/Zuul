@@ -1,7 +1,6 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
+
  */
 package HighscoreLoader;
 
@@ -11,62 +10,83 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
  *
- * @author Danieln Johansen
+ * @author Termprojekt gruppe 13 (Autumn 2016)
  */
 public class Highscore {
 
-	ObservableList<String> highscore;
+	ObservableList<Score> highscore;
 
 	public Highscore() {
 		highscore = FXCollections.observableArrayList();
 	}
 
-	public ObservableList<String> getHighscoreList() {
+	/**
+	 * Loads in the highscore list from the file "highscore.dne" and returns an
+	 * observablelist of the highscores
+	 *
+	 * @return ObservableList of type String
+	 */
+	public ObservableList<Score> getHighscoreList() {
 		try {
 
+			int scoreValue = -1;
+			String name = null;
+			boolean shouldAddScore = false;
 			Scanner scannerFile = new Scanner(new File("highscore.dne"));
 			while (scannerFile.hasNext()) {
-				highscore.add(scannerFile.nextLine());
+				if (scannerFile.hasNextInt()) {
+					shouldAddScore = true;
+					scoreValue = scannerFile.nextInt();
+				} else {
+					name = scannerFile.next();
+				}
+
+				if (shouldAddScore) {
+					addHighscore(scoreValue, name);
+					shouldAddScore = false;
+				}
 			}
-
 			sortHighscore();
-
 		} catch (FileNotFoundException ex) {
 			try {
 				System.out.println("FileNotFoundException in getHighscoreList method in Highscore" + ex);
 				File f = new File("highscore.dne");
 				f.createNewFile();
 			} catch (IOException ex1) {
-				System.out.println("IOException " + ex);
+				System.out.println("IOException " + ex1);
 			}
-					
 		}
 		return highscore;
 	}
 
-	public ObservableList<String> sortHighscore() {
-
-		Collections.sort(highscore, (String s1, String s2) -> {
-			int score1 = Integer.parseInt(s1.split("\\s")[1]); // score in s1
-			int score2 = Integer.parseInt(s2.split("\\s")[1]); // score in s2
-			return score2 - score1;
-		});
+	/**
+	 * Sorts the highscore
+	 *
+	 * @return
+	 */
+	public ObservableList<Score> sortHighscore() {
+		Collections.sort(highscore);
 		return highscore;
 	}
 
-	public void saveHighscore(String highscore) {
-		this.highscore.add(highscore);
+	/**
+	 * Saves a given score value and name as a score and adds it to the list of
+	 * highscores
+	 *
+	 * @param scoreValue
+	 * @param name
+	 */
+	public void saveHighscore(int scoreValue, String name) {
+		this.highscore.add(new Score(name, scoreValue));
 		sortHighscore();
 
 		try (FileWriter highscoreFile = new FileWriter("highscore.dne", true)) {
-			highscoreFile.write(highscore + System.lineSeparator());
+			highscoreFile.write(name + " " + scoreValue + System.lineSeparator());
 			highscoreFile.flush();
 		} catch (IOException ex) {
 			System.out.println("IOException in method saveHighscore() in Highscore" + ex);
@@ -74,10 +94,30 @@ public class Highscore {
 
 	}
 
+	/**
+	 * Calculates a score based on the time left and the amount of bosskills
+	 *
+	 * @param time
+	 * @param bossKill
+	 * @return
+	 */
 	public static int calculateScore(int time, int bossKill) {
 
 		int calculateScore = time + (bossKill * 600);
 
 		return calculateScore;
+	}
+
+	/**
+	 * Adds a scoreValue and name to the highscore list as a score
+	 *
+	 * @param int score value
+	 * @param String name
+	 *
+	 */
+	private void addHighscore(int scoreValue, String name) {
+		if (scoreValue != -1 && name != null) {
+			highscore.add(new Score(name, scoreValue));
+		}
 	}
 }

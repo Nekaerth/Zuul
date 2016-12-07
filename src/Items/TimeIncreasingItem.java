@@ -1,40 +1,45 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Items;
 
 /**
  *
- * @author simon
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class TimeIncreasingItem extends Item {
 
-	private int time;
+	private final int time;
 
+	/**
+	 * the constructor for the class TimeIncreasingItem
+	 *
+	 * @param pickup
+	 * @param name
+	 * @param useable
+	 * @param time
+	 */
 	public TimeIncreasingItem(boolean pickup, String name, boolean useable, int time) {
 		super(pickup, name, useable, 0, 0);
 		this.time = time;
 	}
 
+	/**
+	 * The abstract method which is declared in the abstract class Item is
+	 * overrided so that The getType method returns the enum value corresponding
+	 * to this item type
+	 *
+	 * @return
+	 */
 	@Override
 	public ItemType getItemType() {
 		return ItemType.TIMEINCREASINGITEM;
 	}
 
 	/**
-	 * @return the time
+	 * Returns the amount of time in seconds as an int that this item contains
+	 * @return int
 	 */
 	public int getTime() {
 		return time;
 	}
 
-	/**
-	 * @param time the time to set
-	 */
-	public void setTime(int time) {
-		this.time = time;
-	}
 
 }

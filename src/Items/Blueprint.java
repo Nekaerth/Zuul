@@ -2,7 +2,7 @@ package Items;
 
 /**
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Blueprint extends Item {
 
@@ -23,9 +23,8 @@ public class Blueprint extends Item {
 	}
 
 	/**
-	 * We override the instance method which is declare in the interface The
-	 * getType method returns the enum value corresponding to this item type
-	 *
+	 * The abstract method which is declared in the abstract class Item is overrided so that
+	 * The getType method returns the enum value corresponding to this item type
 	 * @return will return a value of the type ItemType enum
 	 */
 	@Override
