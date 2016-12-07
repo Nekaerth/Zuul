@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * class attributes includes room, hitpoint, moves and inventory. Among its
  * methods are getMoveString() and getMove().
  *
- * @author Semesterproject Group 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public abstract class Person {
 

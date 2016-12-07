@@ -7,7 +7,7 @@ package MainPackage;
 
 /**
  *
- * @author Semesterproject Group 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public enum BossType {
 	BOSSTYPE1("bosstype1"), BOSSTYPE2("bosstype2");

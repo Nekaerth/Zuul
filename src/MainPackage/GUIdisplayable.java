@@ -11,7 +11,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Niklas
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public interface GUIdisplayable {
 

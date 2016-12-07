@@ -2,7 +2,7 @@
  * The RoomContainment class is used to set and return information 
  * about a rooms atributes.
  * 
- * @author Termprojectgroup 13 (autum 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 package WorldLoader;
 

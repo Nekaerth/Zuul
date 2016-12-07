@@ -1,7 +1,7 @@
 package Items;
 /**
  * 
- * @author Semesterproject Group 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Misc extends Item {
 

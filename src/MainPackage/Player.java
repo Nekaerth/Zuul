@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * maximum item weight capacity. It has a method for changing and adding
  * attacks, when picking up weapon items.
  *
- * @author Semesterprojektgruppe 13 (Autumn 2016)
+ * @author Termproject 13 (Autumn 2016)
  */
 public class Player extends Person {
 

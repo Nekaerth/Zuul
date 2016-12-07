@@ -14,7 +14,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Semesterprojekt gruppe 13 (Autumn 2016)
+ * @author Termprojekt gruppe 13 (Autumn 2016)
  */
 public class Highscore {
 
@@ -43,7 +43,7 @@ public class Highscore {
 				File f = new File("highscore.dne");
 				f.createNewFile();
 			} catch (IOException ex1) {
-				System.out.println("IOException " + ex);
+				System.out.println("IOException " + ex1);
 			}
 		}
 		return highscore;

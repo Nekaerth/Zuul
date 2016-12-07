@@ -21,7 +21,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Semesterprojekt Group 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class GamePlay implements GUIdisplayable {
 

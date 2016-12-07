@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 
 /**
  *
- * @author Semesterproject Group 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Inventory {
 

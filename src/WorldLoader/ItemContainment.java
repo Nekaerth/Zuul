@@ -2,7 +2,7 @@
  * The ItemContainment class is used to set and return 
  * the value of atributes related to items
  * 
- * @author Termprojectgroup (autum 2016)
+ * @author Termproject Group (Autumn 2016)
  */
 package WorldLoader;
 

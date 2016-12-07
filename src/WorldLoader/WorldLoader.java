@@ -1,7 +1,7 @@
 /**
  * The WorldLoader class is used to load the game world by reading from an external file
  * 
- * @author Termprojectgroup 13 (autum 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 package WorldLoader;
 

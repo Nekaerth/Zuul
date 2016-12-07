@@ -6,7 +6,7 @@ package MainPackage;
  * position of the boss. The boss class has a name variable. It also has method
  * for returning a random move.
  *
- * @author Semesterproject Group 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Boss extends Person {
 

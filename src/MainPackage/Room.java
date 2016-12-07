@@ -9,7 +9,7 @@ import java.util.HashMap;
  * The Room class is used to create rooms and methods that can describe the
  * rooms. The class consists of X instance variable and X instance methods
  *
- * @author Semesterproject Group 13 (Autumn 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 public class Room {
 

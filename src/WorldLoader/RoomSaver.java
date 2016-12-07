@@ -2,7 +2,7 @@
  * The RoomSaver class is used to add rooms to an arraylist 
  * and add items to those rooms
  * 
- * @author Termprojectgroup 13 (autum 2016)
+ * @author Termproject Group 13 (Autumn 2016)
  */
 package WorldLoader;
 
