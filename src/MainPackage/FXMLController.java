@@ -1,18 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MainPackage;
 
 import Items.Item;
 import Items.Key;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -21,6 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -35,6 +31,7 @@ public class FXMLController implements Initializable {
 	private Player player;
 	private Boss currentBoss;
 	private Item currentItem;
+	private ArrayList<Room> alreadyMappedRooms = new ArrayList<>();
 
 	//Main Pane
 	@FXML
@@ -267,7 +264,9 @@ public class FXMLController implements Initializable {
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
 			if (!bossScene.isVisible()) {
-				mapSceneGridPane.add(new Text("test"), 0, 0);
+				//TODO clear map each time
+				alreadyMappedRooms.clear();
+				updateMap(player.getRoom(), Direction.UNKNOWN, 3, 3);
 				setAllButOneGameSceneInvisible(mapScene);
 			}
 		}
@@ -501,8 +500,46 @@ public class FXMLController implements Initializable {
 		inventorySceneCurrentItemLabel.setText("Current Item: " + itemName);
 	}
 
-	private void updateMap(Room room, String direction, int row, int column) {
-		mapSceneGridPane.add(new Text(room.getName()), column, row);
+	private void updateMap(Room room, Direction arrivalDirection, int row, int column) {
+		Text roomName = new Text(room.getName());
+		roomName.setFont(new Font(12));
+		mapSceneGridPane.add(roomName, row, column);
+		alreadyMappedRooms.add(room);
+		for (Direction direction : room.getListOfExitDirections()) {
+			switch (direction) {
+				case NORTH:
+					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+						updateMap(room.getExit(direction), Direction.SOUTH, row, column - 1);
+					}
+					break;
+				case EAST:
+					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+						updateMap(room.getExit(direction), Direction.WEST, row + 1, column);
+					}
+					break;
+				case SOUTH:
+					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+						updateMap(room.getExit(direction), Direction.NORTH, row, column + 1);
+					}
+					break;
+				case WEST:
+					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+						updateMap(room.getExit(direction), Direction.EAST, row - 1, column);
+					}
+					break;
+				case UNKNOWN:
+					break;
+			}
+		}
+	}
+
+	private void testGrid() {
+		for (int x = 0; x < 7; x++) {
+			for (int y = 0; y < 7; y++) {
+				Text text = new Text(x + "," + y);
+				mapSceneGridPane.add(text, x, y);
+			}
+		}
 	}
 
 	private void beginBossFight() {

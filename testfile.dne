@@ -60,7 +60,7 @@ locked=false
 escapeRoom=false
 numberRoom=true
 hidden=true
-linkedID=1;north:8;west
+linkedID=8;west:1;north
 [room]
 id=8
 name=Canteen
@@ -69,7 +69,7 @@ locked=false
 escapeRoom=false
 numberRoom=false
 hidden=false
-linkedID=7;east:1;north
+linkedID=7;east
 [room]
 id=9
 name=Parkinglot

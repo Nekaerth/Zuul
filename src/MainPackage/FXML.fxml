@@ -9,7 +9,7 @@
 
 <Pane fx:id="prisonBreak" prefHeight="800.0" prefWidth="720.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MainPackage.FXMLController">
 	<children>
-		<Pane fx:id="gameScene" prefHeight="800.0" prefWidth="720.0">
+		<Pane fx:id="gameScene" prefHeight="800.0" prefWidth="720.0" visible="false">
 			<children>
 				<HBox fx:id="topMenu" prefHeight="40.0" prefWidth="720.0">
 					<children>
@@ -69,7 +69,7 @@
 						<Button fx:id="inventorySceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleInventoryButtons" prefHeight="40.0" prefWidth="240.0" text="Close" />
 					</children>
 				</Pane>
-				<Pane fx:id="mapScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0">
+				<Pane fx:id="mapScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
 					<children>
 						<Label fx:id="mapSceneTitle" alignment="CENTER" layoutY="60.0" prefWidth="720.0" text="Map">
 							<font>
@@ -78,6 +78,8 @@
 						</Label>
 						<GridPane fx:id="mapSceneGridPane" layoutX="135.0" layoutY="125.0" prefHeight="450.0" prefWidth="450.0">
 							<columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -85,11 +87,13 @@
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 							</columnConstraints>
 							<rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 							</rowConstraints>
 						</GridPane>
 						<Button fx:id="mapSceneCloseButton" layoutX="240.0" layoutY="600.0" mnemonicParsing="false" onAction="#handleMapButtons" prefHeight="40.0" prefWidth="240.0" text="Close" />
@@ -123,7 +127,7 @@
 				</Pane>
 			</children>
 		</Pane>
-		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0" visible="false">
+		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0">
 			<children>
 				<Label fx:id="startMenuTitel" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="Prison Break">
 					<font>
