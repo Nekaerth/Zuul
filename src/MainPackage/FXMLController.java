@@ -357,7 +357,7 @@ public class FXMLController implements Initializable {
 	private void handleVictorySceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 		String name = victorySceneTextField.getText();
-		int highscore = game.getHighScore();
+		int highscore = game.calculateHighScore();
 		game.saveHighScore(name, highscore);
 	}
 
@@ -439,7 +439,7 @@ public class FXMLController implements Initializable {
 
 	private void updateWeightAndItemAmount() {
 		int itemAmount = player.getInventory().getTotalItemCapacity();
-		int itemCapacity = player.getItemCapacity();
+		int itemCapacity = player.getMaxItemCapacity();
 		int weight = player.getInventory().getTotalItemWeight();
 		int Maxweight = player.getMaxWeight();
 

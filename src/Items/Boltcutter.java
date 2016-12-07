@@ -2,7 +2,7 @@ package Items;
 
 /**
  *
- * @author Semesterprojekt Gruppe 13 (Autumn 16)
+ * @author Semesterproject Group 13 (Autumn 2016)
  */
 public class Boltcutter extends Item {
 
