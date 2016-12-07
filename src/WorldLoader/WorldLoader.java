@@ -158,7 +158,9 @@ public class WorldLoader {
                     String[] roomIdAndDirection = str2.split(";");
                     if (r2.getId().equalsIgnoreCase(roomIdAndDirection[0])) { //If true, set the room as the secondRoom
                         secondRoom = r2; //Print out a confirmation message to the console
-                        mainRoom.setExit(roomIdAndDirection[1].toLowerCase(), secondRoom);
+						//Find the correct Direction as an Enum type
+						Direction direction = findDirection(roomIdAndDirection[1].toLowerCase());
+                        mainRoom.setExit(direction, secondRoom);
                     }
                 }
             } //Do this while there are still links left in the links array
@@ -345,4 +347,8 @@ public class WorldLoader {
         ArrayList<Move> moves = boss.getMoves();
         moves.add(new Move(100, Attack.LAUGH, Attack.SHOOT));
     }
+	
+	private Direction findDirection(String directionString){
+		
+	}
 }
