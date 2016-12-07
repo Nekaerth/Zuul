@@ -161,7 +161,9 @@ public class WorldLoader {
                         secondRoom = r2; //Print out a confirmation message to the console
 						//Find the correct Direction as an Enum type
 						Direction direction = findDirection(roomIdAndDirection[1].toLowerCase());
-                        mainRoom.setExit(direction, secondRoom);
+						if(Direction.UNKNOWN != direction){
+                        mainRoom.setExit(direction, secondroom);
+						}
                     }
                 }
             } //Do this while there are still links left in the links array
@@ -389,6 +391,12 @@ public class WorldLoader {
     }
 	
 	private Direction findDirection(String directionString){
-		
+		directionString = directionString.toLowerCase();
+		for (Direction dir : Direction.values()) {
+			if (directionString.equalsIgnoreCase(dir.toString())) {
+				return dir;
+			}
+		}
+	return Direction.UNKNOWN;	
 	}
 }

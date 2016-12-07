@@ -55,7 +55,7 @@ public class GamePlay implements GUIdisplayable {
      * player moved
      */
     @Override
-    public boolean goRoom(String direction) {
+    public boolean goRoom(Direction direction) {
 
         Room nextRoom = player.getRoom().getExit(direction); //Finds the next room in the hashmap room and sets this as NextRoom
 
@@ -248,7 +248,7 @@ public class GamePlay implements GUIdisplayable {
 	private boolean useKey(Item item) {
 		Key key = (Key) item;	
 		Room roomToUnlock;
-		for (String r : player.getRoom().getListOfExitDirections()) {
+		for (Direction r : player.getRoom().getListOfExitDirections()) {
 			roomToUnlock = player.getRoom().getExit(r);
 			if (key.getNameOfRoomThatFitsThisKey().equalsIgnoreCase(roomToUnlock.getName())) {
 				if (roomToUnlock.isLocked()) {
@@ -284,9 +284,9 @@ public class GamePlay implements GUIdisplayable {
         Boltcutter boltcutter = (Boltcutter) item;
         Room roomToUnlock;
         for (Room room : rooms) {
-            for (String str : room.getListOfExitDirections()) {
-				roomToUnlock = room.getExit(str);
-				if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(str).getName())) {
+            for (Direction dir : room.getListOfExitDirections()) {
+				roomToUnlock = room.getExit(dir);
+				if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(dir).getName())) {
                     if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
                         roomToUnlock.unlock();
                         player.getInventory().removeItem(item);

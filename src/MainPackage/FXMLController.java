@@ -12,13 +12,16 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -120,6 +123,8 @@ public class FXMLController implements Initializable {
 	private Pane mapScene;
 	@FXML
 	private Label mapSceneTitle;
+	@FXML
+	private GridPane mapSceneGridPane;
 	@FXML
 	private Button mapSceneCloseButton;
 	//Boss Pane
@@ -262,6 +267,7 @@ public class FXMLController implements Initializable {
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
 			if (!bossScene.isVisible()) {
+				mapSceneGridPane.add(new Text("test"), 0, 0);
 				setAllButOneGameSceneInvisible(mapScene);
 			}
 		}
@@ -286,13 +292,13 @@ public class FXMLController implements Initializable {
 			}
 			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
-			goRoom("North");
+			goRoom(Direction.NORTH);
 		} else if (event.getSource() == roomSceneEastButton) {
-			goRoom("East");
+			goRoom(Direction.EAST);
 		} else if (event.getSource() == roomSceneSouthButton) {
-			goRoom("South");
+			goRoom(Direction.SOUTH);
 		} else if (event.getSource() == roomSceneWestButton) {
-			goRoom("West");
+			goRoom(Direction.WEST);
 		}
 	}
 
@@ -467,7 +473,7 @@ public class FXMLController implements Initializable {
 		}
 	}
 
-	private void goRoom(String direction) {
+	private void goRoom(Direction direction) {
 		Room nextRoom = player.getRoom().getExit(direction);
 		//Checks if there is a door in that direction
 		if (nextRoom == null || nextRoom.isHidden()) {
@@ -493,6 +499,10 @@ public class FXMLController implements Initializable {
 	private void updateCurrentItemLabel(String itemName) {
 		roomSceneCurrentItemLabel.setText("Current Item: " + itemName);
 		inventorySceneCurrentItemLabel.setText("Current Item: " + itemName);
+	}
+
+	private void updateMap(Room room, String direction, int row, int column) {
+		mapSceneGridPane.add(new Text(room.getName()), column, row);
 	}
 
 	private void beginBossFight() {
