@@ -253,12 +253,9 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleGameMenuButtons(ActionEvent event) {
 		if (event.getSource() == topMenuExitButton) {
-			AlertBox.tryCode(0);
-			/*
-			if (AlertBox.exitInfoBox()) {
+			if (AlertBox.shouldExit()) {
 				setAllButOneMainSceneInvisible(startMenu);
 			}
-			*/
 		} else if (event.getSource() == topMenuHelpButton) {
 			if (!bossScene.isVisible()) {
 				setAllButOneGameSceneInvisible(helpScene);
@@ -496,6 +493,10 @@ public class FXMLController implements Initializable {
 					beginBossFight();
 				}
 			}
+			//Checks if room is escape able
+			if (nextRoom.isEscapeableRoom()) {
+				game.isCodeCorrect(AlertBox.getCode());
+			}
 		} else {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");
 		}
@@ -539,15 +540,6 @@ public class FXMLController implements Initializable {
 		}
 	}
 
-	private void testGrid() {
-		for (int x = 0; x < 7; x++) {
-			for (int y = 0; y < 7; y++) {
-				Text text = new Text(x + "," + y);
-				mapSceneGridPane.add(text, x, y);
-			}
-		}
-	}
-
 	private void beginBossFight() {
 		setAllButOneGameSceneInvisible(bossScene);
 		//finds which boss to fight
@@ -582,11 +574,11 @@ public class FXMLController implements Initializable {
 		if (currentBoss.playerHitsBoss(player)) {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You countered " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-					+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
+							+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
 		} else {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You failed to counter " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-					+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
+							+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
 		}
 		//The bosses next move is chosen
 		currentBoss.setCurrentMoveAtRandom();

@@ -324,13 +324,13 @@ public class GamePlay implements GUIdisplayable {
 			for (Direction dir : room.getListOfExitDirections()) {
 				roomToUnlock = room.getExit(dir);
 				if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(dir).getName())) {
-					if (roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
+					if (roomToUnlock.isEscapeableRoom() && roomToUnlock.isLocked()) {
 						roomToUnlock.unlock();
 						player.getInventory().removeItem(item);
 						return true;
-					} else if (!roomToUnlock.isEscapeAbleRoom() && roomToUnlock.isLocked()) {
+					} else if (!roomToUnlock.isEscapeableRoom() && roomToUnlock.isLocked()) {
 						return false;
-					} else if (roomToUnlock.isEscapeAbleRoom() && !roomToUnlock.isLocked()) {
+					} else if (roomToUnlock.isEscapeableRoom() && !roomToUnlock.isLocked()) {
 						return false;
 					}
 					break;

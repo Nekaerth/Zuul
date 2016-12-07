@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package MainPackage;
 
 import javafx.event.ActionEvent;
@@ -16,16 +11,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-/**
- *
- * @author niklasbruun
- */
 public class AlertBox {
 
-	public static boolean shouldExit = false;
-	public static boolean isCodeCorrect = false;
+	private static String code;
+	private static boolean shouldExit;
 
-	public static boolean tryCode(int code) {
+	public static String getCode() {
 		Stage window = new Stage();
 		window.initModality(Modality.WINDOW_MODAL);
 		window.setTitle("Code");
@@ -47,11 +38,10 @@ public class AlertBox {
 				String inputText = textfield.getText();
 				if (inputText.length() == 3 && isANumber(inputText)) {
 					window.close();
-					if (true) {
-
-					}
+					code = inputText;
 				}
 			}
+
 		});
 
 		VBox layout = new VBox(15);
@@ -61,12 +51,11 @@ public class AlertBox {
 		Scene alertBox = new Scene(layout);
 		window.setScene(alertBox);
 		window.showAndWait();
-		return false;
+
+		return code;
 	}
 
-	public static boolean exitInfoBox() {
-		shouldExit = false;
-
+	public static boolean shouldExit() {
 		Stage window = new Stage();
 		window.initModality(Modality.WINDOW_MODAL);
 		window.setTitle("Exit game?");
@@ -100,6 +89,7 @@ public class AlertBox {
 		Scene alertBox = new Scene(layout);
 		window.setScene(alertBox);
 		window.showAndWait();
+
 		return shouldExit;
 	}
 
@@ -111,5 +101,4 @@ public class AlertBox {
 		}
 		return true;
 	}
-
 }

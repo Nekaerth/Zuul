@@ -43,7 +43,7 @@ public interface GUIdisplayable {
 	public Player getPlayer();
 
 	public ArrayList<Boss> getBosses();
-	
+
 	public boolean isCodeCorrect(String userCode);
-	
+
 }

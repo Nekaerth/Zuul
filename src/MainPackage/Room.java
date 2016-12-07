@@ -21,12 +21,11 @@ public class Room {
 	private String id;
 
 	/**
-	 * The constructor of the class Room. The constructor takes 6 parameters:
-	 * Anid of a room, a boolean that says whether or not the room contains a
-	 * number, a boolean that says whether or not the room is locked, a boolean
-	 * that says whether or not the room is a escape able room, a String that is
-	 * the name of the room and a boolean that says whether or not the room is
-	 * hidden
+	 * The constructor of the class Room. The constructor takes 6 parameters: Anid
+	 * of a room, a boolean that says whether or not the room contains a number, a
+	 * boolean that says whether or not the room is locked, a boolean that says
+	 * whether or not the room is a escape able room, a String that is the name of
+	 * the room and a boolean that says whether or not the room is hidden
 	 *
 	 *
 	 * @param id
@@ -54,10 +53,9 @@ public class Room {
 	/**
 	 * The setExit method is used to declare which exits a room has
 	 *
-	 * @param direction is a Direction parameter used to declare where the exit
-	 * is
-	 * @param neighbor is a room parameter used to declare what room the
-	 * direction refers to
+	 * @param direction is a Direction parameter used to declare where the exit is
+	 * @param neighbor is a room parameter used to declare what room the direction
+	 * refers to
 	 */
 	public void setExit(Direction direction, Room neighbor) {
 		exits.put(direction, neighbor);
@@ -93,8 +91,8 @@ public class Room {
 	 * This method returns the number that is in the room if it is a numberroom,
 	 * else it returns -1.
 	 *
-	 * @return an int. If the room is not a number room it returns -1. if it is,
-	 * a random number
+	 * @return an int. If the room is not a number room it returns -1. if it is, a
+	 * random number
 	 */
 	public int getNumber() {
 		if (escapeCode) {
@@ -105,26 +103,26 @@ public class Room {
 	}
 
 	/**
-	 * The setEscapeAbleRoom method is a setter method that sets the value of
-	 * the boolean escapeRoom to true
+	 * The setEscapeAbleRoom method is a setter method that sets the value of the
+	 * boolean escapeRoom to true
 	 */
-	public void setEscapeAbleRoom() {
+	public void setEscapeableRoom() {
 		this.escapableRoom = true;
 
 	}
 
 	/**
-	 * The getEscapeRoom is a getter method that returns the current value of
-	 * the boolean escapeableRoom
+	 * The getEscapeRoom is a getter method that returns the current value of the
+	 * boolean escapeableRoom
 	 *
 	 * @return will return the current boolean value of escapeRoom
 	 */
-	public boolean isEscapeAbleRoom() {
+	public boolean isEscapeableRoom() {
 		return this.escapableRoom;
 
 		/**
-		 * The lockRoom method is a setter method that will set the boolean
-		 * value lock to true
+		 * The lockRoom method is a setter method that will set the boolean value
+		 * lock to true
 		 */
 	}
 
