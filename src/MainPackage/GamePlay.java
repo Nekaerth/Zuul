@@ -74,13 +74,8 @@ public class GamePlay implements GUIdisplayable {
             for (NPC n : npc) {
                 n.move();
                 npcInteractWithPlayer();
-            }
-//            if (NPC.getName().equalsIgnoreCase("Dobby the alf"))
-//            npcInteractWithPlayer();
-//            else if (NPC.getName().equalsIgnoreCase("Santa"))
-//                            
+            }                   
             return true;
-
         }
         return false;
 
@@ -98,7 +93,7 @@ public class GamePlay implements GUIdisplayable {
                     int indexOfRandomRoom = (int) (Math.random() * (visitedRooms.size() - 1));
                     player.setRoom(visitedRooms.get(indexOfRandomRoom));
                 } if ((int) (Math.random() * 100) +1 > 50)
-                    player.addTime(50);
+                    player.addTime(60);
             }
         }
     }
@@ -191,7 +186,6 @@ public class GamePlay implements GUIdisplayable {
         } else {
             return false;
         }
-
     }
 
     /**
