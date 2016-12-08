@@ -97,7 +97,7 @@ public class GamePlay implements GUIdisplayable {
                 if ((int) (Math.random() * 100) + 1 > 50) {
                     int indexOfRandomRoom = (int) (Math.random() * (visitedRooms.size() - 1));
                     player.setRoom(visitedRooms.get(indexOfRandomRoom));
-                } else if ((int) (Math.random() * 100) +1 > 50)
+                } if ((int) (Math.random() * 100) +1 > 50)
                     player.addTime(50);
             }
         }
