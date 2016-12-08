@@ -9,17 +9,19 @@ import java.util.ArrayList;
 public class NPC {
 
 	private Room currentRoom;
-        private String name;
+	private String name;
+	private boolean teleportedPlayerLastEncounter;
+	private boolean subtractedTimeFromPlayerLastEncounter;
 
 	/**
-	 * The constructor for an NPC sets the starting room and the
+	 * The constructor for an NPC sets the starting room and the name
 	 *
 	 * @param startRoom
-         * @param name
+	 * @param name
 	 */
 	public NPC(Room startRoom, String name) {
 		this.currentRoom = startRoom;
-                this.name = name;
+		this.name = name;
 	}
 
 	/**
@@ -35,8 +37,6 @@ public class NPC {
 			this.setCurrentRoom(nextRoom);
 		}
 	}
-        
-        
 
 	/**
 	 * Returns the room that the NPC is currently in
@@ -56,17 +56,47 @@ public class NPC {
 		this.currentRoom = currentRoom;
 	}
 
-    /**
-     * @return the name
-     */
-    public String getName() {
-        return name;
-    }
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
 
-    /**
-     * @param name the name to set
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the teleportedPlayerLastEncounter
+	 */
+	public boolean hasTeleportedPlayerLastEncounter() {
+		return this.teleportedPlayerLastEncounter;
+	}
+
+	/**
+	 * @param teleportedPlayerLastEncounter the teleportedPlayerLastEncounter to
+	 * set
+	 */
+	public void setTeleportedPlayerLastEncounter(boolean teleportedPlayerLastEncounter) {
+		this.teleportedPlayerLastEncounter = teleportedPlayerLastEncounter;
+	}
+
+	/**
+	 * @return the subtractedTimeFromPlayerLastEncounter
+	 */
+	public boolean hasSubtractedTimeFromPlayerLastEncounter() {
+		return subtractedTimeFromPlayerLastEncounter;
+	}
+
+	/**
+	 * @param subtractedTimeFromPlayerLastEncounter the
+	 * subtractedTimeFromPlayerLastEncounter to set
+	 */
+	public void setSubtractedTimeFromPlayerLastEncounter(boolean subtractedTimeFromPlayerLastEncounter) {
+		this.subtractedTimeFromPlayerLastEncounter = subtractedTimeFromPlayerLastEncounter;
+	}
 }

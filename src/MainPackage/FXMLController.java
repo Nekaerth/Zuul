@@ -523,6 +523,14 @@ public class FXMLController implements Initializable {
 					beginBossFight();
 				}
 			}
+			//Checks if there has been any NPC interactions
+			for (NPC npc : game.getAllNpc()) {
+				if (npc.hasTeleportedPlayerLastEncounter()) {
+					roomSceneInfoLabel.setText("You run into " + npc.getName() + ", and he teleports you to " + player.getRoom().getName() + ", and you lose some time!");
+				} else if (npc.hasSubtractedTimeFromPlayerLastEncounter()) {
+					roomSceneInfoLabel.setText("You run into " + npc.getName() + ", and you lose some time!");
+				}
+			}
 			//Checks if room is escape able
 			if (nextRoom.isEscapeableRoom()) {
 				//Checks if you type the correct code or not
