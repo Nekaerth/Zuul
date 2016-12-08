@@ -174,13 +174,6 @@ id=112
 type=Misc
 roomID=6
 name=Box
-[item]
-type=timeincreasingitem
-roomID=1
-pickup=true
-useable=false
-time=6000
-name=Test
 [boss]
 roomId=8
 hitpoints=100
