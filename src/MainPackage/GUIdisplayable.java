@@ -43,6 +43,6 @@ public interface GUIdisplayable {
 	public ArrayList<Boss> getBosses();
 
 	public boolean isCodeCorrect(String userCode);
-	
+
 	public ObservableList<String> getListOfFiles();
 }

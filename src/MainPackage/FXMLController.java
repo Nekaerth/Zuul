@@ -154,17 +154,17 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Button startMenuQuitButton;
 
-	//Difficulty Pane
+	//Choose map Pane
 	@FXML
-	private Pane difficultyScene;
+	private Pane chooseMapScene;
 	@FXML
-	private Label difficultySceneTitle;
+	private Label chooseMapSceneTitle;
 	@FXML
-	private Button difficultySceneEasyButton;
+	private ListView<String> chooseMapSceneMapList;
 	@FXML
-	private ListView<String> difficultySceneMapList;
+	private Button chooseMapSceneBeginButton;
 	@FXML
-	private Button difficultySceneBackButton;
+	private Button chooseMapSceneBackButton;
 
 	//High score Pane
 	@FXML
@@ -197,7 +197,6 @@ public class FXMLController implements Initializable {
 	private Label gameOverSceneTitle;
 	@FXML
 	private Button gameOverSceneExitButton;
-	
 
 	/**
 	 * Initializes the controller class.
@@ -209,7 +208,7 @@ public class FXMLController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		game = new GamePlay();
 		highScoreSceneScoreList.setItems(game.getHighScoreList());
-		difficultySceneMapList.setItems(game.getListOfFiles());
+		chooseMapSceneMapList.setItems(game.getListOfFiles());
 		//Gives color to background
 		GraphicsContext background = gameSceneCanvas.getGraphicsContext2D();
 		background.setFill(Color.WHITE);
@@ -220,7 +219,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleStartMenuButtons(ActionEvent event) {
 		if (event.getSource() == startMenuStartButton) {
-			setAllButOneMainSceneInvisible(difficultyScene);
+			setAllButOneMainSceneInvisible(chooseMapScene);
 		} else if (event.getSource() == startMenuHighScoreButton) {
 			setAllButOneMainSceneInvisible(highScoreScene);
 		} else if (event.getSource() == startMenuQuitButton) {
@@ -230,16 +229,16 @@ public class FXMLController implements Initializable {
 	}
 
 	@FXML
-	private void handleDifficultySceneButtons(ActionEvent event) {
-		String fileToRead = difficultySceneMapList.getSelectionModel().getSelectedItem();
-		
-		if (event.getSource() == difficultySceneEasyButton && fileToRead !=null) {
+	private void handleChooseMapSceneButtons(ActionEvent event) {
+		String fileToRead = chooseMapSceneMapList.getSelectionModel().getSelectedItem();
+
+		if (event.getSource() == chooseMapSceneBeginButton && fileToRead != null) {
 			bottomMenuLevelLabel.setText("Level: " + fileToRead);
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
 			startGame(fileToRead);
-		
-		} else if (event.getSource() == difficultySceneBackButton) {
+
+		} else if (event.getSource() == chooseMapSceneBackButton) {
 			setAllButOneMainSceneInvisible(startMenu);
 		}
 	}
@@ -381,8 +380,8 @@ public class FXMLController implements Initializable {
 		if (pane != startMenu) {
 			startMenu.setVisible(false);
 		}
-		if (pane != difficultyScene) {
-			difficultyScene.setVisible(false);
+		if (pane != chooseMapScene) {
+			chooseMapScene.setVisible(false);
 		}
 		if (pane != gameScene) {
 			gameScene.setVisible(false);
@@ -518,7 +517,7 @@ public class FXMLController implements Initializable {
 			//Checks if there has been any NPC interactions
 			for (NPC npc : game.getAllNpc()) {
 				if (npc.hasTeleportedPlayerLastEncounter()) {
-					roomSceneInfoLabel.setText("You run into " + npc.getName() + ", and he teleports you to " + player.getRoom().getName() + ", and you lose some time!");
+					roomSceneInfoLabel.setText("You run into " + npc.getName() + ", and he teleports\nyou to " + player.getRoom().getName() + ", and you lose some time!");
 				} else if (npc.hasSubtractedTimeFromPlayerLastEncounter()) {
 					roomSceneInfoLabel.setText("You run into " + npc.getName() + ", and you lose some time!");
 				}
