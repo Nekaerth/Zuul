@@ -162,9 +162,7 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Button difficultySceneEasyButton;
 	@FXML
-	private Button difficultySceneMediumButton;
-	@FXML
-	private Button difficultySceneHardButton;
+	private ListView<String> difficultySceneMapList;
 	@FXML
 	private Button difficultySceneBackButton;
 
@@ -199,6 +197,7 @@ public class FXMLController implements Initializable {
 	private Label gameOverSceneTitle;
 	@FXML
 	private Button gameOverSceneExitButton;
+	
 
 	/**
 	 * Initializes the controller class.
@@ -210,7 +209,7 @@ public class FXMLController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		game = new GamePlay();
 		highScoreSceneScoreList.setItems(game.getHighScoreList());
-
+		difficultySceneMapList.setItems(game.getListOfFiles());
 		//Gives color to background
 		GraphicsContext background = gameSceneCanvas.getGraphicsContext2D();
 		background.setFill(Color.WHITE);
@@ -232,21 +231,14 @@ public class FXMLController implements Initializable {
 
 	@FXML
 	private void handleDifficultySceneButtons(ActionEvent event) {
-		if (event.getSource() == difficultySceneEasyButton) {
-			bottomMenuLevelLabel.setText("Level: Easy");
+		String fileToRead = difficultySceneMapList.getSelectionModel().getSelectedItem();
+		
+		if (event.getSource() == difficultySceneEasyButton && fileToRead !=null) {
+			bottomMenuLevelLabel.setText("Level: " + fileToRead);
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
-			startGame("testfile.dne");
-		} else if (event.getSource() == difficultySceneMediumButton) {
-			bottomMenuLevelLabel.setText("Level: Medium");
-			setAllButOneMainSceneInvisible(gameScene);
-			setAllButOneGameSceneInvisible(roomScene);
-			startGame("scenario2.dne");
-		} else if (event.getSource() == difficultySceneHardButton) {
-			bottomMenuLevelLabel.setText("Level: Hard");
-			setAllButOneMainSceneInvisible(gameScene);
-			setAllButOneGameSceneInvisible(roomScene);
-			startGame("scenario3.dne");
+			startGame(fileToRead);
+		
 		} else if (event.getSource() == difficultySceneBackButton) {
 			setAllButOneMainSceneInvisible(startMenu);
 		}

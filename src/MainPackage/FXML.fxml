@@ -118,7 +118,7 @@
 				</Pane>
 			</children>
 		</Pane>
-		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0">
+		<Pane fx:id="startMenu" prefHeight="800.0" prefWidth="720.0" visible="false">
 			<children>
 				<Label fx:id="startMenuTitel" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="Prison Break">
 					<font>
@@ -130,17 +130,16 @@
 				<Button fx:id="startMenuQuitButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleStartMenuButtons" prefHeight="40.0" prefWidth="240.0" text="Quit" />
 			</children>
 		</Pane>
-		<Pane fx:id="difficultyScene" prefHeight="800.0" prefWidth="720.0" visible="false">
+		<Pane fx:id="difficultyScene" prefHeight="800.0" prefWidth="720.0">
 			<children>
-				<Label fx:id="difficultySceneTitle" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="Choose difficulty">
+				<Label fx:id="difficultySceneTitle" alignment="CENTER" layoutY="80.0" prefWidth="720.0" text="Choose map">
 					<font>
 						<Font name="System Bold" size="60.0" />
 					</font>
 				</Label>
-				<Button fx:id="difficultySceneEasyButton" layoutX="240.0" layoutY="240.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="240.0" text="Easy" />
-				<Button fx:id="difficultySceneMediumButton" layoutX="240.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="240.0" text="Medium" />
-				<Button fx:id="difficultySceneHardButton" layoutX="240.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="240.0" text="Hard" />
-				<Button fx:id="difficultySceneBackButton" layoutX="320.0" layoutY="460.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="80.0" text="Back" />
+				<Button fx:id="difficultySceneEasyButton" layoutX="240.0" layoutY="479.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="240.0" text="Begin" />
+				<Button fx:id="difficultySceneBackButton" layoutX="320.0" layoutY="530.0" mnemonicParsing="false" onAction="#handleDifficultySceneButtons" prefHeight="40.0" prefWidth="80.0" text="Back" />
+            <ListView fx:id="difficultySceneMapList" layoutX="240.0" layoutY="186.0" prefHeight="265.0" prefWidth="240.0" />
 			</children>
 		</Pane>
 		<Pane fx:id="highScoreScene" prefHeight="800.0" prefWidth="720.0" visible="false">
