@@ -80,7 +80,7 @@ capacity=1
 pickup=true
 useable=true
 roomToUnlock=office
-name=Officekey
+name=Office key
 [item]
 type=key
 roomID=8
@@ -89,7 +89,7 @@ capacity=1
 pickup=true
 useable=true
 roomToUnlock=storage
-name=Storagekey
+name=Storage key
 [item]
 type=Flashlight
 roomID=7
@@ -115,7 +115,7 @@ capacity=1
 pickup=true
 useable=true
 roomBoltcutterCanBeUsedIn=parkinglot
-name=Boltcutter
+name=Bolt cutter
 [item]
 type=weapon
 roomID=1
