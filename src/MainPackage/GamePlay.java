@@ -244,8 +244,7 @@ public class GamePlay implements GUIdisplayable {
         this.rooms = wl.loadWorld(fileToRead);
         this.bosses = wl.loadBosses(fileToRead);
         player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
-        npc.add(new NPC(rooms.get(rooms.size() - 1), "Dobby the alf"));
-        npc.add(new NPC(rooms.get(rooms.size() - 1), "Santa"));
+        npc.add(new NPC(rooms.get(rooms.size() - 1), "Dobby the alf"));        
         ArrayList<Move> moves = this.player.getMoves();
         moves.add(new Move(10, Attack.STAB, WeaponType.MELEE));
         moves.add(new Move(0, Attack.DUCK, WeaponType.MELEE));
