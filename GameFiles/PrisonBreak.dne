@@ -131,7 +131,7 @@ type=weapon
 roomID=3
 weight=1
 capacity=1
-pickup=true
+pickup=false
 useable=true
 damage=12
 weaponType=melee
@@ -147,15 +147,17 @@ damage=15
 weaponType=melee
 name=Knife
 [item]
-type=weapon
+type=timeincreasingitem
 roomID=6
-weight=1
-capacity=1
 pickup=true
 useable=true
-damage=25
-weaponType=ranged
-name=pistol
+name=Police uniform
+[item]
+type=timeincreasingitem
+roomID=2
+pickup=true
+useable=true
+name=Camo clothes
 [item]
 id=109
 type=Misc
