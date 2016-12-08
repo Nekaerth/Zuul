@@ -489,7 +489,7 @@ public class FXMLController implements Initializable {
 				roomSceneInfoLabel.setText("You examine the blueprint and discover all hidden rooms!");
 				break;
 			case BOLTCUTTER:
-				roomSceneInfoLabel.setText("You use the bolt cutter to cut down the fence!\nYou can now go through the fence!s");
+				roomSceneInfoLabel.setText("You use the bolt cutter to cut down the fence!\nYou can now go through the fence!");
 				break;
 			default:
 				break;
@@ -533,7 +533,7 @@ public class FXMLController implements Initializable {
 				} else {
 					//If incorrect you go back to previous room
 					goRoom(nextRoom.getDirection(previousRoom));
-					roomSceneInfoLabel.setText("You failed to enther the correct code, and are now back in " + player.getRoom().getName());
+					roomSceneInfoLabel.setText("You failed to enter the correct code,\nand are now back in " + player.getRoom().getName());
 				}
 			}
 		} else {
