@@ -1,6 +1,6 @@
 /**
  * The RoomContainment class is used to set and return information 
- * about a rooms atributes.
+ * about a rooms attributes.
  * 
  * @author Termproject Group 13 (Autumn 2016)
  */
@@ -11,7 +11,7 @@ class RoomContainment {
 	private String id;
 	private String name;
 	private boolean locked;
-	private boolean escapeRoom;
+	private boolean escapeableRoom;
 	private boolean containsHiddenNumber;
 	private boolean hidden;
 	private String[] linkedID;
@@ -66,21 +66,21 @@ class RoomContainment {
         }
 
 	/**
-         * The getEscapeRoom method is used to get the current state 
-         * of the escapeRoom boolean for a specific room
+         * The isEscapeableRoom method is used to get the current state 
+ of the escapeRoom boolean for a specific room
 	 * @return the boolean escapeRoom
 	 */
-	public boolean getEscapeRoom() {
-		return escapeRoom;
+	public boolean isEscapeableRoom() {
+		return escapeableRoom;
 	}
 
 	/**
-         * The setEscapeRoom method is used to set the state of the boolean 
-         * escapeRoom for a specific room
+         * The setEscapeableRoom method is used to set the state of the boolean 
+ escapeRoom for a specific room
 	 * @param escapeRoom is the String that will set the value of the boolean
 	 */
-	public void setEscapeRoom(String escapeRoom) {
-            this.escapeRoom = escapeRoom.equalsIgnoreCase("true");
+	public void setEscapeableRoom(String escapeRoom) {
+            this.escapeableRoom = escapeRoom.equalsIgnoreCase("true");
 	}
 
 	/**

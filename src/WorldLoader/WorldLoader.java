@@ -104,8 +104,8 @@ public class WorldLoader {
                 case "locked":
                     rc.setLocked(strings[length - 1]);
                     break;
-                case "escapeRoom":
-                    rc.setEscapeRoom(strings[length - 1]);
+                case "escapeableRoom":
+                    rc.setEscapeableRoom(strings[length - 1]);
                     break;
                 case "hasEscapeCode":
                     rc.setContainsHiddenNumber(strings[length - 1]);
@@ -123,7 +123,7 @@ public class WorldLoader {
             }
         }
         if (finishRoom) {
-            Room room = new Room(rc.getId(), rc.getContainsHiddenNumber(), rc.getLocked(), rc.getEscapeRoom(), rc.getName(), rc.isHidden());
+            Room room = new Room(rc.getId(), rc.getContainsHiddenNumber(), rc.getLocked(), rc.isEscapeableRoom(), rc.getName(), rc.isHidden());
             rs.addRoom(room);
             buildLinkString();
             finishRoom = false;

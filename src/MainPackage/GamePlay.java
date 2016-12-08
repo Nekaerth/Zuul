@@ -167,12 +167,11 @@ public class GamePlay implements GUIdisplayable {
 					player.changePlayerMove(weapon);
 					break;
 				case TIMEINCREASINGITEM:
-					if (item instanceof TimeIncreasingItem) {
-						player.addTime(((TimeIncreasingItem) item).getTime());
-						player.getRoom().getInventory().removeItem(item);
-						return true;
-					}
-					break;
+
+					player.addTime(((TimeIncreasingItem) item).getTime());
+					player.getRoom().getInventory().removeItem(item);
+					return true;
+
 				default:
 					break;
 			}
@@ -393,13 +392,14 @@ public class GamePlay implements GUIdisplayable {
 
 	/**
 	 * Returns an ArrayList containing all the bosses in the game
+	 *
 	 * @return ArrayList containing Boss
 	 */
 	@Override
 	public ArrayList<Boss> getBosses() {
 		return bosses;
 	}
-	
+
 	/**
 	 * The getCorrectCode method returns the hidden code that is found in all
 	 * rooms, the order of the code is determined by the order of the arraylist

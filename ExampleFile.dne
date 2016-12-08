@@ -1,18 +1,16 @@
 [room]
 id=1
 name=
-description=
 locked=true/false
-escapeRoom=true/false
+escapeableRoom=true/false
 hasEscapeCode=true/false
 hidden=true/false
 linkedID=id;direction:id;direction:id;direction:id;direction (max 4)
 [room]
 id=2
 name=ExampleRoom
-description=This is a description of a room
 locked=false
-escapeRoom=false
+escapeableRoom=false
 hasEscapeCode=true
 hidden=false
 linkedID=1;south:3;north:4;east:5;west
