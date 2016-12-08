@@ -411,6 +411,14 @@ public class WorldLoader {
 		moves.add(new Move(100, Attack.LAUGH, Attack.SHOOT));
 	}
 
+        /**
+        * The findDirection method is used to iterate through the enum of directions,
+        * and find if the String argument matches a direction in the enum, 
+        * it will return that it will return that direction
+        * @param directionString is the String that we want to compare to the enum
+        * @return will return a Direction from the enum if the String equals a Direction
+        * otherwise it will return UNKNOWN
+        */
 	private Direction findDirection(String directionString) {
 		directionString = directionString.toLowerCase();
 		for (Direction dir : Direction.values()) {

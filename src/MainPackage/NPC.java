@@ -9,14 +9,17 @@ import java.util.ArrayList;
 public class NPC {
 
 	private Room currentRoom;
+        private String name;
 
 	/**
-	 * The constructor for an NPC sets the starting room
+	 * The constructor for an NPC sets the starting room and the
 	 *
 	 * @param startRoom
+         * @param name
 	 */
-	public NPC(Room startRoom) {
+	public NPC(Room startRoom, String name) {
 		this.currentRoom = startRoom;
+                this.name = name;
 	}
 
 	/**
@@ -32,6 +35,8 @@ public class NPC {
 			this.setCurrentRoom(nextRoom);
 		}
 	}
+        
+        
 
 	/**
 	 * Returns the room that the NPC is currently in
@@ -50,4 +55,18 @@ public class NPC {
 	private void setCurrentRoom(Room currentRoom) {
 		this.currentRoom = currentRoom;
 	}
+
+    /**
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 }
