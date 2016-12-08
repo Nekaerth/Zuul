@@ -14,10 +14,12 @@ import Items.TimeIncreasingItem;
 import Items.Weapon;
 import Items.WeaponType;
 import WorldLoader.WorldLoader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -275,26 +277,6 @@ public class GamePlay implements GUIdisplayable {
     }
 
     /**
-     * Uses a flashlight, when a flashlight is used it checks whether or not
-     * there are any secret numbers in the room. if there is they are added to
-     * the list of numbers found
-     *
-     * @param item
-     */
-    private void useFlashlight(Item item) {
-        Flashlight flashlight = (Flashlight) item; //Uses up charges on players flashlight, and prints line below telling you how many charges you have left.
-        if (flashlight.getCharges() > 0) {
-            flashlight.subtractCharge(1);
-            if (player.getRoom().hasEscapeCode()) {
-                player.getRoom().getNumber();
-                if (roomNumber.contains(player.getRoom()) == false) { //add a room to the arraylist roomNumber, that tracks the rooms with numbers in them
-                    roomNumber.add(player.getRoom());
-                }
-            }
-        }
-    }
-
-    /**
      * Sets all rooms hidden boolean to false
      */
     private void showAllRooms() {
@@ -302,6 +284,25 @@ public class GamePlay implements GUIdisplayable {
             room.setHidden(false);
         }
     }
+
+	/**
+	 * Uses a flashlight, when a flashlight is used it checks whether or not there
+	 * are any secret numbers in the room. if there is they are added to the list
+	 * of numbers found
+	 *
+	 * @param item
+	 */
+	private void useFlashlight(Item item) {
+		Flashlight flashlight = (Flashlight) item; //Uses up charges on players flashlight, and prints line below telling you how many charges you have left.
+		if (flashlight.getCharges() > 0) {
+			flashlight.subtractCharge(1);
+			if (player.getRoom().hasEscapeCode()) {
+				if (!roomNumber.contains(player.getRoom())) { //add a room to the arraylist roomNumber, that tracks the rooms with numbers in them
+					roomNumber.add(player.getRoom());
+				}
+			}
+		}
+	}
 
     /**
      * Returns a boolean that is true if the boltcutter has been used and false
@@ -394,28 +395,39 @@ public class GamePlay implements GUIdisplayable {
     public ArrayList<Boss> getBosses() {
         return bosses;
     }
+	/**
+	 * The getCorrectCode method returns the hidden code that is found in all
+	 * rooms, the order of the code is determined by the order of the arraylist
+	 *
+	 * @return returns a string with the correct key code
+	 */
+	public String getCorrectCode() {
+		StringBuilder correctCode = new StringBuilder();
+		for (Room room : roomNumber) {
+			if (room.hasEscapeCode()) {
+				correctCode.append(room.getNumber());
+			}
+		}
+		return correctCode.toString();
+	}
 
-    /**
-     * The getCorrectCode method returns the hidden code that is found in all
-     * rooms, the order of the code is determined by the order of the arraylist
-     *
-     * @return returns a string with the correct key code
-     */
-    public String getCorrectCode() {
-        StringBuilder correctCode = new StringBuilder();
-        for (Room room : roomNumber) {
-            if (room.hasEscapeCode()) {
-                correctCode.append(room.getNumber());
-            }
-        }
-        return correctCode.toString();
-    }
-
-    @Override
-    public boolean isCodeCorrect(String code) {
-        if (code != null) {
-            return code.equalsIgnoreCase(getCorrectCode());
-        }
-        return false;
-    }
+	@Override
+	public boolean isCodeCorrect(String code) {
+		if (code != null) {
+			return code.equalsIgnoreCase(getCorrectCode());
+		}
+		return false;
+	}
+	@Override
+	public ObservableList<String> getListOfFiles(){
+		ObservableList<String> returnList = FXCollections.observableArrayList();
+		File folder = new File("./GameFiles");
+		File[] listOfFiles = folder.listFiles();
+		for(File file : listOfFiles){
+			if(file.isFile()){
+				returnList.add(file.getName());
+			}
+		}
+		return returnList;
+	}
 }
