@@ -13,7 +13,7 @@
 	<children>
 		<Pane fx:id="gameScene" prefHeight="800.0" prefWidth="720.0" visible="false">
 			<children>
-				<Canvas fx:id="gameSceneCanvas" height="800.0" width="720.0" />
+				<Canvas fx:id="gameSceneCanvas" width="720.0" height="800.0" />
 				<Button fx:id="topMenuExitButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Exit" />
 				<Button fx:id="topMenuHelpButton" layoutX="144.0" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Help" />
 				<Label fx:id="topMenuTimeLabel" alignment="CENTER" layoutX="288.0" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
@@ -21,7 +21,7 @@
 				<Label fx:id="topMenuCapacityLabel" alignment="CENTER" layoutX="576.0" prefHeight="40.0" prefWidth="144.0" text="Item Amount: 0/0&#10;Weight: 0/0" />
 				<Button fx:id="bottomMenuMapButton" layoutY="760.0" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Map" />
 				<Label fx:id="bottomMenuCurrentRoomLabel" alignment="CENTER" layoutX="144.0" layoutY="760.0" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
-				<Label fx:id="bottomMenuLevelLabel" alignment="CENTER" layoutX="576.0" layoutY="760.0" prefHeight="40.0" prefWidth="144.0" text="Level" />
+				<Label fx:id="bottomMenuLevelLabel" alignment="CENTER" layoutX="576.0" layoutY="760.0" prefHeight="40.0" prefWidth="144.0" text="" />
 				<Pane fx:id="roomScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
 					<children>
 						<Label fx:id="roomSceneInfoTitel" layoutX="80.0" layoutY="60.0" prefHeight="40.0" prefWidth="320.0" text="Game info:" />

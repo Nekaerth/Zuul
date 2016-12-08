@@ -35,16 +35,16 @@ public class AlertBox {
 		textField.setLayoutY(55);
 
 		Button enterButton = new Button("Enter");
-		enterButton.setPrefWidth(120);
+		enterButton.setPrefWidth(90);
 		enterButton.setPrefHeight(30);
-		enterButton.setLayoutX(120);
-		enterButton.setLayoutY(90);
+		enterButton.setLayoutX(80);
+		enterButton.setLayoutY(110);
 
 		Button cancelButton = new Button("Cancel");
-		cancelButton.setPrefWidth(120);
+		cancelButton.setPrefWidth(90);
 		cancelButton.setPrefHeight(30);
-		cancelButton.setLayoutX(120);
-		cancelButton.setLayoutY(130);
+		cancelButton.setLayoutX(190);
+		cancelButton.setLayoutY(110);
 
 		enterButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -96,16 +96,16 @@ public class AlertBox {
 		label2.setLayoutY(50);
 
 		Button exitButton = new Button("Exit");
-		exitButton.setPrefWidth(120);
+		exitButton.setPrefWidth(90);
 		exitButton.setPrefHeight(30);
-		exitButton.setLayoutX(120);
-		exitButton.setLayoutY(90);
+		exitButton.setLayoutX(80);
+		exitButton.setLayoutY(100);
 
 		Button cancelButton = new Button("Cancel");
-		cancelButton.setPrefWidth(120);
+		cancelButton.setPrefWidth(90);
 		cancelButton.setPrefHeight(30);
-		cancelButton.setLayoutX(120);
-		cancelButton.setLayoutY(130);
+		cancelButton.setLayoutX(190);
+		cancelButton.setLayoutY(100);
 
 		exitButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {

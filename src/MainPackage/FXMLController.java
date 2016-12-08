@@ -233,7 +233,7 @@ public class FXMLController implements Initializable {
 		String fileToRead = chooseMapSceneMapList.getSelectionModel().getSelectedItem();
 
 		if (event.getSource() == chooseMapSceneBeginButton && fileToRead != null) {
-			bottomMenuLevelLabel.setText("Level: " + fileToRead);
+			bottomMenuLevelLabel.setText(fileToRead);
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
 			startGame(fileToRead);
@@ -480,7 +480,7 @@ public class FXMLController implements Initializable {
 				roomSceneInfoLabel.setText("You examine the blueprint and discover all hidden rooms!");
 				break;
 			case BOLTCUTTER:
-				roomSceneInfoLabel.setText("You use the bolt cutter to cut down the fence!\nYou can now go through the fence!s");
+				roomSceneInfoLabel.setText("You use the bolt cutter to cut down the fence!\nYou can now go through the fence!");
 				break;
 			default:
 				break;
@@ -532,7 +532,7 @@ public class FXMLController implements Initializable {
 				} else {
 					//If incorrect you go back to previous room
 					goRoom(nextRoom.getDirection(previousRoom));
-					roomSceneInfoLabel.setText("You failed to enther the correct code, and are now back in " + player.getRoom().getName());
+					roomSceneInfoLabel.setText("You failed to enter the correct code,\nand are now back in " + player.getRoom().getName());
 				}
 			}
 		} else {
@@ -548,11 +548,39 @@ public class FXMLController implements Initializable {
 	private void updateMap(Room room, int row, int column) {
 		Pane pane = new Pane();
 		//Adds the room name to pane
+		Canvas roomCanvas = new Canvas();
+		roomCanvas.setWidth(90);
+		roomCanvas.setHeight(90);
+		GraphicsContext roomBackground = roomCanvas.getGraphicsContext2D();
+		roomBackground.setFill(Color.AQUA);
+		roomBackground.fillRect(4, 4, 86, 86);
+
 		Label roomName = new Label(room.getName());
+		roomName.setLayoutY(7);
 		roomName.setPrefWidth(90);
 		roomName.setAlignment(Pos.CENTER);
+
+		Label bossName = new Label("");
+		for (Boss boss : game.getBosses()) {
+			if (room == boss.getRoom()) {
+				bossName.setText(boss.getName());
+			}
+		}
+		bossName.setLayoutY(37);
+		bossName.setPrefWidth(90);
+		bossName.setAlignment(Pos.CENTER);
+
+		Label npcName = new Label("");
+		for (NPC npc : game.getAllNpc()) {
+			if (room == npc.getCurrentRoom()) {
+				npcName.setText(npc.getName());
+			}
+		}
+		npcName.setLayoutY(67);
+		npcName.setPrefWidth(90);
+		npcName.setAlignment(Pos.CENTER);
 		//Adds all children
-		pane.getChildren().addAll(roomName);
+		pane.getChildren().addAll(roomCanvas, roomName, bossName, npcName);
 		//Only draw the room if it is within the grid pane
 		int gridWidth = mapSceneGridPane.getColumnConstraints().size();
 		int gridHeight = mapSceneGridPane.getRowConstraints().size();
