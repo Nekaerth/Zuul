@@ -162,12 +162,9 @@ public class FXMLController implements Initializable {
 	@FXML
 	private Button difficultySceneEasyButton;
 	@FXML
-	private Button difficultySceneMediumButton;
-	@FXML
-	private Button difficultySceneHardButton;
-	@FXML
 	private Button difficultySceneBackButton;
-
+	@FXML
+	private ListView<String> difficultySceneMapList;
 	//High score Pane
 	@FXML
 	private Pane highScoreScene;
@@ -210,7 +207,7 @@ public class FXMLController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		game = new GamePlay();
 		highScoreSceneScoreList.setItems(game.getHighScoreList());
-
+		difficultySceneMapList.setItems(game.getListOfFiles());
 		//Gives color to background
 		GraphicsContext background = gameSceneCanvas.getGraphicsContext2D();
 		background.setFill(Color.WHITE);
@@ -232,22 +229,13 @@ public class FXMLController implements Initializable {
 
 	@FXML
 	private void handleDifficultySceneButtons(ActionEvent event) {
-		if (event.getSource() == difficultySceneEasyButton) {
-			bottomMenuLevelLabel.setText("Level: Easy");
+		String fileToRead = difficultySceneMapList.getSelectionModel().getSelectedItem();
+		if (event.getSource() == difficultySceneEasyButton && fileToRead != null) {
+			bottomMenuLevelLabel.setText("Level: " + fileToRead);
 			setAllButOneMainSceneInvisible(gameScene);
 			setAllButOneGameSceneInvisible(roomScene);
-			startGame("testfile.dne");
-		} else if (event.getSource() == difficultySceneMediumButton) {
-			bottomMenuLevelLabel.setText("Level: Medium");
-			setAllButOneMainSceneInvisible(gameScene);
-			setAllButOneGameSceneInvisible(roomScene);
-			startGame("scenario2.dne");
-		} else if (event.getSource() == difficultySceneHardButton) {
-			bottomMenuLevelLabel.setText("Level: Hard");
-			setAllButOneMainSceneInvisible(gameScene);
-			setAllButOneGameSceneInvisible(roomScene);
-			startGame("scenario3.dne");
-		} else if (event.getSource() == difficultySceneBackButton) {
+			startGame(fileToRead);
+		}else if (event.getSource() == difficultySceneBackButton) {
 			setAllButOneMainSceneInvisible(startMenu);
 		}
 	}
@@ -623,11 +611,11 @@ public class FXMLController implements Initializable {
 		if (currentBoss.playerHitsBoss(player)) {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You countered " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-							+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
+					+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
 		} else {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You failed to counter " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-							+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
+					+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
 		}
 		//The bosses next move is chosen
 		currentBoss.setCurrentMoveAtRandom();

@@ -14,10 +14,12 @@ import Items.TimeIncreasingItem;
 import Items.Weapon;
 import Items.WeaponType;
 import WorldLoader.WorldLoader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
@@ -280,8 +282,7 @@ public class GamePlay implements GUIdisplayable {
 		if (flashlight.getCharges() > 0) {
 			flashlight.subtractCharge(1);
 			if (player.getRoom().hasEscapeCode()) {
-				player.getRoom().getNumber();
-				if (roomNumber.contains(player.getRoom()) == false) { //add a room to the arraylist roomNumber, that tracks the rooms with numbers in them
+				if (!roomNumber.contains(player.getRoom())) { //add a room to the arraylist roomNumber, that tracks the rooms with numbers in them
 					roomNumber.add(player.getRoom());
 				}
 			}
@@ -411,5 +412,17 @@ public class GamePlay implements GUIdisplayable {
 			return code.equalsIgnoreCase(getCorrectCode());
 		}
 		return false;
+	}
+	@Override
+	public ObservableList<String> getListOfFiles(){
+		ObservableList<String> returnList = FXCollections.observableArrayList();
+		File folder = new File("./GameFiles");
+		File[] listOfFiles = folder.listFiles();
+		for(File file : listOfFiles){
+			if(file.isFile()){
+				returnList.add(file.getName());
+			}
+		}
+		return returnList;
 	}
 }

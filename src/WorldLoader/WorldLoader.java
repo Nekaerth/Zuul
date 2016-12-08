@@ -48,7 +48,7 @@ public class WorldLoader {
 	public ArrayList<Room> loadWorld(String fileToRead) {
 		try {
 			boolean shouldCreateRoom = false, shouldCreateItem = false;
-			FileReader file = new FileReader(fileToRead); // Reads the content of the given file
+			FileReader file = new FileReader(".\\GameFiles\\"+fileToRead); // Reads the content of the given file
 			Scanner scanner = new Scanner(file);
 
 			while (scanner.hasNext()) {
@@ -297,7 +297,7 @@ public class WorldLoader {
 	public ArrayList<Boss> loadBosses(String fileToRead) {
 		try {
 			boolean shouldCreateBoss = false;
-			FileReader file = new FileReader(fileToRead);
+			FileReader file = new FileReader(".\\GameFiles\\"+fileToRead);
 			Scanner scanner = new Scanner(file);
 
 			while (scanner.hasNext()) {
