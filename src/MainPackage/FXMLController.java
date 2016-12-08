@@ -1,38 +1,33 @@
 package MainPackage;
 
 import HighscoreLoader.Score;
-import Items.Item;
-import Items.Key;
+import Items.*;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author Lasse
- */
 public class FXMLController implements Initializable {
 
 	private GUIdisplayable game;
 	private Player player;
 	private Boss currentBoss;
 	private Item currentItem;
-	private ArrayList<Room> alreadyMappedRooms = new ArrayList<>();
+	private ArrayList<Room> alreadyMappedRooms = new ArrayList<>(); //Keeps track of which rooms has been printed on the map
 
 	//Main Pane
 	@FXML
@@ -41,9 +36,9 @@ public class FXMLController implements Initializable {
 	//In game Pane
 	@FXML
 	private Pane gameScene;
-	//Top menu HBox
 	@FXML
-	private HBox topMenu;
+	private Canvas gameSceneCanvas;
+	//Top menu
 	@FXML
 	private Button topMenuExitButton;
 	@FXML
@@ -54,9 +49,7 @@ public class FXMLController implements Initializable {
 	private Button topMenuInventoryButton;
 	@FXML
 	private Label topMenuCapacityLabel;
-	//Bottom menu HBox
-	@FXML
-	private HBox bottomMenu;
+	//bottom menu
 	@FXML
 	private Button bottomMenuMapButton;
 	@FXML
@@ -209,13 +202,20 @@ public class FXMLController implements Initializable {
 
 	/**
 	 * Initializes the controller class.
-     * @param url
-     * @param rb
+	 *
+	 * @param url
+	 * @param rb
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
 		game = new GamePlay();
 		highScoreSceneScoreList.setItems(game.getHighScoreList());
+
+		//Gives color to background
+		GraphicsContext background = gameSceneCanvas.getGraphicsContext2D();
+		background.setFill(Color.WHITE);
+		background.fillRect(0, 40, 720, 720);
+		background.fillRect(575, 760, 2, 40);
 	}
 
 	@FXML
@@ -269,9 +269,10 @@ public class FXMLController implements Initializable {
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
 			if (!bossScene.isVisible()) {
-				//TODO clear map each time
+				//Clears the map and the alreadyMappedRooms-list before constructing the map again
+				mapSceneGridPane.getChildren().clear();
 				alreadyMappedRooms.clear();
-				updateMap(player.getRoom(), Direction.UNKNOWN, 3, 3);
+				updateMap(player.getRoom(), 2, 2);
 				setAllButOneGameSceneInvisible(mapScene);
 			}
 		}
@@ -280,21 +281,16 @@ public class FXMLController implements Initializable {
 	@FXML
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
-			if (currentItem != null) {
-				use(currentItem);
-			} else {
-				roomSceneInfoLabel.setText("");
-			}
-			updateWeightAndItemAmount();
+			use(currentItem);
 		} else if (event.getSource() == roomScenePickUpButton) {
 			Item selectedItem = roomSceneItemList.getSelectionModel().getSelectedItem();
 			if (selectedItem != null) {
 				if (!game.pickUp(selectedItem)) {
 					roomSceneInfoLabel.setText("You can't pick " + selectedItem.getName() + " up!");
 				}
-				updateTime();
+				updateAndCheckTime();
+				updateWeightAndItemAmount();
 			}
-			updateWeightAndItemAmount();
 		} else if (event.getSource() == roomSceneNorthButton) {
 			goRoom(Direction.NORTH);
 		} else if (event.getSource() == roomSceneEastButton) {
@@ -419,7 +415,7 @@ public class FXMLController implements Initializable {
 		//updates the current rooms inventory
 		roomSceneItemList.setItems(game.getCurrentRoomInventory());
 		//updates the time label
-		updateTime();
+		updateAndCheckTime();
 		//updates the capacity labels
 		updateWeightAndItemAmount();
 		//updates the current room label
@@ -433,11 +429,16 @@ public class FXMLController implements Initializable {
 		helpSceneTextArea.setText(game.getHelpDescription());
 	}
 
-	private void updateTime() {
-		if (game.getTime() % 60 < 10) {
-			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":0" + game.getTime() % 60);
+	private void updateAndCheckTime() {
+		//Updates all time labels
+		if (player.getTime() % 60 < 10) {
+			topMenuTimeLabel.setText("Time: " + player.getTime() / 60 + ":0" + player.getTime() % 60);
 		} else {
-			topMenuTimeLabel.setText("Time: " + game.getTime() / 60 + ":" + game.getTime() % 60);
+			topMenuTimeLabel.setText("Time: " + player.getTime() / 60 + ":" + player.getTime() % 60);
+		}
+		//Makes the game over, if time has run out
+		if (player.getTime() == 0) {
+			setAllButOneMainSceneInvisible(gameOverScene);
 		}
 	}
 
@@ -453,18 +454,36 @@ public class FXMLController implements Initializable {
 	}
 
 	private void use(Item item) {
+		//Checks if current item is null
+		if (item == null) {
+			roomSceneInfoLabel.setText("You have not selected an item to use!");
+			return;
+		}
+		//Try using the item. If it fails the method stops. Otherwise it continue
 		if (!game.use(item)) {
 			roomSceneInfoLabel.setText("You can't use " + currentItem.getName() + " here!");
 			return;
 		}
+		updateWeightAndItemAmount();
+		//Set current item to null, if the item was used up
+		if (!player.getInventory().getAllItems().contains(item)) {
+			currentItem = null;
+			updateCurrentItemLabel("None");
+		}
+		//Gives different messages in the info label depending on which item was used
 		switch (item.getItemType()) {
 			case KEY:
 				Key key = (Key) item;
 				roomSceneInfoLabel.setText("You have unlocked the door to " + key.getNameOfRoomThatFitsThisKey() + "!");
-				updateCurrentItemLabel("None");
 				break;
 			case FLASHLIGHT:
-				//TODO
+				Flashlight flashlight = (Flashlight) item;
+				//Updates info label depending on if you find something or not
+				if (player.getRoom().hasEscapeCode()) {
+					roomSceneInfoLabel.setText("You have used the flashlight. You find the number " + player.getRoom().getNumber() + ".\nYou have " + flashlight.getCharges() + " charges left!");
+				} else {
+					roomSceneInfoLabel.setText("You have used the flashlight. You find nothing!\nYou have " + flashlight.getCharges() + " charges left!");
+				}
 				break;
 			case BLUEPRINT:
 				//TODO
@@ -478,17 +497,26 @@ public class FXMLController implements Initializable {
 	}
 
 	private void goRoom(Direction direction) {
+		Room previousRoom = player.getRoom();
 		Room nextRoom = player.getRoom().getExit(direction);
 		//Checks if there is a door in that direction
 		if (nextRoom == null || nextRoom.isHidden()) {
 			roomSceneInfoLabel.setText("There is no door in this direction.");
 			return;
 		}
-		//Goes to room if door is not locked
+
+		//TODO - Checks if the escapeable room is in that direction and if it is locked
+		/*
+		if (nextRoom.isEscapeableRoom() && nextRoom.isLocked()) {
+			roomSceneInfoLabel.setText("A fence is blocking your way.");
+			return;
+		}*/
+		//Goes to room if the door is not locked
 		if (game.goRoom(direction)) {
+			roomSceneInfoLabel.setText("");
 			roomSceneItemList.setItems(game.getCurrentRoomInventory());
 			bottomMenuCurrentRoomLabel.setText(player.getRoom().getName());
-			updateTime();
+			updateAndCheckTime();
 			//Checks if a boss is present
 			for (Boss boss : game.getBosses()) {
 				if (boss.getRoom() == player.getRoom()) {
@@ -497,7 +525,16 @@ public class FXMLController implements Initializable {
 			}
 			//Checks if room is escape able
 			if (nextRoom.isEscapeableRoom()) {
-				game.isCodeCorrect(AlertBox.getCode());
+				//Checks if you type the correct code or not
+				if (game.isCodeCorrect(AlertBox.getCode())) {
+					//If correct you win
+					victorySceneScoreLabel.setText("Score: " + game.calculateHighScore());
+					setAllButOneMainSceneInvisible(victoryScene);
+				} else {
+					//If incorrect you go back to previous room
+					goRoom(nextRoom.getDirection(previousRoom));
+					roomSceneInfoLabel.setText("You failed to enther the correct code, and are now back in " + player.getRoom().getName());
+				}
 			}
 		} else {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");
@@ -509,31 +546,41 @@ public class FXMLController implements Initializable {
 		inventorySceneCurrentItemLabel.setText("Current Item: " + itemName);
 	}
 
-	private void updateMap(Room room, Direction arrivalDirection, int row, int column) {
-		Text roomName = new Text(room.getName());
-		roomName.setFont(new Font(12));
-		mapSceneGridPane.add(roomName, row, column);
+	private void updateMap(Room room, int row, int column) {
+		Pane pane = new Pane();
+		//Adds the room name to pane
+		Label roomName = new Label(room.getName());
+		roomName.setPrefWidth(90);
+		roomName.setAlignment(Pos.CENTER);
+		//Adds all children
+		pane.getChildren().addAll(roomName);
+		//Only draw the room if it is within the grid pane
+		int gridWidth = mapSceneGridPane.getColumnConstraints().size();
+		int gridHeight = mapSceneGridPane.getRowConstraints().size();
+		if (0 <= row && row < gridWidth && 0 <= column && column < gridHeight) {
+			mapSceneGridPane.add(pane, row, column);
+		}
 		alreadyMappedRooms.add(room);
 		for (Direction direction : room.getListOfExitDirections()) {
 			switch (direction) {
 				case NORTH:
 					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
-						updateMap(room.getExit(direction), Direction.SOUTH, row, column - 1);
+						updateMap(room.getExit(direction), row, column - 1);
 					}
 					break;
 				case EAST:
 					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
-						updateMap(room.getExit(direction), Direction.WEST, row + 1, column);
+						updateMap(room.getExit(direction), row + 1, column);
 					}
 					break;
 				case SOUTH:
 					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
-						updateMap(room.getExit(direction), Direction.NORTH, row, column + 1);
+						updateMap(room.getExit(direction), row, column + 1);
 					}
 					break;
 				case WEST:
 					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
-						updateMap(room.getExit(direction), Direction.EAST, row - 1, column);
+						updateMap(room.getExit(direction), row - 1, column);
 					}
 					break;
 				case UNKNOWN:
@@ -544,7 +591,7 @@ public class FXMLController implements Initializable {
 
 	private void beginBossFight() {
 		setAllButOneGameSceneInvisible(bossScene);
-		//finds which boss to fight
+		//Finds which boss to fight
 		for (Boss boss : game.getBosses()) {
 			if (player.getRoom() == boss.getRoom()) {
 				currentBoss = boss;
@@ -555,17 +602,17 @@ public class FXMLController implements Initializable {
 		if (currentBoss == null) {
 			return;
 		}
-		//updates the title in bossScene
+		//Updates the title in bossScene
 		bossSceneTitle.setText("You are fighting " + currentBoss.getName());
-		//updates counter attack buttons
+		//Updates counter attack buttons
 		bossSceneAttackButton1.setText(game.getPlayer().getMoves().get(0).getName());
 		bossSceneAttackButton2.setText(game.getPlayer().getMoves().get(1).getName());
 		bossSceneAttackButton3.setText(game.getPlayer().getMoves().get(2).getName());
 		bossSceneAttackButton4.setText(game.getPlayer().getMoves().get(3).getName());
-		//updates player and boss hitpoints
+		//Updates player and boss hitpoints
 		bossScenePlayerHitpointLabel.setText("Your Hitpoints: " + game.getPlayer().getHitpoint());
 		bossSceneBossHitpointLabel.setText(currentBoss.getName() + " Hitpoints: " + currentBoss.getHitpoint());
-		//the boss makes first attack
+		//The boss makes first attack
 		currentBoss.setCurrentMoveAtRandom();
 		bossSceneBossAttackLabel.setText(currentBoss.getName() + " uses: " + currentBoss.getCurrentMove().getName());
 	}
@@ -593,10 +640,13 @@ public class FXMLController implements Initializable {
 			player.addOneBossKill();
 			player.getRoom().getInventory().putInventory(currentBoss.getInventory());
 			currentBoss.setRoom(null);
+			roomSceneInfoLabel.setText("You defeated " + currentBoss.getName() + "!");
 			setAllButOneGameSceneInvisible(roomScene);
 		}
+		//Updates time label and checks if time has run out
+		updateAndCheckTime();
 		//Checks if the player is defeated or if the time has run out
-		if (player.getHitpoint() == 0 || player.getTime() == 0) {
+		if (player.getHitpoint() == 0) {
 			setAllButOneMainSceneInvisible(gameOverScene);
 		}
 	}

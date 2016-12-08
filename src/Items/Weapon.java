@@ -17,15 +17,14 @@ public class Weapon extends Item {
 	 *
 	 * @param pickup is a boolean used to check if the item can be picked up
 	 * @param name is a String that refers to the name of the weapon
-	 * @param useable is a boolean used to check if the item can be used once
-	 * you have picked it up
+	 * @param useable is a boolean used to check if the item can be used once you
+	 * have picked it up
 	 * @param weight is an int that refers to the weight of the item
-	 * @param capacity is an int that refers to how much space it requires in
-	 * the inventory
+	 * @param capacity is an int that refers to how much space it requires in the
+	 * inventory
 	 * @param damage is an int that refers to how much damage you deal to bosses
 	 * while wielding this weapon
-	 * @param weaponType is a String that refers to the type e.g. ranged or
-	 * melee
+	 * @param weaponType is a String that refers to the type e.g. ranged or melee
 	 */
 	public Weapon(boolean pickup, String name, boolean useable, int weight, int capacity, int damage, WeaponType weaponType) {
 		super(pickup, name, useable, weight, capacity);

@@ -1,7 +1,7 @@
 /**
- * The BossContainment class is used to set and return values of the atributes 
+ * The BossContainment class is used to set and return values of the atributes
  * related to a boss
- * 
+ *
  * @author Termproject Group 13 (Autumn 2016)
  */
 package WorldLoader;
@@ -15,7 +15,8 @@ public class BossContainment {
 	private BossType bossType;
 
 	/**
-         * The getRoomId is used to get the roomId where a boss is located
+	 * The getRoomId is used to get the roomId where a boss is located
+	 *
 	 * @return the roomId where a boss is located
 	 */
 	public String getRoomId() {
@@ -23,7 +24,8 @@ public class BossContainment {
 	}
 
 	/**
-         * The setRoomId is ued to set the roomId for where a boss is located
+	 * The setRoomId is ued to set the roomId for where a boss is located
+	 *
 	 * @param roomId the roomId where a boss is
 	 */
 	public void setRoomId(String roomId) {
@@ -31,7 +33,8 @@ public class BossContainment {
 	}
 
 	/**
-         * The getName method is used to return the name of the boss
+	 * The getName method is used to return the name of the boss
+	 *
 	 * @return the name of the boss
 	 */
 	public String getName() {
@@ -39,7 +42,8 @@ public class BossContainment {
 	}
 
 	/**
-         * The setName method is used to set the name of of boss
+	 * The setName method is used to set the name of of boss
+	 *
 	 * @param name a String with the name of the boss
 	 */
 	public void setName(String name) {
@@ -47,7 +51,8 @@ public class BossContainment {
 	}
 
 	/**
-         * The getHitpoints is used to return the amount of hitPoints the boss has 
+	 * The getHitpoints is used to return the amount of hitPoints the boss has
+	 *
 	 * @return the amount of hitpoints
 	 */
 	public int getHitpoints() {
@@ -55,7 +60,8 @@ public class BossContainment {
 	}
 
 	/**
-         * The setHitpoints method is used to set the amount of hitpoints a boss has
+	 * The setHitpoints method is used to set the amount of hitpoints a boss has
+	 *
 	 * @param hitpoints the hitpoints to set
 	 */
 	public void setHitpoints(String hitpoints) {
@@ -63,7 +69,8 @@ public class BossContainment {
 	}
 
 	/**
-         * The getBossType is used to return the bossType of a boss
+	 * The getBossType is used to return the bossType of a boss
+	 *
 	 * @return the bossType of a boss
 	 */
 	public BossType getBossType() {
@@ -71,9 +78,10 @@ public class BossContainment {
 	}
 
 	/**
-         * The setBossType is used to set the type of a boss
+	 * The setBossType is used to set the type of a boss
+	 *
 	 * @param bossType is a String that must be equal to a value in the enum
-         * BossType to set the bossType
+	 * BossType to set the bossType
 	 */
 	public void setBossType(String bossType) {
 		bossType = bossType.toLowerCase();

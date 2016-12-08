@@ -28,8 +28,6 @@ public interface GUIdisplayable {
 
 	public void drop(Item item);
 
-	public int getTime();
-
 	public String getHelpDescription();
 
 	public void constructWorld(String fileToRead);
@@ -45,5 +43,4 @@ public interface GUIdisplayable {
 	public ArrayList<Boss> getBosses();
 
 	public boolean isCodeCorrect(String userCode);
-
 }

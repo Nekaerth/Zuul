@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.canvas.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
@@ -11,26 +13,19 @@
 	<children>
 		<Pane fx:id="gameScene" prefHeight="800.0" prefWidth="720.0" visible="false">
 			<children>
-				<HBox fx:id="topMenu" prefHeight="40.0" prefWidth="720.0">
-					<children>
-						<Button fx:id="topMenuExitButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Exit" />
-						<Button fx:id="topMenuHelpButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Help" />
-						<Label fx:id="topMenuTimeLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
-						<Button fx:id="topMenuInventoryButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
-						<Label fx:id="topMenuCapacityLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Item Amount: 0/0&#10;Weight: 0/0" />
-					</children>
-				</HBox>
-				<HBox fx:id="bottomMenu" layoutY="760.0" prefHeight="40.0" prefWidth="720.0">
-					<children>
-						<Button fx:id="bottomMenuMapButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Map" />
-						<Label fx:id="bottomMenuCurrentRoomLabel" alignment="CENTER" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
-						<Label fx:id="bottomMenuLevelLabel" alignment="CENTER" prefHeight="40.0" prefWidth="144.0" text="Level" />
-					</children>
-				</HBox>
+				<Canvas fx:id="gameSceneCanvas" height="800.0" width="720.0" />
+				<Button fx:id="topMenuExitButton" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Exit" />
+				<Button fx:id="topMenuHelpButton" layoutX="144.0" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Help" />
+				<Label fx:id="topMenuTimeLabel" alignment="CENTER" layoutX="288.0" prefHeight="40.0" prefWidth="144.0" text="Time 00:00" />
+				<Button fx:id="topMenuInventoryButton" layoutX="432.0" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Inventory" />
+				<Label fx:id="topMenuCapacityLabel" alignment="CENTER" layoutX="576.0" prefHeight="40.0" prefWidth="144.0" text="Item Amount: 0/0&#10;Weight: 0/0" />
+				<Button fx:id="bottomMenuMapButton" layoutY="760.0" mnemonicParsing="false" onAction="#handleGameMenuButtons" prefHeight="40.0" prefWidth="144.0" text="Map" />
+				<Label fx:id="bottomMenuCurrentRoomLabel" alignment="CENTER" layoutX="144.0" layoutY="760.0" prefHeight="40.0" prefWidth="432.0" text="Current Room" />
+				<Label fx:id="bottomMenuLevelLabel" alignment="CENTER" layoutX="576.0" layoutY="760.0" prefHeight="40.0" prefWidth="144.0" text="Level" />
 				<Pane fx:id="roomScene" layoutY="40.0" prefHeight="720.0" prefWidth="720.0" visible="false">
 					<children>
 						<Label fx:id="roomSceneInfoTitel" layoutX="80.0" layoutY="60.0" prefHeight="40.0" prefWidth="320.0" text="Game info:" />
-						<Label fx:id="roomSceneInfoLabel" layoutX="80.0" layoutY="100.0" prefHeight="40.0" prefWidth="300.0" text="" />
+						<Label fx:id="roomSceneInfoLabel" layoutX="80.0" layoutY="100.0" prefHeight="40.0" prefWidth="400.0" text="" />
 						<Label fx:id="roomSceneCurrentItemLabel" layoutX="80.0" layoutY="520.0" prefHeight="40.0" prefWidth="180.0" text="Current Item: None" />
 						<Button fx:id="roomSceneUseButton" layoutX="80.0" layoutY="560.0" mnemonicParsing="false" onAction="#handleRoomSceneButtons" prefHeight="40.0" prefWidth="180.0" text="Use item" />
 						<Label fx:id="roomSceneItemLabel" alignment="CENTER" layoutX="500.0" layoutY="60.0" prefHeight="40.0" prefWidth="180.0" text="Items in the room:" />
@@ -83,12 +78,8 @@
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-								<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
 							</columnConstraints>
 							<rowConstraints>
-								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
 								<RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />

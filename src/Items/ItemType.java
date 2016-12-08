@@ -11,8 +11,8 @@ public enum ItemType {
 	String stringItemType;
 
 	/**
-	 * The contructor of the Enum ItemType. It is automatically called when a
-	 * Enum is used
+	 * The contructor of the Enum ItemType. It is automatically called when a Enum
+	 * is used
 	 *
 	 * @param stringItemType
 	 */
@@ -21,8 +21,8 @@ public enum ItemType {
 	}
 
 	/**
-	 * Returns a string representation of an ItemType.
-	 * The representation is a String version of the enum ItemType
+	 * Returns a string representation of an ItemType. The representation is a
+	 * String version of the enum ItemType
 	 *
 	 * @return String
 	 */

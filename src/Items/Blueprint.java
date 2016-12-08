@@ -23,8 +23,10 @@ public class Blueprint extends Item {
 	}
 
 	/**
-	 * The abstract method which is declared in the abstract class Item is overrided so that
-	 * The getType method returns the enum value corresponding to this item type
+	 * The abstract method which is declared in the abstract class Item is
+	 * overrided so that The getType method returns the enum value corresponding
+	 * to this item type
+	 *
 	 * @return will return a value of the type ItemType enum
 	 */
 	@Override

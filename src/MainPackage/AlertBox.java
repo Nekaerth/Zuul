@@ -7,7 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -17,86 +17,128 @@ public class AlertBox {
 	private static boolean shouldExit;
 
 	public static String getCode() {
+		code = null;
+
 		Stage window = new Stage();
 		window.initModality(Modality.WINDOW_MODAL);
 		window.setTitle("Code");
-		window.setMinWidth(300);
-		window.setMinHeight(200);
 
-		TextField textfield = new TextField();
-		textfield.setMaxWidth(100);
-		textfield.setMaxHeight(50);
+		Label label = new Label("Type in your 3-digit code:");
+		label.setPrefWidth(360);
+		label.setAlignment(Pos.CENTER);
+		label.setLayoutX(0);
+		label.setLayoutY(30);
 
-		Label label = new Label();
-		label.setText("Type in your 3-digit code:");
+		TextField textField = new TextField();
+		textField.setPrefWidth(120);
+		textField.setLayoutX(120);
+		textField.setLayoutY(55);
 
 		Button enterButton = new Button("Enter");
+		enterButton.setPrefWidth(120);
+		enterButton.setPrefHeight(30);
+		enterButton.setLayoutX(120);
+		enterButton.setLayoutY(90);
+
+		Button cancelButton = new Button("Cancel");
+		cancelButton.setPrefWidth(120);
+		cancelButton.setPrefHeight(30);
+		cancelButton.setLayoutX(120);
+		cancelButton.setLayoutY(130);
 
 		enterButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
-				String inputText = textfield.getText();
+				String inputText = textField.getText();
 				if (inputText.length() == 3 && isANumber(inputText)) {
 					window.close();
 					code = inputText;
 				}
 			}
-
 		});
 
-		VBox layout = new VBox(15);
-		layout.getChildren().addAll(label, textfield, enterButton);
-		layout.setAlignment(Pos.CENTER);
+		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				window.close();
+			}
+		});
 
-		Scene alertBox = new Scene(layout);
+		Pane pane = new Pane();
+		pane.getChildren().addAll(label, textField, enterButton, cancelButton);
+		pane.setPrefWidth(360);
+		pane.setPrefHeight(200);
+
+		Scene alertBox = new Scene(pane);
+
 		window.setScene(alertBox);
 		window.showAndWait();
-
 		return code;
 	}
 
 	public static boolean shouldExit() {
+		shouldExit = false;
+
 		Stage window = new Stage();
 		window.initModality(Modality.WINDOW_MODAL);
-		window.setTitle("Exit game?");
-		window.setMinWidth(300);
-		window.setMinHeight(200);
+		window.setTitle("Exit");
+		//Makes first label and sets size and coordinates
+		Label label = new Label("Are you sure you want to exit this game?");
+		label.setPrefWidth(360);
+		label.setAlignment(Pos.CENTER);
+		label.setLayoutX(0);
+		label.setLayoutY(30);
+		//Makes second label and sets size and coordinates
+		Label label2 = new Label("Any progress you've made so far will be deleted.");
+		label2.setPrefWidth(360);
+		label2.setAlignment(Pos.CENTER);
+		label2.setLayoutX(0);
+		label2.setLayoutY(50);
 
-		Label label = new Label();
-		label.setText("Are you sure you want to exit?\n" + "Any progress you've made so far will be deleted.");
+		Button exitButton = new Button("Exit");
+		exitButton.setPrefWidth(120);
+		exitButton.setPrefHeight(30);
+		exitButton.setLayoutX(120);
+		exitButton.setLayoutY(90);
 
-		Button yesButton = new Button("Yes");
-		Button noButton = new Button("No");
+		Button cancelButton = new Button("Cancel");
+		cancelButton.setPrefWidth(120);
+		cancelButton.setPrefHeight(30);
+		cancelButton.setLayoutX(120);
+		cancelButton.setLayoutY(130);
 
-		yesButton.setOnAction(new EventHandler<ActionEvent>() {
+		exitButton.setOnAction(new EventHandler<ActionEvent>() {
 			public void handle(ActionEvent event) {
 				window.close();
 				shouldExit = true;
 			}
 		});
 
-		noButton.setOnAction(new EventHandler<ActionEvent>() {
+		cancelButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				window.close();
 			}
 		});
 
-		VBox layout = new VBox(15);
-		layout.getChildren().addAll(label, yesButton, noButton);
-		layout.setAlignment(Pos.CENTER);
+		Pane pane = new Pane();
+		pane.setPrefWidth(360);
+		pane.setPrefHeight(200);
+		pane.getChildren().addAll(label, label2, exitButton, cancelButton);
 
-		Scene alertBox = new Scene(layout);
-		window.setScene(alertBox);
+		Scene scene = new Scene(pane);
+
+		System.out.println(label.getPrefWidth() + ", " + label.getMinWidth() + ", " + label.getMaxWidth());
+
+		window.setScene(scene);
 		window.showAndWait();
-
 		return shouldExit;
 	}
 
 	private static boolean isANumber(String text) {
 		try {
 			Integer.parseInt(text);
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException event) {
 			return false;
 		}
 		return true;

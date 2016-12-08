@@ -50,11 +50,13 @@ public class Player extends Person {
 
 	/**
 	 * Adds a specified amount of time to the players time
-	 * @param time 
+	 *
+	 * @param time
 	 */
 	public void addTime(int time) {
 		this.time += time;
 	}
+
 	/**
 	 * The subtractTime() method is used as a count down timer to keep track of
 	 * how much time the player has left. Time is used as a ressource that you
@@ -73,7 +75,7 @@ public class Player extends Person {
 	}
 
 	/**
-	 * Returns the maximum item capacity for the player 
+	 * Returns the maximum item capacity for the player
 	 *
 	 * @return int
 	 */
@@ -83,6 +85,7 @@ public class Player extends Person {
 
 	/**
 	 * Returns the max weight of items that the player can hold
+	 *
 	 * @return the maximum weight that the players items must weight in total.
 	 */
 	public int getMaxWeight() {
@@ -90,10 +93,9 @@ public class Player extends Person {
 	}
 
 	/**
-	 * Changes the players move
-	 * Takes an item as argument. If the item is a melee weapon, the damage
-	 * of the Stab move is changed. If the item is a range weapon, then a Shoot
-	 * move is added to player moves.
+	 * Changes the players move Takes an item as argument. If the item is a melee
+	 * weapon, the damage of the Stab move is changed. If the item is a range
+	 * weapon, then a Shoot move is added to player moves.
 	 *
 	 * @param weapon Takes a weapon item to update attacks.
 	 */
@@ -102,31 +104,33 @@ public class Player extends Person {
 		if (weapon.weaponType() == WeaponType.MELEE) {
 			ArrayList<Move> moves = getMoves();
 			Move move = getMove("Stab");
-			if(move == null){
-			Move moveToRemove = getMove("Shoot");
-			moves.remove(moveToRemove);
-			moves.add(new Move(weapon.getDamage(),Attack.STAB,WeaponType.MELEE));
+			if (move == null) {
+				Move moveToRemove = getMove("Shoot");
+				moves.remove(moveToRemove);
+				moves.add(new Move(weapon.getDamage(), Attack.STAB, WeaponType.MELEE));
 			} else {
 				move.setDamage(weapon.getDamage());//Changes damage of the Stab move
 			}
-			 
+
 		} //If the item is a range weapon
 		else if (weapon.weaponType() == WeaponType.RANGED) {
 			ArrayList<Move> moves = getMoves();
 			Move move = getMove("Shoot");
-			if(move == null){
-			Move moveToRemove = getMove("Stab");
-			moves.remove(moveToRemove);
-			moves.add(new Move(weapon.getDamage(),Attack.SHOOT,WeaponType.RANGED));
+			if (move == null) {
+				Move moveToRemove = getMove("Stab");
+				moves.remove(moveToRemove);
+				moves.add(new Move(weapon.getDamage(), Attack.SHOOT, WeaponType.RANGED));
 			} else {
 				move.setDamage(weapon.getDamage());//Changes damage of the Shoot move
 			}
-			
+
 		}
 	}
 
 	/**
-	 *	Changes a players move, and is used to revert the effects of picking up an item
+	 * Changes a players move, and is used to revert the effects of picking up an
+	 * item
+	 *
 	 * @param weapon Takes a weapon item which effect on moves should be reversed
 	 */
 	public void droppedWeapon(Weapon weapon) {
@@ -144,6 +148,7 @@ public class Player extends Person {
 
 	/**
 	 * Returns the amount of bosses killed by the player
+	 *
 	 * @return The amount of boss kills
 	 */
 	public int getAmountOfBossKill() {
