@@ -9,14 +9,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class FXMLController implements Initializable {
@@ -34,9 +36,9 @@ public class FXMLController implements Initializable {
 	//In game Pane
 	@FXML
 	private Pane gameScene;
-	//Top menu HBox
 	@FXML
-	private HBox topMenu;
+	private Canvas gameSceneCanvas;
+	//Top menu
 	@FXML
 	private Button topMenuExitButton;
 	@FXML
@@ -47,9 +49,7 @@ public class FXMLController implements Initializable {
 	private Button topMenuInventoryButton;
 	@FXML
 	private Label topMenuCapacityLabel;
-	//Bottom menu HBox
-	@FXML
-	private HBox bottomMenu;
+	//bottom menu
 	@FXML
 	private Button bottomMenuMapButton;
 	@FXML
@@ -210,6 +210,12 @@ public class FXMLController implements Initializable {
 	public void initialize(URL url, ResourceBundle rb) {
 		game = new GamePlay();
 		highScoreSceneScoreList.setItems(game.getHighScoreList());
+
+		//Gives color to background
+		GraphicsContext background = gameSceneCanvas.getGraphicsContext2D();
+		background.setFill(Color.WHITE);
+		background.fillRect(0, 40, 720, 720);
+		background.fillRect(575, 760, 2, 40);
 	}
 
 	@FXML
@@ -498,7 +504,14 @@ public class FXMLController implements Initializable {
 			roomSceneInfoLabel.setText("There is no door in this direction.");
 			return;
 		}
-		//Goes to room if door is not locked
+
+		//TODO - Checks if the escapeable room is in that direction and if it is locked
+		/*
+		if (nextRoom.isEscapeableRoom() && nextRoom.isLocked()) {
+			roomSceneInfoLabel.setText("A fence is blocking your way.");
+			return;
+		}*/
+		//Goes to room if the door is not locked
 		if (game.goRoom(direction)) {
 			roomSceneInfoLabel.setText("");
 			roomSceneItemList.setItems(game.getCurrentRoomInventory());
@@ -627,6 +640,7 @@ public class FXMLController implements Initializable {
 			player.addOneBossKill();
 			player.getRoom().getInventory().putInventory(currentBoss.getInventory());
 			currentBoss.setRoom(null);
+			roomSceneInfoLabel.setText("You defeated " + currentBoss.getName() + "!");
 			setAllButOneGameSceneInvisible(roomScene);
 		}
 		//Updates time label and checks if time has run out

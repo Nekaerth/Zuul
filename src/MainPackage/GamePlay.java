@@ -407,7 +407,10 @@ public class GamePlay implements GUIdisplayable {
 	}
 
 	@Override
-	public boolean isCodeCorrect(String userCode) {
-		return userCode.equalsIgnoreCase(getCorrectCode());
+	public boolean isCodeCorrect(String code) {
+		if (code != null) {
+			return code.equalsIgnoreCase(getCorrectCode());
+		}
+		return false;
 	}
 }
