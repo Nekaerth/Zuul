@@ -474,10 +474,10 @@ public class FXMLController implements Initializable {
 				}
 				break;
 			case BLUEPRINT:
-				//TODO
+				roomSceneInfoLabel.setText("You examine the blueprint and discover all hidden rooms!");
 				break;
 			case BOLTCUTTER:
-				//TODO
+				roomSceneInfoLabel.setText("You use the bolt cutter to cut down the fence!\nYou can now go through the fence!s");
 				break;
 			default:
 				break;
@@ -552,22 +552,22 @@ public class FXMLController implements Initializable {
 		for (Direction direction : room.getListOfExitDirections()) {
 			switch (direction) {
 				case NORTH:
-					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
 						updateMap(room.getExit(direction), row, column - 1);
 					}
 					break;
 				case EAST:
-					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
 						updateMap(room.getExit(direction), row + 1, column);
 					}
 					break;
 				case SOUTH:
-					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
 						updateMap(room.getExit(direction), row, column + 1);
 					}
 					break;
 				case WEST:
-					if (!alreadyMappedRooms.contains(room.getExit(direction))) {
+					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
 						updateMap(room.getExit(direction), row - 1, column);
 					}
 					break;
