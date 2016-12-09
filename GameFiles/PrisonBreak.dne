@@ -114,7 +114,7 @@ weight=15
 capacity=1
 pickup=true
 useable=true
-roomBoltcutterCanBeUsedIn=parkinglot
+roomBoltCutterCanBeUsedIn=parkinglot
 name=Bolt cutter
 [item]
 type=weapon

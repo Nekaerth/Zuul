@@ -553,6 +553,9 @@ public class FXMLController implements Initializable {
 		roomCanvas.setHeight(90);
 		GraphicsContext roomBackground = roomCanvas.getGraphicsContext2D();
 		roomBackground.setFill(Color.AQUA);
+		if (room == player.getRoom()) {
+			roomBackground.setFill(Color.CHARTREUSE);
+		}
 		roomBackground.fillRect(4, 4, 86, 86);
 
 		Label roomName = new Label(room.getName());

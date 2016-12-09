@@ -1,29 +1,25 @@
 About the game:
-You are a prison inmate caught up in an unexpected prison riot.
-Every cell door malfunctioned and are now unlocked.
-You have a certain amount of time before the electrical generator restarts, and locks every exit there is.
- Now is your chance to escape, almost every guard is busy.
+You are a prison inmate caught up in an unexpected prison riot. Every cell door malfunctioned and are now unlocked. You have a certain amount of time before the electrical generator restarts, and locks every exit there is. Now is your chance to escape, almost every guard is busy.
 
 Instructions:
 Navigation: use your map in the left lower corner.
 
 Move: use the 4 navigation buttons in the right lower corner. (north, south, east and west)
-
-Difficulty: You can choose the difficulty level at the start screen.
  
-Exit: Press Exit to return to the start menu. (Warning; if doing so, you will have to start the game from the beginging.)
+Exit: Press Exit to return to the start menu. (Warning; if doing so, you will have to start the game from the beginning.)
 
-Current room: Current room is displayed at the bottom middle.
+Current room: Current room is displayed at the bottom.
 
 Time: Depending on chosen difficulty, you have a certain amount of time to break out. Running out of time will make you lose the game.
 
 Inventory: Show what items you currently have on you. You can use some of the items.
 
-Capacity/Weight: 
-Capacity; you can only hold a certain amount of items on you.
-Weight; every item has a weight, you cannot exceed the weight limit, so pick up your items with care. 
-                                    
-Game screen: 
-Room inventory; in every room there are some items, these are shown at the room inventory. Click on the the item, and pick them up.
-Use item; to use an item, go to your inventory, and click on the desired item, and choose it as your current item. Now you can use it from the game screen.
-Game info-box; tells you relevant information during the game. For example if you try to use a item that is unusable, the info-box will tell you.
+Item capacity & weight capacity: You can only hold a certain amount of items and you can only carry a certain weight, which depend on the total weight of your items.
+
+Room inventory: In every room there are some items, these are shown at the room inventory. Click on the the item, and pick them up.
+
+Use item: To use an item, go to your inventory, and click on the desired item, and choose it as your current item. Now you can use it from the game screen.
+
+Info-box: Tells you relevant information during the game. For example if you try to use a item that is unusable, the info-box will tell you.
+
+Scenario: You can choose different levels at the start screen.

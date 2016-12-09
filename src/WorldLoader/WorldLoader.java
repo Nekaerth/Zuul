@@ -222,8 +222,8 @@ public class WorldLoader {
 				case "roomToUnlock":
 					ic.setNameOfRoomThatFitsThisKey(strings[length - 1]);
 					break;
-				case "roomBoltcutterCanBeUsedIn":
-					ic.setRoomBoltcutterCanBeUsedIn(strings[length - 1]);
+				case "roomBoltCutterCanBeUsedIn":
+					ic.setRoomBoltCutterCanBeUsedIn(strings[length - 1]);
 					break;
 				case "name":
 					ic.setName(strings[length - 1]);
@@ -258,7 +258,7 @@ public class WorldLoader {
 					rs.addItem(timeincreasingitem, ic.getRoomID());
 					break;
 				case BOLTCUTTER:
-					Boltcutter boltcutter = new Boltcutter(ic.isPickup(), ic.getName(), ic.isPickup(), ic.getWeight(), ic.getCapacity(), ic.getRoomBoltcutterCanBeUsedIn());
+					BoltCutter boltcutter = new BoltCutter(ic.isPickup(), ic.getName(), ic.isPickup(), ic.getWeight(), ic.getCapacity(), ic.getRoomBoltCutterCanBeUsedIn());
 					rs.addItem(boltcutter, ic.getRoomID());
 			}
 			finishItem = false;
