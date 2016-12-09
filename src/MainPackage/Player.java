@@ -139,6 +139,7 @@ public class Player extends Person {
 			ArrayList<Move> moves = getMoves();
 			Move move = getMove("Shoot"); //Removes the Shoot move
 			moves.remove(move);
+			moves.add(new Move(10, Attack.STAB, WeaponType.MELEE));
 		} //If the item is a melee weapon
 		else if (weapon.weaponType() == WeaponType.MELEE) {
 			Move move = getMove("Stab");
