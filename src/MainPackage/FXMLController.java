@@ -250,16 +250,21 @@ public class FXMLController implements Initializable {
 				setAllButOneMainSceneInvisible(startMenu);
 			}
 		} else if (event.getSource() == topMenuHelpButton) {
-			if (!bossScene.isVisible()) {
+			if (helpScene.isVisible()) {
+				setAllButOneGameSceneInvisible(roomScene);
+			} else if (!bossScene.isVisible()) {
 				setAllButOneGameSceneInvisible(helpScene);
 			}
 		} else if (event.getSource() == topMenuInventoryButton) {
-			if (!bossScene.isVisible()) {
+			if (inventoryScene.isVisible()) {
+				setAllButOneGameSceneInvisible(roomScene);
+			} else if (!bossScene.isVisible()) {
 				setAllButOneGameSceneInvisible(inventoryScene);
-				updateWeightAndItemAmount();
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
-			if (!bossScene.isVisible()) {
+			if (mapScene.isVisible()) {
+				setAllButOneGameSceneInvisible(roomScene);
+			} else if (!bossScene.isVisible()) {
 				//Clears the map and the alreadyMappedRooms-list before constructing the map again
 				mapSceneGridPane.getChildren().clear();
 				alreadyMappedRooms.clear();
@@ -546,48 +551,49 @@ public class FXMLController implements Initializable {
 	}
 
 	private void updateMap(Room room, int row, int column) {
-		Pane pane = new Pane();
-		//Adds the room name to pane
-		Canvas roomCanvas = new Canvas();
-		roomCanvas.setWidth(90);
-		roomCanvas.setHeight(90);
-		GraphicsContext roomBackground = roomCanvas.getGraphicsContext2D();
-		roomBackground.setFill(Color.AQUA);
-		if (room == player.getRoom()) {
-			roomBackground.setFill(Color.CHARTREUSE);
-		}
-		roomBackground.fillRect(4, 4, 86, 86);
-
-		Label roomName = new Label(room.getName());
-		roomName.setLayoutY(7);
-		roomName.setPrefWidth(90);
-		roomName.setAlignment(Pos.CENTER);
-
-		Label bossName = new Label("");
-		for (Boss boss : game.getBosses()) {
-			if (room == boss.getRoom()) {
-				bossName.setText(boss.getName());
-			}
-		}
-		bossName.setLayoutY(37);
-		bossName.setPrefWidth(90);
-		bossName.setAlignment(Pos.CENTER);
-
-		Label npcName = new Label("");
-		for (NPC npc : game.getAllNpc()) {
-			if (room == npc.getCurrentRoom()) {
-				npcName.setText(npc.getName());
-			}
-		}
-		npcName.setLayoutY(67);
-		npcName.setPrefWidth(90);
-		npcName.setAlignment(Pos.CENTER);
-		//Adds all children
-		pane.getChildren().addAll(roomCanvas, roomName, bossName, npcName);
 		//Only draw the room if it is within the grid pane
 		int gridWidth = mapSceneGridPane.getColumnConstraints().size();
 		int gridHeight = mapSceneGridPane.getRowConstraints().size();
 		if (0 <= row && row < gridWidth && 0 <= column && column < gridHeight) {
+			//The pane that represents this room one the map
+			Pane pane = new Pane();
+			//Creates the background to the pane
+			Canvas roomCanvas = new Canvas();
+			roomCanvas.setWidth(90);
+			roomCanvas.setHeight(90);
+			GraphicsContext roomBackground = roomCanvas.getGraphicsContext2D();
+			roomBackground.setFill(Color.AQUA);
+			if (room == player.getRoom()) {
+				roomBackground.setFill(Color.CHARTREUSE);
+			}
+			roomBackground.fillRect(4, 4, 86, 86);
+			//Adds the room name to the pane
+			Label roomName = new Label(room.getName());
+			roomName.setLayoutY(7);
+			roomName.setPrefWidth(90);
+			roomName.setAlignment(Pos.CENTER);
+			//Adds the boss name to the pane, if there is a boss present
+			Label bossName = new Label("");
+			for (Boss boss : game.getBosses()) {
+				if (room == boss.getRoom()) {
+					bossName.setText(boss.getName());
+				}
+			}
+			bossName.setLayoutY(37);
+			bossName.setPrefWidth(90);
+			bossName.setAlignment(Pos.CENTER);
+			//Adds the NPC name to the pane, if there is a NPC present
+			Label npcName = new Label("");
+			for (NPC npc : game.getAllNpc()) {
+				if (room == npc.getCurrentRoom()) {
+					npcName.setText(npc.getName());
+				}
+			}
+			npcName.setLayoutY(67);
+			npcName.setPrefWidth(90);
+			npcName.setAlignment(Pos.CENTER);
+			//Adds all children to the pane and adds the pane to the grid pane
+			pane.getChildren().addAll(roomCanvas, roomName, bossName, npcName);
 			mapSceneGridPane.add(pane, row, column);
 		}
 		alreadyMappedRooms.add(room);
