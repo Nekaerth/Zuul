@@ -604,16 +604,16 @@ public class FXMLController implements Initializable {
 			}
 			switch (direction) {
 				case NORTH:
-					updateMap(room.getExit(direction), row, column - 1);
+					updateMap(nextRoom, row, column - 1);
 					break;
 				case EAST:
-					updateMap(room.getExit(direction), row + 1, column);
+					updateMap(nextRoom, row + 1, column);
 					break;
 				case SOUTH:
-					updateMap(room.getExit(direction), row, column + 1);
+					updateMap(nextRoom, row, column + 1);
 					break;
 				case WEST:
-					updateMap(room.getExit(direction), row - 1, column);
+					updateMap(nextRoom, row - 1, column);
 					break;
 				case UNKNOWN:
 					break;
