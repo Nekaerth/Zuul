@@ -598,26 +598,22 @@ public class FXMLController implements Initializable {
 		}
 		alreadyMappedRooms.add(room);
 		for (Direction direction : room.getListOfExitDirections()) {
+			Room nextRoom = room.getExit(direction);
+			if (alreadyMappedRooms.contains(nextRoom) || nextRoom.isHidden()) {
+				continue;
+			}
 			switch (direction) {
 				case NORTH:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row, column - 1);
-					}
+					updateMap(room.getExit(direction), row, column - 1);
 					break;
 				case EAST:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row + 1, column);
-					}
+					updateMap(room.getExit(direction), row + 1, column);
 					break;
 				case SOUTH:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row, column + 1);
-					}
+					updateMap(room.getExit(direction), row, column + 1);
 					break;
 				case WEST:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row - 1, column);
-					}
+					updateMap(room.getExit(direction), row - 1, column);
 					break;
 				case UNKNOWN:
 					break;
