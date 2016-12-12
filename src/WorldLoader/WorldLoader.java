@@ -37,10 +37,10 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The loadWorld method is a try-catch contruction The method is used to
-	 * read from a file containing the rooms and items It uses the Scanner to
-	 * read 1 line at a time from the file Other methods are then called to
-	 * create either an item or a room based on the line read
+	 * The loadWorld method is a try-catch contruction The method is used to read
+	 * from a file containing the rooms and items It uses the Scanner to read 1
+	 * line at a time from the file Other methods are then called to create either
+	 * an item or a room based on the line read
 	 *
 	 * @param fileToRead is a String which must contain the file name
 	 * @return will return an ArrayList of the rooms which has been created
@@ -48,7 +48,7 @@ public class WorldLoader {
 	public ArrayList<Room> loadWorld(String fileToRead) {
 		try {
 			boolean shouldCreateRoom = false, shouldCreateItem = false;
-			FileReader file = new FileReader(".\\GameFiles\\"+fileToRead); // Reads the content of the given file
+			FileReader file = new FileReader(".\\GameFiles\\" + fileToRead); // Reads the content of the given file
 			Scanner scanner = new Scanner(file);
 
 			while (scanner.hasNext()) {
@@ -79,9 +79,9 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The hasCreatedRoom method is used to create the rooms based on what is
-	 * read in the file. It contains a switch-case construction which has cases
-	 * to all atributes a room can have
+	 * The hasCreatedRoom method is used to create the rooms based on what is read
+	 * in the file. It contains a switch-case construction which has cases to all
+	 * atributes a room can have
 	 *
 	 * @param evaluateString is a String that comes from the file
 	 * @return will return a boolean
@@ -177,12 +177,12 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The hasCreatedItem method is used to create items baed on what is read
-	 * from the file
+	 * The hasCreatedItem method is used to create items baed on what is read from
+	 * the file
 	 *
 	 * @param evaluateString is the line from the file
-	 * @return will return a boolean as true if an item is done being created,
-	 * and false if it is not
+	 * @return will return a boolean as true if an item is done being created, and
+	 * false if it is not
 	 */
 	private boolean hasCreatedItem(String evaluateString) {
 		String[] strings = evaluateString.split("=");
@@ -269,9 +269,9 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The buildLinkString method is used create a String using StringBuilder
-	 * the String contains the Id of a room which is follow by = and then the
-	 * room id's that it is linked to
+	 * The buildLinkString method is used create a String using StringBuilder the
+	 * String contains the Id of a room which is follow by = and then the room
+	 * id's that it is linked to
 	 */
 	private void buildLinkString() {
 		StringBuilder sb = new StringBuilder();
@@ -287,8 +287,8 @@ public class WorldLoader {
 
 	/**
 	 * The loadBosses method is a try-catch construction used to read from an
-	 * external file It uses the scanner to read 1 line at a time and then act
-	 * on that.
+	 * external file It uses the scanner to read 1 line at a time and then act on
+	 * that.
 	 *
 	 * @param fileToRead is the file that is to be read from
 	 * @return will return an Arraylist of the bosses that bosses that have been
@@ -297,7 +297,7 @@ public class WorldLoader {
 	public ArrayList<Boss> loadBosses(String fileToRead) {
 		try {
 			boolean shouldCreateBoss = false;
-			FileReader file = new FileReader(".\\GameFiles\\"+fileToRead);
+			FileReader file = new FileReader(".\\GameFiles\\" + fileToRead);
 			Scanner scanner = new Scanner(file);
 
 			while (scanner.hasNext()) {
@@ -320,8 +320,8 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The hasCreatedBoss method is used to create a boss with the atributes
-	 * read from the file.
+	 * The hasCreatedBoss method is used to create a boss with the atributes read
+	 * from the file.
 	 *
 	 * @param evaluateString is the line that is read from the file
 	 * @return will return a boolean as true if a boss has succesfully been
@@ -371,8 +371,8 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The setUpBoss1 method is used to determine what attacks the boss have
-	 * those are put into an arraylist. The items that the boss carry are also
+	 * The setUpBoss1 method is used to determine what attacks the boss have those
+	 * are put into an arraylist. The items that the boss carry are also
 	 * determined in this method
 	 *
 	 * @param boss is the boss that will contain these attacks and items.
@@ -386,8 +386,8 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The setUpBoss2 method is used to determine what attacks the boss have
-	 * those are put into an arraylist.
+	 * The setUpBoss2 method is used to determine what attacks the boss have those
+	 * are put into an arraylist.
 	 *
 	 * @param boss is the boss that will contain these attacks
 	 */
@@ -401,8 +401,8 @@ public class WorldLoader {
 	}
 
 	/**
-	 * The setUpDefaultBoss method is used to determine what attacks the boss
-	 * have those are put into an arraylist.
+	 * The setUpDefaultBoss method is used to determine what attacks the boss have
+	 * those are put into an arraylist.
 	 *
 	 * @param boss is the boss that will contain these attacks
 	 */
@@ -411,14 +411,15 @@ public class WorldLoader {
 		moves.add(new Move(100, Attack.LAUGH, Attack.SHOOT));
 	}
 
-        /**
-        * The findDirection method is used to iterate through the enum of directions,
-        * and find if the String argument matches a direction in the enum, 
-        * it will return that it will return that direction
-        * @param directionString is the String that we want to compare to the enum
-        * @return will return a Direction from the enum if the String equals a Direction
-        * otherwise it will return UNKNOWN
-        */
+	/**
+	 * The findDirection method is used to iterate through the enum of directions,
+	 * and find if the String argument matches a direction in the enum, it will
+	 * return that it will return that direction
+	 *
+	 * @param directionString is the String that we want to compare to the enum
+	 * @return will return a Direction from the enum if the String equals a
+	 * Direction otherwise it will return UNKNOWN
+	 */
 	private Direction findDirection(String directionString) {
 		directionString = directionString.toLowerCase();
 		for (Direction dir : Direction.values()) {

@@ -53,8 +53,8 @@ class RoomContainment {
 	}
 
 	/**
-	 * The getLocked method is used to get the currect state of the locked
-	 * boolean for a specific room
+	 * The getLocked method is used to get the currect state of the locked boolean
+	 * for a specific room
 	 *
 	 * @return the boolean locked
 	 */
@@ -63,8 +63,8 @@ class RoomContainment {
 	}
 
 	/**
-	 * The setLocked method is used to set a the state of the locked boolean for
-	 * a specific room
+	 * The setLocked method is used to set a the state of the locked boolean for a
+	 * specific room
 	 *
 	 * @param locked is the String that will set the value of the boolean
 	 */
@@ -73,8 +73,8 @@ class RoomContainment {
 	}
 
 	/**
-	 * The isEscapeableRoom method is used to get the current state
-	 * of the escapeRoom boolean for a specific room
+	 * The isEscapeableRoom method is used to get the current state of the
+	 * escapeRoom boolean for a specific room
 	 *
 	 * @return the boolean escapeRoom
 	 */
@@ -94,8 +94,8 @@ class RoomContainment {
 	}
 
 	/**
-	 * The getContainsHiddenNumber method is used the get the state of the
-	 * boolean containsHidden for a specific room
+	 * The getContainsHiddenNumber method is used the get the state of the boolean
+	 * containsHidden for a specific room
 	 *
 	 * @return the boolean containsHiddenNumber
 	 */
@@ -125,8 +125,8 @@ class RoomContainment {
 	}
 
 	/**
-	 * The setLinkedID method is used to set the Array of Strings in linkedID
-	 * for a specific room
+	 * The setLinkedID method is used to set the Array of Strings in linkedID for
+	 * a specific room
 	 *
 	 * @param linkedID the linkedID to set
 	 */
@@ -135,8 +135,8 @@ class RoomContainment {
 	}
 
 	/**
-	 * The isHidden method is used to get the current state of the hidden
-	 * boolean for a specific room
+	 * The isHidden method is used to get the current state of the hidden boolean
+	 * for a specific room
 	 *
 	 * @return will return the state of hidden
 	 */
@@ -145,8 +145,7 @@ class RoomContainment {
 	}
 
 	/**
-	 * The setHidden method is used to set the state of hidden for a specific
-	 * room
+	 * The setHidden method is used to set the state of hidden for a specific room
 	 *
 	 * @param hidden is the String that will set the value of the boolean
 	 */
