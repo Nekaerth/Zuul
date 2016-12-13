@@ -6,7 +6,7 @@ package Items;
  */
 public class BoltCutter extends Item {
 
-	private String roomBoltCutterCanBeUsedIn;
+	private String roomBoltcutterCanBeUsedIn;
 
 	/**
 	 * The constructor for boltcutter takes 6 parameters
@@ -16,11 +16,11 @@ public class BoltCutter extends Item {
 	 * @param useable
 	 * @param weight
 	 * @param capacity
-	 * @param roomBoltCutterCanBeUsedIn
+	 * @param roomBoltcutterCanBeUsedIn
 	 */
-	public BoltCutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltCutterCanBeUsedIn) {
+	public BoltCutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltcutterCanBeUsedIn) {
 		super(pickup, name, useable, weight, capacity);
-		this.roomBoltCutterCanBeUsedIn = roomBoltCutterCanBeUsedIn;
+		this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
 	}
 
 	/**
@@ -42,7 +42,7 @@ public class BoltCutter extends Item {
 	 * @return String
 	 */
 	public String getRoomBoltCutterCanBeUsedIn() {
-		return roomBoltCutterCanBeUsedIn;
+		return roomBoltcutterCanBeUsedIn;
 	}
 
 }

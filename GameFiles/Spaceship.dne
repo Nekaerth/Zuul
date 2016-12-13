@@ -1,0 +1,332 @@
+[room]
+id=1
+name=The Brig
+locked=false
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=2;west
+[room]
+id=2
+name=The Hangar
+locked=false
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=1;east:3;north:4;south
+[room]
+id=3
+name=The Hallway
+locked=false
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=2;south:11;west:5;east:8;north
+[room]
+id=4
+name=The Gym
+locked=false
+escapeableRoom=false
+hasEscapeCode=true
+hidden=false
+linkedID=2;north
+[room]
+id=5
+name=The Armory
+locked=false
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=6;north:3;west
+[room]
+id=6
+name=The Shooting range
+locked=false
+escapeableRoom=false
+hasEscapeCode=false
+hidden=true
+linkedID=5;south:7;north
+[room]
+id=7
+name=The Officers Lockerroom
+locked=false
+escapeableRoom=false
+hasEscapeCode=true
+hidden=false
+linkedID=6;south
+[room]
+id=8
+name=The Bridge
+locked=true
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=9;north:3;south
+[room]
+id=9
+name=The Warroom
+locked=true
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=13;west:8;south
+[room]
+id=10
+name=The Captains quarter
+locked=true
+escapeableRoom=false
+hasEscapeCode=true
+hidden=false
+linkedID=11;south
+[room]
+id=11
+name=The Living Quarters
+locked=false
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=10;north:3;east:14;south
+[room]
+id=13
+name=Code Room
+locked=false
+escapeableRoom=true
+hasEscapeCode=false
+hidden=true
+linkedID=9;east
+[room]
+id=14
+name=The Infirmary
+locked=false
+escapeableRoom=false
+hasEscapeCode=false
+hidden=false
+linkedID=11;north
+[item]
+type=weapon
+roomID=1
+weight=5
+capacity=2
+pickup=true
+useable=true
+weaponType=melee
+damage=12
+name=Rock
+[item]
+type=misc
+roomID=1
+weight=2
+capacity=1
+pickup=true
+useable=true
+name=Sheet
+[item]
+type=misc
+roomID=1
+weight=4
+capacity=1
+pickup=true
+useable=true
+name=Tablet
+[item]
+type=misc
+roomID=2
+weight=20000000
+capacity=100
+pickup=true
+useable=true
+name=Spaceship
+[item]
+type=misc
+roomID=2
+weight=200000000
+capacity=100
+pickup=true
+useable=true
+name=Star Fighter
+[item]
+type=timeincreasingitem
+roomID=3
+weight=2
+capacity=1
+pickup=true
+useable=true
+time=30
+name=Sandwhich
+[item]
+type=weapon
+roomID=4
+weight=10
+capacity=1
+pickup=true
+useable=true
+weaponType=ranged
+damage=30
+name=Laser gun
+[item]
+type=misc
+roomID=4
+weight=5
+capacity=2
+pickup=true
+useable=true
+name=Excercise ball
+[item]
+type=key
+roomID=4
+weight=1
+capacity=1
+pickup=true
+useable=true
+roomToUnlock=The Captains Quarter
+name=Captains quarter key
+[item]
+type=timeincreasingitem
+roomID=5
+weight=5
+capacity=2
+pickup=true
+useable=true
+time=-30
+name=Space suit
+[item]
+type=weapon
+roomID=5
+weight=5
+capacity=1
+pickup=true
+useable=true
+weaponType=melee
+damage=20
+name=Brass Knuckles
+[item]
+type=misc
+roomID=6
+weight=20
+capacity=3
+pickup=true
+useable=true
+weaponType=ranged
+damage=50
+name=Laser Rifle
+[item]
+type=misc
+roomID=6
+weight=3
+capacity=1
+pickup=true
+useable=true
+name=Rifle Magasin
+[item]
+type=timeincreasingitem
+roomID=7
+weight=5
+capacity=2
+pickup=true
+useable=true
+time=120
+name=Officer Uniform
+[item]
+type=misc
+roomID=7
+weight=5
+capacity=1
+pickup=true
+useable=true
+name=Locket
+[item]
+type=key
+roomID=7
+weight=1
+capacity=1
+pickup=true
+useable=true
+roomToUnlock=The Warroom
+name=Warroom key
+[item]
+type=blueprint
+roomID=8
+weight=1
+capacity=1
+pickup=true
+useable=true
+name=Blueprints
+[item]
+type=timeincreasingitem
+roomID=8
+weight=2
+capacity=1
+pickup=true
+useable=true
+time=60
+name=Cop of coffee
+[item]
+type=key
+roomID=10
+weight=1
+capacity=1
+pickup=true
+useable=true
+roomToUnlock=The Bridge
+name=Bridge key
+[item]
+type=timeincreasingitem
+roomID=10
+weight=1
+capacity=1
+pickup=true
+useable=true
+time=200
+name=Captains uniform
+[item]
+type=misc
+roomID=11
+weight=20
+capacity=3
+pickup=true
+useable=true
+name=Bookshelf
+[item]
+type=misc
+roomID=10
+weight=1
+capacity=1
+pickup=true
+useable=true
+time=200
+name=Captains uniform
+[item]
+type=Flashlight
+roomID=14
+weight=1
+capacity=1
+pickup=true
+useable=true
+charges=9
+name=Flashlight
+[item]
+type=weapon
+roomID=14
+weight=3
+capacity=1
+pickup=true
+useable=true
+weaponType=melee
+damage=15
+name=Syringe
+[boss]
+roomId=4
+hitpoints=100
+bossType=bosstype1
+name=The Captain
+[boss]
+roomId=7
+hitpoints=150
+bossType=bosstype1
+name=The Officer
+[boss]
+roomId=9
+hitpoints=200
+bossType=bosstype2
+
+name=The Commander
