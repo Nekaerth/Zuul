@@ -322,7 +322,7 @@ name=The Captain
 [boss]
 roomId=7
 hitpoints=150
-bossType=bosstype1
+bossType=bosstype2
 name=The Officer
 [boss]
 roomId=9
