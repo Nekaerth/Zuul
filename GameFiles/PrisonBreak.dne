@@ -86,7 +86,7 @@ type=Misc
 roomID=1
 weight=5
 capacity=1
-pickup=true
+pickup=false
 useable=false
 name=Stick
 [item]
@@ -126,7 +126,7 @@ type=Misc
 roomID=3
 weight=3
 capacity=1
-pickup=true
+pickup=false
 useable=false
 name=Plate
 [item]
@@ -159,7 +159,7 @@ type=Misc
 roomID=5
 weight=2
 capacity=1
-pickup=true
+pickup=false
 useable=false
 name=Papers
 [item]
@@ -189,7 +189,6 @@ useable=true
 time=60
 name=Police hat
 [item]
-id=112
 type=Misc
 roomID=6
 weight=10
