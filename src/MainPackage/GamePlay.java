@@ -426,7 +426,7 @@ public class GamePlay implements GUIdisplayable {
 	@Override
 	public ObservableList<String> getListOfFiles() {
 		ObservableList<String> returnList = FXCollections.observableArrayList();
-		File folder = new File("./GameFiles");
+		File folder = new File(".//GameFiles");
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
