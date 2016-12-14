@@ -4,7 +4,7 @@ package Items;
  *
  * @author Termproject Group 13 (Autumn 2016)
  */
-public class Boltcutter extends Item {
+public class BoltCutter extends Item {
 
 	private String roomBoltcutterCanBeUsedIn;
 
@@ -18,7 +18,7 @@ public class Boltcutter extends Item {
 	 * @param capacity
 	 * @param roomBoltcutterCanBeUsedIn
 	 */
-	public Boltcutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltcutterCanBeUsedIn) {
+	public BoltCutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltcutterCanBeUsedIn) {
 		super(pickup, name, useable, weight, capacity);
 		this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
 	}
@@ -41,7 +41,7 @@ public class Boltcutter extends Item {
 	 *
 	 * @return String
 	 */
-	public String getRoomBoltcutterCanBeUsedIn() {
+	public String getRoomBoltCutterCanBeUsedIn() {
 		return roomBoltcutterCanBeUsedIn;
 	}
 

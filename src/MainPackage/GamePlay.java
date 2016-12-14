@@ -5,7 +5,7 @@ package MainPackage;
 
 import HighscoreLoader.Highscore;
 import HighscoreLoader.Score;
-import Items.Boltcutter;
+import Items.BoltCutter;
 import Items.Flashlight;
 import Items.Item;
 import Items.ItemType;
@@ -130,7 +130,7 @@ public class GamePlay implements GUIdisplayable {
 		if (item == null) {
 			return false;
 		}
-		if (!item.isUseable()) {//There are only 4 items that are useable. Either key, flashlight, blueprints or boltcutter
+		if (!item.isUseable()) {//There are only 4 items that are useable. Either key, flashlight, blueprints or bolt cutter
 			return false;
 		}
 
@@ -145,7 +145,7 @@ public class GamePlay implements GUIdisplayable {
 				player.getInventory().removeItem(item);
 				break;
 			case BOLTCUTTER:
-				return useBoltcutter(item);
+				return useBoltCutter(item);
 			default:
 				break;
 		}
@@ -160,7 +160,8 @@ public class GamePlay implements GUIdisplayable {
 	 * @return a boolean as false if an item is not picked up, returns true of an
 	 * item is picked up
 	 */
-	@Override
+
+        @Override
 	public boolean pickUp(Item item) {
 		if (item == null) {
 			return false;
@@ -314,13 +315,13 @@ public class GamePlay implements GUIdisplayable {
 	 * @param item
 	 * @return boolean
 	 */
-	private boolean useBoltcutter(Item item) {
-		Boltcutter boltcutter = (Boltcutter) item;
+	private boolean useBoltCutter(Item item) {
+		BoltCutter boltCutter = (BoltCutter) item;
 		Room roomToUnlock;
 		for (Room room : rooms) {
 			for (Direction dir : room.getListOfExitDirections()) {
 				roomToUnlock = room.getExit(dir);
-				if (boltcutter.getRoomBoltcutterCanBeUsedIn().equalsIgnoreCase(room.getExit(dir).getName())) {
+				if (boltCutter.getRoomBoltCutterCanBeUsedIn().equalsIgnoreCase(room.getExit(dir).getName())) {
 					if (roomToUnlock.isEscapeableRoom() && roomToUnlock.isLocked()) {
 						roomToUnlock.unlock();
 						player.getInventory().removeItem(item);

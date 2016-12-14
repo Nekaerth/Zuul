@@ -23,7 +23,7 @@ public class ItemContainment {
 	private WeaponType weaponType;
 	private int time;
 	private String nameOfRoomThatFitsThisKey;
-	private String roomBoltcutterCanBeUsedIn;
+	private String roomBoltCutterCanBeUsedIn;
 
 	/**
 	 * The getType method is used to the the type of an item
@@ -260,8 +260,8 @@ public class ItemContainment {
 	 *
 	 * @return a String where a boltcutter can be used
 	 */
-	public String getRoomBoltcutterCanBeUsedIn() {
-		return roomBoltcutterCanBeUsedIn;
+	public String getRoomBoltCutterCanBeUsedIn() {
+		return roomBoltCutterCanBeUsedIn;
 	}
 
 	/**
@@ -271,8 +271,8 @@ public class ItemContainment {
 	 * @param roomBoltcutterCanBeUsedIn a String equal to the name of a room where
 	 * the boltcutter can be used
 	 */
-	public void setRoomBoltcutterCanBeUsedIn(String roomBoltcutterCanBeUsedIn) {
-		this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
+	public void setRoomBoltCutterCanBeUsedIn(String roomBoltcutterCanBeUsedIn) {
+		this.roomBoltCutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
 	}
 
 }

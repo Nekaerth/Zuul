@@ -15,8 +15,8 @@ public class Misc extends Item {
 	 * @param useable is a boolean used to check if the item can be used once you
 	 * have picked it up
 	 */
-	public Misc(boolean pickup, String name, boolean useable) {
-		super(pickup, name, useable, 0, 0);
+	public Misc(boolean pickup, String name, boolean useable, int weight, int capacity) {
+		super(pickup, name, useable, weight, capacity);
 	}
 
 	/**
