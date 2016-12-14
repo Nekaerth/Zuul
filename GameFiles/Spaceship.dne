@@ -200,7 +200,7 @@ weaponType=melee
 damage=20
 name=Brass Knuckles
 [item]
-type=misc
+type=weapon
 roomID=6
 weight=20
 capacity=3
@@ -286,15 +286,6 @@ capacity=3
 pickup=true
 useable=true
 name=Bookshelf
-[item]
-type=misc
-roomID=10
-weight=1
-capacity=1
-pickup=true
-useable=true
-time=200
-name=Captains uniform
 [item]
 type=Flashlight
 roomID=14
