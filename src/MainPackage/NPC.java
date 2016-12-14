@@ -16,8 +16,8 @@ public class NPC {
 	/**
 	 * The constructor for an NPC sets the starting room and the name
 	 *
-	 * @param startRoom
-	 * @param name
+	 * @param startRoom is the room in which the NPC will be start
+	 * @param name is the name of NPC
 	 */
 	public NPC(Room startRoom, String name) {
 		this.currentRoom = startRoom;

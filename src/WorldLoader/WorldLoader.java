@@ -382,7 +382,7 @@ public class WorldLoader {
         moves.add(new Move(10, Attack.LASH, Attack.JUMP));
         moves.add(new Move(10, Attack.CHARGE, Attack.SIDESTEP));
         moves.add(new Move(10, Attack.PUNCH, Attack.STAB));
-        boss.getInventory().putItem(new Weapon(true, "Glock-18", false, 5, 1, 25, WeaponType.RANGED));
+        boss.getInventory().putItem(new TimeIncreasingItem(true, "Heart", false, 20));
     }
 
     /**
@@ -395,7 +395,6 @@ public class WorldLoader {
         ArrayList<Move> moves = boss.getMoves();
         moves.add(new Move(15, Attack.LASH, Attack.JUMP));
         moves.add(new Move(15, Attack.CHARGE, Attack.SIDESTEP));
-        moves.add(new Move(15, Attack.PUNCH, Attack.STAB));
         moves.add(new Move(15, Attack.SHOOT, Attack.DUCK));
         moves.add(new Move(5, Attack.LAUGH, Attack.SHOOT));
     }
