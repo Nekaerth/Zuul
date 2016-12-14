@@ -93,9 +93,9 @@ public class Player extends Person {
 	}
 
 	/**
-	 * Changes the players move Takes an item as argument. If the item is a melee
-	 * weapon, the damage of the Stab move is changed. If the item is a range
-	 * weapon, then a Shoot move is added to player moves.
+	 * Changes the players move Takes an item as argument. If the item is a
+	 * melee weapon, the damage of the Stab move is changed. If the item is a
+	 * range weapon, then a Shoot move is added to player moves.
 	 *
 	 * @param weapon Takes a weapon item to update attacks.
 	 */
@@ -128,10 +128,11 @@ public class Player extends Person {
 	}
 
 	/**
-	 * Changes a players move, and is used to revert the effects of picking up an
-	 * item
+	 * Changes a players move, and is used to revert the effects of picking up
+	 * an item
 	 *
-	 * @param weapon Takes a weapon item which effect on moves should be reversed
+	 * @param weapon Takes a weapon item which effect on moves should be
+	 * reversed
 	 */
 	public void droppedWeapon(Weapon weapon) {
 		//If the item is a range weapon
@@ -143,7 +144,11 @@ public class Player extends Person {
 		} //If the item is a melee weapon
 		else if (weapon.weaponType() == WeaponType.MELEE) {
 			Move move = getMove("Stab");
-			move.setDamage(10); //Sets Stab damage back to 10
+			if (move == null) {
+				getMoves().add(new Move(10, Attack.STAB, WeaponType.MELEE));
+			} else {
+				move.setDamage(10); //Sets Stab damage back to 10
+			}
 		}
 	}
 
