@@ -215,7 +215,12 @@ public class FXMLController implements Initializable {
 		background.fillRect(0, 40, 720, 720);
 		background.fillRect(575, 760, 2, 40);
 	}
-
+	
+	/**
+	 * This method does so only one scene is shown at a time.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleStartMenuButtons(ActionEvent event) {
 		if (event.getSource() == startMenuStartButton) {
@@ -227,7 +232,12 @@ public class FXMLController implements Initializable {
 			stage.close();
 		}
 	}
-
+	
+	/**
+	 * Method to choose different files, load that file and then show the right scene.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleChooseMapSceneButtons(ActionEvent event) {
 		String fileToRead = chooseMapSceneMapList.getSelectionModel().getSelectedItem();
@@ -242,7 +252,13 @@ public class FXMLController implements Initializable {
 			setAllButOneMainSceneInvisible(startMenu);
 		}
 	}
-
+	
+	/**
+	 * A method to show different scenes and has mapUpdate that clears the map, 
+	 * and draws a new everytime you go to a new room
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleGameMenuButtons(ActionEvent event) {
 		if (event.getSource() == topMenuExitButton) {
@@ -268,7 +284,13 @@ public class FXMLController implements Initializable {
 			}
 		}
 	}
-
+	
+	/**
+	 * This method update the roomSceneLabel if an item cant be picked up
+	 * Also handles direction buttons.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
@@ -292,12 +314,23 @@ public class FXMLController implements Initializable {
 			goRoom(Direction.WEST);
 		}
 	}
-
+	
+	/**
+	 * Switches to the helpScene.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleHelpButtons(ActionEvent event) {
 		setAllButOneGameSceneInvisible(roomScene);
 	}
-
+	
+	/**
+	 * This method handles the inventory buttons, and updates the currentItemLabel for
+	 * currently chosen item,
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleInventoryButtons(ActionEvent event) {
 		if (event.getSource() == inventorySceneDropButton) {
@@ -320,12 +353,22 @@ public class FXMLController implements Initializable {
 			setAllButOneGameSceneInvisible(roomScene);
 		}
 	}
-
+	
+	/**
+	 * Handles the map button.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleMapButtons(ActionEvent event) {
 		setAllButOneGameSceneInvisible(roomScene);
 	}
-
+	
+	/**
+	 * Method to handle different attacks while at bossScene.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleBossButtons(ActionEvent event) {
 		if (event.getSource() == bossSceneAttackButton1) {
@@ -338,12 +381,23 @@ public class FXMLController implements Initializable {
 			oneAttackCycle(player.getMoves().get(3));
 		}
 	}
-
+	
+	/**
+	 * Method to hide all scenes but highScoreScene.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleHighScoreSceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 	}
-
+	
+	/**
+	 * Method that only shows the victoryScene, and takes in a string that saves
+	 * the string and a score thats calculated and saves it.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleVictorySceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
@@ -351,7 +405,12 @@ public class FXMLController implements Initializable {
 		int highscore = game.calculateHighScore();
 		game.saveHighScore(name, highscore);
 	}
-
+	
+	/**
+	 * Method to only show the gameOverScene.
+	 * 
+	 * @param event 
+	 */
 	@FXML
 	private void handleGameOverSceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
@@ -375,7 +434,12 @@ public class FXMLController implements Initializable {
 		}
 		pane.setVisible(true);
 	}
-
+	
+	/**
+	 * Sets only one scene visible.
+	 * 
+	 * @param pane 
+	 */
 	private void setAllButOneMainSceneInvisible(Pane pane) {
 		if (pane != startMenu) {
 			startMenu.setVisible(false);
@@ -397,7 +461,12 @@ public class FXMLController implements Initializable {
 		}
 		pane.setVisible(true);
 	}
-
+	
+	/*
+	* When a new game is started, clears all former labelse and resets them to 
+	* how they are supposed to be at the start of the game. 
+	*
+	*/
 	private void startGame(String fileName) {
 		game.constructWorld(fileName);
 		player = game.getPlayer();
@@ -419,7 +488,11 @@ public class FXMLController implements Initializable {
 		//updates the help textarea
 		helpSceneTextArea.setText(game.getHelpDescription());
 	}
-
+	
+	/*
+	* Updates the timer and checks if there is time left, or if you run out of time.
+	*
+	*/
 	private void updateAndCheckTime() {
 		//Updates all time labels
 		if (player.getTime() % 60 < 10) {
@@ -432,7 +505,12 @@ public class FXMLController implements Initializable {
 			setAllButOneMainSceneInvisible(gameOverScene);
 		}
 	}
-
+	
+	/*
+	* Checks if you exceed your maximum weightlimit, and if you do, it says you can't pick it up.
+	* does the same with capacity.
+	*
+	*/
 	private void updateWeightAndItemAmount() {
 		int itemAmount = player.getInventory().getTotalItemCapacity();
 		int itemCapacity = player.getMaxItemCapacity();
@@ -443,7 +521,14 @@ public class FXMLController implements Initializable {
 		inventorySceneItemAmountLabel.setText("Item Amount: " + itemAmount + "/" + itemCapacity);
 		inventorySceneWeightLabel.setText("Weight: " + weight + "/" + Maxweight);
 	}
-
+	
+	/**
+	 * This method checks if an item has been selected and checks if the currently 
+	 * selected item has a use, and tells you if you can't use it
+	 * Depending on what item it is, it tells you different things when used.
+	 * 
+	 * @param item 
+	 */
 	private void use(Item item) {
 		//Checks if current item is null
 		if (item == null) {
@@ -486,7 +571,18 @@ public class FXMLController implements Initializable {
 				break;
 		}
 	}
-
+	/**
+	 * Checks if there is a direction from getExit, and if there isn't it tells you
+	 * that you can't go that direction
+	 * Updates the inventory for currentRoom
+	 * Checks if you encounter a boss
+	 * Checks if you encounter the NPC that teleports/take time from you, and if so,
+	 * the NPC has a chance to do so
+	 * Checks if the nextRoom is escapable, if so it gets score and a new scene to type your name
+	 * Checks if there is a door but if it's locked, it tells you, that you need a key
+	 * 
+	 * @param direction 
+	 */
 	private void goRoom(Direction direction) {
 		Room previousRoom = player.getRoom();
 		Room nextRoom = player.getRoom().getExit(direction);
@@ -539,12 +635,24 @@ public class FXMLController implements Initializable {
 			roomSceneInfoLabel.setText("This door is locked, you need a key.");
 		}
 	}
-
+	
+	/**
+	 * Updates the currentItemLabel
+	 * 
+	 * @param itemName 
+	 */
 	private void updateCurrentItemLabel(String itemName) {
 		roomSceneCurrentItemLabel.setText("Current Item: " + itemName);
 		inventorySceneCurrentItemLabel.setText("Current Item: " + itemName);
 	}
 
+	/**
+	 * Updates the map, and shows what room you're currently in
+	 * 
+	 * @param room
+	 * @param row
+	 * @param column 
+	 */
 	private void updateMap(Room room, int row, int column) {
 		Pane pane = new Pane();
 		//Adds the room name to pane
@@ -616,6 +724,12 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * if nextRoom you go to is a bossroom, hides all scenes and show bossScene
+	 * Gets bossName, moves and counterMoves, and updates label that says if you
+	 * take damage or do damage.
+	 * 
+	 */
 	private void beginBossFight() {
 		setAllButOneGameSceneInvisible(bossScene);
 		//Finds which boss to fight
