@@ -4,9 +4,9 @@ package Items;
  *
  * @author Termproject Group 13 (Autumn 2016)
  */
-public class Boltcutter extends Item {
+public class BoltCutter extends Item {
 
-	private String roomBoltcutterCanBeUsedIn;
+	private String roomBoltCutterCanBeUsedIn;
 
 	/**
 	 * The constructor for boltcutter takes 6 parameters
@@ -16,11 +16,11 @@ public class Boltcutter extends Item {
 	 * @param useable
 	 * @param weight
 	 * @param capacity
-	 * @param roomBoltcutterCanBeUsedIn
+	 * @param roomBoltCutterCanBeUsedIn
 	 */
-	public Boltcutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltcutterCanBeUsedIn) {
+	public BoltCutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltCutterCanBeUsedIn) {
 		super(pickup, name, useable, weight, capacity);
-		this.roomBoltcutterCanBeUsedIn = roomBoltcutterCanBeUsedIn;
+		this.roomBoltCutterCanBeUsedIn = roomBoltCutterCanBeUsedIn;
 	}
 
 	/**
@@ -41,8 +41,8 @@ public class Boltcutter extends Item {
 	 *
 	 * @return String
 	 */
-	public String getRoomBoltcutterCanBeUsedIn() {
-		return roomBoltcutterCanBeUsedIn;
+	public String getRoomBoltCutterCanBeUsedIn() {
+		return roomBoltCutterCanBeUsedIn;
 	}
 
 }
