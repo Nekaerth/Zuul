@@ -16,6 +16,11 @@ public class AlertBox {
 	private static String code;
 	private static boolean shouldExit;
 
+	/**
+	 * Calls this method when currentRoom is escapableRoom and ask for a code.
+	 * 
+	 * @return 
+	 */
 	public static String getCode() {
 		code = null;
 
@@ -76,6 +81,11 @@ public class AlertBox {
 		return code;
 	}
 
+	/**
+	 * Calls this method if you click the exitButton, ask if you are sure you want to quit
+	 * 
+	 * @return 
+	 */
 	public static boolean shouldExit() {
 		shouldExit = false;
 
@@ -135,6 +145,12 @@ public class AlertBox {
 		return shouldExit;
 	}
 
+	/**
+	 * Checks if the code written, only consists of numbers, if so it returns true.
+	 * 
+	 * @param text
+	 * @return 
+	 */
 	private static boolean isANumber(String text) {
 		try {
 			Integer.parseInt(text);

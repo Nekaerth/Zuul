@@ -216,6 +216,11 @@ public class FXMLController implements Initializable {
 		background.fillRect(575, 760, 2, 40);
 	}
 
+	/**
+	 * This method does so only one scene is shown at a time.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleStartMenuButtons(ActionEvent event) {
 		if (event.getSource() == startMenuStartButton) {
@@ -228,6 +233,12 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * Method to choose different files, load that file and then show the right
+	 * scene.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleChooseMapSceneButtons(ActionEvent event) {
 		String fileToRead = chooseMapSceneMapList.getSelectionModel().getSelectedItem();
@@ -243,6 +254,12 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * A method to show different scenes and has mapUpdate that clears the map,
+	 * and draws a new everytime you go to a new room
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleGameMenuButtons(ActionEvent event) {
 		if (event.getSource() == topMenuExitButton) {
@@ -250,16 +267,21 @@ public class FXMLController implements Initializable {
 				setAllButOneMainSceneInvisible(startMenu);
 			}
 		} else if (event.getSource() == topMenuHelpButton) {
-			if (!bossScene.isVisible()) {
+			if (helpScene.isVisible()) {
+				setAllButOneGameSceneInvisible(roomScene);
+			} else if (!bossScene.isVisible()) {
 				setAllButOneGameSceneInvisible(helpScene);
 			}
 		} else if (event.getSource() == topMenuInventoryButton) {
-			if (!bossScene.isVisible()) {
+			if (inventoryScene.isVisible()) {
+				setAllButOneGameSceneInvisible(roomScene);
+			} else if (!bossScene.isVisible()) {
 				setAllButOneGameSceneInvisible(inventoryScene);
-				updateWeightAndItemAmount();
 			}
 		} else if (event.getSource() == bottomMenuMapButton) {
-			if (!bossScene.isVisible()) {
+			if (mapScene.isVisible()) {
+				setAllButOneGameSceneInvisible(roomScene);
+			} else if (!bossScene.isVisible()) {
 				//Clears the map and the alreadyMappedRooms-list before constructing the map again
 				mapSceneGridPane.getChildren().clear();
 				alreadyMappedRooms.clear();
@@ -269,6 +291,12 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * This method update the roomSceneLabel if an item cant be picked up Also
+	 * handles direction buttons.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleRoomSceneButtons(ActionEvent event) {
 		if (event.getSource() == roomSceneUseButton) {
@@ -293,11 +321,22 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * Switches to the helpScene.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleHelpButtons(ActionEvent event) {
 		setAllButOneGameSceneInvisible(roomScene);
 	}
 
+	/**
+	 * This method handles the inventory buttons, and updates the currentItemLabel
+	 * for currently chosen item,
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleInventoryButtons(ActionEvent event) {
 		if (event.getSource() == inventorySceneDropButton) {
@@ -321,11 +360,21 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * Handles the map button.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleMapButtons(ActionEvent event) {
 		setAllButOneGameSceneInvisible(roomScene);
 	}
 
+	/**
+	 * Method to handle different attacks while at bossScene.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleBossButtons(ActionEvent event) {
 		if (event.getSource() == bossSceneAttackButton1) {
@@ -339,11 +388,22 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * Method to hide all scenes but highScoreScene.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleHighScoreSceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
 	}
 
+	/**
+	 * Method that only shows the victoryScene, and takes in a string that saves
+	 * the string and a score thats calculated and saves it.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleVictorySceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
@@ -352,6 +412,11 @@ public class FXMLController implements Initializable {
 		game.saveHighScore(name, highscore);
 	}
 
+	/**
+	 * Method to only show the gameOverScene.
+	 *
+	 * @param event
+	 */
 	@FXML
 	private void handleGameOverSceneButtons(ActionEvent event) {
 		setAllButOneMainSceneInvisible(startMenu);
@@ -376,6 +441,11 @@ public class FXMLController implements Initializable {
 		pane.setVisible(true);
 	}
 
+	/**
+	 * Sets only one scene visible.
+	 *
+	 * @param pane
+	 */
 	private void setAllButOneMainSceneInvisible(Pane pane) {
 		if (pane != startMenu) {
 			startMenu.setVisible(false);
@@ -398,6 +468,11 @@ public class FXMLController implements Initializable {
 		pane.setVisible(true);
 	}
 
+	/*
+	* When a new game is started, clears all former labelse and resets them to 
+	* how they are supposed to be at the start of the game. 
+	*
+	 */
 	private void startGame(String fileName) {
 		game.constructWorld(fileName);
 		player = game.getPlayer();
@@ -420,6 +495,10 @@ public class FXMLController implements Initializable {
 		helpSceneTextArea.setText(game.getHelpDescription());
 	}
 
+	/*
+	* Updates the timer and checks if there is time left, or if you run out of time.
+	*
+	 */
 	private void updateAndCheckTime() {
 		//Updates all time labels
 		if (player.getTime() % 60 < 10) {
@@ -433,6 +512,11 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/*
+	* Checks if you exceed your maximum weightlimit, and if you do, it says you can't pick it up.
+	* does the same with capacity.
+	*
+	 */
 	private void updateWeightAndItemAmount() {
 		int itemAmount = player.getInventory().getTotalItemCapacity();
 		int itemCapacity = player.getMaxItemCapacity();
@@ -444,6 +528,13 @@ public class FXMLController implements Initializable {
 		inventorySceneWeightLabel.setText("Weight: " + weight + "/" + Maxweight);
 	}
 
+	/**
+	 * This method checks if an item has been selected and checks if the currently
+	 * selected item has a use, and tells you if you can't use it Depending on
+	 * what item it is, it tells you different things when used.
+	 *
+	 * @param item
+	 */
 	private void use(Item item) {
 		//Checks if current item is null
 		if (item == null) {
@@ -487,6 +578,17 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * Checks if there is a direction from getExit, and if there isn't it tells
+	 * you that you can't go that direction Updates the inventory for currentRoom
+	 * Checks if you encounter a boss Checks if you encounter the NPC that
+	 * teleports/take time from you, and if so, the NPC has a chance to do so
+	 * Checks if the nextRoom is escapable, if so it gets score and a new scene to
+	 * type your name Checks if there is a door but if it's locked, it tells you,
+	 * that you need a key
+	 *
+	 * @param direction
+	 */
 	private void goRoom(Direction direction) {
 		Room previousRoom = player.getRoom();
 		Room nextRoom = player.getRoom().getExit(direction);
@@ -495,13 +597,11 @@ public class FXMLController implements Initializable {
 			roomSceneInfoLabel.setText("There is no door in this direction.");
 			return;
 		}
-
 		//TODO - Checks if the escapeable room is in that direction and if it is locked
-		/*
 		if (nextRoom.isEscapeableRoom() && nextRoom.isLocked()) {
 			roomSceneInfoLabel.setText("A fence is blocking your way.");
 			return;
-		}*/
+		}
 		//Goes to room if the door is not locked
 		if (game.goRoom(direction)) {
 			roomSceneInfoLabel.setText("");
@@ -540,78 +640,87 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * Updates the currentItemLabel
+	 *
+	 * @param itemName
+	 */
 	private void updateCurrentItemLabel(String itemName) {
 		roomSceneCurrentItemLabel.setText("Current Item: " + itemName);
 		inventorySceneCurrentItemLabel.setText("Current Item: " + itemName);
 	}
 
+	/**
+	 * Updates the map, and shows what room you're currently in
+	 *
+	 * @param room
+	 * @param row
+	 * @param column
+	 */
 	private void updateMap(Room room, int row, int column) {
-		Pane pane = new Pane();
-		//Adds the room name to pane
-		Canvas roomCanvas = new Canvas();
-		roomCanvas.setWidth(90);
-		roomCanvas.setHeight(90);
-		GraphicsContext roomBackground = roomCanvas.getGraphicsContext2D();
-		roomBackground.setFill(Color.AQUA);
-		if (room == player.getRoom()) {
-			roomBackground.setFill(Color.CHARTREUSE);
-		}
-		roomBackground.fillRect(4, 4, 86, 86);
-
-		Label roomName = new Label(room.getName());
-		roomName.setLayoutY(7);
-		roomName.setPrefWidth(90);
-		roomName.setAlignment(Pos.CENTER);
-
-		Label bossName = new Label("");
-		for (Boss boss : game.getBosses()) {
-			if (room == boss.getRoom()) {
-				bossName.setText(boss.getName());
-			}
-		}
-		bossName.setLayoutY(37);
-		bossName.setPrefWidth(90);
-		bossName.setAlignment(Pos.CENTER);
-
-		Label npcName = new Label("");
-		for (NPC npc : game.getAllNpc()) {
-			if (room == npc.getCurrentRoom()) {
-				npcName.setText(npc.getName());
-			}
-		}
-		npcName.setLayoutY(67);
-		npcName.setPrefWidth(90);
-		npcName.setAlignment(Pos.CENTER);
-		//Adds all children
-		pane.getChildren().addAll(roomCanvas, roomName, bossName, npcName);
 		//Only draw the room if it is within the grid pane
 		int gridWidth = mapSceneGridPane.getColumnConstraints().size();
 		int gridHeight = mapSceneGridPane.getRowConstraints().size();
 		if (0 <= row && row < gridWidth && 0 <= column && column < gridHeight) {
+			//The pane that represents this room one the map
+			Pane pane = new Pane();
+			//Creates the background to the pane
+			Canvas roomCanvas = new Canvas();
+			roomCanvas.setWidth(90);
+			roomCanvas.setHeight(90);
+			GraphicsContext roomBackground = roomCanvas.getGraphicsContext2D();
+			roomBackground.setFill(Color.AQUA);
+			if (room == player.getRoom()) {
+				roomBackground.setFill(Color.CHARTREUSE);
+			}
+			roomBackground.fillRect(4, 4, 86, 86);
+			//Adds the room name to the pane
+			Label roomName = new Label(room.getName());
+			roomName.setLayoutY(7);
+			roomName.setPrefWidth(90);
+			roomName.setAlignment(Pos.CENTER);
+			//Adds the boss name to the pane, if there is a boss present
+			Label bossName = new Label("");
+			for (Boss boss : game.getBosses()) {
+				if (room == boss.getRoom()) {
+					bossName.setText(boss.getName());
+				}
+			}
+			bossName.setLayoutY(37);
+			bossName.setPrefWidth(90);
+			bossName.setAlignment(Pos.CENTER);
+			//Adds the NPC name to the pane, if there is a NPC present
+			Label npcName = new Label("");
+			for (NPC npc : game.getAllNpc()) {
+				if (room == npc.getCurrentRoom()) {
+					npcName.setText(npc.getName());
+				}
+			}
+			npcName.setLayoutY(67);
+			npcName.setPrefWidth(90);
+			npcName.setAlignment(Pos.CENTER);
+			//Adds all children to the pane and adds the pane to the grid pane
+			pane.getChildren().addAll(roomCanvas, roomName, bossName, npcName);
 			mapSceneGridPane.add(pane, row, column);
 		}
 		alreadyMappedRooms.add(room);
 		for (Direction direction : room.getListOfExitDirections()) {
+			Room nextRoom = room.getExit(direction);
+			if (alreadyMappedRooms.contains(nextRoom) || nextRoom.isHidden()) {
+				continue;
+			}
 			switch (direction) {
 				case NORTH:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row, column - 1);
-					}
+					updateMap(nextRoom, row, column - 1);
 					break;
 				case EAST:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row + 1, column);
-					}
+					updateMap(nextRoom, row + 1, column);
 					break;
 				case SOUTH:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row, column + 1);
-					}
+					updateMap(nextRoom, row, column + 1);
 					break;
 				case WEST:
-					if (!alreadyMappedRooms.contains(room.getExit(direction)) && !room.getExit(direction).isHidden()) {
-						updateMap(room.getExit(direction), row - 1, column);
-					}
+					updateMap(nextRoom, row - 1, column);
 					break;
 				case UNKNOWN:
 					break;
@@ -619,6 +728,12 @@ public class FXMLController implements Initializable {
 		}
 	}
 
+	/**
+	 * if nextRoom you go to is a bossroom, hides all scenes and show bossScene
+	 * Gets bossName, moves and counterMoves, and updates label that says if you
+	 * take damage or do damage.
+	 *
+	 */
 	private void beginBossFight() {
 		setAllButOneGameSceneInvisible(bossScene);
 		//Finds which boss to fight

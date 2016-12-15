@@ -35,7 +35,7 @@ public abstract class Person {
 	/**
 	 * Returns the room which the person currently is in.
 	 *
-	 * @return Room
+	 * @return room
 	 */
 	public Room getRoom() {
 		return this.room;
@@ -62,7 +62,7 @@ public abstract class Person {
 	/**
 	 * subtracts a given amount in the parameter from the persons hitpoints
 	 *
-	 * @param int damage how much to subtract from the persons hitpoits.
+	 * @param damage how much to subtract from the persons hitpoits. 
 	 */
 	public void subtractHitpoint(int damage) {
 		this.hitpoint -= damage;
@@ -118,7 +118,7 @@ public abstract class Person {
 	/**
 	 * Sets the current move of the person
 	 *
-	 * @param move
+	 * @param move is the move to set
 	 */
 	public void setCurrentMove(Move move) {
 		this.currentMove = move;

@@ -160,7 +160,8 @@ public class GamePlay implements GUIdisplayable {
 	 * @return a boolean as false if an item is not picked up, returns true of an
 	 * item is picked up
 	 */
-	@Override
+
+        @Override
 	public boolean pickUp(Item item) {
 		if (item == null) {
 			return false;
@@ -239,7 +240,7 @@ public class GamePlay implements GUIdisplayable {
 	 * Sets up the game so it can be played. The game is read in from a file and
 	 * the name of the file is the parameter
 	 *
-	 * @param fileToRead
+	 * @param fileToRead is the file to read from
 	 */
 	@Override
 	public void constructWorld(String fileToRead) {
@@ -340,8 +341,8 @@ public class GamePlay implements GUIdisplayable {
 	/**
 	 * Saves the given parameters as a highscore
 	 *
-	 * @param name
-	 * @param score
+	 * @param name the name to be entered 
+	 * @param score the score the player gets when the game is completed
 	 */
 	@Override
 	public void saveHighScore(String name, int score) {
@@ -425,7 +426,7 @@ public class GamePlay implements GUIdisplayable {
 	@Override
 	public ObservableList<String> getListOfFiles() {
 		ObservableList<String> returnList = FXCollections.observableArrayList();
-		File folder = new File("./GameFiles");
+		File folder = new File(".//GameFiles");
 		File[] listOfFiles = folder.listFiles();
 		for (File file : listOfFiles) {
 			if (file.isFile()) {
