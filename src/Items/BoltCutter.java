@@ -36,11 +36,11 @@ public class BoltCutter extends Item {
      */
     @Override
     public ItemType getItemType() {
-        return ItemType.KEY;
+        return ItemType.BOLTCUTTER;
     }
 
     /**
-     * Returns the name of the room that this key can be used in
+     * Returns the name of the room that this Boltcutter can be used in
      *
      * @return String
      */
