@@ -321,7 +321,7 @@ public class GamePlay implements GUIdisplayable {
         for (Room room : rooms) {
             for (Direction dir : room.getListOfExitDirections()) {
                 roomToUnlock = room.getExit(dir);
-                if (boltCutter.getRoomBoltCutterCanBeUsedIn().equalsIgnoreCase(room.getExit(dir).getName())) {
+                if (boltCutter.getNameOfRoomBoltCutterCanBeUsedIn().equalsIgnoreCase(room.getExit(dir).getName())) {
                     if (roomToUnlock.isEscapeableRoom() && roomToUnlock.isLocked()) {
                         roomToUnlock.unlock();
                         player.getInventory().removeItem(item);
