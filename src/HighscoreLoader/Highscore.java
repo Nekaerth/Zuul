@@ -63,7 +63,7 @@ public class Highscore {
 	/**
 	 * Sorts the highscore
 	 *
-	 * @return
+	 * @return the ObservableList of Score objects
 	 */
 	public ObservableList<Score> sortHighscore() {
 		Collections.sort(highscore);
@@ -74,8 +74,8 @@ public class Highscore {
 	 * Saves a given score value and name as a score and adds it to the list of
 	 * highscores
 	 *
-	 * @param scoreValue
-	 * @param name
+	 * @param scoreValue is an int
+	 * @param name is a String
 	 */
 	public void saveHighscore(int scoreValue, String name) {
 		this.highscore.add(new Score(name, scoreValue));
@@ -93,9 +93,9 @@ public class Highscore {
 	/**
 	 * Calculates a score based on the time left and the amount of bosskills
 	 *
-	 * @param time
-	 * @param bossKill
-	 * @return
+	 * @param time is an int
+	 * @param bossKill is an int
+	 * @return an the calculateScore as an int
 	 */
 	public static int calculateScore(int time, int bossKill) {
 
@@ -108,8 +108,7 @@ public class Highscore {
 	 * Adds a scoreValue and name to the highscore list as a score
 	 *
 	 * @param int score value
-	 * @param String name
-	 *
+	 * @param String name	 *
 	 */
 	private void addHighscore(int scoreValue, String name) {
 		if (scoreValue != -1 && name != null) {
