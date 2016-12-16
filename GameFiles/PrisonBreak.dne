@@ -251,6 +251,16 @@ pickup=true
 useable=true
 time=120
 name=Police uniform
+[item]
+type=weapon
+roomID=8
+pickup=true
+useable=false
+weight=10
+capacity=1
+weaponType=ranged
+damage=25
+name=Glock-18
 [boss]
 roomId=8
 hitpoints=100
