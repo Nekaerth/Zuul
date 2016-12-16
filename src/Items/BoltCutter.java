@@ -32,7 +32,7 @@ public class BoltCutter extends Item {
      * overrided so that The getType method returns the enum value corresponding
      * to this item type
      *
-     * @return
+     * @return an itemtype from the enum ItemType
      */
     @Override
     public ItemType getItemType() {
