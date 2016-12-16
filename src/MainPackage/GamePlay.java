@@ -74,11 +74,8 @@ public class GamePlay implements GUIdisplayable {
 				npc.move();
 				npc.setTeleportedPlayerLastEncounter(false);
 				npc.setSubtractedTimeFromPlayerLastEncounter(false);
-				npcInteractWithPlayer();
 			}
-			//if (NPC.getName().equalsIgnoreCase("Dobby the alf"))
-			//	npcInteractWithPlayer();
-			//else if (NPC.getName().equalsIgnoreCase("Santa"))
+                        npcInteractWithPlayer();
 			return true;
 
 		}

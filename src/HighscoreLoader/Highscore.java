@@ -65,9 +65,9 @@ public class Highscore {
 	 *
 	 * @return the ObservableList of Score objects
 	 */
-	public ObservableList<Score> sortHighscore() {
+	private void sortHighscore() {
 		Collections.sort(highscore);
-		return highscore;
+		
 	}
 
 	/**
