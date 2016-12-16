@@ -6,28 +6,28 @@ package MainPackage;
  */
 public enum Attack {
 
-	PUNCH("Punch"), STAB("Stab"), DUCK("Duck"), JUMP("Jump"), SIDESTEP("Side step"), LASH("Lash"), CHARGE("Charge"), SHOOT("Shoot"), LAUGH("Laugh");
+    PUNCH("Punch"), STAB("Stab"), DUCK("Duck"), JUMP("Jump"), SIDESTEP("Side step"), LASH("Lash"), CHARGE("Charge"), SHOOT("Shoot"), LAUGH("Laugh");
 
-	private String attackString;
+    private String attackString;
 
-	/**
-	 * The contructor of the Enum Attack. It is automatically called when a Enum
-	 * is used
-	 *
-	 * @param stringItemType
-	 */
-	Attack(String attackString) {
-		this.attackString = attackString;
-	}
+    /**
+     * The contructor of the Enum Attack. It is automatically called when a Enum
+     * is used
+     *
+     * @param stringItemType
+     */
+    Attack(String attackString) {
+        this.attackString = attackString;
+    }
 
-	/**
-	 * Returns a string representation of an Attack. The representation is a
-	 * String version of the enum Attack
-	 *
-	 * @return String
-	 */
-	@Override
-	public String toString() {
-		return attackString;
-	}
+    /**
+     * Returns a string representation of an Attack. The representation is a
+     * String version of the enum Attack
+     *
+     * @return String
+     */
+    @Override
+    public String toString() {
+        return attackString;
+    }
 }

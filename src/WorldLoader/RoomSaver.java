@@ -12,63 +12,63 @@ import java.util.ArrayList;
 
 public class RoomSaver {
 
-	ArrayList<Room> roomSaver;
+    ArrayList<Room> roomSaver;
 
-	/**
-	 * The RoomSaver constructor initializes roomSaver as an arraylist that
-	 * contains rooms
-	 */
-	public RoomSaver() {
-		roomSaver = new ArrayList<>();
-	}
+    /**
+     * The RoomSaver constructor initializes roomSaver as an arraylist that
+     * contains rooms
+     */
+    public RoomSaver() {
+        roomSaver = new ArrayList<>();
+    }
 
-	/**
-	 * The addRoom method is used to add a room to the roomSaver ArrayList
-	 *
-	 * @param room is the room that is to be added.
-	 */
-	public void addRoom(Room room) {
-		roomSaver.add(room);
-	}
+    /**
+     * The addRoom method is used to add a room to the roomSaver ArrayList
+     *
+     * @param room is the room that is to be added.
+     */
+    public void addRoom(Room room) {
+        roomSaver.add(room);
+    }
 
-	/**
-	 * The getRoom method is used to iterate through the roomSaver ArrayList
-	 *
-	 * @param id is the id of the room you wish to get
-	 * @return if a room with the id is found it will return that room otherwise
-	 * it will return null
-	 */
-	public Room getRoom(String id) {
-		for (Room r : roomSaver) {
-			if (r.getId().equalsIgnoreCase(id)) {
-				return r;
-			}
-		}
-		return null;
-	}
+    /**
+     * The getRoom method is used to iterate through the roomSaver ArrayList
+     *
+     * @param id is the id of the room you wish to get
+     * @return if a room with the id is found it will return that room otherwise
+     * it will return null
+     */
+    public Room getRoom(String id) {
+        for (Room r : roomSaver) {
+            if (r.getId().equalsIgnoreCase(id)) {
+                return r;
+            }
+        }
+        return null;
+    }
 
-	/**
-	 * The addItem method is used to add items to a room
-	 *
-	 * @param item the item parameter is the item to be added
-	 * @param roomID the roomID parameter is the room which the item is to be
-	 * added to
-	 */
-	public void addItem(Item item, String roomID) {
-		for (Room r : roomSaver) {
-			if (roomID.equalsIgnoreCase(r.getId())) {
-				r.getInventory().putItem(item);
-				return;
-			}
-		}
-	}
+    /**
+     * The addItem method is used to add items to a room
+     *
+     * @param item the item parameter is the item to be added
+     * @param roomID the roomID parameter is the room which the item is to be
+     * added to
+     */
+    public void addItem(Item item, String roomID) {
+        for (Room r : roomSaver) {
+            if (roomID.equalsIgnoreCase(r.getId())) {
+                r.getInventory().putItem(item);
+                return;
+            }
+        }
+    }
 
-	/**
-	 * The getAllRooms method is used to get the rommSaver ArrayList
-	 *
-	 * @return will return the roomSaver ArrayList of rooms
-	 */
-	public ArrayList<Room> getAllRooms() {
-		return roomSaver;
-	}
+    /**
+     * The getAllRooms method is used to get the rommSaver ArrayList
+     *
+     * @return will return the roomSaver ArrayList of rooms
+     */
+    public ArrayList<Room> getAllRooms() {
+        return roomSaver;
+    }
 }
