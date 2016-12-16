@@ -596,13 +596,6 @@ public class FXMLController implements Initializable {
 			roomSceneInfoLabel.setText("There is no door in this direction.");
 			return;
 		}
-
-		//TODO - Checks if the escapeable room is in that direction and if it is locked
-		/*
-		if (nextRoom.isEscapeableRoom() && nextRoom.isLocked()) {
-			roomSceneInfoLabel.setText("A fence is blocking your way.");
-			return;
-		}*/
 		//Goes to room if the door is not locked
 		if (game.goRoom(direction)) {
 			roomSceneInfoLabel.setText("");
