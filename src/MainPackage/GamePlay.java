@@ -127,7 +127,7 @@ public class GamePlay implements GUIdisplayable {
 		if (item == null) {
 			return false;
 		}
-		if (!item.isUseable()) {//There are only 4 items that can be useable. Either key, flashlight, blueprints or bolt cutter
+		if (!item.isUseable()) {//There are only 4 items that are useable. Either key, flashlight, blueprints or bolt cutter
 			return false;
 		}
 
@@ -247,9 +247,7 @@ public class GamePlay implements GUIdisplayable {
 		player = new Player(rooms.get(0), 100, 1200, 3, 20); // creates a new object of the player class
 		allNPC.add(new NPC(rooms.get(rooms.size() - 1), "Dobby the alf"));
 		ArrayList<Move> moves = this.player.getMoves();
-                ArrayList<Room> roomNumber = new ArrayList<>(); 
-                ArrayList<Room> visitedRooms = new ArrayList<>();
-                moves.add(new Move(10, Attack.STAB, WeaponType.MELEE));
+		moves.add(new Move(10, Attack.STAB, WeaponType.MELEE));
 		moves.add(new Move(0, Attack.DUCK, WeaponType.MELEE));
 		moves.add(new Move(0, Attack.JUMP, WeaponType.MELEE));
 		moves.add(new Move(0, Attack.SIDESTEP, WeaponType.MELEE));

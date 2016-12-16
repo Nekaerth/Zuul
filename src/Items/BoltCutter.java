@@ -9,18 +9,14 @@ public class BoltCutter extends Item {
 	private String roomBoltcutterCanBeUsedIn;
 
 	/**
-	 * The constructor for the specialItem class is called when we want to create
-	 * objects of the specialItem class with a specific set of instace variables.
+	 * The constructor for boltcutter takes 6 parameters
 	 *
-	 * @param pickup is a boolean used to check if the item can be picked up
-	 * @param name is a String that refers to the name of the specialItem
-	 * @param useable is a boolean used to check if the item can be used once you
-	 * have picked it up
-	 * @param weight is an int that refers to the weight of the item
-	 * @param capacity is an int that refers to how much space it requires in the
-	 * inventory
-         * @param roomBoltcutterCanBeUsedIn is a String that defines in what room 
-         * a boltcutter object can be used
+	 * @param pickup
+	 * @param name
+	 * @param useable
+	 * @param weight
+	 * @param capacity
+	 * @param roomBoltcutterCanBeUsedIn
 	 */
 	public BoltCutter(boolean pickup, String name, boolean useable, int weight, int capacity, String roomBoltcutterCanBeUsedIn) {
 		super(pickup, name, useable, weight, capacity);
