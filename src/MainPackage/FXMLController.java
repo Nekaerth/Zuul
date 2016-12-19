@@ -332,8 +332,8 @@ public class FXMLController implements Initializable {
 	}
 
 	/**
-	 * This method handles the inventory buttons, and updates the
-	 * currentItemLabel for currently chosen item,
+	 * This method handles the inventory buttons, and updates the currentItemLabel
+	 * for currently chosen item,
 	 *
 	 * @param event
 	 */
@@ -529,12 +529,12 @@ public class FXMLController implements Initializable {
 	}
 
 	/**
-	 * This method checks if an item has been selected and checks if the
-	 * currently selected item has a use, and tells you if you can't use it
-	 * Depending on what item it is, it tells you different things when used.
+	 * This method checks if an item has been selected and checks if the currently
+	 * selected item has a use, and tells you if you can't use it Depending on
+	 * what item it is, it tells you different things when used.
 	 *
-	 * @param item is the items in rooms/player inventory we want to get the
-	 * name of and check if its usable or not
+	 * @param item is the items in rooms/player inventory we want to get the name
+	 * of and check if its usable or not
 	 */
 	private void use(Item item) {
 		//Checks if current item is null
@@ -581,12 +581,12 @@ public class FXMLController implements Initializable {
 
 	/**
 	 * Checks if there is a direction from getExit, and if there isn't it tells
-	 * you that you can't go that direction Updates the inventory for
-	 * currentRoom Checks if you encounter a boss Checks if you encounter the
-	 * NPC that teleports/take time from you, and if so, the NPC has a chance to
-	 * do so Checks if the nextRoom is escapable, if so it gets score and a new
-	 * scene to type your name Checks if there is a door but if it's locked, it
-	 * tells you, that you need a key
+	 * you that you can't go that direction Updates the inventory for currentRoom
+	 * Checks if you encounter a boss Checks if you encounter the NPC that
+	 * teleports/take time from you, and if so, the NPC has a chance to do so
+	 * Checks if the nextRoom is escapable, if so it gets score and a new scene to
+	 * type your name Checks if there is a door but if it's locked, it tells you,
+	 * that you need a key
 	 *
 	 * @param direction is the next room you go to
 	 */
@@ -654,9 +654,11 @@ public class FXMLController implements Initializable {
 	/**
 	 * Updates the map, and shows what room you're currently in
 	 *
-	 * @param room is the rooms you can see on the map
-	 * @param row
-	 * @param column
+	 * @param room the players current room
+	 * @param row the row index in the grid pane where the players current room is
+	 * put
+	 * @param column the column index in the grid pane where the players current
+	 * room is put
 	 */
 	private void updateMap(Room room, int row, int column) {
 		//Only draw the room if it is within the grid pane
@@ -765,8 +767,8 @@ public class FXMLController implements Initializable {
 
 	/**
 	 * Executes one attack cycle using the boss's current move and the player
-	 * current move. Informs the user wether the counter move failed or not.
-	 * Time and Hitpoint labels are updated. Lastly a new boss move is chosen at
+	 * current move. Informs the user wether the counter move failed or not. Time
+	 * and Hitpoint labels are updated. Lastly a new boss move is chosen at
 	 * random, ready for next attack cycle.
 	 *
 	 * @param playerMove the move the player responds with in boss fight
@@ -777,11 +779,11 @@ public class FXMLController implements Initializable {
 		if (currentBoss.playerHitsBoss(player)) {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You countered " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-					+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
+							+ " and you deal " + player.getCurrentMove().getDamage() + " damage!");
 		} else {
 			//Updates the info label
 			bossSceneInfoLabel.setText("You failed to counter " + currentBoss.getName() + "'s " + currentBoss.getCurrentMove().getName()
-					+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
+							+ " and " + currentBoss.getName() + " deals " + currentBoss.getCurrentMove().getDamage() + " damage to you!");
 		}
 		//The bosses next move is chosen
 		currentBoss.setCurrentMoveAtRandom();
