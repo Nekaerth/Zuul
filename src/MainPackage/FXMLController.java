@@ -533,7 +533,8 @@ public class FXMLController implements Initializable {
 	 * selected item has a use, and tells you if you can't use it Depending on
 	 * what item it is, it tells you different things when used.
 	 *
-	 * @param item
+	 * @param item is the items in rooms/player inventory we want to get the name of 
+	 * and check if its usable or not
 	 */
 	private void use(Item item) {
 		//Checks if current item is null
@@ -587,7 +588,7 @@ public class FXMLController implements Initializable {
 	 * type your name Checks if there is a door but if it's locked, it tells you,
 	 * that you need a key
 	 *
-	 * @param direction
+	 * @param direction is the next room you go to
 	 */
 	private void goRoom(Direction direction) {
 		Room previousRoom = player.getRoom();
@@ -643,7 +644,7 @@ public class FXMLController implements Initializable {
 	/**
 	 * Updates the currentItemLabel
 	 *
-	 * @param itemName
+	 * @param itemName is the name of the item
 	 */
 	private void updateCurrentItemLabel(String itemName) {
 		roomSceneCurrentItemLabel.setText("Current Item: " + itemName);
@@ -653,8 +654,8 @@ public class FXMLController implements Initializable {
 	/**
 	 * Updates the map, and shows what room you're currently in
 	 *
-	 * @param room
-	 * @param row
+	 * @param room is the rooms you can see on the map
+	 * @param row 
 	 * @param column
 	 */
 	private void updateMap(Room room, int row, int column) {
